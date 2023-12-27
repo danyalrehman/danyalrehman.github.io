@@ -1,6 +1,47 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
-  color: "#00369f"
+"NeurIPS":
+  url: https://nips.cc/
+  color: "#634488"
 
-"PhysRev":
-  url: https://journals.aps.org/
+"ICLR":
+  url: https://iclr.cc/
+  color: "#5CBBE3"
+
+"Water Research":
+  url: https://www.sciencedirect.com/journal/water-research
+  color: "#204E9E"
+
+"JMSL":
+  url: https://www.sciencedirect.com/journal/journal-of-membrane-science-letters
+  color: "#9E4192"
+
+"JMS":
+  url: https://www.sciencedirect.com/journal/journal-of-membrane-science
+  color: "#9E4192"
+
+"ES&T":
+  url: https://pubs.acs.org/journal/esthag
+  color: "#56AE58"
+
+"AMI":
+  url: https://pubs.acs.org/journal/aamick
+  color: "#DA9E64"
+
+"APPE":
+  url: https://www.sciencedirect.com/journal/applied-energy
+  color: "#D88738"
+
+"DESAL":
+  url: https://www.sciencedirect.com/journal/desalination
+  color: "#1E489E"
+
+"MEMB":
+  url: https://www.mdpi.com/journal/membranes
+
+"IJHMT":
+  url: https://www.sciencedirect.com/journal/international-journal-of-heat-and-mass-transfer
+  color: "#A5291F"
+
+"IJWIA":
+  url: https://www.sciencedirect.com/journal/journal-of-wind-engineering-and-industrial-aerodynamics
+  color: "#A4B6DC"
+
