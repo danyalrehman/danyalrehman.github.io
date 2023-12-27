@@ -24,13 +24,14 @@ hr {
 }
 
 table {
+
   td,
   th {
-    font-size: 1rem;
+    color: var(--global-text-color);
   }
 
-  th {
-    font-weight: bold;
+  td {
+    font-size: 1rem;
   }
 }
 
@@ -48,13 +49,6 @@ table.table a {
   }
 }
 
-.table-dark {
-  background-color: transparent;
-  &.table-bordered{
-    border: 1px solid var(--global-divider-color) !important;
-  }
-}
-
 figure,
 img {
   max-width: 90vw;
@@ -62,54 +56,10 @@ img {
 
 blockquote {
   background: var(--global-bg-color);
-  border-left: 5px solid var(--global-theme-color);
-  margin: 1.5em 0;
-  padding: 1em;
+  border-left: 2px solid var(--global-theme-color);
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
   font-size: 1.2rem;
-
-  p {
-    margin-bottom: 0;
-  }
-
-  /* Tips, warnings, and dangers blockquotes */
-  &.block-tip {
-    border-color: var(--global-tip-block);
-    background-color: var(--global-tip-block-bg);
-
-    p {
-      color: var(--global-tip-block-text);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--global-tip-block-title);
-    }
-  }
-
-  &.block-warning {
-    border-color: var(--global-warning-block);
-    background-color: var(--global-warning-block-bg);
-
-    p {
-      color: var(--global-warning-block-text);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--global-warning-block-title);
-    }
-  }
-
-  &.block-danger {
-    border-color: var(--global-danger-block);
-    background-color: var(--global-danger-block-bg);
-
-    p {
-      color: var(--global-danger-block-text);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--global-danger-block-title);
-    }
-  }
 }
 
 // Math
@@ -164,7 +114,7 @@ blockquote {
 .profile {
   width: 100%;
 
-  .more-info {
+  .address {
     margin-bottom: 5px;
     margin-top: 5px;
     font-family: monospace;
@@ -373,36 +323,6 @@ blockquote {
   }
 }
 
-.wechat-modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.8);
-}
-
-.wechat-modal > img {
-  display: block;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 33%;
-  max-width: 400px;
-  transform: translate(-50%, -50%);
-}
-
-@media only screen and (max-width: 400px){
-  .wechat-modal > img {
-    width: 100%;
-  }
-}
-
 
 // Footer
 footer.fixed-bottom {
@@ -453,12 +373,6 @@ footer.sticky-bottom {
   }
 }
 
-.table-cv-map {
-  background-color: transparent;
-  border: none;
-  color: var(--global-text-color);
-}
-
 // Repositories
 
 @media (min-width: 768px) {
@@ -481,7 +395,7 @@ footer.sticky-bottom {
   }
 }
 
-.tag-category-list {
+.tag-list {
   border-bottom: 1px solid var(--global-divider-color);
   text-align: center;
   padding-top: 1rem;
@@ -497,12 +411,6 @@ footer.sticky-bottom {
       padding: 1rem 0.5rem;
       color: var(--global-text-color-light);
     }
-  }
-}
-
-.post-title {
-  mjx-container[jax="CHTML"][display="true"] {
-    display: unset;
   }
 }
 
@@ -537,10 +445,6 @@ footer.sticky-bottom {
       &:hover {
         color: var(--global-theme-color);
       }
-    }
-
-    mjx-container[jax="CHTML"][display="true"] {
-      display: unset;
     }
   }
 }
@@ -644,7 +548,7 @@ footer.sticky-bottom {
     }
   }
 
-  h2.bibliography {
+  h2.year {
     color: var(--global-divider-color);
     border-top: 1px solid var(--global-divider-color);
     padding-top: 1rem;
@@ -858,6 +762,13 @@ html.transition *:after {
       }
     }
   }
+
+  .post-content {
+    blockquote {
+      border-left: 5px solid var(--global-theme-color);
+      padding: 8px;
+    }
+  }
 }
 
 progress {
@@ -915,21 +826,29 @@ progress::-moz-progress-bar {
   height: inherit;
 }
 
-/* Copy button */
-.code-display-wrapper {
+pre {
+  padding: 8px 12px;
   position: relative;
 
+  /* Copy code to clipboard button */
   .copy {
     background: var(--global-card-bg-color);
     border-color: var(--global-bg-color);
     border-radius: .3rem;
-    border-style: none;
+    border-style: solid;
     color: var(--global-text-color);
     font-size: medium;
     opacity: 0;
     position: absolute;
-    right: .5rem;
-    top: .5rem;
+    right: .25rem;
+    top: .25rem;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: var(--global-hover-color);
+      opacity: 1;
+    }
   }
 
   &:active .copy,
@@ -938,132 +857,4 @@ progress::-moz-progress-bar {
     color: var(--global-hover-color);
     opacity: 1;
   }
-}
-
-.btn-group.dropdown {
-  .btn {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
-
-  .btn-secondary.dropdown-toggle {
-    border: 1px solid var(--global-divider-color);
-
-    .page-size {
-      color: inherit;
-    }
-
-    &:not(.active) {
-      background-color: var(--global-bg-color) !important;
-      color: var(--global-text-color);
-    }
-
-    &:hover {
-      background-color: var(--global-hover-color) !important;
-      color: var(--global-hover-text-color) !important;
-    }
-  }
-
-  .dropdown-menu {
-    background-color: var(--global-bg-color);
-  }
-
-  .dropdown-item {
-    background-color: var(--global-bg-color);
-    color: var(--global-text-color);
-
-    &:hover {
-      color: var(--global-hover-color);
-    }
-  }
-
-  .dropdown-item.active, .dropdown-item:active {
-    background-color: var(--global-hover-color);
-    color: var(--global-hover-text-color) !important;
-
-    &:hover {
-      color: var(--global-hover-text-color);
-    }
-  }
-}
-
-/* Table of Contents */
-nav[data-toggle="toc"] {
-  top: 5rem;
-
-  .nav .nav>li>a {
-    font-size: .75rem;
-  }
-
-  .nav>li>a {
-    color: var(--global-text-color);
-    font-size: .75rem;
-
-    &:hover {
-      color: var(--global-hover-color);
-      border-left-color: var(--global-hover-color);
-    }
-  }
-
-  .nav-link.active {
-    color: var(--global-theme-color);
-    border-left-color: var(--global-theme-color);
-    font-size: .75rem;
-
-    &:hover {
-      color: var(--global-hover-color);
-      border-left-color: var(--global-hover-color);
-    }
-  }
-}
-
-/* small screens */
-@media (max-width: 576px) {
-  /* override stickyness so that the navigation does not follow scrolling */
-  nav[data-toggle="toc"] {
-    visibility: hidden;
-    height: 0;
-    top: 0;
-  }
-}
-
-.featured-posts {
-  a {
-    color: var(--global-text-color-light);
-    text-decoration: none;
-
-    .card-text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    &:hover {
-      color: var(--global-theme-color);
-
-      .card-title {
-        color: var(--global-theme-color);
-      }
-    }
-  }
-
-  .card-item {
-    margin-bottom: 10px;
-  }
-
-  .post-meta {
-    color: var(--global-text-color-light);
-    font-size: 0.875rem;
-    margin-bottom: 0;
-    padding-top: 0.5rem;
-  }
-}
-
-.medium-zoom-overlay,
-.medium-zoom-image--opened {
-  z-index: 999;
-}
-
-#toc-sidebar {
-  z-index: 1;
 }
