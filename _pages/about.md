@@ -1,26 +1,25 @@
 ---
 layout: about
-title: about
+title: Home
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle:  MIT Ph.D. // AI for Science; Scientific Machine Learning; Deep Learning
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
-
+  
 news: true  # includes a list of news items
-latest_posts: true  # includes a list of the newest posts
+latest_posts: false  # includes a list of the newest posts
 selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true  # includes social icons at the bottom of the page
+social: false  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I'm currently a research scientist working on deep generative models for sustainable chemistry / drug discovery at [Flagship Pioneering](https://www.flagshippioneering.com/pioneering-intelligence). Previously, I completed a joint Ph.D. in Mechanical Engineering and Computational Science & Engineering at the [Massachusetts Institute of Technology (MIT)](https://www.mit.edu/). During that time, I was awarded fellowships from the Martin Family Society of Fellows for Sustainability and the Abdul Latif Jameel World Water and Food Systems Lab. Prior to that, I completed my undergraduate degree in Mechanical Engineering with High Honours at the [University of Toronto](https://www.utoronto.ca/). 
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+My Ph.D. research centered around the development of physics-informed deep learning methods and accelerated partial differential equations (PDEs) solvers for diverse physics-based applications. Examples include developing attention-enhanced neural differential equations models for ion transport phenomena (under [John H. Lienhard](https://en.wikipedia.org/wiki/John_H._Lienhard_V)) and self-supervised learning (SSL) methods with Lie point symmetries for partial differential equations (under [Yann LeCun](https://en.wikipedia.org/wiki/Yann_LeCun)). More recently, my interests have extended to combining deep generative models with physics-based priors for the natural sciences, with a particular focus on scientific discovery and out-of-distribution generalization.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+In my spare time, I enjoy watching/playing football (long-term supporter of [Arsenal F.C.](https://www.arsenal.com/)) and bouldering/rock climbing both indoors and outdoors.
+
+**Contact**: danyal [dot] rehman [at] gmail [dot] com  
+**Links**: [Google Scholar](https://scholar.google.com/citations?user=XdyK1qoAAAAJ&hl=en) / [GitHub](https://github.com/danyalrehman) / [LinkedIn](https://www.linkedin.com/in/danyalrehman/) / [Twitter](https://twitter.com/danyalrehman17)
