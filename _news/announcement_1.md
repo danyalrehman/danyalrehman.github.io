@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2022-09-01 07:59:00-0400
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+I was awarded a [Martin Sustainability Fellowship](https://martin-fellows.mit.edu/) ($100,000) for my research in AI for Science! 
