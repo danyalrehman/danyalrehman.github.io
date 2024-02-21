@@ -1,3 +1,18 @@
+@article{REHMAN2024149806,
+abbr={CEJ},
+title = {Physics-informed deep learning for multi-species membrane separations},
+journal = {Chemical Engineering Journal},
+pages = {149806},
+year = {2024},
+issn = {1385-8947},
+doi = {https://doi.org/10.1016/j.cej.2024.149806},
+selected={true},
+author = {Danyal Rehman and John H. Lienhard},
+bibtex_show={true},
+keywords = {Ion selectivity, Membrane separations, Physics-informed machine learning, Scientific machine learning, Deep learning},
+abstract = {Conventional continuum models for ion transport across polyamide membranes require solving partial differential equations (PDEs). These models typically introduce a host of assumptions and simplifications to improve the computational tractability of existing solvers. As a consequence of these constraints, conventional models struggle to generalize predictive performance to new unseen conditions. Deep learning has recently shown promise in alleviating many of these concerns, making it a promising avenue for surrogate models that can replace conventional PDE-based approaches. In this work, we develop a physics-informed deep learning model to predict ion transport across polyamide membranes. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural methods are pre-trained on simulated data from continuum models and fine-tuned on independent experiments to learn multi-ionic rejection behaviour. We also harness the attention mechanism, commonly observed in language modelling, to learn and infer key ion-pairing relationships. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve robustness and generalization. We study the neural framework’s performance relative to conventional PDE-based methods, and also compare the use of hard/soft inductive bias constraints on prediction accuracy. Lastly, we compare our approach to other competitive deep learning architectures and illustrate strong agreement with experimental measurements across all studied datasets.}
+}
+
 @article{REHMAN2023ATTENTIONGUIDED,
 	abbr         = {NeurIPS},
 	author       = {Danyal Rehman and John H. Lienhard},
@@ -15,6 +30,7 @@
 	author       = {Gregoire Mialon and Quentin Garrido and Hannah Lawrence and Danyal Rehman and Yann LeCun and Bobak T. Kiani},
 	title        = {Self-supervised learning with {L}ie symmetries for partial differential equations},
 	year         = 2023,
+	volume=36,
 	journal      = {Advances in Neural Information Processing Systems (NeurIPS)},
 	pdf          = {https://arxiv.org/pdf/2307.05432},
 	selected     = {true},
@@ -83,7 +99,7 @@
 	pdf          = {https://www.sciencedirect.com/science/article/pii/S2772421222000216/pdfft?md5=8d532a150f743dec6b583aca0be0ab3c&pid=1-s2.0-S2772421222000216-main.pdf},
 	bibtex_show  = {true},
 	keywords     = {Ion selectivity, Transport models, Metaheuristics, Global optimization, Nanofiltration},
-	selected     = {true},
+	selected     = {false},
 	abstract     = {One of the most well-established frameworks for modeling multicomponent transport in nanofiltration (NF) is the Donnan-Steric Pore Model with Dielectric Exclusion (DSPM-DE). Conventional DSPM-DE characterizes transport across NF membranes through four governing membrane parameters:\ (1) pore radius; (2) effective membrane thickness; (3) membrane charge density; and (4) the dielectric constant inside the membrane pores. The process for quantifying these parameters is typically sequential. First, neutral solute experiments are performed to determine pore radius and effective membrane thickness. Next, charged species experiments are conducted, and the data is used to regress out the remaining parameters. The resulting regressions are often performed using local search algorithms that can struggle to provide low residuals with robust fits. In addition, this two-step approach tends to:\ (1) require a substantial number of charged and uncharged solute experiments; and (2) introduce assumed relationships between pore size and water flux, such as the Hagen-Poiseuille equation, which may not be representative of transport through complex pore networks. To address these issues, we propose the use of metaheuristic global optimization techniques supplemented with gradient-free local search and maximum likelihood estimation to simultaneously regress all four membrane parameters directly from charged species experiments. We validate our approach against eight independent datasets across diverse input salinities, compositions, and membranes.},
 }
 
