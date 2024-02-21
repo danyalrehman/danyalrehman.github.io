@@ -2,7 +2,7 @@
 layout: about
 title: Home
 permalink: /
-subtitle:  MIT Ph.D. // AI for Science; Scientific Machine Learning; Deep Learning
+subtitle:  Postdoctoral Associate @ Mila AI / Visiting Scientist @ Broad Institute / Ph.D @ MIT
 
 profile:
   align: right
