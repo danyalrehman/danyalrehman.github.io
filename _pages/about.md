@@ -2,7 +2,7 @@
 layout: about
 title: Home
 permalink: /
-subtitle:  Postdoctoral Associate @ Mila AI / Visiting Scientist @ Broad Institute / Ph.D @ MIT
+subtitle:  Postdoctoral Associate @ Mila Qu&eacute;bec / Visiting Research Scientist @ Broad Institute / Ph.D @ MIT
 
 profile:
   align: right
