@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I joined the [Broad Institute](https://www.broadinstitute.org/) as a visiting scientist focused on generative AI for antibiotic discovery under [Jim Collins](https://en.wikipedia.org/wiki/James_J._Collins)!
+I joined the [Broad Institute's Eric and Wendy Schmidt Center](https://www.ericandwendyschmidtcenter.org/) to work on generative models for drug discovery under [Jim Collins](https://en.wikipedia.org/wiki/James_J._Collins)!
