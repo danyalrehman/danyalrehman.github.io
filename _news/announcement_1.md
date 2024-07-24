@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I joined the [Broad Institute's Eric and Wendy Schmidt Center](https://www.ericandwendyschmidtcenter.org/) to work on generative models for drug discovery under [Jim Collins](https://en.wikipedia.org/wiki/James_J._Collins)!
+I joined [Mila &ndash; Qu&eacute;bec Artificial Intelligence Institute](https://mila.quebec/en) to work on deep learning for scientific discovery under [Yoshua Bengio](https://en.wikipedia.org/wiki/Yoshua_Bengio)!
