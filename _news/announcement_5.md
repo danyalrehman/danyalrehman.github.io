@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I was awarded the [Banting Postdoctoral Fellowship](https://banting.fellowships-bourses.gc.ca/en/home-accueil.html) by the [Natural Sciences and Engineering Research Council](https://www.nserc-crsng.gc.ca/index_eng.asp)!
+I was awarded the [NSERC Banting Postdoctoral Fellowship](https://banting.fellowships-bourses.gc.ca/en/home-accueil.html)!
