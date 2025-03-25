@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I was awarded the [NSERC Banting Postdoctoral Fellowship](https://banting.fellowships-bourses.gc.ca/en/home-accueil.html)!
+I was awarded the [NSERC Banting Postdoctoral Fellowship](https://banting.fellowships-bourses.gc.ca/en/home-accueil.html) (C$140,000)!
