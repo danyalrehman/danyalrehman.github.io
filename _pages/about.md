@@ -2,7 +2,7 @@
 layout: about
 title: Home
 permalink: /
-subtitle:  Postdoctoral Scientist @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> / Researcher @ <b>Broad Institute</b> / Ph.D @ <b>MIT</b>
+subtitle:  Banting Postdoctoral Fellow @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> / Researcher @ <b>Broad Institute of MIT & Harvard</b>
 
 profile:
   align: right
@@ -15,7 +15,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false  # includes social icons at the bottom of the page
 ---
 
-I'm a postdoctoral research scientist at [Mila &ndash; Qu&eacute;bec AI Institute](https://mila.quebec/en/) under [Yoshua Bengio](https://en.wikipedia.org/wiki/Yoshua_Bengio) working on generative models for scientific discovery. I am also a visiting researcher at the [Broad Institute of MIT & Harvard](https://www.broadinstitute.org/) under [Jim Collins](https://en.wikipedia.org/wiki/James_J._Collins) developing deep learning models for molecular discovery. 
+I'm a Banting postdoctoral researcher at [Mila &ndash; Qu&eacute;bec AI Institute](https://mila.quebec/en/) under [Yoshua Bengio](https://en.wikipedia.org/wiki/Yoshua_Bengio) working on generative models for scientific discovery. I am also a visiting researcher at the [Broad Institute of MIT & Harvard](https://www.broadinstitute.org/) under [Jim Collins](https://en.wikipedia.org/wiki/James_J._Collins) developing deep learning models for molecular discovery. 
 
 Previously, I completed a joint Ph.D. in Mechanical Engineering and Computational Science & Engineering from the [Massachusetts Institute of Technology (MIT)](https://www.mit.edu/). During that time, I was awarded fellowships from the Martin Family Society of Fellows for Sustainability and the Abdul Latif Jameel (J-WAFS) World Water and Food Systems Lab. Prior to that, I completed my undergraduate degree in Mechanical Engineering with High Honours from the [University of Toronto](https://www.utoronto.ca/). 
 
