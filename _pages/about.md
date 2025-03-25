@@ -2,7 +2,7 @@
 layout: about
 title: Home
 permalink: /
-subtitle:  Banting Postdoctoral Fellow @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> / Researcher @ <b>Broad Institute of MIT & Harvard</b>
+subtitle: Banting Postdoctoral Researcher @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> / Visiting Scientist @ <b>Broad Institute of MIT & Harvard</b> / Ph.D. @ <b>MIT</b>
 
 profile:
   align: right
