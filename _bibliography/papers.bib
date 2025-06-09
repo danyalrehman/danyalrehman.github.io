@@ -1,17 +1,137 @@
-@article{AHDAB2020118072,
-	title        = {Brackish water desalination for greenhouses: Improving groundwater quality for irrigation using monovalent selective electrodialysis reversal},
-	author       = {Yvana D. Ahdab and Danyal Rehman and John H. Lienhard},
-	year         = {2020},
-	journal      = {Journal of Membrane Science},
-	volume       = {610},
-	pages        = {118072},
-	abbr         = {JMS},
-	html         = {https://doi.org/10.1016/j.memsci.2020.118072},
-	pdf          = {https://www.sciencedirect.com/science/article/am/pii/S0376738820306517},
+@article{REHMAN2025FORT,
+	title        = {FORT: Forward-only regression training of normalizing flows},
+	author       = {Danyal Rehman and Oscar Davis and Jiarui Lu and Jian Tang and Michael Bronstein and Yoshua Bengio and Alexander Tong and Avishek Joey Bose},
+	year         = {2025},
+	journal      = {arXiv preprint arXiv:2506.01158},
 	bibtex_show  = {false},
-	keywords     = {Desalination, Groundwater, Electrodialysis, Agriculture, Membrane selectivity},
+	selected     = {true},
+	abbr         = {Preprint},
+	html         = {https://arxiv.org/abs/2506.01158},
+	pdf          = {https://arxiv.org/pdf/2506.01158},
+	keywords     = {Normalizing Flows, Generative Models, Optimal Transport, Flow Matching, AI for Science},
+	abstract     = {Simulation-free training frameworks have been at the forefront of the generative modeling revolution in continuous spaces, leading to neural dynamical systems that encompass modern large-scale diffusion and flow-matching models. Despite the scalability of training, the generation of high-quality samples and their corresponding likelihood under the model requires expensive numerical simulation---inhibiting adoption in numerous scientific applications such as equilibrium sampling of molecular systems. In this paper, we revisit classical normalizing flows as one-step generative models with exact likelihoods and propose a novel, scalable training objective that does not require computing the expensive change of variable formula used in conventional maximum likelihood training. We propose Forward-Only Regression Training (FORT), a simple regression objective that maps prior samples under our flow to specifically chosen targets. We demonstrate that FORT supports a wide class of targets, such as optimal transport targets and targets from pre-trained continuous-time normalizing flows (CNF). We further demonstrate that by using CNF targets, our one-step flows allow for larger-scale training that exceeds the performance and stability of maximum likelihood training, while unlocking a broader class of architectures that were previously challenging to train. Empirically, we elucidate that our trained flows can perform equilibrium conformation sampling in Cartesian coordinates of alanine dipeptide, alanine tripeptide, and alanine tetrapeptide.}
+}
+
+@article{LIU2024149097,
+	title        = {Selective fluoride removal from groundwater using CNT-CeO2 electrodes in capacitive deionization (CDI)},
+	author       = {Xun Liu and Danyal Rehman and Yufei Shu and Bei Liu and Li Wang and Li Li and Mengxia Wang and Kunkun Wang and Qi Han and Linlin Zang and John H. Lienhard and Zhongying Wang},
+	year         = {2024},
+	journal      = {Chemical Engineering Journal},
+	volume       = {482},
+	pages        = {149097},
+	doi          = {https://doi.org/10.1016/j.cej.2024.149097},
+	issn         = {1385-8947},
+	abbr         = {CEJ},
+	html         = {https://doi.org/10.1016/j.cej.2024.149097},
+	bibtex_show  = {true},
+	keywords     = {Selective capacitive deionization, Defluoridation, Cerium dioxide, Carbon nanotubes, Selective separations},
+	abstract     = {Selective capacitive deionization (SCDI) is a promising process for preferentially removing specific ions from waters with complex compositions. The selectivity towards certain species in CDI is most frequently achieved through novel electrode materials with high affinities towards targeted species. In this study, we investigate the selective removal of fluoride ions from groundwater containing concentrated co-existing chloride ions. A carbon nanotube-CeO2 (CNT-CeO2) electrode is employed for the electro-sorption of fluoride ions. Our findings are compelling: when processing a mixed F−/Cl− solution comprising 10 mg/L F− and 100 mg/L Cl−, the CNT-CeO2 electrode is seen to reduce the concentration of F− ions to 1.5 mg/L in just 150 min, amounting to an 85 % F− removal efficiency, while the Cl− removal efficiency remains below 2 %. Importantly, this translates to a F−/Cl− separation factor of up to 4.16 when using the CeO2-based electrodes, which is 40 times higher than that achieved with conventional activated carbon (AC) electrodes. Furthermore, the energy consumption for treating actual groundwater using scaled-up equipment is impressively low at approximately 0.2 kWh/m3. The high affinity of CNT-CeO2 towards fluoride is attributed to the intercalation Faraday capacitance initiated by the reaction between F− with CeO2, as verified by the electrochemical quartz crystal microbalance (EQCM). Moreover, EQCM results show a substantial increase in both mass and current as the potential increased beyond 0.8 V vs Ag/AgCl, implying that the current surge is not a result of water splitting but rather the adsorption of F− onto the CNT-CeO2 electrode. The addition of CNTs substantially increases the conductivity of CeO2 electrodes and restricts the aggregation of CeO2, thereby accelerating ion diffusion and promoting selective adsorption characteristics. Importantly, our electro-driven approach demonstrates excellent adsorption–desorption over 20 cycles. This comprehensive study advances the technological development of selective CDI, while providing new insights for fluoride removal in groundwater.}
+}
+
+@article{REHMAN2024149806,
+	title        = {Physics-informed deep learning for multi-species membrane separations},
+	author       = {Danyal Rehman and John H. Lienhard},
+	year         = {2024},
+	journal      = {Chemical Engineering Journal},
+	pages        = {149806},
+	doi          = {https://doi.org/10.1016/j.cej.2024.149806},
+	issn         = {1385-8947},
+	abbr         = {CEJ},
+	html         = {https://doi.org/10.1016/j.cej.2024.149806},
+	selected     = {true},
+	bibtex_show  = {true},
+	keywords     = {Ion selectivity, Membrane separations, Physics-informed machine learning, Scientific machine learning, Deep learning},
+	abstract     = {Conventional continuum models for ion transport across polyamide membranes require solving partial differential equations (PDEs). These models typically introduce a host of assumptions and simplifications to improve the computational tractability of existing solvers. As a consequence of these constraints, conventional models struggle to generalize predictive performance to new unseen conditions. Deep learning has recently shown promise in alleviating many of these concerns, making it a promising avenue for surrogate models that can replace conventional PDE-based approaches. In this work, we develop a physics-informed deep learning model to predict ion transport across polyamide membranes. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural methods are pre-trained on simulated data from continuum models and fine-tuned on independent experiments to learn multi-ionic rejection behaviour. We also harness the attention mechanism, commonly observed in language modelling, to learn and infer key ion-pairing relationships. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve robustness and generalization. We study the neural framework’s performance relative to conventional PDE-based methods, and also compare the use of hard/soft inductive bias constraints on prediction accuracy. Lastly, we compare our approach to other competitive deep learning architectures and illustrate strong agreement with experimental measurements across all studied datasets.}
+}
+
+@article{FOO2023LITHIUM,
+	title        = {Lithium concentration from salt-lake brine by {D}onnan-enhanced nanofiltration},
+	author       = {Zi Hao Foo and Danyal Rehman and Andrew T. Bouma and Sebasti\'an Monsalvo and John H. Lienhard},
+	year         = {2023},
+	journal      = {ACS Environmental Science \& Technology},
+	volume       = {57},
+	number       = {15},
+	pages        = {6320--6330},
+	abbr         = {ES\&T},
+	html         = {https://doi.org/10.1021/acs.est.2c08584},
+	pdf          = {https://www.researchgate.net/profile/Zi-Foo/publication/369883732_Lithium_Concentration_from_Salt-Lake_Brine_by_Donnan-Enhanced_Nanofiltration/links/6431e8fc4e83cd0e2f9d3ba1/Lithium-Concentration-from-Salt-Lake-Brine-by-Donnan-Enhanced-Nanofiltration.pdf},
+	bibtex_show  = {true},
 	selected     = {false},
-	abstract     = {Reverse osmosis (RO) is the most widely used desalination technology for treating brackish water prior to irrigation. RO, however, removes both monovalent ions (Na+,Cl−) detrimental to crops and divalent ions (Ca2+,Mg2+,SO42−) that are beneficial. These beneficial ions must then be reintroduced to the desalinated water by adding fertilizer or mixing with nutrient-rich brackish water that typically contains excess levels of monovalent ions. Unlike RO, monovalent selective electrodialysis reversal (MSED-R) removes monovalent ions, while retaining divalent ions. This paper evaluates whether Neosepta ion exchange membranes, originally manufactured to concentrate seawater for salt production, show sufficient monovalent selectivity in the brackish salinity range to be suitable for use in greenhouse agriculture. Using an MSED-R experimental set-up, 16 brackish groundwater compositions are tested to determine membrane parameters, including limiting current, membrane resistance, membrane permeability, and membrane selectivity. Across compositions, the Neosepta membranes show monovalent selectivity for sodium relative to calcium and magnesium and for chloride relative to sulfate. The membrane selectivities are used to calculate MSED-R fertilizer savings relative to RO for brackish groundwaters across the U.S. Regions in which brackish groundwaters contain greater than the target nutrient concentrations for crop growth, or show potential for MSED-R adoption, are also identified.}
+	abstract     = {Membranes offer a scalable and cost-effective approach to ion separations for lithium recovery. In the case of salt-lake brines, however, the high feed salinity and low pH of the post-treated feed have an uncertain impact on nanofiltration’s selectivity. Here, we adopt experimental and computational approaches to analyze the effect of pH and feed salinity and elucidate key selectivity mechanisms. Our data set comprises over 750 original ion rejection measurements, spanning five salinities and two pH levels, collected using brine solutions that model three salt-lake compositions. Our results demonstrate that the Li+/Mg2+ selectivity of polyamide membranes can be enhanced by 13 times with acid-pretreated feed solutions. This selectivity enhancement is attributed to the amplified Donnan potential from the ionization of carboxyl and amino moieties under low solution pH. As feed salinities increase from 10 to 250 g L–1, the Li+/Mg2+ selectivity decreases by ∼43\%, a consequence of weakening exclusion mechanisms. Further, our analysis accentuates the importance of measuring separation factors using representative solution compositions to replicate the ion-transport behaviors with salt-lake brine. Consequently, our results reveal that predictions of ion rejection and Li+/Mg2+ separation factors can be improved by up to 80\% when feed solutions with the appropriate Cl–/SO42– molar ratios are used.}
+}
+
+@article{GARRIDO2023SELFSUPERVISED,
+	title        = {Self-supervised learning with {L}ie symmetries for partial differential equations},
+	author       = {Gr\'egoire Mialon and Quentin Garrido and Hannah Lawrence and Danyal Rehman and Yann LeCun and Bobak T. Kiani},
+	year         = {2023},
+	journal      = {Advances in Neural Information Processing Systems (NeurIPS)},
+	volume       = {36},
+	abbr         = {NeurIPS},
+	pdf          = {https://arxiv.org/pdf/2307.05432},
+	selected     = {true},
+	abstract     = {Machine learning for differential equations paves the way for computationally efficient alternatives to numerical solvers, with potentially broad impacts in science and engineering. Though current algorithms typically require simulated training data tailored to a given setting, one may instead wish to learn useful information from heterogeneous sources, or from real dynamical systems observations that are messy or incomplete. In this work, we learn general-purpose representations of PDEs from heterogeneous data by implementing joint embedding methods for self-supervised learning (SSL), a framework for unsupervised representation learning that has had notable success in computer vision. Our representation outperforms baseline approaches to invariant tasks, such as regressing the coefficients of a PDE, while also improving the time-stepping performance of neural solvers. We hope that our proposed methodology will prove useful in the eventual development of general-purpose foundation models for PDEs.},
+	journal2     = {International Conference on Learning Representations (ICLR) -- Physics for Machine Learning Workshop},
+	abbr2        = {ICLR},
+	arxiv        = {2307.05432},
+	poster       = {https://www.dropbox.com/s/9bpzbp2ioyx2w0u/iclr23_ssl.pdf?dl=0}
+}
+
+@article{REHMAN2023ATTENTIONGUIDED,
+	title        = {Attention-enhanced neural differential equations for physics-informed deep learning},
+	author       = {Danyal Rehman and John H. Lienhard},
+	year         = {2023},
+	journal      = {Advances in Neural Information Processing Systems (NeurIPS) -- Machine Learning for the Physical Sciences Workshop},
+	abbr         = {NeurIPS},
+	pdf          = {https://arxiv.org/pdf/2312.02871},
+	selected     = {false},
+	abstract     = {Species transport models typically combine partial differential equations (PDEs) with relations from hindered transport theory to quantify electromigrative, convective, and diffusive transport through complex nanoporous systems;\ however, these formulations are frequently substantial simplifications of the governing dynamics, leading to the poor generalization performance of PDE-based models. Given the growing interest in deep learning methods for the physical sciences, we develop a machine learning-based approach to characterize ion transport across nanoporous membranes. Our proposed framework centers around attention-enhanced neural differential equations that incorporate electroneutrality-based inductive biases to improve generalization performance relative to conventional PDE-based methods. In addition, we study the role of the attention mechanism in illuminating physically-meaningful ion-pairing relationships across diverse mixture compositions. Further, we investigate the importance of pre-training on simulated data from PDE-based models, as well as the performance benefits from hard vs.\ soft inductive biases. Our results indicate that physics-informed deep learning solutions can outperform their classical PDE-based counterparts and provide promising avenues for modelling complex transport phenomena across diverse applications.},
+	arxiv        = {2312.02871}
+}
+
+@article{REHMAN2023PHYSICSCONSTRAINED,
+	title        = {Physics-constrained neural differential equations for learning multi-ionic transport},
+	author       = {Danyal Rehman and John H. Lienhard},
+	year         = {2023},
+	journal      = {International Conference on Learning Representations (ICLR) -- Physics for Machine Learning Workshop},
+	abbr         = {ICLR},
+	pdf          = {https://arxiv.org/pdf/2303.04594},
+	selected     = {false},
+	abstract     = {Continuum models for ion transport through polyamide nanopores require solving partial differential equations (PDEs) through complex pore geometries. Resolving spatiotemporal features at this length and time-scale can make solving these equations computationally intractable. In addition, mechanistic models frequently require functional relationships between ion interaction parameters under nano-confinement, which are often too challenging to measure experimentally or know a priori. In this work, we develop the first physics-informed deep learning model to learn ion transport behaviour across polyamide nanopores. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural differential equations are pre-trained on simulated data from continuum models and fine-tuned on independent experimental data to learn ion rejection behaviour. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve model generalization. Our approach is compared to other physics-informed deep learning models and shows strong agreement with experimental measurements across all studied datasets.},
+	poster       = {https://www.dropbox.com/s/0ftwqkv48rd1yuf/iclr23_phynde.pdf?dl=0},
+	arxiv        = {2303.04594}
+}
+
+@article{REHMAN2023QUANTIFYING,
+	title        = {Quantifying uncertainty in nanofiltration transport models for enhanced metals recovery},
+	author       = {Danyal Rehman and Fareed Sheriff and John H. Lienhard},
+	year         = {2023},
+	journal      = {Water Research},
+	volume       = {243},
+	pages        = {120325},
+	abbr         = {Water Research},
+	html         = {https://doi.org/10.1016/j.watres.2023.120325},
+	pdf          = {https://dspace.mit.edu/bitstream/handle/1721.1/151185/NF_WR_Manuscript.pdf?sequence=2&isAllowed=y},
+	bibtex_show  = {true},
+	keywords     = {Ion selectivity, Metal recovery, Transport models, Donnan exclusion, Bilevel optimization, Nanofiltration},
+	selected     = {false},
+	abstract     = {To decarbonize our global energy system, sustainably harvesting metals from diverse sourcewaters is essential. Membrane-based processes have recently shown great promise in meeting these needs by achieving high metal ion selectivities with relatively low water and energy use. An example is nanofiltration, which harnesses steric, dielectric, and Donnan exclusion mechanisms to perform size- and charge-based fractionation of metal ions. To further optimize nanofiltration systems, multicomponent models are needed; however, conventional methods necessitate large amounts of data for model calibration, introduce substantial uncertainty into the characterization process, and often yield poor results when extrapolated. In this work, we develop a new computational architecture to alleviate these concerns. Specifically, we develop a framework that: (1) reduces the data requirement for model calibration to only charged species measurements; (2) eliminates uncertainty propagation problems present in conventional characterization processes; (3) enables exploration of pH optimization for enhancing metal ion selectivities; and (4) enables uncertainty quantification to assess the sensitivity of partition coefficients and ion driving forces to learned pore size distributions. Our framework captures eight independent datasets comprising over 500 measurements to within ±15\%. Our studies also suggest that the expectation–maximization algorithm can effectively learn pore size distributions and that optimizing pH can improve metal ion selectivities by a factor of 3–10×. Our findings also reveal that image charges appear to play a less pronounced role in dielectric exclusion under the studied conditions and that ion driving forces are more sensitive to pore size distributions than partition coefficients.}
+}
+
+@article{REHMAN2022100034,
+	title        = {Global optimization for accurate and efficient parameter estimation in nanofiltration},
+	author       = {Danyal Rehman and John H. Lienhard},
+	year         = {2022},
+	journal      = {Journal of Membrane Science Letters},
+	volume       = {2},
+	number       = {2},
+	pages        = {100034},
+	abbr         = {JMSL},
+	html         = {https://doi.org/10.1016/j.memlet.2022.100034},
+	pdf          = {https://www.sciencedirect.com/science/article/pii/S2772421222000216/pdfft?md5=8d532a150f743dec6b583aca0be0ab3c&pid=1-s2.0-S2772421222000216-main.pdf},
+	bibtex_show  = {true},
+	keywords     = {Ion selectivity, Transport models, Metaheuristics, Global optimization, Nanofiltration},
+	selected     = {false},
+	abstract     = {One of the most well-established frameworks for modeling multicomponent transport in nanofiltration (NF) is the Donnan-Steric Pore Model with Dielectric Exclusion (DSPM-DE). Conventional DSPM-DE characterizes transport across NF membranes through four governing membrane parameters:\ (1) pore radius; (2) effective membrane thickness; (3) membrane charge density; and (4) the dielectric constant inside the membrane pores. The process for quantifying these parameters is typically sequential. First, neutral solute experiments are performed to determine pore radius and effective membrane thickness. Next, charged species experiments are conducted, and the data is used to regress out the remaining parameters. The resulting regressions are often performed using local search algorithms that can struggle to provide low residuals with robust fits. In addition, this two-step approach tends to:\ (1) require a substantial number of charged and uncharged solute experiments; and (2) introduce assumed relationships between pore size and water flux, such as the Hagen-Poiseuille equation, which may not be representative of transport through complex pore networks. To address these issues, we propose the use of metaheuristic global optimization techniques supplemented with gradient-free local search and maximum likelihood estimation to simultaneously regress all four membrane parameters directly from charged species experiments. We validate our approach against eight independent datasets across diverse input salinities, compositions, and membranes.}
 }
 
 @article{AHDAB2020TREATING,
@@ -78,70 +198,6 @@
 	abstract     = {Osmotically-assisted membrane processes (OAMP) are separation technologies that leverage osmotic gradients to recover water from brine. Accurate modeling of the solute-coupling effects for transmembrane transport is integral to the development and subsequent optimization of OAMP unit operations. In the literature, multicomponent transport in OAMP is commonly linearized, and species fluxes are computed using binary solution-diffusion theory and then superposed. However, recent publications highlight the large predictive errors associated with such an approach as the transport coupling between species is ignored. In this paper, we demonstrate that significant improvements in multicomponent species fluxes can be obtained when solute-coupling interactions are incorporated. Here, we present a multicomponent solution-diffusion model, by extending the binary solution-diffusion model with multicomponent diffusion theory. When multicomponent diffusion coefficients are available, we find that the average absolute deviation (AAD) of the model decreased from 21.0% to 3.0% for 7 unique combinations of forward osmosis processes involving ternary mixtures. In the absence of data for multicomponent diffusion coefficients, we demonstrate that the multicomponent model can regress the impact of transport coupling on water and solute fluxes, using excess solute permeabilities. For the case of H2O-NaCl-EtOH forward osmosis process, the AAD of the solution-diffusion model is shown to decrease from 66.1% to 7.2% for NaCl concentrations from 0.0 to 1.5 M and EtOH mass fractions from 0.0 to 0.5. These values are extended to analyze the implications on the thermodynamic and membrane area requirements of the desalination systems employing OAMP.}
 }
 
-@article{FOO2023LITHIUM,
-	title        = {Lithium concentration from salt-lake brine by {D}onnan-enhanced nanofiltration},
-	author       = {Zi Hao Foo and Danyal Rehman and Andrew T. Bouma and Sebasti\'an Monsalvo and John H. Lienhard},
-	year         = {2023},
-	journal      = {ACS Environmental Science \& Technology},
-	volume       = {57},
-	number       = {15},
-	pages        = {6320--6330},
-	abbr         = {ES\&T},
-	html         = {https://doi.org/10.1021/acs.est.2c08584},
-	pdf          = {https://www.researchgate.net/profile/Zi-Foo/publication/369883732_Lithium_Concentration_from_Salt-Lake_Brine_by_Donnan-Enhanced_Nanofiltration/links/6431e8fc4e83cd0e2f9d3ba1/Lithium-Concentration-from-Salt-Lake-Brine-by-Donnan-Enhanced-Nanofiltration.pdf},
-	bibtex_show  = {true},
-	selected     = {false},
-	abstract     = {Membranes offer a scalable and cost-effective approach to ion separations for lithium recovery. In the case of salt-lake brines, however, the high feed salinity and low pH of the post-treated feed have an uncertain impact on nanofiltration’s selectivity. Here, we adopt experimental and computational approaches to analyze the effect of pH and feed salinity and elucidate key selectivity mechanisms. Our data set comprises over 750 original ion rejection measurements, spanning five salinities and two pH levels, collected using brine solutions that model three salt-lake compositions. Our results demonstrate that the Li+/Mg2+ selectivity of polyamide membranes can be enhanced by 13 times with acid-pretreated feed solutions. This selectivity enhancement is attributed to the amplified Donnan potential from the ionization of carboxyl and amino moieties under low solution pH. As feed salinities increase from 10 to 250 g L–1, the Li+/Mg2+ selectivity decreases by ∼43\%, a consequence of weakening exclusion mechanisms. Further, our analysis accentuates the importance of measuring separation factors using representative solution compositions to replicate the ion-transport behaviors with salt-lake brine. Consequently, our results reveal that predictions of ion rejection and Li+/Mg2+ separation factors can be improved by up to 80\% when feed solutions with the appropriate Cl–/SO42– molar ratios are used.}
-}
-
-@article{GARRIDO2023SELFSUPERVISED,
-	title        = {Self-supervised learning with {L}ie symmetries for partial differential equations},
-	author       = {Gr\'egoire Mialon and Quentin Garrido and Hannah Lawrence and Danyal Rehman and Yann LeCun and Bobak T. Kiani},
-	year         = {2023},
-	journal      = {Advances in Neural Information Processing Systems (NeurIPS)},
-	volume       = {36},
-	abbr         = {NeurIPS},
-	pdf          = {https://arxiv.org/pdf/2307.05432},
-	selected     = {true},
-	abstract     = {Machine learning for differential equations paves the way for computationally efficient alternatives to numerical solvers, with potentially broad impacts in science and engineering. Though current algorithms typically require simulated training data tailored to a given setting, one may instead wish to learn useful information from heterogeneous sources, or from real dynamical systems observations that are messy or incomplete. In this work, we learn general-purpose representations of PDEs from heterogeneous data by implementing joint embedding methods for self-supervised learning (SSL), a framework for unsupervised representation learning that has had notable success in computer vision. Our representation outperforms baseline approaches to invariant tasks, such as regressing the coefficients of a PDE, while also improving the time-stepping performance of neural solvers. We hope that our proposed methodology will prove useful in the eventual development of general-purpose foundation models for PDEs.},
-	journal2     = {International Conference on Learning Representations (ICLR) -- Physics for Machine Learning Workshop},
-	abbr2        = {ICLR},
-	arxiv        = {2307.05432},
-	poster       = {https://www.dropbox.com/s/9bpzbp2ioyx2w0u/iclr23_ssl.pdf?dl=0}
-}
-
-@article{KUO201894,
-	title        = {A novel wake model for wind farm design on complex terrains},
-	author       = {Jim Kuo and Danyal Rehman and David A. Romero and Cristina H. Amon},
-	year         = {2018},
-	journal      = {Journal of Wind Engineering and Industrial Aerodynamics},
-	volume       = {174},
-	pages        = {94--102},
-	abbr         = {IJWIA},
-	html         = {https://doi.org/10.1016/j.jweia.2017.12.016},
-	pdf          = {https://tspace.library.utoronto.ca/bitstream/1807/111376/1/A_Novel_Wake_Model_2018_TSpace.pdf},
-	bibtex_show  = {false},
-	keywords     = {Wake model, Complex terrains, Wind farm layout optimization},
-	selected     = {false},
-	abstract     = {A numerical wake model that is capable of simulating wind turbine wake effects over complex terrains is proposed in this work. Currently, full computational fluid dynamics (CFD) simulations are required to simulate wake effects over complex terrains. Due to their high computational cost, it is difficult to apply expensive CFD simulations in the wind farm design process as optimization algorithms often require large number of solution evaluations. The proposed wake model solves a simplified variation of the Navier-Stokes equations, in which simplifications and assumptions have been implemented in order to reduce computational cost while maintaining accuracy. This model was validated by comparing with full CFD simulations with reasonable accuracy. In general, the model produces accurate results while keeping the computational cost two orders of magnitude lower than that of full CFD simulations. The low computation time highlights the model's potential to be used for optimizing wind farm layouts on complex terrains.}
-}
-
-@article{LIU2024149097,
-	title        = {Selective fluoride removal from groundwater using CNT-CeO2 electrodes in capacitive deionization (CDI)},
-	author       = {Xun Liu and Danyal Rehman and Yufei Shu and Bei Liu and Li Wang and Li Li and Mengxia Wang and Kunkun Wang and Qi Han and Linlin Zang and John H. Lienhard and Zhongying Wang},
-	year         = {2024},
-	journal      = {Chemical Engineering Journal},
-	volume       = {482},
-	pages        = {149097},
-	doi          = {https://doi.org/10.1016/j.cej.2024.149097},
-	issn         = {1385-8947},
-	abbr         = {CEJ},
-	html         = {https://doi.org/10.1016/j.cej.2024.149097},
-	bibtex_show  = {true},
-	keywords     = {Selective capacitive deionization, Defluoridation, Cerium dioxide, Carbon nanotubes, Selective separations},
-	abstract     = {Selective capacitive deionization (SCDI) is a promising process for preferentially removing specific ions from waters with complex compositions. The selectivity towards certain species in CDI is most frequently achieved through novel electrode materials with high affinities towards targeted species. In this study, we investigate the selective removal of fluoride ions from groundwater containing concentrated co-existing chloride ions. A carbon nanotube-CeO2 (CNT-CeO2) electrode is employed for the electro-sorption of fluoride ions. Our findings are compelling: when processing a mixed F−/Cl− solution comprising 10 mg/L F− and 100 mg/L Cl−, the CNT-CeO2 electrode is seen to reduce the concentration of F− ions to 1.5 mg/L in just 150 min, amounting to an 85 % F− removal efficiency, while the Cl− removal efficiency remains below 2 %. Importantly, this translates to a F−/Cl− separation factor of up to 4.16 when using the CeO2-based electrodes, which is 40 times higher than that achieved with conventional activated carbon (AC) electrodes. Furthermore, the energy consumption for treating actual groundwater using scaled-up equipment is impressively low at approximately 0.2 kWh/m3. The high affinity of CNT-CeO2 towards fluoride is attributed to the intercalation Faraday capacitance initiated by the reaction between F− with CeO2, as verified by the electrochemical quartz crystal microbalance (EQCM). Moreover, EQCM results show a substantial increase in both mass and current as the potential increased beyond 0.8 V vs Ag/AgCl, implying that the current surge is not a result of water splitting but rather the adsorption of F− onto the CNT-CeO2 electrode. The addition of CNTs substantially increases the conductivity of CeO2 electrodes and restricts the aggregation of CeO2, thereby accelerating ion diffusion and promoting selective adsorption characteristics. Importantly, our electro-driven approach demonstrates excellent adsorption–desorption over 20 cycles. This comprehensive study advances the technological development of selective CDI, while providing new insights for fluoride removal in groundwater.}
-}
-
 @article{membranes11020128,
 	title        = {The need for accurate osmotic pressure and mass transfer resistances in modeling osmotically driven membrane processes},
 	author       = {Nagy, Endre and Hegedüs, Imre and Rehman, Danyal and Wei, Quantum J. and Ahdab, Yvana D. and Lienhard, John H.},
@@ -157,22 +213,6 @@
 	abstract     = {The widely used van ’t Hoff linear relation for predicting the osmotic pressure of NaCl solutions may result in errors in the evaluation of key system parameters, which depend on osmotic pressure, in pressure-retarded osmosis and forward osmosis. In this paper, the linear van ’t Hoff approach is compared to the solutions using OLI Stream Analyzer, which gives the real osmotic pressure values. Various dilutions of NaCl solutions, including the lower solute concentrations typical of river water, are considered. Our results indicate that the disparity in the predicted osmotic pressure of the two considered methods can reach 30%, depending on the solute concentration, while that in the predicted power density can exceed over 50%. New experimental results are obtained for NanoH2O and Porifera membranes, and theoretical equations are also developed. Results show that discrepancies arise when using the van ’t Hoff equation, compared to the OLI method. At higher NaCl concentrations (C &gt; 1.5 M), the deviation between the linear approach and the real values increases gradually, likely indicative of a larger error in van ’t Hoff predictions. The difference in structural parameter values predicted by the two evaluation methods is also significant; it can exceed the typical 50–70% range, depending on the operating conditions. We find that the external mass transfer coefficients should be considered in the evaluation of the structural parameter in order to avoid overestimating its value. Consequently, measured water flux and predicted structural parameter values from our own and literature measurements are recalculated with the OLI software to account for external mass transfer coefficients.},
 	article-number = {128},
 	pubmedid     = {33672803}
-}
-
-@article{REHMAN2020120270,
-	title        = {A heat and mass transport model of clay pot evaporative coolers for vegetable storage},
-	author       = {Danyal Rehman and Ethan McGarrigle and Leon Glicksman and Eric Verploegen},
-	year         = {2020},
-	journal      = {International Journal of Heat and Mass Transfer},
-	volume       = {162},
-	pages        = {120270},
-	abbr         = {IJHMT},
-	html         = {https://doi.org/10.1016/j.ijheatmasstransfer.2020.120270},
-	pdf          = {https://pdf.sciencedirectassets.com/271451/1-s2.0-S0017931020X00135/1-s2.0-S0017931020332063/am.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLWVhc3QtMSJIMEYCIQDyEvOzfcJ2NW5Ql%2FahtI2aAfNKXtybUAfD3NwVJVhm1wIhAKKtSa%2B9vWLbZJGTHRdNCNzcmNZS5%2FCf6NJKP8PQPkIpKrwFCJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBRoMMDU5MDAzNTQ2ODY1IgxknkwJC59G%2BA2CRSAqkAW%2B8bhKR7%2BoonGaEZl%2BVthpxuFT3aLtbsNnGuhApdQpClsNIt12Q6QEP174%2BzCnMyLskWqeJggTghorGqziovtv5eJJ%2FIAdUuWm1YjKyKFRjmtLPZ6W4Fc%2BzP3QLScLm7aBTzJuabIDgL0Uq7oyl4TqVEYK8H7rEdxlJZ5oKWjzay1oHUzuW9MUy1r20rhxrm6lU23QNwgXRvWdS5SImyFr8nDWmZSQ7IN2b30J6pxa3ld7IcAAkThLQXM7FAcpOhxk7vK6Vs7DS9clf0iZ5EZ7G1asnwAhIHLpqgtBW9t56UDD02CQ%2FgTajElvKsFYZhkLNU3D91FwgY1otXJPcC2WxqqwrcRq9wnr9ED4tJqWJhWZFzmNOdMMpKySWBFHxTbfGeJqEna4tQel2eAxXHjf3O%2F6%2B1mAM416dCSIm6nZXP3ZiJNmBSGDhRJEY2QymIwPnCiafosNSy3E6iD9rS7p0H0o9G%2FdUkIWmSbjDUYNlmv8Mdqm%2BR7aT8ol%2FAHe1b0rncObkZ4TAT6bhl40IiMEV0Wbqbxj9DBRucJM13%2F2Pz1YcDpIAndt1AzlCFFG4wWThmo3wPvU9q12nWqduEAe2IqRHVguVZSXgquiMDgPORh8%2B8HMf1e8L5JQZw%2Fv4CbRGK4ZnB3h%2Fl%2BpRhtD3FQzDMG0HCLdPbYg%2Fn9xzjzzcUkuYNR%2BOr7k7zHnVcunhthr62We1H8V%2FuCHobCpHnCzxHMlsBl8JTzQeIacTdQn3PSx3XFkIeJz8kqac0SJ182V4lPgkda5LJctwy2ZCB09FFKr86OfrGVN8LV1zlsSIrKPlAotb2kor0czVTeAhdLum4eNcI3g%2FPtQ%2BWtMfHSMeEflv9ELWXcjx7P3cqjpCzCgvK2sBjqwAQMOe8afOQuv8%2BQmq1rQupEQeiLHgSNGA8CYFcP%2FxjeBxHcvh6cHiiM7O57U7nkNwOHVKU5tl7pJlbxRYyEC7xr%2B4JBEvRuy5idZ0n6AgdW8tfFb%2B6btbAVsNdJ%2B1h4oobBZMym5ZCUL33KSsnSlUJAUCq%2BcfRu%2BCt9zTKxn7VdiHfiT0Uv%2F1mPbD68DRPu6WeShqNOvxQRB4E%2BfCRH4B%2B%2F9%2FMSsgeJMHQ1oxf0G%2BLtc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231226T233237Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY4XYXYZHR%2F20231226%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=535e728ed96166f50907a86ba98f97f6fef8e2e9807e372d7f48ea91f188dbc0&hash=65ce5e991c517d2eb47eb31de1884b334c792219a223c30982ac702f16aa3c42&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S0017931020332063&tid=pdf-7cc56611-17c9-468e-bd7a-fd04c1c49eea&sid=a41c4e81528b52449b0bad68d39859a36cd9gxrqa&type=client},
-	bibtex_show  = {false},
-	keywords     = {Horticulture, Evaporative cooling, Postharvest vegetable storage, Transport modelling, Global development},
-	selected     = {false},
-	abstract     = {Clay pot coolers are low-cost technologies that can prolong vegetable shelf-life by providing a cool and humid storage environment through evaporative cooling. A predictive performance model of these systems is not available for investigating the impact of design modifications on device performance. This study proposes transport models for pot-in-pot and pot-in-dish coolers that have been validated with experimental data from 17 field trials from Mali and Rwanda with maximum errors of less than 6% observed. Results show that the pot-in-pot and pot-in-dish devices consume 1.96 and 2.85 L/day of water, respectively. A parametric study was conducted to evaluate how the refrigeration efficiency and daily water consumption are affected by the size of the device, local wind speed, and the mass of vegetables stored in the cooler. Increasing local wind speeds provides a net positive impact on refrigeration efficiency despite the increased convective heating. In addition, the quantity of vegetable mass showed a negligible impact on daily water consumption. Insights from the model suggest that water consumption is more efficient for larger devices.}
 }
 
 @article{REHMAN2021117171,
@@ -191,94 +231,6 @@
 	abstract     = {Monovalent selective electrodialysis (MSED) is a variant of conventional electrodialysis (ED) that employs selective ion exchange membranes to preferentially remove monovalent ions relative to divalent ions. This process can be beneficial when the divalent rich stream has potential applications. In agriculture, for example, a stream rich in calcium and magnesium is deemed beneficial for crops and can decrease the use of fertilizers that would otherwise need to be re-introduced to the source water prior to irrigation. MSED has been used for salt production, brine concentration, and irrigation. An experimentally validated computational model to predict its performance, however, is not available in the literature. The present work uses concepts from conventional ED modelling to build a high-resolution predictive model for the performance of MSED. The model was validated with over 32 experiments at different operating conditions and observed to fit the data to within 6% and 8% for two different types of membranes. All voltage predictions were within 10% of experiments conducted. The model was then used to predict permselectivity across different salinities and compositions. These values were extended to investigate the economic benefits of using MSED to save fertilizers for greenhouses across the U.S. Results showed an average of $4991 saved per hectare when employing MSED technology. These values aligned with predictions from two previous techno-economic studies conducted investigating MSED for agriculture.}
 }
 
-@article{REHMAN2022100034,
-	title        = {Global optimization for accurate and efficient parameter estimation in nanofiltration},
-	author       = {Danyal Rehman and John H. Lienhard},
-	year         = {2022},
-	journal      = {Journal of Membrane Science Letters},
-	volume       = {2},
-	number       = {2},
-	pages        = {100034},
-	abbr         = {JMSL},
-	html         = {https://doi.org/10.1016/j.memlet.2022.100034},
-	pdf          = {https://www.sciencedirect.com/science/article/pii/S2772421222000216/pdfft?md5=8d532a150f743dec6b583aca0be0ab3c&pid=1-s2.0-S2772421222000216-main.pdf},
-	bibtex_show  = {true},
-	keywords     = {Ion selectivity, Transport models, Metaheuristics, Global optimization, Nanofiltration},
-	selected     = {false},
-	abstract     = {One of the most well-established frameworks for modeling multicomponent transport in nanofiltration (NF) is the Donnan-Steric Pore Model with Dielectric Exclusion (DSPM-DE). Conventional DSPM-DE characterizes transport across NF membranes through four governing membrane parameters:\ (1) pore radius; (2) effective membrane thickness; (3) membrane charge density; and (4) the dielectric constant inside the membrane pores. The process for quantifying these parameters is typically sequential. First, neutral solute experiments are performed to determine pore radius and effective membrane thickness. Next, charged species experiments are conducted, and the data is used to regress out the remaining parameters. The resulting regressions are often performed using local search algorithms that can struggle to provide low residuals with robust fits. In addition, this two-step approach tends to:\ (1) require a substantial number of charged and uncharged solute experiments; and (2) introduce assumed relationships between pore size and water flux, such as the Hagen-Poiseuille equation, which may not be representative of transport through complex pore networks. To address these issues, we propose the use of metaheuristic global optimization techniques supplemented with gradient-free local search and maximum likelihood estimation to simultaneously regress all four membrane parameters directly from charged species experiments. We validate our approach against eight independent datasets across diverse input salinities, compositions, and membranes.}
-}
-
-@article{REHMAN2023ATTENTIONGUIDED,
-	title        = {Attention-enhanced neural differential equations for physics-informed deep learning},
-	author       = {Danyal Rehman and John H. Lienhard},
-	year         = {2023},
-	journal      = {Advances in Neural Information Processing Systems (NeurIPS) -- Machine Learning for the Physical Sciences Workshop},
-	abbr         = {NeurIPS},
-	pdf          = {https://arxiv.org/pdf/2312.02871},
-	selected     = {false},
-	abstract     = {Species transport models typically combine partial differential equations (PDEs) with relations from hindered transport theory to quantify electromigrative, convective, and diffusive transport through complex nanoporous systems;\ however, these formulations are frequently substantial simplifications of the governing dynamics, leading to the poor generalization performance of PDE-based models. Given the growing interest in deep learning methods for the physical sciences, we develop a machine learning-based approach to characterize ion transport across nanoporous membranes. Our proposed framework centers around attention-enhanced neural differential equations that incorporate electroneutrality-based inductive biases to improve generalization performance relative to conventional PDE-based methods. In addition, we study the role of the attention mechanism in illuminating physically-meaningful ion-pairing relationships across diverse mixture compositions. Further, we investigate the importance of pre-training on simulated data from PDE-based models, as well as the performance benefits from hard vs.\ soft inductive biases. Our results indicate that physics-informed deep learning solutions can outperform their classical PDE-based counterparts and provide promising avenues for modelling complex transport phenomena across diverse applications.},
-	arxiv        = {2312.02871}
-}
-
-@article{REHMAN2023PHYSICSCONSTRAINED,
-	title        = {Physics-constrained neural differential equations for learning multi-ionic transport},
-	author       = {Danyal Rehman and John H. Lienhard},
-	year         = {2023},
-	journal      = {International Conference on Learning Representations (ICLR) -- Physics for Machine Learning Workshop},
-	abbr         = {ICLR},
-	pdf          = {https://arxiv.org/pdf/2303.04594},
-	selected     = {false},
-	abstract     = {Continuum models for ion transport through polyamide nanopores require solving partial differential equations (PDEs) through complex pore geometries. Resolving spatiotemporal features at this length and time-scale can make solving these equations computationally intractable. In addition, mechanistic models frequently require functional relationships between ion interaction parameters under nano-confinement, which are often too challenging to measure experimentally or know a priori. In this work, we develop the first physics-informed deep learning model to learn ion transport behaviour across polyamide nanopores. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural differential equations are pre-trained on simulated data from continuum models and fine-tuned on independent experimental data to learn ion rejection behaviour. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve model generalization. Our approach is compared to other physics-informed deep learning models and shows strong agreement with experimental measurements across all studied datasets.},
-	poster       = {https://www.dropbox.com/s/0ftwqkv48rd1yuf/iclr23_phynde.pdf?dl=0},
-	arxiv        = {2303.04594}
-}
-
-@article{REHMAN2023QUANTIFYING,
-	title        = {Quantifying uncertainty in nanofiltration transport models for enhanced metals recovery},
-	author       = {Danyal Rehman and Fareed Sheriff and John H. Lienhard},
-	year         = {2023},
-	journal      = {Water Research},
-	volume       = {243},
-	pages        = {120325},
-	abbr         = {Water Research},
-	html         = {https://doi.org/10.1016/j.watres.2023.120325},
-	pdf          = {https://dspace.mit.edu/bitstream/handle/1721.1/151185/NF_WR_Manuscript.pdf?sequence=2&isAllowed=y},
-	bibtex_show  = {true},
-	keywords     = {Ion selectivity, Metal recovery, Transport models, Donnan exclusion, Bilevel optimization, Nanofiltration},
-	selected     = {false},
-	abstract     = {To decarbonize our global energy system, sustainably harvesting metals from diverse sourcewaters is essential. Membrane-based processes have recently shown great promise in meeting these needs by achieving high metal ion selectivities with relatively low water and energy use. An example is nanofiltration, which harnesses steric, dielectric, and Donnan exclusion mechanisms to perform size- and charge-based fractionation of metal ions. To further optimize nanofiltration systems, multicomponent models are needed; however, conventional methods necessitate large amounts of data for model calibration, introduce substantial uncertainty into the characterization process, and often yield poor results when extrapolated. In this work, we develop a new computational architecture to alleviate these concerns. Specifically, we develop a framework that: (1) reduces the data requirement for model calibration to only charged species measurements; (2) eliminates uncertainty propagation problems present in conventional characterization processes; (3) enables exploration of pH optimization for enhancing metal ion selectivities; and (4) enables uncertainty quantification to assess the sensitivity of partition coefficients and ion driving forces to learned pore size distributions. Our framework captures eight independent datasets comprising over 500 measurements to within ±15\%. Our studies also suggest that the expectation–maximization algorithm can effectively learn pore size distributions and that optimizing pH can improve metal ion selectivities by a factor of 3–10×. Our findings also reveal that image charges appear to play a less pronounced role in dielectric exclusion under the studied conditions and that ion driving forces are more sensitive to pore size distributions than partition coefficients.}
-}
-
-@article{REHMAN2024149806,
-	title        = {Physics-informed deep learning for multi-species membrane separations},
-	author       = {Danyal Rehman and John H. Lienhard},
-	year         = {2024},
-	journal      = {Chemical Engineering Journal},
-	pages        = {149806},
-	doi          = {https://doi.org/10.1016/j.cej.2024.149806},
-	issn         = {1385-8947},
-	abbr         = {CEJ},
-	html         = {https://doi.org/10.1016/j.cej.2024.149806},
-	selected     = {true},
-	bibtex_show  = {true},
-	keywords     = {Ion selectivity, Membrane separations, Physics-informed machine learning, Scientific machine learning, Deep learning},
-	abstract     = {Conventional continuum models for ion transport across polyamide membranes require solving partial differential equations (PDEs). These models typically introduce a host of assumptions and simplifications to improve the computational tractability of existing solvers. As a consequence of these constraints, conventional models struggle to generalize predictive performance to new unseen conditions. Deep learning has recently shown promise in alleviating many of these concerns, making it a promising avenue for surrogate models that can replace conventional PDE-based approaches. In this work, we develop a physics-informed deep learning model to predict ion transport across polyamide membranes. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural methods are pre-trained on simulated data from continuum models and fine-tuned on independent experiments to learn multi-ionic rejection behaviour. We also harness the attention mechanism, commonly observed in language modelling, to learn and infer key ion-pairing relationships. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve robustness and generalization. We study the neural framework’s performance relative to conventional PDE-based methods, and also compare the use of hard/soft inductive bias constraints on prediction accuracy. Lastly, we compare our approach to other competitive deep learning architectures and illustrate strong agreement with experimental measurements across all studied datasets.}
-}
-
-@article{REHMAN2025FORT,
-	title        = {FORT: Forward-only regression training of normalizing flows},
-	author       = {Danyal Rehman and Oscar Davis and Jiarui Lu and Jian Tang and Michael Bronstein and Yoshua Bengio and Alexander Tong and Avishek Joey Bose},
-	year         = {2025},
-	journal      = {arXiv preprint arXiv:2506.01158},
-	bibtex_show  = {false},
-	selected     = {true},
-	abbr         = {Preprint},
-	html         = {https://arxiv.org/abs/2506.01158},
-	pdf          = {https://arxiv.org/pdf/2506.01158},
-	keywords     = {Normalizing Flows, Generative Models, Optimal Transport, Flow Matching, AI for Science},
-	abstract     = {Simulation-free training frameworks have been at the forefront of the generative modeling revolution in continuous spaces, leading to neural dynamical systems that encompass modern large-scale diffusion and flow-matching models. Despite the scalability of training, the generation of high-quality samples and their corresponding likelihood under the model requires expensive numerical simulation---inhibiting adoption in numerous scientific applications such as equilibrium sampling of molecular systems. In this paper, we revisit classical normalizing flows as one-step generative models with exact likelihoods and propose a novel, scalable training objective that does not require computing the expensive change of variable formula used in conventional maximum likelihood training. We propose Forward-Only Regression Training (FORT), a simple regression objective that maps prior samples under our flow to specifically chosen targets. We demonstrate that FORT supports a wide class of targets, such as optimal transport targets and targets from pre-trained continuous-time normalizing flows (CNF). We further demonstrate that by using CNF targets, our one-step flows allow for larger-scale training that exceeds the performance and stability of maximum likelihood training, while unlocking a broader class of architectures that were previously challenging to train. Empirically, we elucidate that our trained flows can perform equilibrium conformation sampling in Cartesian coordinates of alanine dipeptide, alanine tripeptide, and alanine tetrapeptide.}
-}
-
 @article{WANG2021LITHIUM,
 	title        = {Novel positively charged metal-coordinated nanofiltration membrane for Lithium recovery},
 	author       = {Wang, Li and Rehman, Danyal and Sun, Peng-Fei and Deshmukh, Akshay and Zhang, Liyuan and Han, Qi and Yang, Zhe and Wang, Zhongying and Park, Hee-Deung and Lienhard, John H. and Tang, Chuyang Y.},
@@ -293,4 +245,52 @@
 	bibtex_show  = {true},
 	selected     = {false},
 	abstract     = {Nanofiltration (NF) with high water flux and precise separation performance with high Li+/Mg2+ selectivity is ideal for lithium brine recovery. However, conventional polyamide-based commercial NF membranes are ineffective in lithium recovery processes due to their undesired Li+/Mg2+ selectivity. In addition, they are constrained by the water permeance selectivity trade-off, which means that a highly permeable membrane often has lower selectivity. In this study, we developed a novel nonpolyamide NF membrane based on metal-coordinated structure, which exhibits simultaneously improved water permeance and Li+/Mg2+ selectivity. Specifically, the optimized Cu–m-phenylenediamine (MPD) membrane demonstrated a high water permeance of 16.2 ± 2.7 LMH/bar and a high Li+/Mg2+ selectivity of 8.0 ± 1.0, which surpassed the trade-off of permeance selectivity. Meanwhile, the existence of copper in the Cu–MPD membrane further enhanced anti-biofouling property and the metal-coordinated nanofiltration membrane possesses a pH-responsive property. Finally, a transport model based on the Nernst–Planck equations has been developed to fit the water flux and rejection of uncharged solutes to the experiments conducted. The model had a deviation below 2\% for all experiments performed and suggested an average pore radius of 1.25 nm with a porosity of 21\% for the Cu–MPD membrane. Overall, our study provides an exciting approach for fabricating a nonpolyamide high-performance nanofiltration membrane in the context of lithium recovery.}
+}
+
+@article{AHDAB2020118072,
+	title        = {Brackish water desalination for greenhouses: Improving groundwater quality for irrigation using monovalent selective electrodialysis reversal},
+	author       = {Yvana D. Ahdab and Danyal Rehman and John H. Lienhard},
+	year         = {2020},
+	journal      = {Journal of Membrane Science},
+	volume       = {610},
+	pages        = {118072},
+	abbr         = {JMS},
+	html         = {https://doi.org/10.1016/j.memsci.2020.118072},
+	pdf          = {https://www.sciencedirect.com/science/article/am/pii/S0376738820306517},
+	bibtex_show  = {false},
+	keywords     = {Desalination, Groundwater, Electrodialysis, Agriculture, Membrane selectivity},
+	selected     = {false},
+	abstract     = {Reverse osmosis (RO) is the most widely used desalination technology for treating brackish water prior to irrigation. RO, however, removes both monovalent ions (Na+,Cl−) detrimental to crops and divalent ions (Ca2+,Mg2+,SO42−) that are beneficial. These beneficial ions must then be reintroduced to the desalinated water by adding fertilizer or mixing with nutrient-rich brackish water that typically contains excess levels of monovalent ions. Unlike RO, monovalent selective electrodialysis reversal (MSED-R) removes monovalent ions, while retaining divalent ions. This paper evaluates whether Neosepta ion exchange membranes, originally manufactured to concentrate seawater for salt production, show sufficient monovalent selectivity in the brackish salinity range to be suitable for use in greenhouse agriculture. Using an MSED-R experimental set-up, 16 brackish groundwater compositions are tested to determine membrane parameters, including limiting current, membrane resistance, membrane permeability, and membrane selectivity. Across compositions, the Neosepta membranes show monovalent selectivity for sodium relative to calcium and magnesium and for chloride relative to sulfate. The membrane selectivities are used to calculate MSED-R fertilizer savings relative to RO for brackish groundwaters across the U.S. Regions in which brackish groundwaters contain greater than the target nutrient concentrations for crop growth, or show potential for MSED-R adoption, are also identified.}
+}
+
+@article{REHMAN2020120270,
+	title        = {A heat and mass transport model of clay pot evaporative coolers for vegetable storage},
+	author       = {Danyal Rehman and Ethan McGarrigle and Leon Glicksman and Eric Verploegen},
+	year         = {2020},
+	journal      = {International Journal of Heat and Mass Transfer},
+	volume       = {162},
+	pages        = {120270},
+	abbr         = {IJHMT},
+	html         = {https://doi.org/10.1016/j.ijheatmasstransfer.2020.120270},
+	pdf          = {https://pdf.sciencedirectassets.com/271451/1-s2.0-S0017931020X00135/1-s2.0-S0017931020332063/am.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLWVhc3QtMSJIMEYCIQDyEvOzfcJ2NW5Ql%2FahtI2aAfNKXtybUAfD3NwVJVhm1wIhAKKtSa%2B9vWLbZJGTHRdNCNzcmNZS5%2FCf6NJKP8PQPkIpKrwFCJj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBRoMMDU5MDAzNTQ2ODY1IgxknkwJC59G%2BA2CRSAqkAW%2B8bhKR7%2BoonGaEZl%2BVthpxuFT3aLtbsNnGuhApdQpClsNIt12Q6QEP174%2BzCnMyLskWqeJggTghorGqziovtv5eJJ%2FIAdUuWm1YjKyKFRjmtLPZ6W4Fc%2BzP3QLScLm7aBTzJuabIDgL0Uq7oyl4TqVEYK8H7rEdxlJZ5oKWjzay1oHUzuW9MUy1r20rhxrm6lU23QNwgXRvWdS5SImyFr8nDWmZSQ7IN2b30J6pxa3ld7IcAAkThLQXM7FAcpOhxk7vK6Vs7DS9clf0iZ5EZ7G1asnwAhIHLpqgtBW9t56UDD02CQ%2FgTajElvKsFYZhkLNU3D91FwgY1otXJPcC2WxqqwrcRq9wnr9ED4tJqWJhWZFzmNOdMMpKySWBFHxTbfGeJqEna4tQel2eAxXHjf3O%2F6%2B1mAM416dCSIm6nZXP3ZiJNmBSGDhRJEY2QymIwPnCiafosNSy3E6iD9rS7p0H0o9G%2FdUkIWmSbjDUYNlmv8Mdqm%2BR7aT8ol%2FAHe1b0rncObkZ4TAT6bhl40IiMEV0Wbqbxj9DBRucJM13%2F2Pz1YcDpIAndt1AzlCFFG4wWThmo3wPvU9q12nWqduEAe2IqRHVguVZSXgquiMDgPORh8%2B8HMf1e8L5JQZw%2Fv4CbRGK4ZnB3h%2Fl%2BpRhtD3FQzDMG0HCLdPbYg%2Fn9xzjzzcUkuYNR%2BOr7k7zHnVcunhthr62We1H8V%2FuCHobCpHnCzxHMlsBl8JTzQeIacTdQn3PSx3XFkIeJz8kqac0SJ182V4lPgkda5LJctwy2ZCB09FFKr86OfrGVN8LV1zlsSIrKPlAotb2kor0czVTeAhdLum4eNcI3g%2FPtQ%2BWtMfHSMeEflv9ELWXcjx7P3cqjpCzCgvK2sBjqwAQMOe8afOQuv8%2BQmq1rQupEQeiLHgSNGA8CYFcP%2FxjeBxHcvh6cHiiM7O57U7nkNwOHVKU5tl7pJlbxRYyEC7xr%2B4JBEvRuy5idZ0n6AgdW8tfFb%2B6btbAVsNdJ%2B1h4oobBZMym5ZCUL33KSsnSlUJAUCq%2BcfRu%2BCt9zTKxn7VdiHfiT0Uv%2F1mPbD68DRPu6WeShqNOvxQRB4E%2BfCRH4B%2B%2F9%2FMSsgeJMHQ1oxf0G%2BLtc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231226T233237Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTY4XYXYZHR%2F20231226%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=535e728ed96166f50907a86ba98f97f6fef8e2e9807e372d7f48ea91f188dbc0&hash=65ce5e991c517d2eb47eb31de1884b334c792219a223c30982ac702f16aa3c42&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S0017931020332063&tid=pdf-7cc56611-17c9-468e-bd7a-fd04c1c49eea&sid=a41c4e81528b52449b0bad68d39859a36cd9gxrqa&type=client},
+	bibtex_show  = {false},
+	keywords     = {Horticulture, Evaporative cooling, Postharvest vegetable storage, Transport modelling, Global development},
+	selected     = {false},
+	abstract     = {Clay pot coolers are low-cost technologies that can prolong vegetable shelf-life by providing a cool and humid storage environment through evaporative cooling. A predictive performance model of these systems is not available for investigating the impact of design modifications on device performance. This study proposes transport models for pot-in-pot and pot-in-dish coolers that have been validated with experimental data from 17 field trials from Mali and Rwanda with maximum errors of less than 6% observed. Results show that the pot-in-pot and pot-in-dish devices consume 1.96 and 2.85 L/day of water, respectively. A parametric study was conducted to evaluate how the refrigeration efficiency and daily water consumption are affected by the size of the device, local wind speed, and the mass of vegetables stored in the cooler. Increasing local wind speeds provides a net positive impact on refrigeration efficiency despite the increased convective heating. In addition, the quantity of vegetable mass showed a negligible impact on daily water consumption. Insights from the model suggest that water consumption is more efficient for larger devices.}
+}
+
+@article{KUO201894,
+	title        = {A novel wake model for wind farm design on complex terrains},
+	author       = {Jim Kuo and Danyal Rehman and David A. Romero and Cristina H. Amon},
+	year         = {2018},
+	journal      = {Journal of Wind Engineering and Industrial Aerodynamics},
+	volume       = {174},
+	pages        = {94--102},
+	abbr         = {IJWIA},
+	html         = {https://doi.org/10.1016/j.jweia.2017.12.016},
+	pdf          = {https://tspace.library.utoronto.ca/bitstream/1807/111376/1/A_Novel_Wake_Model_2018_TSpace.pdf},
+	bibtex_show  = {false},
+	keywords     = {Wake model, Complex terrains, Wind farm layout optimization},
+	selected     = {false},
+	abstract     = {A numerical wake model that is capable of simulating wind turbine wake effects over complex terrains is proposed in this work. Currently, full computational fluid dynamics (CFD) simulations are required to simulate wake effects over complex terrains. Due to their high computational cost, it is difficult to apply expensive CFD simulations in the wind farm design process as optimization algorithms often require large number of solution evaluations. The proposed wake model solves a simplified variation of the Navier-Stokes equations, in which simplifications and assumptions have been implemented in order to reduce computational cost while maintaining accuracy. This model was validated by comparing with full CFD simulations with reasonable accuracy. In general, the model produces accurate results while keeping the computational cost two orders of magnitude lower than that of full CFD simulations. The low computation time highlights the model's potential to be used for optimizing wind farm layouts on complex terrains.}
 }
