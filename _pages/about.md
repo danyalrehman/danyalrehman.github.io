@@ -6,7 +6,7 @@ subtitle: Banting Postdoctoral Researcher @ <b>Mila &ndash; Qu&eacute;bec AI Ins
 
 profile:
   align: right
-  image: prof_pic_cartoon.jpeg
+  image: profile_pic.png
   image_circular: false # crops the image to make it circular
   
 news: true  # includes a list of news items
