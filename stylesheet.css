@@ -293,3 +293,26 @@ h2 {
     padding: 1rem;
   }
 }
+
+.rainbow {
+  background: linear-gradient(
+    90deg,
+    blue,
+    indigo,
+    violet,
+    blue
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 4s linear infinite;
+}
+
+@keyframes rainbow {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 200%;
+  }
+}
