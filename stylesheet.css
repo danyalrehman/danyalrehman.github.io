@@ -269,6 +269,86 @@ h2 {
   color: #f09228;
 }
 
+/* Image comparison slider */
+.cmp-wrapper {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  user-select: none;
+  cursor: col-resize;
+}
+
+.cmp-base-img,
+.cmp-top-img {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.cmp-top-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: inset(0 0% 0 0);
+}
+
+.cmp-divider {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 2px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.cmp-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cmp-handle::before,
+.cmp-handle::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  border: 7px solid transparent;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.cmp-handle::before {
+  left: 38%;
+  border-left-color: rgba(255, 255, 255, 0.9);
+}
+
+.cmp-handle::after {
+  left: 62%;
+  border-top-color: rgba(255, 255, 255, 0.9);
+}
+
+.cmp-range {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: col-resize;
+  margin: 0;
+  -webkit-appearance: none;
+}
+
 /* Responsive */
 @media screen and (max-width: 660px) {
   .profile-section {

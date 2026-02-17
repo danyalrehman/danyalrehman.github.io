@@ -9,6 +9,24 @@
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="./last-updated.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const wrapper = document.querySelector('.cmp-wrapper');
+      const range   = wrapper.querySelector('.cmp-range');
+      const topImg  = wrapper.querySelector('.cmp-top-img');
+      const divider = wrapper.querySelector('.cmp-divider');
+      if (wrapper.dataset.cmp !== 'on') {
+        range.style.display   = 'none';
+        divider.style.display = 'none';
+        return;
+      }
+      range.addEventListener('input', function () {
+        const val = range.value;
+        topImg.style.clipPath = 'inset(0 ' + (100 - val) + '% 0 0)';
+        divider.style.left = val + '%';
+      });
+    });
+  </script>
 </head>
 
 <body>
@@ -45,7 +63,14 @@
 
       </div>
       <div class="profile-image" style="position: relative; top: -2px;">
-        <img src="img/profile_pic.png" alt="Danyal Rehman">
+        <div class="cmp-wrapper" data-cmp="on"> <!-- slider active -->
+          <img src="img/inverse_pass.png" alt="Danyal Rehman" class="cmp-base-img">
+          <img src="img/forward_pass.png" alt="Danyal Rehman" class="cmp-top-img">
+          <div class="cmp-divider">
+            <span class="cmp-handle"></span>
+          </div>
+          <input class="cmp-range" type="range" min="0" max="100" value="100" aria-label="Image comparison slider">
+        </div>
       </div>
     </div>
 
