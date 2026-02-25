@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Danyal Rehman, Ph.D.</title>
-  <meta name="author" content="Danyal Rehman, Ph.D.">
+  <meta name="author" content="Danyal Rehman">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
@@ -31,7 +31,26 @@
 </head>
 
 <body>
-  <div class="content">
+  <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+  <script>
+    (function() {
+      var btn = document.getElementById('dark-toggle');
+      var icon = btn.querySelector('i');
+      if (localStorage.getItem('dark-mode') === 'on') {
+        document.documentElement.classList.add('dark-mode');
+        icon.className = 'fas fa-sun';
+      }
+      btn.addEventListener('click', function() {
+        document.documentElement.classList.toggle('dark-mode');
+        var on = document.documentElement.classList.contains('dark-mode');
+        icon.className = on ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('dark-mode', on ? 'on' : 'off');
+      });
+    })();
+  </script>
+<div class="content">
 
     <!-- Header -->
     <span class="name">Danyal Rehman</span>

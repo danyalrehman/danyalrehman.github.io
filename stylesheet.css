@@ -390,6 +390,45 @@ h2 {
   }
 }
 
+/* Dark-mode toggle button */
+.dark-toggle {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 9999;
+  background: #def1ff;
+  border: 1.5px solid #213c7a;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #213c7a;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.dark-toggle:hover {
+  background: #eee;
+  border-color: #888;
+}
+
+/* Dark mode via filter inversion */
+html.dark-mode {
+  filter: invert(1) hue-rotate(180deg);
+  background: #fff;
+}
+
+/* Counter-invert images / videos so they look normal */
+html.dark-mode img,
+html.dark-mode video,
+html.dark-mode picture,
+html.dark-mode svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 .rainbow {
   background: linear-gradient(
     90deg,
