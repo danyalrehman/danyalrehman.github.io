@@ -140,11 +140,23 @@ h2 {
   padding: 0.3em 0;
 }
 
-.news-table .news-date {
-  width: 5.5em;
+.news-table .news-month {
+  width: 2.3em;
   white-space: nowrap;
-  padding-right: 0.8em;
+  padding-right: 0em;
   color: #333;
+}
+
+.news-table .news-year {
+  width: 2.8em;
+  white-space: nowrap;
+  padding-right: 2em;
+  color: #333;
+}
+
+.news-table .news-month b,
+.news-table .news-year b {
+  font-weight: 600;
 }
 
 /* Scrollbar styling */
