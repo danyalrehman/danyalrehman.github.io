@@ -51,7 +51,7 @@ h2 {
 .name {
   font-family: 'Source Sans Pro', 'Lato', Arial, sans-serif;
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 500;
   display: block;
   text-align: center;
 }
@@ -87,8 +87,12 @@ h2 {
   border-radius: 4px;
 }
 
-.profile-image img:hover {
-  opacity: 0.9;
+.profile-image .cmp-wrapper {
+  transition: opacity 0.25s ease;
+}
+
+.profile-image .cmp-wrapper:hover {
+  opacity: 0.85;
 }
 
 /* Social links bar */
