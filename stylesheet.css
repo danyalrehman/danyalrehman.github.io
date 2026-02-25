@@ -1,5 +1,3 @@
-/* Fonts */
-
 /* Reset & Base */
 * {
   box-sizing: border-box;
@@ -147,7 +145,7 @@ h2 {
 .news-table .news-month {
   width: 2.3em;
   white-space: nowrap;
-  padding-right: 0em;
+  padding-right: 0;
   color: #333;
 }
 
@@ -187,12 +185,16 @@ h2 {
   background: #def1ff;
   padding: 1.5rem;
   border-radius: 8px;
-  margin: 2rem 0;
-  margin-top: 1rem;
+  margin: 3rem 0 2rem;
+}
+
+.research h2 {
+  margin-top: -4px;
 }
 
 .research-item {
   margin-bottom: 1.5rem;
+  line-height: 1.35;
 }
 
 .research-item h3 {
@@ -247,34 +249,21 @@ h2 {
   margin-right: 0.3rem;
 }
 
-/* Education table */
-.education-table {
-  width: 100%;
-  border: 0;
-  border-spacing: 15px 10px;
-  border-collapse: separate;
-}
-
-.education-table td {
-  vertical-align: middle;
-}
-
-.education-table .icon-cell {
-  width: 80px;
-  text-align: center;
-}
-
-.education-table .icon-cell img {
-  max-width: 70px;
-  max-height: 70px;
-}
-
 /* Footer */
 .footer {
   text-align: center;
   font-size: small;
   color: #888;
   padding: 1rem 0;
+  margin-top: -2em;
+}
+
+.footer p:first-child {
+  margin-bottom: 0;
+}
+
+.footer p:last-child {
+  margin-top: 0.2em;
 }
 
 .footer a {
@@ -427,27 +416,4 @@ html.dark-mode video,
 html.dark-mode picture,
 html.dark-mode svg {
   filter: invert(1) hue-rotate(180deg);
-}
-
-.rainbow {
-  background: linear-gradient(
-    90deg,
-    blue,
-    indigo,
-    violet,
-    blue
-  );
-  background-size: 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rainbow 4s linear infinite;
-}
-
-@keyframes rainbow {
-  from {
-    background-position: 0%;
-  }
-  to {
-    background-position: 200%;
-  }
 }
