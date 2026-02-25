@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+b, strong {
+  font-weight: 800;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -12,7 +16,7 @@ body {
   background-color: #f8f9fa;
   font-family: 'Source Sans Pro', 'Lato', Arial, sans-serif;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 a {
@@ -28,7 +32,9 @@ a:hover {
 
 h2 {
   color: #213c7a;
-  margin-top: 1.5rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Layout */
@@ -44,8 +50,8 @@ h2 {
 /* Name */
 .name {
   font-family: 'Source Sans Pro', 'Lato', Arial, sans-serif;
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 32px;
+  font-weight: 600;
   display: block;
   text-align: center;
 }
@@ -100,6 +106,17 @@ h2 {
   margin-right: 0.2em;
 }
 
+/* Hiring box */
+.news-box {
+  background-color: #def1ff;
+  border-left: 4px solid #00229c;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 /* News section */
 .news-section .news-scroll {
   max-height: 325px;
@@ -151,10 +168,11 @@ h2 {
 
 /* Research section */
 .research {
-  background: #d3eafb;
-  padding: 2rem;
+  background: #def1ff;
+  padding: 1.5rem;
   border-radius: 8px;
   margin: 2rem 0;
+  margin-top: 1rem;
 }
 
 .research-item {
