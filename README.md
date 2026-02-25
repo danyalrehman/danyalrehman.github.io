@@ -1,6 +1,6 @@
 # 🌐 danyalrehman.github.io
 
-Personal academic website for [Danyal Rehman, Ph.D.](https://danyalrehman.com) — Banting Postdoctoral Researcher at Mila – Québec AI Institute. 🇨🇦
+Personal website for [Danyal Rehman, Ph.D.](https://danyalrehman.com) — Banting Postdoctoral Researcher at Mila – Québec AI Institute. 🇨🇦
 
 ## 📖 Overview
 
