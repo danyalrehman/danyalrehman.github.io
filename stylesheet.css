@@ -52,7 +52,7 @@ h2 {
   position: absolute;
   inset: 0;
   background: url('img/glacier.jpg') center / cover no-repeat;
-  opacity: 0.05;
+  opacity: 0.075;
   border-radius: 8px;
   pointer-events: none;
   z-index: 0;
@@ -248,7 +248,7 @@ h2 {
   color: white !important;
   text-decoration: none;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: all 0.3s ease;
   border: none;
