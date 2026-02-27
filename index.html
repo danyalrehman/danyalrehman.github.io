@@ -56,6 +56,15 @@
 </head>
 
 <body>
+  <!-- Floating Table of Contents -->
+  <nav class="toc" id="toc" aria-label="Table of contents">
+    <ul>
+      <li><a href="#about" class="toc-link active"><i class="fas fa-user"></i> About</a></li>
+      <li><a href="#news" class="toc-link"><i class="fas fa-bolt"></i> Highlights</a></li>
+      <li><a href="#publications" class="toc-link"><i class="fas fa-book"></i> Publications</a></li>
+    </ul>
+  </nav>
+
   <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
     <i class="fas fa-moon"></i>
   </button>
@@ -90,7 +99,7 @@
     </p>
 
     <!-- Profile -->
-    <div class="profile-section">
+    <div id="about" class="profile-section">
       <div class="profile-text" style="line-height: 1.38;">
         <p>
         I'm a Banting Postdoctoral Researcher at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>, working with <a href="https://en.wikipedia.org/wiki/Yoshua_Bengio" target="_blank" rel="noopener noreferrer">Yoshua Bengio</a> on the development of diffusion/flow-based and autoregressive generative models for AI for Science. I also hold visiting research appointments at both the <a href="https://www.ericandwendyschmidtcenter.org/" target="_blank" rel="noopener noreferrer">Broad Institute of MIT &amp; Harvard</a> and <a href="https://www.oeaw.ac.at/aithyra" target="_blank" rel="noopener noreferrer">AITHYRA</a>.
@@ -130,7 +139,7 @@
     </div>
 
     <!-- News -->
-    <h2>Recent Highlights</h2>
+    <h2 id="news">Recent Highlights</h2>
     <div class="news-section">
       <div class="news-scroll" style="line-height: 1.2;">
         <table class="news-table">
@@ -171,7 +180,7 @@
     </div>
 
     <!-- Selected Research -->
-    <section class="research">
+    <section id="publications" class="research">
       <h2>Selected Publications</h2>
 
       <div class="research-item">
@@ -291,5 +300,44 @@
     </div>
 
   </div>
+
+  <!-- Scroll-spy for floating TOC -->
+  <script>
+    (function () {
+      var links = document.querySelectorAll('.toc-link');
+      var sections = [];
+      links.forEach(function (link) {
+        var id = link.getAttribute('href').slice(1);
+        var el = document.getElementById(id);
+        if (el) sections.push({ id: id, el: el, link: link });
+      });
+
+      function updateActive() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var current = sections[0];
+        for (var i = 0; i < sections.length; i++) {
+          if (sections[i].el.getBoundingClientRect().top <= 120) {
+            current = sections[i];
+          }
+        }
+        links.forEach(function (l) { l.classList.remove('active'); });
+        if (current) current.link.classList.add('active');
+      }
+
+      window.addEventListener('scroll', updateActive, { passive: true });
+      updateActive();
+
+      /* Smooth-scroll on click */
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.getElementById(this.getAttribute('href').slice(1));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

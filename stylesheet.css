@@ -372,6 +372,64 @@ h2 {
   -webkit-appearance: none;
 }
 
+/* Floating Table of Contents */
+.toc {
+  position: fixed;
+  top: 30px;
+  left: calc((100vw + 900px) / 2 + 20px);
+  z-index: 100;
+  width: 140px;
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc li {
+  margin-bottom: 0.25rem;
+}
+
+.toc-link {
+  display: block;
+  padding: 0.45rem 0.75rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555 !important;
+  border-left: 3px solid transparent;
+  border-radius: 0 4px 4px 0;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.toc-link:hover {
+  color: #213c7a !important;
+  background: rgba(222, 241, 255, 0.6);
+  border-left-color: #213c7a;
+}
+
+.toc-link.active {
+  color: #213c7a !important;
+  font-weight: 600;
+  border-left-color: #213c7a;
+  background: rgba(222, 241, 255, 0.8);
+}
+
+.toc-link i {
+  width: 18px;
+  text-align: center;
+  margin-right: 0.35rem;
+  font-size: 12px;
+}
+
+/* Hide TOC when viewport is too narrow for the sidebar */
+@media screen and (max-width: 1200px) {
+  .toc {
+    display: none;
+  }
+}
+
 /* Responsive */
 @media screen and (max-width: 660px) {
   .profile-section {
