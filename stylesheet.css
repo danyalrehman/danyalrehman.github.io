@@ -118,8 +118,18 @@ h2 {
 }
 
 .social-links a {
-  margin: 0 0.6em;
+  margin: 0 0.3em;
   white-space: nowrap;
+  padding: 6px 6px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  background-color: #f0f4f8;
+  color: #0067cf;
+  text-decoration: none;
 }
 
 .social-links a i {
@@ -137,64 +147,71 @@ h2 {
   line-height: 1.55;
 }
 
-/* News section */
-.news-section .news-scroll {
-  max-height: 325px;
+/* News timeline */
+.news-timeline {
+  position: relative;
+  padding-left: 20px;
+  margin-left: 0px;
+  max-height: 310px;
   overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 10px;
+  overflow-x: auto;
+  padding-right: 18px;
 }
 
-.news-table {
-  width: 100%;
-  border: 0;
-  border-spacing: 0;
-  border-collapse: collapse;
+.news-timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 0px;
+  bottom: 12px;
+  width: 2px;
+  background: #c8d6e5;
+  z-index: 0;
 }
 
-.news-table tr {
-  vertical-align: top;
+.news-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  position: relative;
 }
 
-.news-table td {
-  padding: 0.3em 0;
+.news-item::before {
+  content: '';
+  position: absolute;
+  left: -16.5px;
+  top: 7.5px;
+  width: 5px;
+  height: 5px;
+  background: #213c7a;
+  border-radius: 50%;
+  z-index: 1;
 }
 
-.news-table .news-month {
-  width: 2.3em;
-  white-space: nowrap;
-  padding-right: 0;
-  color: #333;
-}
-
-.news-table .news-year {
-  width: 2.8em;
-  white-space: nowrap;
-  padding-right: 2em;
-  color: #333;
-}
-
-.news-table .news-month b,
-.news-table .news-year b {
+.news-date {
+  flex-shrink: 0;
+  width: 70px;
+  font-size: 14px;
+  color: #555;
   font-weight: 600;
 }
 
 /* Scrollbar styling */
-.news-scroll::-webkit-scrollbar {
+.news-timeline::-webkit-scrollbar {
   width: 6px;
 }
 
-.news-scroll::-webkit-scrollbar-track {
+.news-timeline::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 3px;
 }
 
-.news-scroll::-webkit-scrollbar-thumb {
+.news-timeline::-webkit-scrollbar-thumb {
   background: #bbb;
   border-radius: 3px;
 }
 
-.news-scroll::-webkit-scrollbar-thumb:hover {
+.news-timeline::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
 
@@ -453,6 +470,56 @@ h2 {
   .research {
     padding: 1rem;
   }
+}
+
+/* Background image toggle button */
+.bg-toggle {
+  position: fixed;
+  top: 14px;
+  right: 96px;
+  z-index: 9999;
+  background: #def1ff;
+  border: 1.5px solid #213c7a;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #213c7a;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.bg-toggle:hover {
+  background: #eee;
+  border-color: #888;
+}
+
+/* TOC toggle button */
+.toc-toggle {
+  position: fixed;
+  top: 14px;
+  right: 56px;
+  z-index: 9999;
+  background: #def1ff;
+  border: 1.5px solid #213c7a;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #213c7a;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.toc-toggle:hover {
+  background: #eee;
+  border-color: #888;
 }
 
 /* Dark-mode toggle button */
