@@ -220,7 +220,7 @@ h2 {
   background: #def1ff;
   padding: 1.5rem;
   border-radius: 8px;
-  margin: 2.75rem 0 2rem;
+  margin: calc(2.75rem - 10px) 0 2rem;
 }
 
 .research h2 {
