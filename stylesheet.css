@@ -12,7 +12,7 @@ body {
   padding: 0;
   color: #333;
   background-color: #f8f9fa;
-  font-family: 'Source Sans Pro', 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans 3', 'Lato', Arial, sans-serif;
   font-size: 14px;
   line-height: 1.45;
 }
@@ -65,7 +65,7 @@ h2 {
 
 /* Name */
 .name {
-  font-family: 'Source Sans Pro', 'Lato', Arial, sans-serif;
+  font-family: 'Source Sans 3', 'Lato', Arial, sans-serif;
   font-size: 32px;
   font-weight: 500;
   display: block;
