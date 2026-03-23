@@ -171,7 +171,7 @@ h2 {
 
 .news-item {
   display: flex;
-  gap: 12px;
+  gap: 25px;
   margin-bottom: 12px;
   position: relative;
 }
@@ -190,10 +190,22 @@ h2 {
 
 .news-date {
   flex-shrink: 0;
-  width: 70px;
+  display: flex;
   font-size: 14px;
   color: #555;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.news-date .news-month {
+  display: inline-block;
+  width: 28px;
+  text-align: left;
+  margin-left: 3px;
+}
+
+.news-date .news-year {
+  display: inline-block;
+  margin-left: 3px;
 }
 
 /* Scrollbar styling */
