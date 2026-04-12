@@ -1,10 +1,18 @@
-/* Reset & Base */
+/* ============================================================
+   Danyal Rehman — Personal Website
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Reset & global base
+   ------------------------------------------------------------ */
 * {
   box-sizing: border-box;
 }
 
-b, strong {
-  font-weight: 800;
+html {
+  /* Leave room at the top for the sticky nav when scrolling to anchors */
+  scroll-padding-top: 65px;
 }
 
 body {
@@ -28,6 +36,11 @@ a:hover {
   text-decoration: none;
 }
 
+b,
+strong {
+  font-weight: 800;
+}
+
 h2 {
   color: #213c7a;
   font-weight: 600;
@@ -35,18 +48,131 @@ h2 {
   margin-bottom: 0.75rem;
 }
 
-/* Layout */
+::selection {
+  background: rgba(33, 60, 122, 0.18);
+  color: #213c7a;
+}
+
+::-moz-selection {
+  background: rgba(33, 60, 122, 0.18);
+  color: #213c7a;
+}
+
+
+/* ------------------------------------------------------------
+   Sticky nav bar (always visible at top of viewport)
+   ------------------------------------------------------------ */
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid rgba(33, 60, 122, 0.1);
+}
+
+.sticky-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0.7rem 0.1em;
+}
+
+.sticky-nav-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Source Sans 3', 'Lato', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: #213c7a;
+  white-space: nowrap;
+}
+
+.sticky-nav-favicon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.sticky-nav-links {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.sticky-nav-links a {
+  padding: 0.32rem 0.7rem;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sticky-nav-links a:hover {
+  background: #def1ff;
+  color: #213c7a;
+  text-decoration: none;
+}
+
+/* Vertical separator between text links and icon buttons */
+.sticky-nav-sep {
+  display: inline-block;
+  align-self: center;
+  width: 1px;
+  height: 16px;
+  margin: 0 0.25rem;
+  background: rgba(33, 60, 122, 0.2);
+}
+
+/* Icon-only toggle buttons inside the sticky nav */
+.nav-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-icon-btn:hover {
+  background: #def1ff;
+  color: #213c7a;
+  border-color: rgba(33, 60, 122, 0.18);
+}
+
+
+/* ------------------------------------------------------------
+   Page container (.content card)
+   ------------------------------------------------------------ */
 .content {
   position: relative;
   max-width: 900px;
-  margin: 30px auto;
-  background: white;
+  margin: 60px auto 30px;
+  padding: 30px;
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 30px;
 }
 
-/* Background image overlay (toggle via data-bg="on" / "off" on .content) */
+/* Optional background image overlay (toggled via data-bg="on") */
 .content[data-bg="on"]::before {
   content: "";
   position: absolute;
@@ -58,42 +184,110 @@ h2 {
   z-index: 0;
 }
 
-.content[data-bg="on"] > * {
+/* Subtle SVG noise overlay — gives the white card a printed-paper feel */
+.content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: multiply;
+}
+
+/* Lift content above the bg overlays */
+.content > * {
   position: relative;
   z-index: 1;
 }
 
-/* Name */
+
+/* ------------------------------------------------------------
+   Hero (name, subtitle, interest pills)
+   ------------------------------------------------------------ */
 .name {
-  font-family: 'Source Sans 3', 'Lato', Arial, sans-serif;
-  font-size: 32px;
-  font-weight: 500;
   display: block;
   text-align: center;
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
 }
 
 .subtitle {
+  margin: 0 0 1rem;
   text-align: center;
-  color: #555;
   font-size: 14px;
-  margin-bottom: 1rem;
+  color: #555;
 }
 
-/* Profile section */
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 1.2rem;
+}
+
+.interests span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.85rem;
+  background: #f8f9fa;
+  border: 1px solid #e3e8ee;
+  border-radius: 7px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.interests span:hover {
+  background-color: #def1ff;
+  border-color: #b3d4f0;
+  color: #0067cf;
+}
+
+
+/* ------------------------------------------------------------
+   Profile section (bio text + image)
+   ------------------------------------------------------------ */
 .profile-section {
   display: flex;
-  gap: 2rem;
   align-items: flex-start;
+  gap: 2rem;
 }
 
 .profile-text {
   flex: 3;
   text-align: justify;
+  line-height: 1.38;
+}
+
+/* Fancy serif drop-cap on the first letter of the bio */
+.profile-text > p:first-of-type::first-letter {
+  float: left;
+  margin-bottom: -0.08em;
+  padding-top: 0.05em;
+  padding-right: 0.1em;
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 3em;
+  line-height: 0.85;
+  color: #213c7a;
 }
 
 .profile-image {
+  position: relative;
+  top: -2px;
   flex: 1;
-  max-width: 190px;
+  max-width: 198px;
   padding-top: 1.75rem;
 }
 
@@ -111,58 +305,82 @@ h2 {
   opacity: 0.85;
 }
 
-/* Social links bar */
+
+/* ------------------------------------------------------------
+   Social links (pill buttons)
+   ------------------------------------------------------------ */
 .social-links {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
   margin: 1rem 0;
+  text-align: center;
 }
 
 .social-links a {
-  margin: 0 0.3em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.85rem;
+  background: #f8f9fa;
+  border: 1px solid #e3e8ee;
+  border-radius: 7px;
   white-space: nowrap;
-  padding: 6px 6px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.2s ease;
 }
 
 .social-links a:hover,
 .social-links a:focus {
-  background-color: #f0f4f8;
+  background-color: #def1ff;
+  border-color: #b3d4f0;
   color: #0067cf;
   text-decoration: none;
+  transform: translateY(-1px);
 }
 
 .social-links a i {
-  margin-right: 0.2em;
+  margin-right: 0;
+  font-size: 12px;
 }
 
-/* Hiring box */
+
+/* ------------------------------------------------------------
+   Hiring / news call-out box
+   ------------------------------------------------------------ */
 .news-box {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
   background-color: #def1ff;
   border-left: 4px solid #00229c;
   border-radius: 4px;
-  padding: 0.75rem 1rem;
-  margin: 1rem 0;
   font-size: 14px;
   line-height: 1.55;
 }
 
-/* News timeline */
+
+/* ------------------------------------------------------------
+   News timeline (Recent Highlights)
+   ------------------------------------------------------------ */
 .news-timeline {
   position: relative;
   padding-left: 20px;
-  margin-left: 0px;
+  padding-right: 18px;
   max-height: 310px;
   overflow-y: auto;
   overflow-x: auto;
-  padding-right: 18px;
+  /* Firefox scrollbar (WebKit rules below are Chromium/Safari only) */
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #f1f1f1;
 }
 
 .news-timeline::before {
   content: '';
   position: absolute;
   left: 5px;
-  top: 0px;
   bottom: 12px;
   width: 2px;
   background: #c8d6e5;
@@ -170,10 +388,10 @@ h2 {
 }
 
 .news-item {
+  position: relative;
   display: flex;
   gap: 25px;
   margin-bottom: 12px;
-  position: relative;
 }
 
 .news-item::before {
@@ -186,21 +404,28 @@ h2 {
   background: #213c7a;
   border-radius: 50%;
   z-index: 1;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-item:hover::before {
+  background: #0067cf;
+  transform: scale(1.4);
+  box-shadow: 0 0 0 1.5px rgba(0, 103, 207, 0.15);
 }
 
 .news-date {
-  flex-shrink: 0;
   display: flex;
+  flex-shrink: 0;
   font-size: 14px;
-  color: #555;
   font-weight: 400;
+  color: #555;
 }
 
 .news-date .news-month {
   display: inline-block;
   width: 28px;
-  text-align: left;
   margin-left: 3px;
+  text-align: left;
 }
 
 .news-date .news-year {
@@ -208,7 +433,7 @@ h2 {
   margin-left: 3px;
 }
 
-/* Scrollbar styling */
+/* News timeline scrollbar */
 .news-timeline::-webkit-scrollbar {
   width: 6px;
 }
@@ -227,66 +452,150 @@ h2 {
   background: #999;
 }
 
-/* Research section */
+
+/* ------------------------------------------------------------
+   Stats row (citations / h-index / publications)
+   ------------------------------------------------------------ */
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  margin: 1.6rem 0 0.4rem;
+  padding: 0.4rem 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 5.5rem;
+}
+
+.stat-number {
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: 2.4rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #213c7a;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(180deg,
+    rgba(33, 60, 122, 0)    0%,
+    rgba(33, 60, 122, 0.2) 50%,
+    rgba(33, 60, 122, 0)  100%);
+}
+
+
+/* ------------------------------------------------------------
+   Featured publications
+   ------------------------------------------------------------ */
 .research {
-  background: #def1ff;
-  padding: 1.5rem;
-  border-radius: 8px;
   margin: calc(2.75rem - 10px) 0 2rem;
+  padding: 1.5rem;
+  background: #def1ff;
+  border-radius: 8px;
 }
 
 .research h2 {
   margin-top: -4px;
+  margin-bottom: calc(0.75rem - 5px);
 }
 
 .research-item {
-  margin-bottom: 1.5rem;
-  line-height: 1.35;
+  position: relative;
+  margin-bottom: 0.4rem;
+  padding: 1.05rem 1.25rem 1.1rem;
+  background: #def1ff;
+  border-radius: 10px;
+  line-height: 1.4;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.research-item:last-child {
+  margin-bottom: 0;
+}
+
+.research-item:hover {
+  background: #e5dcc7;
+  box-shadow:
+    0 6px 18px rgba(159, 86, 2, 0.08),
+    0 1px 3px rgba(159, 86, 2, 0.04);
 }
 
 .research-item h3 {
-  margin: 0;
-  font-size: 15px;
+  margin: 0 0 0.25rem;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  color: #213c7a;
 }
 
 .research-item p {
   margin: 0.2rem 0 0;
+  font-size: 13.5px;
+  line-height: 1.38;
+  color: #4a4a4a;
+}
+
+.research-item p b,
+.research-item p strong {
+  font-weight: 700;
+  color: #213c7a;
 }
 
 .research-item a {
   color: #b40101;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .research-item a:hover {
+  color: #7a0000;
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-/* Paper link buttons */
+/* Paper link buttons (arXiv / PDF / Bib / GitHub / etc.) */
 .paper-links {
-  margin-top: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .paper-btn {
   display: inline-block;
   padding: 0.4rem 0.8rem;
   background-color: #03417e;
-  color: white !important;
-  text-decoration: none;
+  color: #ffffff !important;
+  border: none;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  border: none;
+  text-decoration: none;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .paper-btn:hover {
   background-color: #f09228;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -296,21 +605,29 @@ h2 {
   margin-right: 0.3rem;
 }
 
-/* Footer */
+.paper-btn.is-disabled,
+.paper-btn.is-disabled:hover {
+  background-color: #03417e;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* ------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------ */
 .footer {
+  margin-top: -2em;
+  padding: 1rem 0;
   text-align: center;
   font-size: small;
   color: #888;
-  padding: 1rem 0;
-  margin-top: -2em;
 }
 
-.footer p:first-child {
-  margin-bottom: 0;
-}
-
-.footer p:last-child {
-  margin-top: 0.2em;
+.footer p {
+  margin: 0.2em 0 0;
 }
 
 .footer a {
@@ -321,11 +638,15 @@ h2 {
   color: #f09228;
 }
 
-/* Image comparison slider */
+
+/* ------------------------------------------------------------
+   Image comparison slider (forward/inverse pass demo)
+   ------------------------------------------------------------ */
 .cmp-wrapper {
   position: relative;
-  border-radius: 4px;
   overflow: hidden;
+  border-radius: 4px;
+  -webkit-user-select: none;
   user-select: none;
   cursor: col-resize;
 }
@@ -342,6 +663,7 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-clip-path: inset(0 0% 0 0);
   clip-path: inset(0 0% 0 0);
 }
 
@@ -360,18 +682,18 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.9);
   background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .cmp-handle::before,
 .cmp-handle::after {
-  position: absolute;
   content: "";
+  position: absolute;
   top: 50%;
   border: 7px solid transparent;
   border-bottom-width: 0;
@@ -395,13 +717,19 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
   opacity: 0;
   cursor: col-resize;
-  margin: 0;
   -webkit-appearance: none;
+  appearance: none;
 }
 
-/* Floating Table of Contents */
+
+/* ------------------------------------------------------------
+   Floating Table of Contents
+   (Toggle button is currently commented out in the HTML; the
+    TOC system is kept here for re-enable later.)
+   ------------------------------------------------------------ */
 .toc {
   position: fixed;
   top: 30px;
@@ -423,43 +751,64 @@ h2 {
 .toc-link {
   display: block;
   padding: 0.45rem 0.75rem;
+  border-left: 3px solid transparent;
+  border-radius: 0 4px 4px 0;
   font-size: 13px;
   font-weight: 500;
   color: #555 !important;
-  border-left: 3px solid transparent;
-  border-radius: 0 4px 4px 0;
   text-decoration: none !important;
   transition: all 0.2s ease;
 }
 
 .toc-link:hover {
-  color: #213c7a !important;
   background: rgba(222, 241, 255, 0.6);
   border-left-color: #213c7a;
+  color: #213c7a !important;
 }
 
 .toc-link.active {
-  color: #213c7a !important;
-  font-weight: 600;
-  border-left-color: #213c7a;
   background: rgba(222, 241, 255, 0.8);
+  border-left-color: #213c7a;
+  font-weight: 600;
+  color: #213c7a !important;
 }
 
 .toc-link i {
   width: 18px;
-  text-align: center;
   margin-right: 0.35rem;
   font-size: 12px;
+  text-align: center;
 }
 
-/* Hide TOC when viewport is too narrow for the sidebar */
+
+/* ------------------------------------------------------------
+   Dark mode (filter inversion — preserves color relationships)
+   ------------------------------------------------------------ */
+html.dark-mode {
+  background: #ffffff;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Counter-invert images / videos so they look normal */
+html.dark-mode img,
+html.dark-mode video,
+html.dark-mode picture,
+html.dark-mode svg,
+html.dark-mode .content[data-bg="on"]::before {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
 @media screen and (max-width: 1200px) {
+  /* Hide the floating TOC sidebar on narrower viewports */
   .toc {
     display: none;
   }
 }
 
-/* Responsive */
 @media screen and (max-width: 660px) {
   .profile-section {
     flex-direction: column-reverse;
@@ -484,92 +833,30 @@ h2 {
   }
 }
 
-/* Background image toggle button */
-.bg-toggle {
-  position: fixed;
-  top: 14px;
-  right: 96px;
-  z-index: 9999;
-  background: #def1ff;
-  border: 1.5px solid #213c7a;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #213c7a;
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
-}
+@media screen and (max-width: 520px) {
+  .sticky-nav-inner {
+    padding: 0.6rem 1rem;
+    gap: 0.8rem;
+  }
 
-.bg-toggle:hover {
-  background: #eee;
-  border-color: #888;
-}
+  .sticky-nav-name {
+    font-size: 13px;
+  }
 
-/* TOC toggle button */
-.toc-toggle {
-  position: fixed;
-  top: 14px;
-  right: 56px;
-  z-index: 9999;
-  background: #def1ff;
-  border: 1.5px solid #213c7a;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #213c7a;
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
-}
+  .sticky-nav-links a {
+    padding: 0.28rem 0.55rem;
+    font-size: 12px;
+  }
 
-.toc-toggle:hover {
-  background: #eee;
-  border-color: #888;
-}
+  .stats {
+    gap: 1.4rem;
+  }
 
-/* Dark-mode toggle button */
-.dark-toggle {
-  position: fixed;
-  top: 14px;
-  right: 16px;
-  z-index: 9999;
-  background: #def1ff;
-  border: 1.5px solid #213c7a;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #213c7a;
-  transition: background 0.3s, color 0.3s, border-color 0.3s;
-}
+  .stat {
+    min-width: 4.5rem;
+  }
 
-.dark-toggle:hover {
-  background: #eee;
-  border-color: #888;
-}
-
-/* Dark mode via filter inversion */
-html.dark-mode {
-  filter: invert(1) hue-rotate(180deg);
-  background: #fff;
-}
-
-/* Counter-invert images / videos so they look normal */
-html.dark-mode img,
-html.dark-mode video,
-html.dark-mode picture,
-html.dark-mode svg,
-html.dark-mode .content[data-bg="on"]::before {
-  filter: invert(1) hue-rotate(180deg);
+  .stat-number {
+    font-size: 2rem;
+  }
 }

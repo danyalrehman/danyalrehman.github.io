@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
   <script src="./last-updated.js" defer></script>
   <script>
     var bibEntries = {
@@ -22,17 +22,35 @@
     function copyBib(key, btn) {
       var entry = bibEntries[key];
       if (!entry) return;
-      var ta = document.createElement('textarea');
-      ta.value = entry;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      var orig = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-      setTimeout(function() { btn.innerHTML = orig; }, 1500);
+
+      function flashCopied() {
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(function () { btn.innerHTML = orig; }, 1500);
+      }
+
+      // Preferred: async Clipboard API (all modern browsers, HTTPS/localhost)
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(entry).then(flashCopied).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+
+      // Legacy fallback for older browsers / non-secure contexts
+      function fallbackCopy() {
+        var ta = document.createElement('textarea');
+        ta.value = entry;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '0';
+        ta.style.left = '0';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) { /* no-op */ }
+        document.body.removeChild(ta);
+        flashCopied();
+      }
     }
   </script>
   <script>
@@ -48,7 +66,9 @@
       }
       range.addEventListener('input', function () {
         const val = range.value;
-        topImg.style.clipPath = 'inset(0 ' + (100 - val) + '% 0 0)';
+        const clip = 'inset(0 ' + (100 - val) + '% 0 0)';
+        topImg.style.clipPath = clip;
+        topImg.style.webkitClipPath = clip;
         divider.style.left = val + '%';
       });
     });
@@ -56,6 +76,28 @@
 </head>
 
 <body>
+  <!-- Sticky minimal nav (always visible) -->
+  <header class="sticky-nav" id="sticky-nav" aria-label="Page navigation">
+    <div class="sticky-nav-inner">
+      <span class="sticky-nav-name">
+        <img class="sticky-nav-favicon" src="img/favicon.png" alt="">
+        Danyal Rehman
+      </span>
+      <nav class="sticky-nav-links">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <span class="sticky-nav-sep" aria-hidden="true"></span>
+        <button class="nav-icon-btn" id="bg-toggle" aria-label="Toggle background image" title="Toggle background image">
+          <i class="fas fa-image"></i>
+        </button>
+        <button class="nav-icon-btn" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
   <!-- Floating Table of Contents -->
   <nav class="toc" id="toc" aria-label="Table of contents" style="display:none;">
     <ul>
@@ -65,15 +107,6 @@
     </ul>
   </nav>
 
-  <button class="bg-toggle" id="bg-toggle" aria-label="Toggle background image" title="Toggle background image">
-    <i class="fas fa-image"></i>
-  </button>
-  <button class="toc-toggle" id="toc-toggle" aria-label="Toggle table of contents" title="Toggle table of contents">
-    <i class="fas fa-list"></i>
-  </button>
-  <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-    <i class="fas fa-moon"></i>
-  </button>
   <script>
     (function() {
       // Background image toggle (deferred until DOM is ready)
@@ -95,17 +128,19 @@
         initBgToggle();
       }
 
-      // TOC toggle
+      // TOC toggle (button is commented out — guard against null)
       var tocBtn = document.getElementById('toc-toggle');
       var toc = document.getElementById('toc');
-      if (localStorage.getItem('toc-visible') === 'on') {
-        toc.style.display = '';
+      if (tocBtn && toc) {
+        if (localStorage.getItem('toc-visible') === 'on') {
+          toc.style.display = '';
+        }
+        tocBtn.addEventListener('click', function() {
+          var visible = toc.style.display !== 'none';
+          toc.style.display = visible ? 'none' : '';
+          localStorage.setItem('toc-visible', visible ? 'off' : 'on');
+        });
       }
-      tocBtn.addEventListener('click', function() {
-        var visible = toc.style.display !== 'none';
-        toc.style.display = visible ? 'none' : '';
-        localStorage.setItem('toc-visible', visible ? 'off' : 'on');
-      });
 
       // Dark mode toggle
       var btn = document.getElementById('dark-toggle');
@@ -130,23 +165,31 @@
     <!--<p class="subtitle" style="margin-top:0rem;">
       <a href="https://maps.app.goo.gl/an4fUWtEFkx7ZRwd8" target="_blank" style="color:#A31D99;"><i class="fas fa-location-dot" style="font-size:0.9em;"></i></a> 6666 Rue Saint-Urbain, Montr&eacute;al, QC H2S&nbsp;3H1, Canada <img src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f1e8-1f1e6.svg" alt="🇨🇦" style="height:1em; vertical-align:-0.1em; display:inline-block;">
     </p>-->
-    <p class="subtitle" style="margin-top:0rem;">
+    <p class="subtitle">
       Banting Postdoctoral Researcher @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> &middot;&middot;
       <!--Visiting Researcher @ <b>Broad Institute of MIT &amp; Harvard</b> &middot;&middot;-->
       Ph.D. @ <b>MIT</b>
     </p>
 
+    <!-- Research interests -->
+    <div class="interests">
+      <span>Diffusion &amp; Flow-based Models</span>
+      <span>Generative Models</span>
+      <span>Artificial Intelligence</span>
+      <span>AI/ML for Science</span>
+    </div>
+
     <!-- Profile -->
     <div id="about" class="profile-section">
-      <div class="profile-text" style="line-height: 1.38;">
+      <div class="profile-text">
         <p>
-        I'm a Banting Postdoctoral Researcher at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>, advised by <a href="https://en.wikipedia.org/wiki/Yoshua_Bengio" target="_blank" rel="noopener noreferrer">Yoshua Bengio</a> on the development of diffusion/flow-based and autoregressive generative models for AI for Science. I also hold visiting research appointments at both the <a href="https://www.ericandwendyschmidtcenter.org/" target="_blank" rel="noopener noreferrer">Broad Institute of MIT &amp; Harvard</a> and <a href="https://www.oeaw.ac.at/aithyra" target="_blank" rel="noopener noreferrer">AITHYRA</a>.
+        I am a Banting Postdoctoral Researcher at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>, advised by <a href="https://en.wikipedia.org/wiki/Yoshua_Bengio" target="_blank" rel="noopener noreferrer">Yoshua Bengio</a> on the development of diffusion/flow-based and autoregressive generative models for AI for Science. I also hold visiting research appointments at both the <a href="https://www.ericandwendyschmidtcenter.org/" target="_blank" rel="noopener noreferrer">Broad Institute of MIT &amp; Harvard</a> and <a href="https://www.oeaw.ac.at/aithyra" target="_blank" rel="noopener noreferrer">AITHYRA</a>.
         </p>
         <p>
           Previously, I completed my Ph.D. from the <a href="https://www.mit.edu/" target="_blank">Massachusetts Institute of Technology (MIT)</a>. During that time, I was awarded research fellowships from the Martin Family Society of Fellows for Sustainability and the Abdul Latif Jameel (J-WAFS) World Water and Food Systems Lab. Prior to that, I completed my undergraduate degree from the <a href="https://www.utoronto.ca/" target="_blank">University of Toronto</a> with High Honours.
         </p>
         <p>
-          My Ph.D. focused on the development of physics-informed deep learning methods and accelerated partial differential equations (PDEs) solvers for physics-based applications. Examples include neural differential equation models for molecular/ion transport phenomena (under <a href="https://en.wikipedia.org/wiki/John_H._Lienhard_V" target="_blank">John Lienhard</a>) and self-supervised learning (SSL) methods with Lie point symmetries for PDEs (under <a href="https://en.wikipedia.org/wiki/Yann_LeCun" target="_blank">Yann LeCun</a>). More recently, my interests have extended to generative modelling for applications to AI for Science.
+          My Ph.D. focused on the development of physics-informed deep learning methods and accelerated partial differential equations (PDEs) solvers for physics-based applications. Examples include neural differential equation models for molecular/ion transport phenomena (advised by <a href="https://en.wikipedia.org/wiki/John_H._Lienhard_V" target="_blank">John Lienhard</a>) and self-supervised learning (SSL) methods with Lie point symmetries for PDEs (advised by <a href="https://en.wikipedia.org/wiki/Yann_LeCun" target="_blank">Yann LeCun</a>). More recently, my interests have extended to generative modelling for applications to AI for Science.
         </p>
 
         <!-- Social links -->
@@ -159,8 +202,8 @@
         </p>
 
       </div>
-      <div class="profile-image" style="position: relative; top: -2px;">
-        <div class="cmp-wrapper" data-cmp="on"> <!-- slider active -->
+      <div class="profile-image">
+        <div class="cmp-wrapper" data-cmp="on"><!-- slider active -->
           <img src="img/inverse_pass.png" alt="Danyal Rehman" class="cmp-base-img">
           <img src="img/forward_pass.png" alt="Danyal Rehman" class="cmp-top-img">
           <div class="cmp-divider">
@@ -173,7 +216,7 @@
 
     <!-- Hiring box -->
     <div class="news-box">
-      <strong>Hiring Interns</strong>&ensp;I’m looking to recruit 1–2 M.S./Ph.D. research interns for Summer 2026 to work on generative modelling for AI for Science at <a href="https://mila.quebec/en/" target="_blank">Mila &ndash; Qu&eacute;bec AI Institute</a>. If you’re interested, please send me your CV and a brief summary of your research experience via <a href="mailto:danyal.rehman@mila.quebec?subject=Research%20Internship%20at%20Mila%20-%20Qu%C3%A9bec%20AI%20Institute">email</a>.
+      <strong>Hiring Interns</strong>&ensp;I’m looking to recruit a M.S./Ph.D. research intern for Summer 2026 to work on generative modelling for AI for Science at <a href="https://mila.quebec/en/" target="_blank">Mila &ndash; Qu&eacute;bec AI Institute</a>. If you’re interested, please send me your CV and a brief summary of your research experience via <a href="mailto:danyal.rehman@mila.quebec?subject=Research%20Internship%20at%20Mila%20-%20Qu%C3%A9bec%20AI%20Institute">email</a>.
     </div>
 
     <!-- News -->
@@ -185,7 +228,7 @@
       </div>
       <div class="news-item">
         <span class="news-date"><span class="news-month">Feb.</span><span class="news-year">2026</span></span>
-        <span><a href="https://arxiv.org/abs/2506.01158" target="_blank">RegFlow</a> and <a href="https://arxiv.org/abs/2512.09914" target="_blank">FALCON</a> were accepted at ICLR 2026 as a Poster and an Oral (<u>top 1.2% of all submitted papers</u>), respectively.</span>
+        <span><a href="https://arxiv.org/abs/2506.01158" target="_blank">RegFlow</a> and <a href="https://arxiv.org/abs/2512.09914" target="_blank">FALCON</a> were accepted to ICLR 2026 as a Poster and an Oral (<u>top 1.2% of all submitted papers</u>), respectively.</span>
       </div>
       <div class="news-item">
         <span class="news-date"><span class="news-month">Jul.</span><span class="news-year">2025</span></span>
@@ -213,19 +256,37 @@
       </div>
     </div>
 
+    <!-- Stats -->
+    <div id="publications" class="stats">
+      <div class="stat">
+        <span class="stat-number" data-target="994">0</span>
+        <span class="stat-label">citations</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat">
+        <span class="stat-number" data-target="17">0</span>
+        <span class="stat-label">h-index</span>
+      </div>
+      <div class="stat-divider" aria-hidden="true"></div>
+      <div class="stat">
+        <span class="stat-number" data-target="36">0</span>
+        <span class="stat-label">publications</span>
+      </div>
+    </div>
+
     <!-- Selected Research -->
-    <section id="publications" class="research">
-      <h2>Selected Publications</h2>
+    <section class="research">
+      <h2>Featured Publications</h2>
 
       <div class="research-item">
         <h3>Autoregressive Boltzmann Generators.</h3>
         <p><b>Danyal Rehman</b>, Charlie B. Tan, Yoshua Bengio, Avishek Joey Bose, Alexander Tong.</p>
         <!-- <p>We develop autoregressive Boltzmann generators that combine normalizing flows with autoregressive sampling for efficient generation of molecular equilibrium configurations.</p> -->
-        <p><i>Coming soon.</i> Presented at <a href="https://iclr.cc/" target="_blank">ICLR</a> &ndash; Generative and Experimental Perspectives for Biomolecular Design Workshop (2026).</p>
+        <p><i>Under Review</i>. Presented at <a href="https://iclr.cc/" target="_blank">ICLR</a> &ndash; Generative & Experimental Perspectives for Biomolecular Design Workshop (2026).</p>
         <div class="paper-links">
-          <a href="#" class="paper-btn" style="opacity:0.6; cursor:not-allowed;">
+          <span class="paper-btn is-disabled" aria-disabled="true">
             <i class="fas fa-external-link-alt"></i> arXiv (coming soon)
-          </a>
+          </span>
         </div>
       </div>
 
@@ -233,7 +294,7 @@
         <h3>FALCON: Few-step Accurate Likelihoods for Continuous Flows.</h3>
         <p><b>Danyal Rehman</b>, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong.</p>
         <!-- <p>We introduce a training method enabling continuous normalizing flow models to compute reliable likelihoods with minimal computational steps, achieving significant speedup for molecular sampling in equilibrium statistical physics.</p> -->
-        <p>Published at <a href="https://iclr.cc/" target="_blank">ICLR (2026)</a> <span style="color:#0067cf;">(<u>Oral</u>)</span>. Presented at <a href="https://neurips.cc/" target="_blank">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
+        <p>Published at <a href="https://iclr.cc/" target="_blank">ICLR (2026)</a> <span style="color:#0067cf;">(<u>Oral - Top 1.2%</u>)</span>. Presented at <a href="https://neurips.cc/" target="_blank">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
         <div class="paper-links">
           <a href="https://arxiv.org/abs/2512.09914" class="paper-btn" target="_blank">
             <i class="fas fa-external-link-alt"></i> arXiv
@@ -251,7 +312,7 @@
         <h3>Efficient Regression-based Training of Normalizing Flows for Boltzmann Generators.</h3>
         <p><b>Danyal Rehman</b>, Oscar Davis, Jiarui Lu, Jian Tang, Michael Bronstein, Yoshua Bengio, Alexander Tong, Avishek Joey Bose.</p>
         <!-- <p>We introduce RegFlow, a regression-based training method that replaces unstable maximum likelihood training for normalizing flows used in Boltzmann generators by mapping flow samples to targets via optimal transport.</p> -->
-        <p>Published at <a href="https://iclr.cc/" target="_blank">ICLR (2026)</a>. Received the <b>Best Paper Award</b> at <a href="https://icml.cc/" target="_blank">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
+        <p>Published at <a href="https://iclr.cc/" target="_blank">ICLR (2026)</a>. Received the <span style="color:#0067cf;"><u>Best Paper Award</u></span> at <a href="https://icml.cc/" target="_blank">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
         <div class="paper-links">
           <a href="https://arxiv.org/abs/2506.01158" class="paper-btn" target="_blank">
             <i class="fas fa-external-link-alt"></i> arXiv
@@ -259,6 +320,9 @@
           <button class="paper-btn" onclick="copyBib('rehman2026regflow', this)">
             <i class="fas fa-quote-right"></i> Bib
           </button>
+          <a href="https://github.com/danyalrehman/regflow" class="paper-btn" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+          </a>
           <a href="https://arxiv.org/pdf/2506.01158" class="paper-btn" target="_blank">
             <i class="fas fa-file-pdf"></i> PDF
           </a>
@@ -371,6 +435,78 @@
           }
         });
       });
+    })();
+  </script>
+
+  <!-- Sticky nav: smooth-scroll behavior on jump links -->
+  <script>
+    (function () {
+      var nav = document.getElementById('sticky-nav');
+      if (!nav) return;
+      nav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var hash = this.getAttribute('href');
+          // "About" → scroll to the very top of the page
+          if (hash === '#about') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
+          var target = document.getElementById(hash.slice(1));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+
+  <!-- Animated count-up for the stats row -->
+  <script>
+    (function () {
+      var nums = document.querySelectorAll('.stat-number[data-target]');
+      if (!nums.length) return;
+
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        nums.forEach(function (el) {
+          el.textContent = parseInt(el.getAttribute('data-target'), 10).toLocaleString();
+        });
+        return;
+      }
+
+      function animate(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var duration = 1600;
+        var startTime = null;
+
+        function tick(now) {
+          if (!startTime) startTime = now;
+          var progress = Math.min((now - startTime) / duration, 1);
+          // ease-out cubic
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.floor(eased * target);
+          el.textContent = current.toLocaleString();
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            el.textContent = target.toLocaleString();
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      nums.forEach(function (el) { observer.observe(el); });
     })();
   </script>
 </body>
