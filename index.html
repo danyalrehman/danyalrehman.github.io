@@ -56,20 +56,39 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const wrapper = document.querySelector('.cmp-wrapper');
+      if (!wrapper) return;
       const range   = wrapper.querySelector('.cmp-range');
       const topImg  = wrapper.querySelector('.cmp-top-img');
       const divider = wrapper.querySelector('.cmp-divider');
-      if (wrapper.dataset.cmp !== 'on') {
-        range.style.display   = 'none';
-        divider.style.display = 'none';
-        return;
+
+      if (range) {
+        range.addEventListener('input', function () {
+          const val = range.value;
+          const clip = 'inset(0 ' + (100 - val) + '% 0 0)';
+          topImg.style.clipPath = clip;
+          topImg.style.webkitClipPath = clip;
+          if (divider) divider.style.left = val + '%';
+        });
       }
-      range.addEventListener('input', function () {
-        const val = range.value;
-        const clip = 'inset(0 ' + (100 - val) + '% 0 0)';
-        topImg.style.clipPath = clip;
-        topImg.style.webkitClipPath = clip;
-        divider.style.left = val + '%';
+
+      // Tap-to-dissolve: short click (not a drag) toggles a denoise-style fade
+      var downX, downY, downT, moved = false;
+      wrapper.addEventListener('pointerdown', function (e) {
+        downX = e.clientX;
+        downY = e.clientY;
+        downT = Date.now();
+        moved = false;
+      });
+      wrapper.addEventListener('pointermove', function (e) {
+        if (downT && Math.hypot(e.clientX - downX, e.clientY - downY) > 5) {
+          moved = true;
+        }
+      });
+      wrapper.addEventListener('pointerup', function () {
+        var dt = Date.now() - (downT || 0);
+        downT = null;
+        if (moved || dt > 400) return;
+        wrapper.classList.toggle('is-revealed');
       });
     });
   </script>
@@ -81,7 +100,7 @@
     <div class="sticky-nav-inner">
       <span class="sticky-nav-name">
         <img class="sticky-nav-favicon" src="img/favicon.png" alt="">
-        Danyal Rehman
+        <span class="sticky-nav-name-text">Danyal Rehman</span>
       </span>
       <nav class="sticky-nav-links">
         <a href="#about">About</a>
@@ -173,10 +192,10 @@
 
     <!-- Research interests -->
     <div class="interests">
-      <span>Diffusion &amp; Flow-based Models</span>
-      <span>Generative Models</span>
-      <span>Artificial Intelligence</span>
-      <span>AI/ML for Science</span>
+      <span><i class="fas fa-water"></i> Diffusion &amp; Flow-based Models</span>
+      <span><i class="fas fa-wand-magic-sparkles"></i> Generative Models</span>
+      <span><i class="fas fa-brain"></i> Artificial Intelligence</span>
+      <span><i class="fas fa-flask"></i> AI/ML for Science</span>
     </div>
 
     <!-- Profile -->
@@ -203,13 +222,15 @@
 
       </div>
       <div class="profile-image">
-        <div class="cmp-wrapper" data-cmp="on"><!-- slider active -->
+        <div class="cmp-wrapper" data-cmp="on"><!-- slider commented out; tap-to-dissolve still active -->
           <img src="img/inverse_pass.png" alt="Danyal Rehman" class="cmp-base-img">
           <img src="img/forward_pass.png" alt="Danyal Rehman" class="cmp-top-img">
+          <!--
           <div class="cmp-divider">
             <span class="cmp-handle"></span>
           </div>
           <input class="cmp-range" type="range" min="0" max="100" value="100" aria-label="Image comparison slider">
+          -->
         </div>
       </div>
     </div>
@@ -259,7 +280,7 @@
     <!-- Stats -->
     <div id="publications" class="stats">
       <div class="stat">
-        <span class="stat-number" data-target="994">0</span>
+        <span class="stat-number" data-target="995">0</span>
         <span class="stat-label">citations</span>
       </div>
       <div class="stat-divider" aria-hidden="true"></div>
@@ -362,7 +383,7 @@
           <button class="paper-btn" onclick="copyBib('rehman2024membrane', this)">
             <i class="fas fa-quote-right"></i> Bib
           </button>
-          <a href="https://dspace.mit.edu/bitstream/handle/1721.1/155274/REHMAN_NF_ML_CEJ_Manuscript.pdf?sequence=2&isAllowed=y" class="paper-btn" target="_blank">
+          <a href="https://dspace.mit.edu/handle/1721.1/155274" class="paper-btn" target="_blank">
             <i class="fas fa-file-pdf"></i> PDF
           </a>
         </div>
