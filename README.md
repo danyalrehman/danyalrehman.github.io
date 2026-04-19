@@ -4,13 +4,24 @@ Personal website for [Danyal Rehman, Ph.D.](https://danyalrehman.com) — Bantin
 
 ## 📖 Overview
 
-A static site showcasing research publications, news, and contact information. Built with vanilla HTML, CSS, and JavaScript. Website format inspired by [Jon Barron](https://jonbarron.info/).
+A static site showcasing research publications, recent highlights, and contact information. Built with vanilla HTML, CSS, and JavaScript — no build step, no framework. Website format inspired by [Jon Barron](https://jonbarron.info/).
+
+## ✨ Features
+
+- Sticky nav with scroll progress, dark mode, and background-image toggles
+- Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
+- Tap-to-dissolve profile image with denoise-style animation
+- Expandable paper abstracts with one-click BibTeX copy
+- Animated count-up stats (citations, h-index, publications)
+- Timeline-style recent highlights feed
+- Persisted preferences (dark mode, background) via `localStorage`
+- Auto-updating footer timestamp
 
 ## 📂 Structure
 
 ```
-index.html        — Main page
-stylesheet.css    — Styles and theming
+index.html        — Main page (content + inline scripts)
+stylesheet.css    — Styles, theming, and dark mode
 last-updated.js   — Auto-updates the footer timestamp
 img/              — Images and favicon
 CNAME             — Custom domain (danyalrehman.com)
