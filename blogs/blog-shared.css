@@ -1,0 +1,331 @@
+/* Shared styles for blog posts (arbg, falcon, ...). */
+/* Loaded before each blog's inline <style>; blog-specific rules override here. */
+
+body.is-ready { opacity: 1; }
+
+body.is-leaving { opacity: 0; }
+
+/* Blog typography */
+.blog-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 13px;
+  color: var(--accent-deep);
+  margin-bottom: 0.6rem;
+}
+
+.blog-back i { font-size: 11px; }
+
+.blog-title {
+  display: block;
+  text-align: left;
+  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  font-size: 38px;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  color: var(--accent-deep);
+  margin: 0.2rem 0 0.5rem;
+}
+
+.gh-badge {
+  display: inline-flex;
+  align-items: stretch;
+  font-family: 'Helvetica Neue', Verdana, sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.gh-badge:hover {
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  filter: brightness(1.06);
+}
+
+.gh-badge .gh-badge-label,
+.gh-badge .gh-badge-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 5px 8px;
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.gh-badge .gh-badge-label {
+  background: #555;
+  color: #ffffff;
+}
+
+.gh-badge i { font-size: 10px; }
+
+.gh-badge.gh-badge-award { cursor: default; }
+
+.gh-badge.gh-badge-award .gh-badge-value { background: #d4a017; }
+
+html.dark-mode .gh-badge { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
+
+html.dark-mode .gh-badge .gh-badge-label { background: #3a3a3a; }
+
+.blog-divider {
+  border: 0;
+  height: 1px;
+  background: var(--divider-line);
+  margin: 1.6rem 0 1.2rem;
+}
+
+.blog-body h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.blog-body h3 {
+  margin-top: 1.4rem;
+  margin-bottom: 0.35rem;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
+
+.blog-body p { margin: 0 0 0.85rem; }
+
+.blog-body p:last-child { margin-bottom: 0; }
+
+.blog-body ul { line-height: 1.55; }
+
+.blog-body ul li { margin: 0.35rem 0; }
+
+.blog-body b { color: var(--accent-deep); }
+
+html.dark-mode .blog-body b { color: #b8d2ff; }
+
+.fig-frame {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1rem 0.6rem;
+  background: #ffffff;
+}
+
+.fig-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.fig figcaption {
+  font-size: 12.5px;
+  color: #555;
+  padding: 0.65rem 1rem 0.75rem;
+  background: rgba(var(--accent-deep-rgb), 0.025);
+  border-top: 1px solid rgba(var(--accent-deep-rgb), 0.08);
+  line-height: 1.55;
+}
+
+.fig figcaption b { color: var(--accent-deep); }
+
+/* Equation block */
+.blog-eq { display: block; margin: 0.8rem auto; text-align: center; overflow-x: auto; }
+
+.ref-card.ref-list {
+  list-style-position: outside;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #555;
+}
+
+.ref-list li { margin: 0.4rem 0; padding-left: 0.2rem; }
+
+.ref-list li::marker { color: rgba(var(--accent-deep-rgb), 0.55); font-weight: 600; }
+
+.ref-list li em { color: #2c2c2c; }
+
+.ref-list li strong { color: var(--accent-deep); font-weight: 600; }
+
+html.dark-mode .ref-card {
+  background: #14171f;
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+html.dark-mode .ref-list { color: #b8b8b8; }
+
+html.dark-mode .ref-list li::marker { color: rgba(255, 255, 255, 0.40); }
+
+html.dark-mode .ref-list li em { color: #d8d8d8; }
+
+html.dark-mode .ref-list li strong { color: #b8d2ff; }
+
+.callout .callout-title {
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.callout p { margin: 0.55rem 0; }
+
+.callout p:first-of-type { margin-top: 0; }
+
+.callout p:last-child { margin-bottom: 0; }
+
+.callout .blog-eq { margin: 0.6rem auto; }
+
+html.dark-mode .callout {
+  background: rgba(124, 92, 196, 0.12);
+  border-left-color: #c9b6ff;
+  color: #ebe6dc;
+}
+
+html.dark-mode .callout .callout-title { color: #c9b6ff; }
+
+/* Full-width derivation box: shares the TL;DR/.callout color palette but with
+   tighter padding/margins and a smaller font for dense worked-out math. */
+.callout.callout-derivation {
+  padding: 0.7rem 1rem 0.75rem;
+  margin: 1.1rem 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.callout.callout-derivation p { margin: 0.35rem 0; }
+.callout.callout-derivation .blog-eq { margin: 0.4rem auto; }
+.callout.callout-derivation code { font-size: 0.88em; }
+
+/* Bib code snippet — GitHub Light by default, GitHub Dark in dark mode */
+.bib-block {
+  position: relative;
+  margin: 0.8rem 0 0.4rem;
+  background: #f6f8fa;
+  color: #24292f;
+  border-radius: 10px;
+  border: 1px solid #d0d7de;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+.bib-block .bib-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.85rem;
+  background: #ffffff;
+  border-bottom: 1px solid #d0d7de;
+  font-size: 12px;
+  color: #57606a;
+}
+
+.bib-block .bib-header .bib-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #57606a;
+}
+
+.bib-block .bib-header .bib-label i { color: #0969da; }
+
+.bib-block .bib-copy {
+  background: #f6f8fa;
+  color: #24292f;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.bib-block .bib-copy:hover {
+  background: #eaeef2;
+  border-color: #afb8c1;
+  color: #24292f;
+}
+
+.bib-block .bib-copy i { color: #57606a; }
+
+.bib-block .bib-copy:hover i { color: #24292f; }
+
+.bib-block pre {
+  margin: 0;
+  padding: 0.95rem 1.05rem;
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+  color: #24292f;
+  tab-size: 2;
+}
+
+/* Token colors — GitHub Light */
+.bib-block .tok-entry { color: #cf222e; }
+.bib-block .tok-key   { color: #8250df; }
+.bib-block .tok-field { color: #0550ae; }
+.bib-block .tok-eq    { color: #cf222e; }
+.bib-block .tok-str   { color: #0a3069; }
+.bib-block .tok-brace { color: #24292f; }
+.bib-block .tok-punct { color: #57606a; }
+.bib-block .tok-num   { color: #0550ae; }
+
+/* Dark mode — GitHub Dark */
+html.dark-mode .bib-block {
+  background: #0d1117;
+  color: #e6edf3;
+  border-color: #30363d;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+}
+
+html.dark-mode .bib-block .bib-header {
+  background: #161b22;
+  border-bottom-color: #30363d;
+  color: #c9d1d9;
+}
+
+html.dark-mode .bib-block .bib-header .bib-label { color: #8b949e; }
+html.dark-mode .bib-block .bib-header .bib-label i { color: #79c0ff; }
+
+html.dark-mode .bib-block .bib-copy {
+  background: #21262d;
+  color: #c9d1d9;
+  border-color: #30363d;
+}
+
+html.dark-mode .bib-block .bib-copy:hover {
+  background: #30363d;
+  border-color: #8b949e;
+  color: #ffffff;
+}
+
+html.dark-mode .bib-block .bib-copy i { color: #8b949e; }
+html.dark-mode .bib-block .bib-copy:hover i { color: #ffffff; }
+
+html.dark-mode .bib-block pre { color: #e6edf3; }
+
+html.dark-mode .bib-block .tok-entry { color: #ff7b72; }
+html.dark-mode .bib-block .tok-key   { color: #ffa657; }
+html.dark-mode .bib-block .tok-field { color: #d2a8ff; }
+html.dark-mode .bib-block .tok-eq    { color: #ff7b72; }
+html.dark-mode .bib-block .tok-str   { color: #a5d6ff; }
+html.dark-mode .bib-block .tok-brace { color: #c9d1d9; }
+html.dark-mode .bib-block .tok-punct { color: #8b949e; }
+html.dark-mode .bib-block .tok-num   { color: #79c0ff; }
+
+html.dark-mode .fig figcaption {
+  color: #b8b8b8;
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}

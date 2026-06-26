@@ -10,6 +10,7 @@ A static site showcasing research publications, recent highlights, and contact i
 
 - Sticky nav with scroll progress, dark mode, and background-image toggles
 - Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
+- Long-form research blog pages with shared navigation, citation tools, and table-of-contents behavior
 - Tap-to-dissolve profile image with denoise-style animation
 - Expandable paper abstracts with one-click BibTeX copy
 - Animated count-up stats (citations, h-index, publications)
@@ -20,11 +21,16 @@ A static site showcasing research publications, recent highlights, and contact i
 ## 📂 Structure
 
 ```
-index.html        — Main page (content + inline scripts)
-stylesheet.css    — Styles, theming, and dark mode
-last-updated.js   — Auto-updates the footer timestamp
-img/              — Images and favicon
-CNAME             — Custom domain (danyalrehman.com)
+index.html          — Main page
+stylesheet.css      — Homepage styles, theming, and dark mode
+cmdk.js             — Shared command palette (⌘K) and link-fade transition
+last-updated.js     — Auto-updates the footer timestamp
+blogs/              — Research blog pages and shared blog scripts/styles
+blogs/blog-head.js  — Shared blog head injection
+blogs/blog-body.js  — Shared blog interactions
+blogs/blog-shared.css — Shared blog styles
+img/                — Images and favicon
+CNAME               — Custom domain (danyalrehman.com)
 ```
 
 ## 🚀 Deployment

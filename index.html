@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
   <title>Danyal Rehman, Ph.D.</title>
   <meta name="author" content="Danyal Rehman">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="stylesheet" href="stylesheet.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet">
   <script src="./last-updated.js" defer></script>
   <script>
+
+    document.documentElement.classList.add('js');
     // Apply persisted dark mode before paint to prevent FOUC.
     if (localStorage.getItem('dark-mode') === 'on') {
       document.documentElement.classList.add('dark-mode');
@@ -21,109 +23,219 @@
   </script>
   <script>
     const bibEntries = {
-      "rehman2026arbg": "@article{rehman2026arbg,\n  title        = {Autoregressive {Boltzmann Generators}},\n  author       = {Rehman, Danyal and Tan, Charlie B. and Bengio, Yoshua and Bose, Avishek Joey and Tong, Alexander},\n  journal      = {arXiv preprint arXiv:XXXX.XXXXX},\n  year         = {2026},\n  eprint       = {XXXX.XXXXX},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Submitted; expected 2026},\n  url          = {https://arxiv.org/abs/XXXX.XXXXX}\n}",
-      "rehman2026falcon": "@inproceedings{rehman2026falcon,\n  title        = {{FALCON}: {F}ew-Step Accurate Likelihoods for Continuous Flows},\n  author       = {Rehman, Danyal and Akhound-Sadegh, Tara and Gazizov, Artem and Bengio, Yoshua and Tong, Alexander},\n  booktitle    = {International Conference on Learning Representations (ICLR)},\n  year         = {2026},\n  doi          = {10.48550/arXiv.2512.09914},\n  eprint       = {2512.09914},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Oral presentation at ICLR 2026}\n}",
+      "rehman2026arbg": "@inproceedings{rehman2026arbg,\n  title        = {{A}utoregressive {B}oltzmann {G}enerators},\n  author       = {Rehman, Danyal and Tan, Charlie B and Bengio, Yoshua and Bose, Joey and Tong, Alexander},\n  booktitle    = {International Conference on Machine Learning (ICML)},\n  year         = {2026},\n  url          = {https://arxiv.org/abs/2606.27361},\n  doi          = {10.48550/arXiv.2606.27361},\n  eprint       = {2606.27361},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Spotlight at ICML 2026}\n}",
+      "rehman2025falcon": "@inproceedings{rehman2025falcon,\n  title        = {{FALCON}: {F}ew-{S}tep {A}ccurate {L}ikelihoods for {C}ontinuous {F}lows},\n  author       = {Rehman, Danyal and Akhound-Sadegh, Tara and Gazizov, Artem and Bengio, Yoshua and Tong, Alexander},\n  booktitle    = {International Conference on Learning Representations (ICLR)},\n  year         = {2025},\n  url          = {https://arxiv.org/abs/2512.09914},\n  doi          = {10.48550/arXiv.2512.09914},\n  eprint       = {2512.09914},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Oral presentation at ICLR 2026}\n}",
       "rehman2026regflow": "@inproceedings{rehman2026regflow,\n  title        = {Efficient Regression-Based Training of Normalizing Flows for {Boltzmann Generators}},\n  author       = {Rehman, Danyal and Davis, Oscar and Lu, Jiarui and Tang, Jian and Bronstein, Michael M. and Bengio, Yoshua and Tong, Alexander and Bose, Avishek Joey},\n  booktitle    = {International Conference on Learning Representations (ICLR)},\n  year         = {2026},\n  doi          = {10.48550/arXiv.2506.01158},\n  eprint       = {2506.01158},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Poster at ICLR 2026}\n}",
       "krishnan2025antibiotics": "@article{krishnan2025antibiotics,\n  title        = {A Generative Deep Learning Approach to \\textit{de novo} Antibiotic Design},\n  author       = {Krishnan, Aarti and Anahtar, Melis N. and Valeri, Jacqueline A. and Jin, Wengong and Donghia, Nina M. and Luttens, Andreas and Zhang, Yu and Modaresi, Seyed Majed and Hennes, Andrew and Fromer, Jenna and Bandyopadhyay, Parijat and Chen, Jonathan C. and Rehman, Danyal and Desai, Ronak and Edwards, Paige and Lach, Ryan S. and Aschtgen, Marie-St{\\'e}phanie and Gaborieau, Margaux and Gaetani, Massimiliano and Palace, Samantha G. and Omori, Satotaka and Khonde, Lutete and Moroz, Yurii S. and Blough, Bruce and Jin, Chunyang and Loh, Edmund and Grad, Yonatan H. and Saei, Amir Ata and Coley, Connor W. and Wong, Felix and Collins, James J.},\n  journal      = {Cell},\n  volume       = {188},\n  number       = {21},\n  pages        = {5962--5979.e22},\n  year         = {2025},\n  doi          = {10.1016/j.cell.2025.07.033},\n  month        = {oct},\n  note         = {Published online 14 August 2025; Issue 21, 16 October 2025}\n}",
       "rehman2024membrane": "@article{rehman2024membrane,\n  title        = {Physics-Informed Deep Learning for Multi-Species Membrane Transport},\n  author       = {Rehman, Danyal and Lienhard, John H.},\n  journal      = {Chemical Engineering Journal},\n  volume       = {472},\n  pages        = {149806},\n  year         = {2024},\n  doi          = {10.1016/j.cej.2024.149806}\n}",
       "mialon2023ssl": "@inproceedings{mialon2023ssl,\n  title        = {Self-Supervised Learning with {Lie} Symmetries for Partial Differential Equations},\n  author       = {Mialon, Gr{\\'e}goire and Garrido, Quentin and Lawrence, Hannah and Rehman, Danyal and LeCun, Yann and Kiani, Bobak T.},\n  booktitle    = {Advances in Neural Information Processing Systems (NeurIPS)},\n  series       = {NeurIPS 2023},\n  year         = {2023}\n}"
     };
+
+    function flashCopied(btn) {
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      setTimeout(() => { btn.innerHTML = original; }, 1500);
+    }
+
+    function fallbackCopy(text, btn) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+      flashCopied(btn);
+    }
+
     function copyBib(key, btn) {
       const entry = bibEntries[key];
       if (!entry) return;
-
-      function flashCopied() {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(function () { btn.innerHTML = orig; }, 1500);
-      }
-
-      // Legacy fallback for older browsers / non-secure contexts
-      function fallbackCopy() {
-        const ta = document.createElement('textarea');
-        ta.value = entry;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.top = '0';
-        ta.style.left = '0';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch (e) { /* no-op */ }
-        document.body.removeChild(ta);
-        flashCopied();
-      }
-
-      // Preferred: async Clipboard API (all modern browsers, HTTPS/localhost)
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(entry).then(flashCopied).catch(fallbackCopy);
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(entry)
+          .then(() => flashCopied(btn))
+          .catch(() => fallbackCopy(entry, btn));
       } else {
-        fallbackCopy();
+        fallbackCopy(entry, btn);
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.paper-btn[data-bib-key]').forEach((btn) => {
+        btn.addEventListener('click', () => copyBib(btn.dataset.bibKey, btn));
+      });
+    });
   </script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', () => {
       const wrapper = document.querySelector('.cmp-wrapper');
-      if (!wrapper) return;
-      const range   = wrapper.querySelector('.cmp-range');
-      const topImg  = wrapper.querySelector('.cmp-top-img');
-      const divider = wrapper.querySelector('.cmp-divider');
+      const toggleBtn = wrapper?.querySelector('.cmp-toggle');
+      if (!toggleBtn) return;
 
-      if (range && topImg) {
-        range.addEventListener('input', function () {
-          const val = range.value;
-          const clip = 'inset(0 ' + (100 - val) + '% 0 0)';
-          topImg.style.clipPath = clip;
-          topImg.style.webkitClipPath = clip;
-          if (divider) divider.style.left = val + '%';
-        });
-      }
-
-      // Tap-to-dissolve: short click (not a drag) toggles a denoise-style fade
-      let downX = 0, downY = 0, downT = 0, moved = false;
-      wrapper.addEventListener('pointerdown', function (e) {
-        downX = e.clientX;
-        downY = e.clientY;
-        downT = Date.now();
-        moved = false;
-      });
-      wrapper.addEventListener('pointermove', function (e) {
-        if (downT && Math.hypot(e.clientX - downX, e.clientY - downY) > 5) {
-          moved = true;
-        }
-      });
-      wrapper.addEventListener('pointerup', function () {
-        const dt = Date.now() - (downT || 0);
-        downT = 0;
-        if (moved || dt > 400) return;
+      let denoiseTimer = 0;
+      toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         wrapper.classList.toggle('is-revealed');
-        // Retrigger the noise-burst animation on every toggle (reveal or hide)
+
         wrapper.classList.remove('denoising');
-        void wrapper.offsetWidth; // force reflow so the animation restarts
+        void wrapper.offsetWidth;
         wrapper.classList.add('denoising');
-        clearTimeout(wrapper._denoiseT);
-        wrapper._denoiseT = setTimeout(function () {
+        clearTimeout(denoiseTimer);
+        denoiseTimer = setTimeout(() => {
           wrapper.classList.remove('denoising');
         }, 2200);
       });
     });
   </script>
+  <script>
+
+    // Uses globalAlpha (no getImageData on the photo) to avoid taint on file://.
+    (() => {
+      const startDenoise = () => {
+        const wrapper = document.querySelector('.profile-image .cmp-wrapper');
+        if (!wrapper || wrapper.dataset.denoiseStarted === '1') return;
+        wrapper.dataset.denoiseStarted = '1';
+
+        const revealToggle = () => wrapper.classList.add('denoise-complete');
+
+        if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+          revealToggle();
+          return;
+        }
+
+        const rect = wrapper.getBoundingClientRect();
+        if (rect.width < 4 || rect.height < 4) { revealToggle(); return; }
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.max(1, Math.round(rect.width  * dpr));
+        const h = Math.max(1, Math.round(rect.height * dpr));
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'denoise-canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+        canvas.width  = w;
+        canvas.height = h;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { revealToggle(); return; }
+
+        const noiseCanvas = document.createElement('canvas');
+        noiseCanvas.width = w;
+        noiseCanvas.height = h;
+        const nctx = noiseCanvas.getContext('2d');
+        if (!nctx) { revealToggle(); return; }
+        const noiseFrame = nctx.createImageData(w, h);
+        const noise = noiseFrame.data;
+        for (let i = 3; i < noise.length; i += 4) noise[i] = 255;
+
+        const paintNoise = () => {
+          for (let i = 0; i < noise.length; i += 4) {
+            noise[i]     = Math.random() * 255;
+            noise[i + 1] = Math.random() * 255;
+            noise[i + 2] = Math.random() * 255;
+          }
+          nctx.putImageData(noiseFrame, 0, 0);
+        };
+
+        paintNoise();
+        ctx.drawImage(noiseCanvas, 0, 0);
+        wrapper.appendChild(canvas);
+
+        const target = new Image();
+        let started = false;
+
+        const begin = () => {
+          if (started) return;
+          started = true;
+
+          const duration = 4000;
+          let startTime = null;
+          const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+          const step = (now) => {
+            if (startTime === null) startTime = now;
+            const t = Math.min((now - startTime) / duration, 1);
+            const e = ease(t);
+
+            paintNoise();
+
+            ctx.clearRect(0, 0, w, h);
+            ctx.globalAlpha = e;
+            ctx.drawImage(target, 0, 0, w, h);
+            ctx.globalAlpha = 1 - e;
+            ctx.drawImage(noiseCanvas, 0, 0);
+            ctx.globalAlpha = 1;
+
+            if (t < 1) {
+              requestAnimationFrame(step);
+            } else {
+              canvas.classList.add('denoise-done');
+              revealToggle();
+              setTimeout(() => canvas.remove(), 600);
+            }
+          };
+
+          requestAnimationFrame(step);
+        };
+
+        target.addEventListener('load', begin, { once: true });
+        target.addEventListener('error', () => { canvas.remove(); revealToggle(); }, { once: true });
+        target.src = 'img/forward_pass.png';
+
+        if (target.complete && target.naturalWidth > 0) begin();
+      };
+
+      if (document.readyState === 'complete') {
+        startDenoise();
+      } else {
+        window.addEventListener('load', startDenoise, { once: true });
+      }
+    })();
+  </script>
 </head>
 
 <body>
-  <!-- Sticky minimal nav (always visible) -->
+
+  <script>
+    requestAnimationFrame(() => document.body.classList.add('is-ready'));
+  </script>
+
   <header class="sticky-nav" id="sticky-nav" aria-label="Page navigation">
     <div class="sticky-nav-inner">
-      <span class="nav-progress" aria-hidden="true"></span>
-      <span class="sticky-nav-name">
+      <svg class="nav-progress" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="nav-progress-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop class="nav-progress-stop-1" offset="0%"></stop>
+            <stop class="nav-progress-stop-2" offset="50%"></stop>
+            <stop class="nav-progress-stop-3" offset="100%"></stop>
+          </linearGradient>
+        </defs>
+        <path pathLength="1"></path>
+      </svg>
+      <a href="#about" class="sticky-nav-name" id="nav-home" aria-label="Back to top">
         <img class="sticky-nav-favicon" src="img/favicon.png" alt="">
         <span class="sticky-nav-name-text">Danyal Rehman</span>
-      </span>
+      </a>
       <nav class="sticky-nav-links">
         <a href="#about">About</a>
         <a href="#news">News</a>
         <a href="#publications">Publications</a>
+        <div class="nav-blog-dropdown">
+          <a href="#blog">Blog</a>
+          <div class="nav-blog-menu" role="menu" aria-label="Blog posts">
+            <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="nav-blog-item" role="menuitem" data-fade-link>
+              <span class="nav-blog-item-title">Autoregressive Boltzmann Generators</span>
+              <span class="nav-blog-item-meta">ICML 2026 Spotlight &middot; Seoul, Korea</span>
+            </a>
+<!-- FALCON blog (hidden)
+            <a href="blogs/falcon/falcon.html" class="nav-blog-item" role="menuitem" data-fade-link>
+              <span class="nav-blog-item-title">FALCON: Few-step Accurate Likelihood Flows</span>
+              <span class="nav-blog-item-meta">ICLR 2026 Oral &middot; Rio de Janeiro, Brazil</span>
+            </a>
+-->
+          </div>
+        </div>
         <span class="sticky-nav-sep" aria-hidden="true"></span>
         <button class="nav-icon-btn" id="cmdk-open" aria-label="Open command palette" title="Search (⌘K)">
           <i class="fas fa-search"></i>
@@ -138,81 +250,50 @@
     </div>
   </header>
 
-  <!-- Floating Table of Contents -->
-  <nav class="toc" id="toc" aria-label="Table of contents" style="display:none;">
-    <ul>
-      <li><a href="#about" class="toc-link active"><i class="fas fa-user"></i> About</a></li>
-      <li><a href="#news" class="toc-link"><i class="fas fa-bolt"></i> Highlights</a></li>
-      <li><a href="#publications" class="toc-link"><i class="fas fa-book"></i> Publications</a></li>
-    </ul>
-  </nav>
-
   <script>
-    (function () {
-      // Background image toggle (deferred until .content is parsed)
-      function initBgToggle() {
+    (() => {
+      const initBgToggle = () => {
         const bgBtn = document.getElementById('bg-toggle');
         const content = document.querySelector('.content');
         if (!bgBtn || !content) return;
         if (localStorage.getItem('bg-image') === 'on') {
           content.setAttribute('data-bg', 'on');
         }
-        bgBtn.addEventListener('click', function () {
+        bgBtn.addEventListener('click', () => {
           const on = content.getAttribute('data-bg') === 'on';
           content.setAttribute('data-bg', on ? 'off' : 'on');
           localStorage.setItem('bg-image', on ? 'off' : 'on');
         });
-      }
+      };
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initBgToggle);
       } else {
         initBgToggle();
       }
 
-      // TOC toggle (button is commented out — guard against null)
-      const tocBtn = document.getElementById('toc-toggle');
-      const toc = document.getElementById('toc');
-      if (tocBtn && toc) {
-        if (localStorage.getItem('toc-visible') === 'on') {
-          toc.style.display = '';
-        }
-        tocBtn.addEventListener('click', function () {
-          const visible = toc.style.display !== 'none';
-          toc.style.display = visible ? 'none' : '';
-          localStorage.setItem('toc-visible', visible ? 'off' : 'on');
-        });
-      }
-
-      // Dark mode toggle (early-init in <head> already set the class if needed)
       const darkBtn = document.getElementById('dark-toggle');
-      const darkIcon = darkBtn && darkBtn.querySelector('i');
+      const darkIcon = darkBtn?.querySelector('i');
       if (darkBtn && darkIcon) {
         if (document.documentElement.classList.contains('dark-mode')) {
           darkIcon.className = 'fas fa-sun';
         }
-        darkBtn.addEventListener('click', function () {
+        darkBtn.addEventListener('click', () => {
           const on = document.documentElement.classList.toggle('dark-mode');
           darkIcon.className = on ? 'fas fa-sun' : 'fas fa-moon';
           localStorage.setItem('dark-mode', on ? 'on' : 'off');
         });
       }
     })();
-  </script>
-  <!-- Background image toggle: set data-bg="on" to show, "off" to hide -->
+</script>
+
   <div class="content" data-bg="off">
 
-    <!-- Header -->
     <span class="name">Danyal Rehman</span>
-    <!--<p class="subtitle" style="margin-top:0rem;">
-      <a href="https://maps.app.goo.gl/an4fUWtEFkx7ZRwd8" target="_blank" style="color:#A31D99;"><i class="fas fa-location-dot" style="font-size:0.9em;"></i></a> 6666 Rue Saint-Urbain, Montr&eacute;al, QC H2S&nbsp;3H1, Canada <img src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f1e8-1f1e6.svg" alt="🇨🇦" style="height:1em; vertical-align:-0.1em; display:inline-block;">
-    </p>-->
     <p class="subtitle">
       Banting Postdoctoral Researcher @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> &middot;&middot;
-      <!--Visiting Researcher @ <b>Broad Institute of MIT &amp; Harvard</b> &middot;&middot;-->
       Ph.D. @ <b>MIT</b>
     </p>
 
-    <!-- Research interests -->
     <div class="interests">
       <span><i class="fas fa-water"></i> Diffusion &amp; Flow-based Models</span>
       <span><i class="fas fa-wand-magic-sparkles"></i> Generative Models</span>
@@ -220,11 +301,10 @@
       <span><i class="fas fa-flask"></i> AI/ML for Science</span>
     </div>
 
-    <!-- Profile -->
     <div id="about" class="profile-section">
       <div class="profile-text">
         <p>
-        I am a Banting Postdoctoral Researcher at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>, advised by <a href="https://en.wikipedia.org/wiki/Yoshua_Bengio" target="_blank" rel="noopener noreferrer">Yoshua Bengio</a> on the development of diffusion/flow-based and autoregressive generative models for AI for Science. I also hold visiting research appointments at both the <a href="https://www.ericandwendyschmidtcenter.org/" target="_blank" rel="noopener noreferrer">Broad Institute of MIT &amp; Harvard</a> and <a href="https://www.oeaw.ac.at/aithyra" target="_blank" rel="noopener noreferrer">AITHYRA</a>.
+        I am a Banting Postdoctoral Researcher at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>, advised by <a href="https://en.wikipedia.org/wiki/Yoshua_Bengio" target="_blank" rel="noopener noreferrer">Yoshua Bengio</a> on the development of diffusion/flow-based and autoregressive generative models for AI for Science. I also hold visiting research appointments at both <a href="https://www.oeaw.ac.at/aithyra" target="_blank" rel="noopener noreferrer">Aithyra</a> and the <a href="https://www.ericandwendyschmidtcenter.org/" target="_blank" rel="noopener noreferrer">Broad Institute of MIT &amp; Harvard</a>.
         </p>
         <p>
           Previously, I completed my Ph.D. from the <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer">Massachusetts Institute of Technology (MIT)</a>. During that time, I was awarded research fellowships from the Martin Family Society of Fellows for Sustainability and the Abdul Latif Jameel (J-WAFS) World Water and Food Systems Lab. Prior to that, I completed my undergraduate degree from the <a href="https://www.utoronto.ca/" target="_blank" rel="noopener noreferrer">University of Toronto</a> with High Honours.
@@ -233,40 +313,38 @@
           My Ph.D. focused on the development of physics-informed deep learning methods and accelerated partial differential equations (PDEs) solvers for physics-based applications. Examples include neural differential equation models for molecular/ion transport phenomena (advised by <a href="https://en.wikipedia.org/wiki/John_H._Lienhard_V" target="_blank" rel="noopener noreferrer">John Lienhard</a>) and self-supervised learning (SSL) methods with Lie point symmetries for PDEs (advised by <a href="https://en.wikipedia.org/wiki/Yann_LeCun" target="_blank" rel="noopener noreferrer">Yann LeCun</a>). More recently, my interests have extended to generative modelling for applications to AI for Science.
         </p>
 
-        <!-- Social links -->
         <p class="social-links">
           <a href="mailto:danyal.rehman@mila.quebec"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://twitter.com/danyalrehman17" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> X</a>
           <a href="https://www.linkedin.com/in/danyalrehman/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
-          <a href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&hl=en" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i> Scholar</a>
+          <a href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i> Scholar</a>
           <a href="https://github.com/danyalrehman" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
         </p>
 
       </div>
       <div class="profile-image">
-        <div class="cmp-wrapper" data-cmp="on"><!-- slider commented out; tap-to-dissolve still active -->
+        <div class="cmp-wrapper">
           <img src="img/inverse_pass.png" alt="Danyal Rehman" class="cmp-base-img">
           <img src="img/forward_pass.png" alt="Danyal Rehman" class="cmp-top-img">
           <div class="cmp-noise" aria-hidden="true"></div>
-          <!--
-          <div class="cmp-divider">
-            <span class="cmp-handle"></span>
-          </div>
-          <input class="cmp-range" type="range" min="0" max="100" value="100" aria-label="Image comparison slider">
-          -->
+          <button type="button" class="cmp-toggle" aria-label="Toggle forward / inverse pass" title="Toggle pass">
+            <i class="fas fa-arrows-rotate" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- Hiring box -->
     <div class="news-box">
-      <strong>Hiring Interns</strong>&ensp;I’m looking to recruit a M.S./Ph.D. research intern for Summer 2026 to work on generative modelling for AI for Science at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>. If you’re interested, please send me your CV and a brief summary of your research experience via <a href="mailto:danyal.rehman@mila.quebec?subject=Research%20Internship%20at%20Mila%20-%20Qu%C3%A9bec%20AI%20Institute">email</a>.
+      <strong>Hiring Interns</strong>&ensp;I&rsquo;m looking to recruit Ph.D. research interns to work on scaling up foundation models for drug discovery at <a href="https://mila.quebec/en/" target="_blank" rel="noopener noreferrer">Mila &ndash; Qu&eacute;bec AI Institute</a>. If you&rsquo;re interested, please send me your CV and a summary of your research interests via <a href="mailto:danyal.rehman@mila.quebec?subject=Research%20Internship%20at%20Mila%20-%20Qu%C3%A9bec%20AI%20Institute">email</a>.
     </div>
 
-    <!-- News -->
     <section class="room room-news">
     <h2 id="news">Recent Highlights</h2>
     <div class="news-timeline">
+      <div class="news-item">
+        <span class="news-date"><span class="news-month">Apr.</span><span class="news-year">2026</span></span>
+        <span><a href="blogs/arbg/autoregressive_boltzmann_generators.html">Autoregressive Boltzmann Generators</a> was accepted to ICML 2026 as a Spotlight (<u>top 2.2% of submitted papers</u>).</span>
+      </div>
       <div class="news-item">
         <span class="news-date"><span class="news-month">Mar.</span><span class="news-year">2026</span></span>
         <span>I was awarded the <a href="https://www.lindau-nobel.org/" target="_blank" rel="noopener noreferrer">Vanier&ndash;Banting Lindau Prize</a> to attend the <a href="https://en.wikipedia.org/wiki/Lindau_Nobel_Laureate_Meetings" target="_blank" rel="noopener noreferrer">Lindau Nobel Laureate Meeting</a>.</span>
@@ -302,8 +380,7 @@
     </div>
     </section>
 
-    <!-- Stats -->
-    <div id="publications" class="stats">
+    <div id="publications" class="stats reveal">
       <div class="stat">
         <span class="stat-number" data-target="1000" data-suffix="+">0</span>
         <span class="stat-label">citations</span>
@@ -320,22 +397,29 @@
       </div>
     </div>
 
-    <!-- Selected Research -->
     <section class="research room room-research">
       <h2>Featured Publications</h2>
 
-      <div class="research-item">
-        <h3>Autoregressive Boltzmann Generators.</h3>
+      <div class="research-item reveal">
+        <h3><span class="award-ribbon" title="ICML 2026 Spotlight — Top 2.2%" aria-label="ICML 2026 Spotlight — Top 2.2%"><i class="fas fa-award"></i></span>Autoregressive Boltzmann Generators.</h3>
         <p><b>Danyal Rehman</b>, Charlie B. Tan, Yoshua Bengio, Joey Bose, Alexander Tong.</p>
-        <!-- <p>We develop autoregressive Boltzmann generators that combine normalizing flows with autoregressive sampling for efficient generation of molecular equilibrium configurations.</p> -->
-        <p><i>Under Review</i>. Presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Generative & Experimental Perspectives for Biomolecular Design Workshop (2026).</p>
+        <p><a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML (2026)</a> <span style="color:#0067cf;">(<u>Spotlight - Top 2.2%</u>)</span>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Generative AI for Biomolecular Design Workshop (2026).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
             <i class="fas fa-chevron-down"></i> Abstract
           </button>
-          <span class="paper-btn is-disabled" aria-disabled="true">
-            <i class="fas fa-external-link-alt"></i> arXiv (coming soon)
-          </span>
+          <a href="https://arxiv.org/abs/2606.27361" class="paper-btn" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-external-link-alt"></i> arXiv
+          </a>
+          <button class="paper-btn" type="button" data-bib-key="rehman2026arbg">
+            <i class="fas fa-quote-right"></i> Bib
+          </button>
+          <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="paper-btn">
+            <i class="fas fa-pen-nib"></i> Blog
+          </a>
+          <a href="https://github.com/danyalrehman/AutoBG" class="paper-btn" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i> GitHub
+          </a>
         </div>
         <div class="paper-abstract">
           <div class="paper-abstract-inner">
@@ -346,11 +430,10 @@
         </div>
       </div>
 
-      <div class="research-item">
+      <div class="research-item reveal">
         <h3><span class="award-ribbon" title="ICLR 2026 Oral — Top 1.2%" aria-label="ICLR 2026 Oral — Top 1.2%"><i class="fas fa-award"></i></span>FALCON: Few-step Accurate Likelihoods for Continuous Flows.</h3>
         <p><b>Danyal Rehman</b>, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong.</p>
-        <!-- <p>We introduce a training method enabling continuous normalizing flow models to compute reliable likelihoods with minimal computational steps, achieving significant speedup for molecular sampling in equilibrium statistical physics.</p> -->
-        <p>Published at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a> <span style="color:#0067cf;">(<u>Oral - Top 1.2%</u>)</span>. Presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
+        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a> <span style="color:#0067cf;">(<u>Oral - Top 1.2%</u>)</span>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
             <i class="fas fa-chevron-down"></i> Abstract
@@ -358,9 +441,14 @@
           <a href="https://arxiv.org/abs/2512.09914" class="paper-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-external-link-alt"></i> arXiv
           </a>
-          <button class="paper-btn" onclick="copyBib('rehman2026falcon', this)">
+          <button class="paper-btn" type="button" data-bib-key="rehman2025falcon">
             <i class="fas fa-quote-right"></i> Bib
           </button>
+<!-- FALCON blog link (hidden)
+          <a href="blogs/falcon/falcon.html" class="paper-btn">
+            <i class="fas fa-pen-nib"></i> Blog
+          </a>
+-->
           <a href="https://arxiv.org/pdf/2512.09914" class="paper-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-file-pdf"></i> PDF
           </a>
@@ -374,11 +462,10 @@
         </div>
       </div>
 
-      <div class="research-item">
+      <div class="research-item reveal">
         <h3>Efficient Regression-based Training of Normalizing Flows for Boltzmann Generators.</h3>
         <p><b>Danyal Rehman</b>, Oscar Davis, Jiarui Lu, Jian Tang, Michael Bronstein, Yoshua Bengio, Alexander Tong, Joey Bose.</p>
-        <!-- <p>We introduce RegFlow, a regression-based training method that replaces unstable maximum likelihood training for normalizing flows used in Boltzmann generators by mapping flow samples to targets via optimal transport.</p> -->
-        <p>Published at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Received the <span style="color:#0067cf;"><u>Best Paper Award</u></span> at <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
+        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Received the <span style="color:#0067cf;"><u>Best Paper Award</u></span> at <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
             <i class="fas fa-chevron-down"></i> Abstract
@@ -386,7 +473,7 @@
           <a href="https://arxiv.org/abs/2506.01158" class="paper-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-external-link-alt"></i> arXiv
           </a>
-          <button class="paper-btn" onclick="copyBib('rehman2026regflow', this)">
+          <button class="paper-btn" type="button" data-bib-key="rehman2026regflow">
             <i class="fas fa-quote-right"></i> Bib
           </button>
           <a href="https://github.com/danyalrehman/regflow" class="paper-btn" target="_blank" rel="noopener noreferrer">
@@ -405,11 +492,10 @@
         </div>
       </div>
 
-      <div class="research-item">
+      <div class="research-item reveal">
         <h3>A Generative Deep Learning Approach to <i>De Novo</i> Antibiotic Design.</h3>
         <p>Aarti Krishnan, Melis N. Anahtar, Jacqueline A. Valeri, ..., <b>Danyal Rehman</b>, ..., Felix Wong, James J. Collins.</p>
-        <!-- <p>We develop a generative AI framework for designing de novo antibiotics, yielding lead compounds with selective antibacterial activity, distinct mechanisms of action, and reduced bacterial burden in vivo.</p> -->
-        <p>Published in <a href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>.</p>
+        <p><a href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>.</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
             <i class="fas fa-chevron-down"></i> Abstract
@@ -417,7 +503,7 @@
           <a href="https://doi.org/10.1016/j.cell.2025.07.033" class="paper-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-file-alt"></i> DOI
           </a>
-          <button class="paper-btn" onclick="copyBib('krishnan2025antibiotics', this)">
+          <button class="paper-btn" type="button" data-bib-key="krishnan2025antibiotics">
             <i class="fas fa-quote-right"></i> Bib
           </button>
           <a href="https://github.com/aartikrish/de-novo-antibiotics" class="paper-btn" target="_blank" rel="noopener noreferrer">
@@ -436,11 +522,10 @@
         </div>
       </div>
 
-      <div class="research-item">
+      <div class="research-item reveal">
         <h3>Physics-informed Deep Learning for Multi-species Membrane Transport.</h3>
         <p><b>Danyal Rehman</b> and John H. Lienhard.</p>
-        <!-- <p>We develop a physics-informed deep learning model leveraging attention-enhanced neural differential equations with classical closure models as inductive biases for robust multi-ionic rejection prediction across polyamide membranes.</p> -->
-        <p>Published in <a href="https://www.sciencedirect.com/journal/chemical-engineering-journal" target="_blank" rel="noopener noreferrer">Chemical Engineering Journal (2024)</a>. Presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Physics for Machine Learning Workshop (2023).</p>
+        <p><a href="https://www.sciencedirect.com/journal/chemical-engineering-journal" target="_blank" rel="noopener noreferrer">Chemical Engineering Journal (2024)</a>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Physics for Machine Learning Workshop (2023).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
             <i class="fas fa-chevron-down"></i> Abstract
@@ -448,7 +533,7 @@
           <a href="https://doi.org/10.1016/j.cej.2024.149806" class="paper-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-file-alt"></i> DOI
           </a>
-          <button class="paper-btn" onclick="copyBib('rehman2024membrane', this)">
+          <button class="paper-btn" type="button" data-bib-key="rehman2024membrane">
             <i class="fas fa-quote-right"></i> Bib
           </button>
           <a href="https://dspace.mit.edu/handle/1721.1/155274" class="paper-btn" target="_blank" rel="noopener noreferrer">
@@ -464,11 +549,10 @@
         </div>
       </div>
 
-      <div class="research-item">
+      <div class="research-item reveal">
         <h3>Self-supervised Learning with Lie Symmetries for Partial Differential Equations.</h3>
         <p>Gr&eacute;goire Mialon, Quentin Garrido, Hannah Lawrence, <b>Danyal Rehman</b>, Yann LeCun, Bobak T. Kiani.</p>
-        <!-- <p>We learn general-purpose representations of PDEs from heterogeneous data by implementing joint embedding methods for self-supervised learning, outperforming baselines on invariant tasks and improving the time-stepping performance of neural solvers.</p>-->
-        <p>Published at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023).</p>
+        <p><a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
             <i class="fas fa-chevron-down"></i> Abstract
@@ -476,7 +560,7 @@
           <a href="https://arxiv.org/abs/2307.05432" class="paper-btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-external-link-alt"></i> arXiv
           </a>
-          <button class="paper-btn" onclick="copyBib('mialon2023ssl', this)">
+          <button class="paper-btn" type="button" data-bib-key="mialon2023ssl">
             <i class="fas fa-quote-right"></i> Bib
           </button>
           <a href="https://github.com/facebookresearch/SSLForPDEs" class="paper-btn" target="_blank" rel="noopener noreferrer">
@@ -496,8 +580,75 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <div class="footer">
+    <section id="blog" class="room room-blog reveal">
+      <h2>Blog</h2>
+      <div class="blog-list">
+        <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="blog-card" data-fade-link>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i>June 26, 2026</span>
+            <span class="dot">&middot;</span>
+            <span><i class="fas fa-clock"></i>~8 min read</span>
+            <span class="dot">&middot;</span>
+            <span><i class="fas fa-flask"></i>ICML 2026</span>
+          </div>
+          <span class="blog-card-title">Autoregressive Boltzmann Generators</span>
+          <p class="blog-card-sub">
+            Train a Boltzmann Generator the way you&rsquo;d train an LLM &mdash;
+            coordinate by coordinate &mdash; and you inherit LLM-style scaling laws,
+            exact likelihoods in a single forward pass, and a transferable model that
+            beats molecular dynamics on inference efficiency.
+          </p>
+          <div class="blog-card-tags">
+            <span class="blog-card-tag">Boltzmann Generators</span>
+            <span class="blog-card-tag">Autoregressive Models</span>
+            <span class="blog-card-tag">AI for Science</span>
+          </div>
+          <i class="fas fa-arrow-right blog-card-arrow" aria-hidden="true"></i>
+        </a>
+
+<!-- FALCON blog card (hidden)
+        <a href="blogs/falcon/falcon.html" class="blog-card" data-fade-link>
+          <div class="blog-card-meta">
+            <span><i class="fas fa-calendar"></i>December 12, 2025</span>
+            <span class="dot">&middot;</span>
+            <span><i class="fas fa-clock"></i>~7 min read</span>
+            <span class="dot">&middot;</span>
+            <span><i class="fas fa-flask"></i>ICLR 2026</span>
+          </div>
+          <span class="blog-card-title">FALCON: Few-Step Accurate Likelihoods for Continuous Flows</span>
+          <p class="blog-card-sub">
+            Continuous flows are easy to train but slow at inference. Few-step
+            flow maps are fast at inference but lose exact likelihoods. FALCON achieves
+            both objectives &mdash; making Boltzmann sampling two orders of magnitude faster
+            than state-of-the-art CNFs.
+          </p>
+          <div class="blog-card-tags">
+            <span class="blog-card-tag">Generative Models</span>
+            <span class="blog-card-tag">Flow Maps</span>
+            <span class="blog-card-tag">Exact Likelihoods</span>
+            <span class="blog-card-tag">AI for Science</span>
+          </div>
+          <i class="fas fa-arrow-right blog-card-arrow" aria-hidden="true"></i>
+        </a>
+-->
+
+        <div class="blog-empty">More posts coming soon.</div>
+      </div>
+    </section>
+
+    <div class="footer reveal">
+      <hr class="footer-divider" aria-hidden="true">
+      <p class="site-footer-links">
+        <a href="mailto:danyal.rehman@mila.quebec"><i class="fas fa-envelope" aria-hidden="true"></i>Email</a>
+        <span class="site-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="https://twitter.com/danyalrehman17" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter" aria-hidden="true"></i>X</a>
+        <span class="site-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="https://www.linkedin.com/in/danyalrehman/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i>LinkedIn</a>
+        <span class="site-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap" aria-hidden="true"></i>Scholar</a>
+        <span class="site-footer-sep" aria-hidden="true">&middot;</span>
+        <a href="https://github.com/danyalrehman" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i>GitHub</a>
+      </p>
       <p>
         &copy; 2026 Danyal Rehman &middot;&middot; Last updated: <span id="last-updated"></span>.
       </p>
@@ -505,7 +656,10 @@
 
   </div>
 
-  <!-- Command palette (⌘K) -->
+  <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
   <div class="cmdk" id="cmdk" role="dialog" aria-label="Command palette" aria-modal="true" hidden>
     <div class="cmdk-backdrop" data-cmdk-close aria-hidden="true"></div>
     <div class="cmdk-panel" role="document">
@@ -531,11 +685,10 @@
     </div>
   </div>
 
-  <!-- Expandable abstracts -->
   <script>
-    (function () {
-      document.querySelectorAll('.paper-btn-abstract').forEach(function (btn) {
-        btn.addEventListener('click', function () {
+    (() => {
+      document.querySelectorAll('.paper-btn-abstract').forEach((btn) => {
+        btn.addEventListener('click', () => {
           const item = btn.closest('.research-item');
           if (!item) return;
           const expanded = item.classList.toggle('is-open');
@@ -545,369 +698,249 @@
     })();
   </script>
 
-  <!-- Scroll-spy for floating TOC -->
   <script>
-    (function () {
-      const links = document.querySelectorAll('.toc-link');
-      if (!links.length) return;
-      const sections = [];
-      links.forEach(function (link) {
-        const id = link.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if (el) sections.push({ id: id, el: el, link: link });
-      });
-
-      function updateActive() {
-        let current = sections[0];
-        for (let i = 0; i < sections.length; i++) {
-          if (sections[i].el.getBoundingClientRect().top <= 120) {
-            current = sections[i];
-          }
-        }
-        links.forEach(function (l) { l.classList.remove('active'); });
-        if (current) current.link.classList.add('active');
-      }
-
-      window.addEventListener('scroll', updateActive, { passive: true });
-      updateActive();
-
-      /* Smooth-scroll on click */
-      links.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.getElementById(this.getAttribute('href').slice(1));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-    })();
-  </script>
-
-  <!-- Sticky nav: smooth-scroll behavior on jump links -->
-  <script>
-    (function () {
+    (() => {
       const nav = document.getElementById('sticky-nav');
       if (!nav) return;
-      nav.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener('click', function (e) {
+      nav.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (e) => {
           e.preventDefault();
-          const hash = this.getAttribute('href');
-          // "About" → scroll to the very top of the page
-          if (hash === '#about') {
+          const hash = link.getAttribute('href');
+          if (hash === '#' || hash === '#about') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
           }
           const target = document.getElementById(hash.slice(1));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       });
     })();
   </script>
 
-  <!-- Sticky nav: scroll progress line + scroll state + active-section indicator -->
   <script>
-    (function () {
-      const nav      = document.getElementById('sticky-nav');
+    (() => {
+      const nav = document.getElementById('sticky-nav');
+      const navInner = document.querySelector('.sticky-nav-inner');
       const progress = document.querySelector('.nav-progress');
+      const progressPath = progress?.querySelector('path');
       if (!nav && !progress) return;
+
+      const STROKE = 1.5;
+      const HALF = STROKE / 2;
+      const rebuildProgressPath = () => {
+        if (!navInner || !progress || !progressPath) return;
+        const { width: W, height: H } = navInner.getBoundingClientRect();
+        if (W < 4 || H < 4) return;
+        const rad = H / 2;
+        const innerRad = rad - HALF;
+        const wrap = Math.PI / 4;
+        const dx = innerRad * Math.sin(wrap);
+        const dy = innerRad * Math.cos(wrap);
+        const x1 = rad - dx;
+        const y1 = rad + dy;
+        const x2 = W - rad + dx;
+        const yBot = H - HALF;
+
+        progressPath.setAttribute(
+          'd',
+          `M ${x1.toFixed(2)} ${y1.toFixed(2)} ` +
+          `A ${innerRad.toFixed(2)} ${innerRad.toFixed(2)} 0 0 0 ${rad.toFixed(2)} ${yBot.toFixed(2)} ` +
+          `L ${(W - rad).toFixed(2)} ${yBot.toFixed(2)} ` +
+          `A ${innerRad.toFixed(2)} ${innerRad.toFixed(2)} 0 0 0 ${x2.toFixed(2)} ${y1.toFixed(2)}`
+        );
+        progress.setAttribute('viewBox', `0 0 ${W.toFixed(2)} ${H.toFixed(2)}`);
+      };
+
+      if (navInner && progress && typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(rebuildProgressPath).observe(navInner);
+      }
 
       const navLinks = nav ? Array.from(nav.querySelectorAll('.sticky-nav-links a[href^="#"]')) : [];
       const sections = navLinks
-        .map(function (link) {
+        .map((link) => {
           const id = link.getAttribute('href').slice(1);
           const el = id ? document.getElementById(id) : null;
-          return el ? { id: id, el: el, link: link } : null;
+          return el ? { id, el, link } : null;
         })
         .filter(Boolean);
 
       let ticking = false;
-      function update() {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const val = max > 0 ? (window.scrollY / max) * 100 : 0;
-        if (progress) progress.style.width = Math.min(100, Math.max(0, val)) + '%';
+      const update = () => {
+        const doc = document.documentElement;
+        const scrollTop = Math.max(window.scrollY || 0, doc.scrollTop || 0, document.body.scrollTop || 0);
+        const fullH = Math.max(doc.scrollHeight, document.body.scrollHeight, doc.offsetHeight);
+        const max = fullH - (doc.clientHeight || window.innerHeight);
+        const val = max > 0 ? scrollTop / max : 0;
+        if (progress) progress.style.setProperty('--p', Math.min(1, Math.max(0, val)));
 
-        if (nav) {
-          nav.classList.toggle('is-scrolled', window.scrollY > 8);
-        }
+        nav?.classList.toggle('is-scrolled', scrollTop > 8);
 
         if (sections.length) {
           let current = null;
-          for (let i = 0; i < sections.length; i++) {
-            if (sections[i].el.getBoundingClientRect().top <= 140) {
-              current = sections[i];
-            }
+          for (const section of sections) {
+            if (section.el.getBoundingClientRect().top <= 140) current = section;
           }
-          // If above the first section, no active link (cleaner than always-on "About")
-          if (window.scrollY < 80) current = null;
-          navLinks.forEach(function (l) { l.classList.remove('is-active'); });
+          if (scrollTop < 80) current = null;
+          navLinks.forEach((l) => l.classList.remove('is-active'));
           if (current) current.link.classList.add('is-active');
         }
 
         ticking = false;
-      }
-      function requestTick() {
-        if (!ticking) {
-          requestAnimationFrame(update);
-          ticking = true;
-        }
-      }
+      };
+      const requestTick = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      };
 
       window.addEventListener('scroll', requestTick, { passive: true });
-      window.addEventListener('resize', requestTick);
-      window.addEventListener('load', update);
+      window.addEventListener('resize', () => {
+        rebuildProgressPath();
+        requestTick();
+      });
+      window.addEventListener('load', () => {
+        rebuildProgressPath();
+        update();
+      });
+      document.fonts?.ready?.then(requestTick);
+      rebuildProgressPath();
       update();
     })();
   </script>
 
-  <!-- Command palette: ⌘K / Ctrl-K / "/" opens, Esc closes.
-       Ranking: each space-separated query token must appear in the item's
-       haystack (title + subtitle + keywords + group); sum of indexOf positions
-       is the score, lower wins — earlier matches surface first. -->
   <script>
-    (function () {
-      const modal  = document.getElementById('cmdk');
-      const input  = document.getElementById('cmdk-input');
-      const listEl = document.getElementById('cmdk-list');
-      const emptyEl = document.getElementById('cmdk-empty');
-      const openBtn = document.getElementById('cmdk-open');
-      if (!modal || !input || !listEl) return;
+    (() => {
+      const navLinks = document.querySelector('.sticky-nav-links');
+      if (!navLinks) return;
+      const links = Array.from(navLinks.querySelectorAll('a:not(.nav-blog-item)'));
+      if (!links.length) return;
 
-      function scrollToId(id) {
-        if (id === 'about') return window.scrollTo({ top: 0, behavior: 'smooth' });
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const pill = document.createElement('span');
+      pill.className = 'sticky-nav-pill';
+      pill.setAttribute('aria-hidden', 'true');
+      navLinks.prepend(pill);
 
-      const items = [
-        { group: 'Navigate', title: 'About',             icon: 'fas fa-user',
-          keywords: 'bio mila mit postdoc profile',
-          run: function () { scrollToId('about'); } },
-        { group: 'Navigate', title: 'Recent Highlights', icon: 'fas fa-bolt',
-          keywords: 'news awards timeline',
-          run: function () { scrollToId('news'); } },
-        { group: 'Navigate', title: 'Publications',      icon: 'fas fa-book',
-          keywords: 'papers research',
-          run: function () { scrollToId('publications'); } },
+      const getActive = () => links.find((l) => l.classList.contains('is-active')) || null;
+      const isHovering = () => navLinks.matches(':hover');
 
-        { group: 'Papers', title: 'Autoregressive Boltzmann Generators',
-          subtitle: 'Under Review', icon: 'fas fa-file-alt',
-          keywords: 'arbg bengio tong boltzmann',
-          run: function () { scrollToId('publications'); } },
-        { group: 'Papers', title: 'FALCON: Few-step Accurate Likelihoods for Continuous Flows',
-          subtitle: 'ICLR 2026', icon: 'fas fa-file-alt',
-          keywords: 'falcon iclr 2026 oral flow matching likelihood',
-          url: 'https://arxiv.org/abs/2512.09914' },
-        { group: 'Papers', title: 'Efficient Regression-based Training of Normalizing Flows',
-          subtitle: 'ICLR 2026', icon: 'fas fa-file-alt',
-          keywords: 'regflow iclr 2026 normalizing flow best paper',
-          url: 'https://arxiv.org/abs/2506.01158' },
-        { group: 'Papers', title: 'A Generative Deep Learning Approach to De Novo Antibiotic Design',
-          subtitle: 'Cell 2025', icon: 'fas fa-file-alt',
-          keywords: 'cell 2025 antibiotics collins krishnan generative',
-          url: 'https://doi.org/10.1016/j.cell.2025.07.033' },
-        { group: 'Papers', title: 'Physics-informed Deep Learning for Multi-species Membrane Transport',
-          subtitle: 'Chemical Engineering Journal 2024', icon: 'fas fa-file-alt',
-          keywords: 'cej 2024 physics informed membrane transport lienhard',
-          url: 'https://doi.org/10.1016/j.cej.2024.149806' },
-        { group: 'Papers', title: 'Self-supervised Learning with Lie Symmetries for PDEs',
-          subtitle: 'NeurIPS 2023', icon: 'fas fa-file-alt',
-          keywords: 'neurips 2023 ssl lie symmetries pdes lecun mialon',
-          url: 'https://arxiv.org/abs/2307.05432' },
+      let lockedLink = null;
+      let lockTimer = 0;
 
-        { group: 'Contact', title: 'Email', subtitle: 'danyal.rehman@mila.quebec',
-          icon: 'fas fa-envelope', keywords: 'contact mail',
-          url: 'mailto:danyal.rehman@mila.quebec' }
-      ];
-
-      items.forEach(function (it) {
-        it._hay = (it.title + ' ' + (it.subtitle || '') + ' ' + (it.keywords || '') + ' ' + it.group).toLowerCase();
-      });
-
-      let filtered = items.slice();
-      let activeIndex = 0;
-
-      function score(item, tokens) {
-        let total = 0;
-        for (let i = 0; i < tokens.length; i++) {
-          const idx = item._hay.indexOf(tokens[i]);
-          if (idx < 0) return -1;
-          total += idx;
-        }
-        return total;
-      }
-
-      function render() {
-        const q = input.value.trim().toLowerCase();
-        if (!q) {
-          filtered = items.slice();
-        } else {
-          const tokens = q.split(/\s+/);
-          const scored = [];
-          for (let i = 0; i < items.length; i++) {
-            const s = score(items[i], tokens);
-            if (s >= 0) scored.push([s, items[i]]);
-          }
-          scored.sort(function (a, b) { return a[0] - b[0]; });
-          filtered = scored.map(function (x) { return x[1]; });
-        }
-
-        listEl.textContent = '';
-        emptyEl.hidden = filtered.length > 0;
-
-        let lastGroup = null;
-        filtered.forEach(function (it, i) {
-          if (it.group !== lastGroup) {
-            const h = document.createElement('div');
-            h.className = 'cmdk-group';
-            h.textContent = it.group;
-            listEl.appendChild(h);
-            lastGroup = it.group;
-          }
-          listEl.appendChild(buildRow(it, i));
-        });
-
-        activeIndex = filtered.length ? 0 : -1;
-        updateActive();
-      }
-
-      function buildRow(it, i) {
-        const row = document.createElement('button');
-        row.type = 'button';
-        row.className = 'cmdk-item';
-        row.setAttribute('role', 'option');
-
-        const iconWrap = document.createElement('span');
-        iconWrap.className = 'cmdk-item-icon';
-        iconWrap.innerHTML = '<i class="' + it.icon + '"></i>';
-
-        const textWrap = document.createElement('span');
-        textWrap.className = 'cmdk-item-text';
-        const titleEl = document.createElement('span');
-        titleEl.className = 'cmdk-item-title';
-        titleEl.textContent = it.title;
-        textWrap.appendChild(titleEl);
-        if (it.subtitle) {
-          const subEl = document.createElement('span');
-          subEl.className = 'cmdk-item-sub';
-          subEl.textContent = it.subtitle;
-          textWrap.appendChild(subEl);
-        }
-
-        row.appendChild(iconWrap);
-        row.appendChild(textWrap);
-
-        if (it.url) {
-          const meta = document.createElement('span');
-          meta.className = 'cmdk-item-meta';
-          const isMail = it.url.startsWith('mailto:');
-          meta.innerHTML = '<i class="fas ' + (isMail ? 'fa-envelope-open-text' : 'fa-arrow-up-right-from-square') + '"></i>';
-          row.appendChild(meta);
-        }
-
-        row.addEventListener('click', function () { activate(i); });
-        row.addEventListener('mousemove', function () {
-          if (activeIndex !== i) { activeIndex = i; updateActive(); }
-        });
-        return row;
-      }
-
-      function updateActive() {
-        const rows = listEl.querySelectorAll('.cmdk-item');
-        rows.forEach(function (r, i) {
-          r.classList.toggle('is-active', i === activeIndex);
-        });
-        const active = rows[activeIndex];
-        if (active) active.scrollIntoView({ block: 'nearest' });
-      }
-
-      function activate(i) {
-        if (i < 0 || i >= filtered.length) return;
-        const it = filtered[i];
-        close();
-        if (it.run) it.run();
-        else if (it.url) {
-          if (it.url.startsWith('mailto:')) window.location.href = it.url;
-          else window.open(it.url, '_blank', 'noopener,noreferrer');
-        }
-      }
-
-      let lastFocused = null;
-      function open() {
-        if (!modal.hidden) return;
-        lastFocused = document.activeElement;
-        input.value = '';
-        modal.hidden = false;
-        document.documentElement.classList.add('cmdk-open');
-        render();
-        requestAnimationFrame(function () { input.focus(); });
-      }
-      function close() {
-        if (modal.hidden) return;
-        modal.hidden = true;
-        document.documentElement.classList.remove('cmdk-open');
-        if (lastFocused && lastFocused.focus) lastFocused.focus();
-      }
-
-      window.addEventListener('keydown', function (e) {
-        if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
-          e.preventDefault();
-          modal.hidden ? open() : close();
+      const moveTo = (link, { animate = true } = {}) => {
+        if (!link) {
+          pill.classList.remove('is-visible');
           return;
         }
-        if (e.key === '/' && modal.hidden) {
-          const t = e.target;
-          const editable = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
-          if (!editable) { e.preventDefault(); open(); }
+        const navRect = navLinks.getBoundingClientRect();
+        const r = link.getBoundingClientRect();
+        const x = r.left - navRect.left;
+        const y = r.top - navRect.top;
+
+        if (!animate) {
+          pill.style.transition = 'none';
+          void pill.offsetWidth;
         }
+        pill.style.transform = `translate(${x}px, ${y}px)`;
+        pill.style.width = `${r.width}px`;
+        pill.style.height = `${r.height}px`;
+        if (!animate) {
+          requestAnimationFrame(() => { pill.style.transition = ''; });
+        }
+        pill.classList.add('is-visible');
+      };
+
+      const settleToActive = () => moveTo(getActive());
+
+      requestAnimationFrame(() => moveTo(getActive(), { animate: false }));
+
+      links.forEach((link) => {
+        link.addEventListener('mouseenter', () => moveTo(link));
+        link.addEventListener('focus', () => moveTo(link));
+        link.addEventListener('click', () => {
+          lockedLink = link;
+          moveTo(link);
+          clearTimeout(lockTimer);
+          lockTimer = setTimeout(() => { lockedLink = null; }, 700);
+        });
       });
 
-      modal.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
-        if (e.key === 'Enter')  { e.preventDefault(); activate(activeIndex); return; }
-        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
-        e.preventDefault();
-        if (!filtered.length) return;
-        const dir = e.key === 'ArrowDown' ? 1 : -1;
-        activeIndex = (activeIndex + dir + filtered.length) % filtered.length;
-        updateActive();
+      navLinks.addEventListener('mouseleave', settleToActive);
+      navLinks.addEventListener('focusout', (e) => {
+        if (!navLinks.contains(e.relatedTarget)) settleToActive();
       });
 
-      input.addEventListener('input', render);
-      modal.querySelectorAll('[data-cmdk-close]').forEach(function (el) {
-        el.addEventListener('click', close);
+      const observer = new MutationObserver(() => {
+        if (lockedLink || isHovering()) return;
+        settleToActive();
       });
-      if (openBtn) openBtn.addEventListener('click', open);
+      links.forEach((link) => observer.observe(link, { attributes: true, attributeFilter: ['class'] }));
+
+      let resizeTimer = 0;
+      const reflow = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => moveTo(lockedLink || getActive(), { animate: false }), 80);
+      };
+      window.addEventListener('resize', reflow);
+      window.addEventListener('load', reflow);
     })();
   </script>
 
-  <!-- Animated count-up for the stats row -->
+  <script type="application/json" id="cmdk-data">
+  [
+    { "group": "Navigate", "title": "About",             "icon": "fas fa-user",     "keywords": "bio mila mit postdoc profile", "scroll": "about" },
+    { "group": "Navigate", "title": "Recent Highlights", "icon": "fas fa-bolt",     "keywords": "news awards timeline",         "scroll": "news" },
+    { "group": "Navigate", "title": "Publications",      "icon": "fas fa-book",     "keywords": "papers research",              "scroll": "publications" },
+    { "group": "Navigate", "title": "Blog",              "icon": "fas fa-pen-nib",  "keywords": "posts writing",                "scroll": "blog" },
+
+    { "group": "Papers", "title": "Autoregressive Boltzmann Generators",
+      "subtitle": "ICML 2026", "icon": "fas fa-file-alt",
+      "url": "https://arxiv.org/abs/2606.27361" },
+    { "group": "Papers", "title": "FALCON: Few-step Accurate Likelihoods for Continuous Flows",
+      "subtitle": "ICLR 2026", "icon": "fas fa-file-alt",
+      "url": "https://arxiv.org/abs/2512.09914" },
+    { "group": "Papers", "title": "Efficient Regression-based Training of Normalizing Flows",
+      "subtitle": "ICLR 2026", "icon": "fas fa-file-alt",
+      "url": "https://arxiv.org/abs/2506.01158" },
+    { "group": "Papers", "title": "A Generative Deep Learning Approach to De Novo Antibiotic Design",
+      "subtitle": "Cell 2025", "icon": "fas fa-file-alt",
+      "url": "https://doi.org/10.1016/j.cell.2025.07.033" },
+    { "group": "Papers", "title": "Physics-informed Deep Learning for Multi-species Membrane Transport",
+      "subtitle": "Chemical Engineering Journal 2024", "icon": "fas fa-file-alt",
+      "url": "https://doi.org/10.1016/j.cej.2024.149806" },
+    { "group": "Papers", "title": "Self-supervised Learning with Lie Symmetries for PDEs",
+      "subtitle": "NeurIPS 2023", "icon": "fas fa-file-alt",
+      "url": "https://arxiv.org/abs/2307.05432" },
+
+    { "group": "Contact", "title": "Email", "subtitle": "danyal.rehman@mila.quebec",
+      "icon": "fas fa-envelope", "keywords": "contact mail",
+      "url": "mailto:danyal.rehman@mila.quebec" }
+  ]
+  </script>
+  <script src="./cmdk.js"></script>
+
   <script>
-    (function () {
+    (() => {
       const nums = document.querySelectorAll('.stat-number[data-target]');
       if (!nums.length) return;
 
-      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
       if (reduceMotion || !('IntersectionObserver' in window)) {
-        nums.forEach(function (el) {
-          const suffix = el.getAttribute('data-suffix') || '';
+        nums.forEach((el) => {
+          const suffix = el.getAttribute('data-suffix') ?? '';
           el.textContent = parseInt(el.getAttribute('data-target'), 10).toLocaleString() + suffix;
         });
         return;
       }
 
-      function animate(el) {
+      const animate = (el) => {
         const target = parseInt(el.getAttribute('data-target'), 10);
-        const suffix = el.getAttribute('data-suffix') || '';
+        const suffix = el.getAttribute('data-suffix') ?? '';
         const duration = 1600;
         let startTime = null;
 
-        function tick(now) {
+        const tick = (now) => {
           if (!startTime) startTime = now;
           const progress = Math.min((now - startTime) / duration, 1);
-          // ease-out cubic
           const eased = 1 - Math.pow(1 - progress, 3);
           const current = Math.floor(eased * target);
           el.textContent = current.toLocaleString() + suffix;
@@ -916,13 +949,13 @@
           } else {
             el.textContent = target.toLocaleString() + suffix;
           }
-        }
+        };
 
         requestAnimationFrame(tick);
-      }
+      };
 
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             animate(entry.target);
             observer.unobserve(entry.target);
@@ -930,7 +963,53 @@
         });
       }, { threshold: 0.4 });
 
-      nums.forEach(function (el) { observer.observe(el); });
+      nums.forEach((el) => observer.observe(el));
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const targets = document.querySelectorAll('.reveal');
+      if (!targets.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+      targets.forEach((el) => observer.observe(el));
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      const threshold = 600;
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        btn.classList.toggle('is-visible', window.scrollY > threshold);
+      };
+      const onScroll = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+      btn.addEventListener('click', () => {
+        const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
     })();
   </script>
 </body>
