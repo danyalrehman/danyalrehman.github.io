@@ -12,6 +12,19 @@ const store = {
   },
 };
 
+// Local file:// preview only: the clean "../../" home links resolve to a bare
+// directory off disk (a file listing) instead of the homepage. Point them at
+// index.html so preview navigates correctly — the deployed site, served over
+// http(s), keeps the clean root URL untouched.
+if (location.protocol === 'file:') {
+  document.querySelectorAll('a[href^="../../"]').forEach((a) => {
+    const href = a.getAttribute('href');
+    if (href === '../../' || href.startsWith('../../#')) {
+      a.setAttribute('href', '../../index.html' + href.slice(6));
+    }
+  });
+}
+
 (() => {
   const bgBtn = document.getElementById('bg-toggle');
   const content = document.querySelector('.content');

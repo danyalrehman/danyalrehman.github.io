@@ -45,6 +45,17 @@
   }
   if (!items.length) return;
 
+  // Local file:// preview only: rewrite the blog palette's clean "../../" home
+  // targets to index.html so they don't open a directory listing off disk. The
+  // homepage's palette has no such URLs, so this is a no-op there and in prod.
+  if (location.protocol === 'file:') {
+    items.forEach((it) => {
+      if (it.url && (it.url === '../../' || it.url.startsWith('../../#'))) {
+        it.url = '../../index.html' + it.url.slice(6);
+      }
+    });
+  }
+
   const scrollToId = (id) => {
     const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
     if (id === 'about') {
