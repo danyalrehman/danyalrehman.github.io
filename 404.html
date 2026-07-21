@@ -7,15 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
 
-  <!-- GitHub Pages serves this at any missing path, so every reference is
-       root-relative (/...) rather than relative to the broken URL. -->
-  <link rel="stylesheet" href="/stylesheet.css">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <!-- Self-contained: no external CSS/image dependencies, so this renders
+       identically whether GitHub Pages serves it at a deep missing URL or it
+       is opened directly. The links below are root-relative because Pages
+       serves this file at arbitrary paths; they resolve on the live site. -->
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900&amp;display=swap" rel="stylesheet">
 
   <script>
     // Respect the saved / OS theme before paint (storage can throw when blocked).
@@ -27,55 +27,114 @@
   </script>
 
   <style>
+    :root {
+      --accent-primary: #0067cf;
+      --accent-primary-rgb: 0, 103, 207;
+      --accent-deep: #213c7a;
+      --accent-deep-rgb: 33, 60, 122;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      color-scheme: light dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      color: #333;
+      background-color: #f8f9fa;
+      font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient gradient wash + drift, echoing the main site. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -10%;
+      z-index: -2;
+      background:
+        radial-gradient(42% 44% at 16% 18%, rgba(33, 60, 122, 0.20), transparent 70%),
+        radial-gradient(38% 40% at 84% 14%, rgba(184, 125, 150, 0.16), transparent 70%),
+        radial-gradient(44% 46% at 50% 94%, rgba(0, 103, 207, 0.18), transparent 70%),
+        radial-gradient(34% 36% at 88% 68%, rgba(180, 1, 1, 0.10), transparent 70%),
+        radial-gradient(36% 38% at 12% 72%, rgba(124, 92, 196, 0.14), transparent 70%);
+      animation: nf-drift 32s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes nf-drift {
+      0%   { transform: translate3d(0, 0, 0) scale(1); }
+      50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.06); }
+      100% { transform: translate3d(2%, -1%, 0) scale(1.02); }
+    }
+
     .nf {
+      position: relative;
+      z-index: 1;
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.1rem;
+      gap: 1.15rem;
       text-align: center;
-      padding: 5rem 1.25rem 3rem;
-      position: relative;
-      z-index: 1;
+      padding: 5.5rem 1.25rem 3rem;
     }
 
+    /* Brand pill — mirrors the site's rounded nav. */
     .nf-brand {
       position: fixed;
-      top: 20px;
-      left: 24px;
+      top: 18px;
+      left: 20px;
+      z-index: 2;
       display: inline-flex;
       align-items: center;
       gap: 0.55rem;
+      padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+      border-radius: 999px;
       text-decoration: none;
       color: var(--accent-deep);
       font-weight: 600;
       font-size: 14px;
-      transition: opacity var(--motion-quick);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(var(--accent-deep-rgb), 0.1);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 22px -14px rgba(var(--accent-deep-rgb), 0.4);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      transition: transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
     }
-    .nf-brand:hover { opacity: 0.7; }
-    .nf-brand img { width: 26px; height: 26px; border-radius: 7px; }
+    .nf-brand:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06), 0 12px 26px -14px rgba(var(--accent-deep-rgb), 0.5);
+    }
+    .nf-brand img { width: 24px; height: 24px; border-radius: 7px; display: block; }
 
-    /* Noise panel — echoes the homepage's denoise portrait, but the sample
-       never resolves: this URL was never generated. */
+    /* Noise panel — echoes the homepage denoise portrait, but the sample never
+       converges: this URL was never generated. */
     .nf-panel {
       position: relative;
-      width: min(380px, 80vw);
+      width: min(360px, 78vw);
       aspect-ratio: 16 / 10;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(var(--accent-deep-rgb), 0.16);
       box-shadow:
         0 1px 2px rgba(15, 23, 42, 0.06),
-        0 24px 55px -26px rgba(var(--accent-primary-rgb), 0.34);
+        0 30px 60px -30px rgba(var(--accent-primary-rgb), 0.4);
     }
     .nf-noise { display: block; width: 100%; height: 100%; }
     .nf-panel::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(75% 75% at 50% 50%, rgba(0, 0, 0, 0.55), transparent 78%);
+      background: radial-gradient(78% 78% at 50% 50%, rgba(0, 0, 0, 0.58), transparent 80%);
       pointer-events: none;
     }
     .nf-code {
@@ -86,49 +145,52 @@
       z-index: 1;
       font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
       font-weight: 400;
-      font-size: clamp(76px, 17vw, 132px);
+      font-size: clamp(78px, 17vw, 136px);
       line-height: 1;
       letter-spacing: 0.02em;
       color: #ffffff;
-      text-shadow: 0 2px 34px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 2px 36px rgba(0, 0, 0, 0.65);
     }
 
     .nf-title {
       font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
       font-weight: 400;
-      font-size: clamp(27px, 5.2vw, 42px);
-      line-height: 1.1;
-      letter-spacing: -0.012em;
+      font-size: clamp(28px, 5.4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.014em;
       color: var(--accent-deep);
-      margin: 0.55rem 0 0;
+      margin: 0.7rem 0 0;
     }
     .nf-sub {
-      max-width: 30rem;
+      max-width: 31rem;
       margin: 0;
       color: #5b6573;
-      font-size: 15px;
+      font-size: 15.5px;
       line-height: 1.55;
     }
     .nf-path {
-      margin: 0.1rem 0 0;
+      margin: 0.15rem 0 0;
+      max-width: 90vw;
       font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
       font-size: 12.5px;
+      letter-spacing: -0.01em;
       color: #8a93a3;
       word-break: break-all;
     }
+    .nf-path b { color: var(--accent-deep); font-weight: 600; }
 
     .nf-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.7rem;
       justify-content: center;
-      margin-top: 0.6rem;
+      margin-top: 0.7rem;
     }
     .nf-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.6rem 1.15rem;
+      padding: 0.62rem 1.2rem;
       border-radius: 11px;
       font-size: 14px;
       font-weight: 600;
@@ -136,22 +198,34 @@
       border: 1px solid rgba(var(--accent-deep-rgb), 0.14);
       background: rgba(var(--accent-deep-rgb), 0.05);
       color: var(--accent-deep);
-      transition: background var(--motion-quick), border-color var(--motion-quick), transform var(--motion-quick);
+      transition: background 0.16s var(--ease-out), border-color 0.16s var(--ease-out), transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
     }
     .nf-btn:hover { background: rgba(var(--accent-deep-rgb), 0.1); transform: translateY(-1px); }
+    .nf-btn svg { width: 15px; height: 15px; flex: none; }
     .nf-btn-primary {
       background: var(--accent-primary);
       border-color: transparent;
       color: #ffffff;
       box-shadow: 0 2px 10px -3px rgba(var(--accent-primary-rgb), 0.5);
     }
-    .nf-btn-primary:hover { background: var(--accent-primary); color: #ffffff; }
+    .nf-btn-primary:hover {
+      background: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px -4px rgba(var(--accent-primary-rgb), 0.6);
+    }
 
-    html.dark-mode .nf-brand { color: #cbd9f2; }
+    /* ---- Dark mode ---- */
+    html.dark-mode body { color: #d8d8d8; background-color: #141317; }
+    html.dark-mode .nf-brand {
+      color: #cbd9f2;
+      background: rgba(30, 30, 38, 0.7);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
     html.dark-mode .nf-panel { border-color: rgba(255, 255, 255, 0.1); }
     html.dark-mode .nf-title { color: #cbd9f2; }
     html.dark-mode .nf-sub { color: #9aa3b3; }
     html.dark-mode .nf-path { color: #6f7787; }
+    html.dark-mode .nf-path b { color: #9ec5ff; }
     html.dark-mode .nf-btn {
       background: rgba(255, 255, 255, 0.07);
       color: #cdd9ee;
@@ -161,14 +235,18 @@
     html.dark-mode .nf-btn-primary { background: var(--accent-primary); color: #ffffff; }
 
     @media (max-width: 480px) {
-      .nf-brand { top: 14px; left: 16px; }
+      .nf-brand { top: 12px; left: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before { animation: none; }
     }
   </style>
 </head>
 
 <body>
   <a class="nf-brand" href="/">
-    <img src="/img/favicon.png" alt="" width="26" height="26">
+    <img src="data:image/png;base64,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" alt="" width="24" height="24">
     <span>Danyal Rehman</span>
   </a>
 
@@ -181,21 +259,40 @@
     <p class="nf-sub">This page was never generated &mdash; the URL you followed doesn&rsquo;t exist. Every other page converged nicely, though.</p>
     <p class="nf-path" id="nf-path" aria-hidden="true"></p>
     <div class="nf-actions">
-      <a class="nf-btn nf-btn-primary" href="/"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to homepage</a>
-      <a class="nf-btn" href="/blogs/arbg/autoregressive_boltzmann_generators.html"><i class="fas fa-pen-nib" aria-hidden="true"></i> Read the blog</a>
+      <a class="nf-btn nf-btn-primary" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to homepage
+      </a>
+      <a class="nf-btn" href="/blogs/arbg/autoregressive_boltzmann_generators.html">
+        Read the blog
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </main>
 
   <script>
+    // When opened straight from disk (file://) the root-relative links can't
+    // resolve — but this file lives at the site root, so relative paths do.
+    // Rewrite them for local preview only; the deployed site keeps the
+    // root-relative originals (required since Pages serves 404 at any path).
+    if (location.protocol === 'file:') {
+      document.querySelectorAll('a[href^="/"]').forEach((a) => {
+        const href = a.getAttribute('href');
+        a.setAttribute('href', href === '/' ? './index.html' : '.' + href);
+      });
+    }
+
     // Surface the path the visitor actually requested.
     (() => {
       const el = document.getElementById('nf-path');
-      if (el) el.textContent = location.pathname + location.search;
+      if (!el) return;
+      const path = location.pathname + location.search;
+      el.innerHTML = 'Requested: <b></b>';
+      el.querySelector('b').textContent = path;
     })();
 
     // Living static in the panel — the "sample" that never converges. Rendered
-    // at a capped backing resolution (noise doesn't need retina) and paused for
-    // prefers-reduced-motion, which gets a single frozen frame instead.
+    // at a capped backing resolution and frozen for prefers-reduced-motion.
     (() => {
       const canvas = document.getElementById('nf-noise');
       if (!canvas) return;
