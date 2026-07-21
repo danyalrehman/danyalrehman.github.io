@@ -5,26 +5,55 @@
   <title>Danyal Rehman, Ph.D.</title>
   <meta name="author" content="Danyal Rehman">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Danyal Rehman &mdash; Banting Postdoctoral Researcher at Mila &ndash; Qu&eacute;bec AI Institute and MIT Ph.D. Generative models for AI for Science: Boltzmann generators and flows.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Danyal Rehman">
+  <meta property="og:title" content="Danyal Rehman, Ph.D.">
+  <meta property="og:description" content="Banting Postdoctoral Researcher at Mila and MIT Ph.D. Generative models for AI for Science: Boltzmann generators and flows.">
+  <meta property="og:url" content="https://danyalrehman.com/">
+  <meta property="og:image" content="https://danyalrehman.com/img/forward_pass.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Danyal Rehman, Ph.D.">
+  <meta name="twitter:description" content="Banting Postdoctoral Researcher at Mila and MIT Ph.D. Generative models for AI for Science: Boltzmann generators and flows.">
+  <meta name="twitter:image" content="https://danyalrehman.com/img/forward_pass.png">
+
+  <link rel="canonical" href="https://danyalrehman.com/">
   <link rel="stylesheet" href="stylesheet.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet">
   <script src="./last-updated.js" defer></script>
   <script>
-
     document.documentElement.classList.add('js');
-    // Apply persisted dark mode before paint to prevent FOUC.
-    if (localStorage.getItem('dark-mode') === 'on') {
+
+    // localStorage throws (not returns null) when storage is blocked — e.g.
+    // Safari "Block All Cookies" or enterprise policy — so every access is
+    // guarded. Shared by the theme bootstrap below and the toggles further down.
+    window.siteStore = {
+      get(key) {
+        try { return localStorage.getItem(key); } catch (_) { return null; }
+      },
+      set(key, value) {
+        try { localStorage.setItem(key, value); } catch (_) { /* not persisted */ }
+      },
+    };
+
+    // Apply the persisted theme before paint to prevent a flash of the wrong one.
+    // With no stored preference, follow the operating-system setting.
+    const storedTheme = window.siteStore.get('dark-mode');
+    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+    if (storedTheme === 'on' || (storedTheme === null && prefersDark)) {
       document.documentElement.classList.add('dark-mode');
     }
   </script>
   <script>
     const bibEntries = {
       "rehman2026arbg": "@inproceedings{rehman2026arbg,\n  title        = {{A}utoregressive {B}oltzmann {G}enerators},\n  author       = {Rehman, Danyal and Tan, Charlie B and Bengio, Yoshua and Bose, Joey and Tong, Alexander},\n  booktitle    = {International Conference on Machine Learning (ICML)},\n  year         = {2026},\n  url          = {https://arxiv.org/abs/2606.27361},\n  doi          = {10.48550/arXiv.2606.27361},\n  eprint       = {2606.27361},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Spotlight at ICML 2026}\n}",
-      "rehman2025falcon": "@inproceedings{rehman2025falcon,\n  title        = {{FALCON}: {F}ew-{S}tep {A}ccurate {L}ikelihoods for {C}ontinuous {F}lows},\n  author       = {Rehman, Danyal and Akhound-Sadegh, Tara and Gazizov, Artem and Bengio, Yoshua and Tong, Alexander},\n  booktitle    = {International Conference on Learning Representations (ICLR)},\n  year         = {2025},\n  url          = {https://arxiv.org/abs/2512.09914},\n  doi          = {10.48550/arXiv.2512.09914},\n  eprint       = {2512.09914},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Oral presentation at ICLR 2026}\n}",
+      "rehman2025falcon": "@inproceedings{rehman2025falcon,\n  title        = {{FALCON}: {F}ew-{S}tep {A}ccurate {L}ikelihoods for {C}ontinuous {F}lows},\n  author       = {Rehman, Danyal and Akhound-Sadegh, Tara and Gazizov, Artem and Bengio, Yoshua and Tong, Alexander},\n  booktitle    = {International Conference on Learning Representations (ICLR)},\n  year         = {2026},\n  url          = {https://arxiv.org/abs/2512.09914},\n  doi          = {10.48550/arXiv.2512.09914},\n  eprint       = {2512.09914},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Oral presentation at ICLR 2026}\n}",
       "rehman2026regflow": "@inproceedings{rehman2026regflow,\n  title        = {Efficient Regression-Based Training of Normalizing Flows for {Boltzmann Generators}},\n  author       = {Rehman, Danyal and Davis, Oscar and Lu, Jiarui and Tang, Jian and Bronstein, Michael M. and Bengio, Yoshua and Tong, Alexander and Bose, Joey},\n  booktitle    = {International Conference on Learning Representations (ICLR)},\n  year         = {2026},\n  doi          = {10.48550/arXiv.2506.01158},\n  eprint       = {2506.01158},\n  archivePrefix= {arXiv},\n  primaryClass = {cs.LG},\n  note         = {Poster at ICLR 2026}\n}",
       "krishnan2025antibiotics": "@article{krishnan2025antibiotics,\n  title        = {A Generative Deep Learning Approach to \\textit{de novo} Antibiotic Design},\n  author       = {Krishnan, Aarti and Anahtar, Melis N. and Valeri, Jacqueline A. and Jin, Wengong and Donghia, Nina M. and Luttens, Andreas and Zhang, Yu and Modaresi, Seyed Majed and Hennes, Andrew and Fromer, Jenna and Bandyopadhyay, Parijat and Chen, Jonathan C. and Rehman, Danyal and Desai, Ronak and Edwards, Paige and Lach, Ryan S. and Aschtgen, Marie-St{\\'e}phanie and Gaborieau, Margaux and Gaetani, Massimiliano and Palace, Samantha G. and Omori, Satotaka and Khonde, Lutete and Moroz, Yurii S. and Blough, Bruce and Jin, Chunyang and Loh, Edmund and Grad, Yonatan H. and Saei, Amir Ata and Coley, Connor W. and Wong, Felix and Collins, James J.},\n  journal      = {Cell},\n  volume       = {188},\n  number       = {21},\n  pages        = {5962--5979.e22},\n  year         = {2025},\n  doi          = {10.1016/j.cell.2025.07.033},\n  month        = {oct},\n  note         = {Published online 14 August 2025; Issue 21, 16 October 2025}\n}",
       "rehman2024membrane": "@article{rehman2024membrane,\n  title        = {Physics-Informed Deep Learning for Multi-Species Membrane Transport},\n  author       = {Rehman, Danyal and Lienhard, John H.},\n  journal      = {Chemical Engineering Journal},\n  volume       = {472},\n  pages        = {149806},\n  year         = {2024},\n  doi          = {10.1016/j.cej.2024.149806}\n}",
@@ -33,7 +62,7 @@
 
     function flashCopied(btn) {
       const original = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i> Copied!';
       setTimeout(() => { btn.innerHTML = original; }, 1500);
     }
 
@@ -201,6 +230,8 @@
     requestAnimationFrame(() => document.body.classList.add('is-ready'));
   </script>
 
+  <a class="skip-link" href="#content">Skip to main content</a>
+
   <header class="sticky-nav" id="sticky-nav" aria-label="Page navigation">
     <div class="sticky-nav-inner">
       <svg class="nav-progress" aria-hidden="true" focusable="false" preserveAspectRatio="none">
@@ -213,7 +244,7 @@
         </defs>
         <path pathLength="1"></path>
       </svg>
-      <a href="#about" class="sticky-nav-name" id="nav-home" aria-label="Back to top">
+      <a href="#about" class="sticky-nav-name" id="nav-home">
         <img class="sticky-nav-favicon" src="img/favicon.png" alt="">
         <span class="sticky-nav-name-text">Danyal Rehman</span>
       </a>
@@ -223,8 +254,8 @@
         <a href="#publications">Publications</a>
         <div class="nav-blog-dropdown">
           <a href="#blog">Blog</a>
-          <div class="nav-blog-menu" role="menu" aria-label="Blog posts">
-            <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="nav-blog-item" role="menuitem" data-fade-link>
+          <div class="nav-blog-menu">
+            <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="nav-blog-item" data-fade-link>
               <span class="nav-blog-item-title">Autoregressive Boltzmann Generators</span>
               <span class="nav-blog-item-meta">ICML 2026 Spotlight &middot; Seoul, Korea</span>
             </a>
@@ -238,13 +269,13 @@
         </div>
         <span class="sticky-nav-sep" aria-hidden="true"></span>
         <button class="nav-icon-btn" id="cmdk-open" aria-label="Open command palette" title="Search (⌘K)">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search" aria-hidden="true"></i>
         </button>
         <button class="nav-icon-btn" id="bg-toggle" aria-label="Toggle background image" title="Toggle background image">
-          <i class="fas fa-image"></i>
+          <i class="fas fa-image" aria-hidden="true"></i>
         </button>
         <button class="nav-icon-btn" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <i class="fas fa-moon"></i>
+          <i class="fas fa-moon" aria-hidden="true"></i>
         </button>
       </nav>
     </div>
@@ -256,13 +287,13 @@
         const bgBtn = document.getElementById('bg-toggle');
         const content = document.querySelector('.content');
         if (!bgBtn || !content) return;
-        if (localStorage.getItem('bg-image') === 'on') {
+        if (window.siteStore.get('bg-image') === 'on') {
           content.setAttribute('data-bg', 'on');
         }
         bgBtn.addEventListener('click', () => {
           const on = content.getAttribute('data-bg') === 'on';
           content.setAttribute('data-bg', on ? 'off' : 'on');
-          localStorage.setItem('bg-image', on ? 'off' : 'on');
+          window.siteStore.set('bg-image', on ? 'off' : 'on');
         });
       };
       if (document.readyState === 'loading') {
@@ -280,25 +311,25 @@
         darkBtn.addEventListener('click', () => {
           const on = document.documentElement.classList.toggle('dark-mode');
           darkIcon.className = on ? 'fas fa-sun' : 'fas fa-moon';
-          localStorage.setItem('dark-mode', on ? 'on' : 'off');
+          window.siteStore.set('dark-mode', on ? 'on' : 'off');
         });
       }
     })();
 </script>
 
-  <div class="content" data-bg="off">
+  <main class="content" id="content" data-bg="off">
 
-    <span class="name">Danyal Rehman</span>
+    <h1 class="name">Danyal Rehman</h1>
     <p class="subtitle">
       Banting Postdoctoral Researcher @ <b>Mila &ndash; Qu&eacute;bec AI Institute</b> &middot;&middot;
       Ph.D. @ <b>MIT</b>
     </p>
 
     <div class="interests">
-      <span><i class="fas fa-water"></i> Diffusion &amp; Flow-based Models</span>
-      <span><i class="fas fa-wand-magic-sparkles"></i> Generative Models</span>
-      <span><i class="fas fa-brain"></i> Artificial Intelligence</span>
-      <span><i class="fas fa-flask"></i> AI/ML for Science</span>
+      <span><i class="fas fa-water" aria-hidden="true"></i> Diffusion &amp; Flow-based Models</span>
+      <span><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Generative Models</span>
+      <span><i class="fas fa-brain" aria-hidden="true"></i> Artificial Intelligence</span>
+      <span><i class="fas fa-flask" aria-hidden="true"></i> AI/ML for Science</span>
     </div>
 
     <div id="about" class="profile-section">
@@ -310,22 +341,22 @@
           Previously, I completed my Ph.D. from the <a href="https://www.mit.edu/" target="_blank" rel="noopener noreferrer">Massachusetts Institute of Technology (MIT)</a>. During that time, I was awarded research fellowships from the Martin Family Society of Fellows for Sustainability and the Abdul Latif Jameel (J-WAFS) World Water and Food Systems Lab. Prior to that, I completed my undergraduate degree from the <a href="https://www.utoronto.ca/" target="_blank" rel="noopener noreferrer">University of Toronto</a> with High Honours.
         </p>
         <p>
-          My Ph.D. focused on the development of physics-informed deep learning methods and accelerated partial differential equations (PDEs) solvers for physics-based applications. Examples include neural differential equation models for molecular/ion transport phenomena (advised by <a href="https://en.wikipedia.org/wiki/John_H._Lienhard_V" target="_blank" rel="noopener noreferrer">John Lienhard</a>) and self-supervised learning (SSL) methods with Lie point symmetries for PDEs (advised by <a href="https://en.wikipedia.org/wiki/Yann_LeCun" target="_blank" rel="noopener noreferrer">Yann LeCun</a>). More recently, my interests have extended to generative modelling for applications to AI for Science.
+          My Ph.D. focused on the development of physics-informed deep learning methods and accelerated partial differential equation (PDE) solvers for physics-based applications. Examples include neural differential equation models for molecular/ion transport phenomena (advised by <a href="https://en.wikipedia.org/wiki/John_H._Lienhard_V" target="_blank" rel="noopener noreferrer">John Lienhard</a>) and self-supervised learning (SSL) methods with Lie point symmetries for PDEs (advised by <a href="https://en.wikipedia.org/wiki/Yann_LeCun" target="_blank" rel="noopener noreferrer">Yann LeCun</a>). More recently, my interests have extended to generative modelling for applications to AI for Science.
         </p>
 
         <p class="social-links">
-          <a href="mailto:danyal.rehman@mila.quebec"><i class="fas fa-envelope"></i> Email</a>
-          <a href="https://twitter.com/danyalrehman17" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> X</a>
-          <a href="https://www.linkedin.com/in/danyalrehman/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
-          <a href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i> Scholar</a>
-          <a href="https://github.com/danyalrehman" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+          <a href="mailto:danyal.rehman@mila.quebec"><i class="fas fa-envelope" aria-hidden="true"></i> Email</a>
+          <a href="https://twitter.com/danyalrehman17" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter" aria-hidden="true"></i> X</a>
+          <a href="https://www.linkedin.com/in/danyalrehman/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Scholar</a>
+          <a href="https://github.com/danyalrehman" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
         </p>
 
       </div>
       <div class="profile-image">
         <div class="cmp-wrapper">
-          <img src="img/inverse_pass.png" alt="Danyal Rehman" class="cmp-base-img">
-          <img src="img/forward_pass.png" alt="Danyal Rehman" class="cmp-top-img">
+          <img src="img/inverse_pass.png" alt="" aria-hidden="true" width="1024" height="1536" class="cmp-base-img">
+          <img src="img/forward_pass.png" alt="Danyal Rehman" width="1024" height="1536" class="cmp-top-img">
           <div class="cmp-noise" aria-hidden="true"></div>
           <button type="button" class="cmp-toggle" aria-label="Toggle forward / inverse pass" title="Toggle pass">
             <i class="fas fa-arrows-rotate" aria-hidden="true"></i>
@@ -367,7 +398,7 @@
       </div>
       <div class="news-item">
         <span class="news-date"><span class="news-month">Mar.</span><span class="news-year">2024</span></span>
-        <span>I joined the <a href="https://www.broadinstitute.org/" target="_blank" rel="noopener noreferrer">Broad Institute of Harvard &amp; MIT</a> to work on generative models for the life sciences under <a href="https://en.wikipedia.org/wiki/James_J._Collins" target="_blank" rel="noopener noreferrer">James Collins</a>.</span>
+        <span>I joined the <a href="https://www.broadinstitute.org/" target="_blank" rel="noopener noreferrer">Broad Institute of MIT &amp; Harvard</a> to work on generative models for the life sciences under <a href="https://en.wikipedia.org/wiki/James_J._Collins" target="_blank" rel="noopener noreferrer">James Collins</a>.</span>
       </div>
       <div class="news-item">
         <span class="news-date"><span class="news-month">Dec.</span><span class="news-year">2023</span></span>
@@ -401,24 +432,24 @@
       <h2>Featured Publications</h2>
 
       <div class="research-item reveal">
-        <h3><span class="award-ribbon" title="ICML 2026 Spotlight — Top 2.2%" aria-label="ICML 2026 Spotlight — Top 2.2%"><i class="fas fa-award"></i></span>Autoregressive Boltzmann Generators.</h3>
+        <h3><span class="award-ribbon" title="ICML 2026 Spotlight — Top 2.2%" aria-label="ICML 2026 Spotlight — Top 2.2%"><i class="fas fa-award" aria-hidden="true"></i></span>Autoregressive Boltzmann Generators.</h3>
         <p><b>Danyal Rehman</b>, Charlie B. Tan, Yoshua Bengio, Joey Bose, Alexander Tong.</p>
-        <p><a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML (2026)</a> <span style="color:#0067cf;">(<u>Spotlight - Top 2.2%</u>)</span>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Generative AI for Biomolecular Design Workshop (2026).</p>
+        <p><a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML (2026)</a> <span class="paper-accolade">(<u>Spotlight - Top 2.2%</u>)</span>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Generative AI for Biomolecular Design Workshop (2026).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i> Abstract
+            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
           </button>
           <a href="https://arxiv.org/abs/2606.27361" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt"></i> arXiv
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
           </a>
           <button class="paper-btn" type="button" data-bib-key="rehman2026arbg">
-            <i class="fas fa-quote-right"></i> Bib
+            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
           </button>
           <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="paper-btn">
-            <i class="fas fa-pen-nib"></i> Blog
+            <i class="fas fa-pen-nib" aria-hidden="true"></i> Blog
           </a>
           <a href="https://github.com/danyalrehman/AutoBG" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> GitHub
+            <i class="fab fa-github" aria-hidden="true"></i> GitHub
           </a>
         </div>
         <div class="paper-abstract">
@@ -431,18 +462,18 @@
       </div>
 
       <div class="research-item reveal">
-        <h3><span class="award-ribbon" title="ICLR 2026 Oral — Top 1.2%" aria-label="ICLR 2026 Oral — Top 1.2%"><i class="fas fa-award"></i></span>FALCON: Few-step Accurate Likelihoods for Continuous Flows.</h3>
+        <h3><span class="award-ribbon" title="ICLR 2026 Oral — Top 1.2%" aria-label="ICLR 2026 Oral — Top 1.2%"><i class="fas fa-award" aria-hidden="true"></i></span>FALCON: Few-step Accurate Likelihoods for Continuous Flows.</h3>
         <p><b>Danyal Rehman</b>, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong.</p>
-        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a> <span style="color:#0067cf;">(<u>Oral - Top 1.2%</u>)</span>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
+        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a> <span class="paper-accolade">(<u>Oral - Top 1.2%</u>)</span>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i> Abstract
+            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
           </button>
           <a href="https://arxiv.org/abs/2512.09914" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt"></i> arXiv
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
           </a>
           <button class="paper-btn" type="button" data-bib-key="rehman2025falcon">
-            <i class="fas fa-quote-right"></i> Bib
+            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
           </button>
 <!-- FALCON blog link (hidden)
           <a href="blogs/falcon/falcon.html" class="paper-btn">
@@ -450,7 +481,7 @@
           </a>
 -->
           <a href="https://arxiv.org/pdf/2512.09914" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf"></i> PDF
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
           </a>
         </div>
         <div class="paper-abstract">
@@ -465,22 +496,22 @@
       <div class="research-item reveal">
         <h3>Efficient Regression-based Training of Normalizing Flows for Boltzmann Generators.</h3>
         <p><b>Danyal Rehman</b>, Oscar Davis, Jiarui Lu, Jian Tang, Michael Bronstein, Yoshua Bengio, Alexander Tong, Joey Bose.</p>
-        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Received the <span style="color:#0067cf;"><u>Best Paper Award</u></span> at <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
+        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Received the <span class="paper-accolade"><u>Best Paper Award</u></span> at <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i> Abstract
+            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
           </button>
           <a href="https://arxiv.org/abs/2506.01158" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt"></i> arXiv
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
           </a>
           <button class="paper-btn" type="button" data-bib-key="rehman2026regflow">
-            <i class="fas fa-quote-right"></i> Bib
+            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
           </button>
           <a href="https://github.com/danyalrehman/regflow" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> GitHub
+            <i class="fab fa-github" aria-hidden="true"></i> GitHub
           </a>
           <a href="https://arxiv.org/pdf/2506.01158" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf"></i> PDF
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
           </a>
         </div>
         <div class="paper-abstract">
@@ -498,19 +529,19 @@
         <p><a href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>.</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i> Abstract
+            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
           </button>
           <a href="https://doi.org/10.1016/j.cell.2025.07.033" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-alt"></i> DOI
+            <i class="fas fa-file-alt" aria-hidden="true"></i> DOI
           </a>
           <button class="paper-btn" type="button" data-bib-key="krishnan2025antibiotics">
-            <i class="fas fa-quote-right"></i> Bib
+            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
           </button>
           <a href="https://github.com/aartikrish/de-novo-antibiotics" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> GitHub
+            <i class="fab fa-github" aria-hidden="true"></i> GitHub
           </a>
           <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12790861/pdf/nihms-2127187.pdf" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf"></i> PDF
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
           </a>
         </div>
         <div class="paper-abstract">
@@ -528,16 +559,16 @@
         <p><a href="https://www.sciencedirect.com/journal/chemical-engineering-journal" target="_blank" rel="noopener noreferrer">Chemical Engineering Journal (2024)</a>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Physics for Machine Learning Workshop (2023).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i> Abstract
+            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
           </button>
           <a href="https://doi.org/10.1016/j.cej.2024.149806" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-alt"></i> DOI
+            <i class="fas fa-file-alt" aria-hidden="true"></i> DOI
           </a>
           <button class="paper-btn" type="button" data-bib-key="rehman2024membrane">
-            <i class="fas fa-quote-right"></i> Bib
+            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
           </button>
           <a href="https://dspace.mit.edu/handle/1721.1/155274" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf"></i> PDF
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
           </a>
         </div>
         <div class="paper-abstract">
@@ -555,19 +586,19 @@
         <p><a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023).</p>
         <div class="paper-links">
           <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down"></i> Abstract
+            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
           </button>
           <a href="https://arxiv.org/abs/2307.05432" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt"></i> arXiv
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
           </a>
           <button class="paper-btn" type="button" data-bib-key="mialon2023ssl">
-            <i class="fas fa-quote-right"></i> Bib
+            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
           </button>
           <a href="https://github.com/facebookresearch/SSLForPDEs" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> GitHub
+            <i class="fab fa-github" aria-hidden="true"></i> GitHub
           </a>
           <a href="https://arxiv.org/pdf/2307.05432" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf"></i> PDF
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
           </a>
         </div>
         <div class="paper-abstract">
@@ -585,11 +616,11 @@
       <div class="blog-list">
         <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="blog-card" data-fade-link>
           <div class="blog-card-meta">
-            <span><i class="fas fa-calendar"></i>June 25, 2026</span>
+            <span><i class="fas fa-calendar" aria-hidden="true"></i>June 25, 2026</span>
             <span class="dot">&middot;</span>
-            <span><i class="fas fa-clock"></i>~8 min read</span>
+            <span><i class="fas fa-clock" aria-hidden="true"></i>~8 min read</span>
             <span class="dot">&middot;</span>
-            <span><i class="fas fa-flask"></i>ICML 2026</span>
+            <span><i class="fas fa-flask" aria-hidden="true"></i>ICML 2026</span>
           </div>
           <span class="blog-card-title">Autoregressive Boltzmann Generators</span>
           <p class="blog-card-sub">
@@ -636,7 +667,7 @@
       </div>
     </section>
 
-    <div class="footer reveal">
+    <footer class="footer reveal">
       <hr class="footer-divider" aria-hidden="true">
       <p class="site-footer-links">
         <a href="mailto:danyal.rehman@mila.quebec"><i class="fas fa-envelope" aria-hidden="true"></i>Email</a>
@@ -652,9 +683,9 @@
       <p>
         &copy; 2026 Danyal Rehman &middot;&middot; Last updated: <span id="last-updated"></span>.
       </p>
-    </div>
+    </footer>
 
-  </div>
+  </main>
 
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
@@ -669,6 +700,7 @@
           type="text"
           class="cmdk-input"
           id="cmdk-input"
+          aria-label="Search sections"
           placeholder="Search sections..."
           autocomplete="off"
           spellcheck="false"

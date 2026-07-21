@@ -21,6 +21,9 @@ body.is-leaving { opacity: 0; }
   display: block;
   text-align: left;
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  /* Instrument Serif ships weight 400 only; pinned so the UA h1 bold does not
+     fall back to a synthesised faux-bold. */
+  font-weight: 400;
   font-size: 38px;
   line-height: 1.1;
   letter-spacing: -0.012em;
@@ -191,10 +194,16 @@ html.dark-mode .callout .callout-title { color: #c9b6ff; }
 /* Full-width derivation box: shares the TL;DR/.callout color palette but with
    tighter padding/margins and a smaller font for dense worked-out math. */
 .callout.callout-derivation {
-  padding: 0.7rem 1rem 0.75rem;
   margin: 1.1rem 0;
   font-size: 12.5px;
   line-height: 1.5;
+}
+
+/* Scoped away from <details>: this rule's (0,2,0) outranks the posts' own
+   details.callout { padding: 0 } (0,1,1) regardless of source order, which
+   would stop a collapsible derivation's summary from spanning the full width. */
+.callout.callout-derivation:not(details) {
+  padding: 0.7rem 1rem 0.75rem;
 }
 .callout.callout-derivation p { margin: 0.35rem 0; }
 .callout.callout-derivation .blog-eq { margin: 0.4rem auto; }

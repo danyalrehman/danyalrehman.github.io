@@ -9,6 +9,9 @@
 // link (mailto / external in a new tab / internal in place).
 
 (() => {
+  const prefersReducedMotion = () =>
+    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
   // ---- Page-transition fade for internal links ----
   document.querySelectorAll('a[data-fade-link]').forEach((a) => {
     a.addEventListener('click', (e) => {
@@ -16,6 +19,7 @@
       if (!href || href.startsWith('http') || href.startsWith('mailto:')) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
+      if (prefersReducedMotion()) { window.location.href = href; return; }
       document.body.classList.add('is-leaving');
       setTimeout(() => { window.location.href = href; }, 320);
     });
@@ -37,11 +41,12 @@
   if (!items.length) return;
 
   const scrollToId = (id) => {
+    const behavior = prefersReducedMotion() ? 'auto' : 'smooth';
     if (id === 'about') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior });
       return;
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
   };
 
   items.forEach((it) => {
@@ -77,16 +82,26 @@
     listEl.textContent = '';
     emptyEl.hidden = filtered.length > 0;
 
-    let lastGroup = null;
-    filtered.forEach((it, i) => {
-      if (it.group !== lastGroup) {
-        const h = document.createElement('div');
-        h.className = 'cmdk-group';
-        h.textContent = it.group;
-        listEl.appendChild(h);
-        lastGroup = it.group;
-      }
-      listEl.appendChild(buildRow(it, i));
+    // Cluster by group before rendering. Scores interleave groups freely, so
+    // emitting a header whenever the group changes would repeat it; a Map keyed
+    // by group preserves first-seen (best-scoring) order and emits each once.
+    // `filtered` is reassigned to the rendered order so activate() and the
+    // arrow-key handler keep indexing the same sequence the user sees.
+    const groups = new Map();
+    filtered.forEach((it) => {
+      if (!groups.has(it.group)) groups.set(it.group, []);
+      groups.get(it.group).push(it);
+    });
+    filtered = Array.from(groups.values()).flat();
+
+    let i = 0;
+    groups.forEach((groupItems, group) => {
+      const h = document.createElement('div');
+      h.className = 'cmdk-group';
+      h.setAttribute('role', 'presentation');
+      h.textContent = group;
+      listEl.appendChild(h);
+      groupItems.forEach((it) => listEl.appendChild(buildRow(it, i++)));
     });
 
     activeIndex = filtered.length ? 0 : -1;
@@ -97,7 +112,12 @@
     const row = document.createElement('button');
     row.type = 'button';
     row.className = 'cmdk-item';
+    row.id = `cmdk-opt-${i}`;
     row.setAttribute('role', 'option');
+    row.setAttribute('aria-selected', 'false');
+    // Options are driven by ArrowUp/ArrowDown from the input, so they must stay
+    // out of the Tab order for the dialog's focus trap to hold.
+    row.tabIndex = -1;
 
     const iconWrap = document.createElement('span');
     iconWrap.className = 'cmdk-item-icon';
@@ -135,10 +155,19 @@
     return row;
   };
 
+  // Focus stays in the input while the highlight moves, so the active row is
+  // reported to assistive tech via aria-activedescendant rather than focus.
   const updateActive = () => {
     const rows = listEl.querySelectorAll('.cmdk-item');
-    rows.forEach((r, i) => r.classList.toggle('is-active', i === activeIndex));
-    rows[activeIndex]?.scrollIntoView({ block: 'nearest' });
+    rows.forEach((r, i) => {
+      const isActive = i === activeIndex;
+      r.classList.toggle('is-active', isActive);
+      r.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    const active = rows[activeIndex];
+    active?.scrollIntoView({ block: 'nearest' });
+    if (active) input.setAttribute('aria-activedescendant', active.id);
+    else input.removeAttribute('aria-activedescendant');
   };
 
   const activate = (i) => {
@@ -187,6 +216,22 @@
   modal.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { e.preventDefault(); close(); return; }
     if (e.key === 'Enter')  { e.preventDefault(); activate(activeIndex); return; }
+    // aria-modal is only a promise unless Tab is confined to the panel; result
+    // rows are tabIndex -1, so the cycle is just the input and the ESC button.
+    if (e.key === 'Tab') {
+      const focusable = modal.querySelectorAll('input, button:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+      return;
+    }
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
     e.preventDefault();
     if (!filtered.length) return;

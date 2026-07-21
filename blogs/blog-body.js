@@ -1,14 +1,26 @@
 requestAnimationFrame(() => document.body.classList.add('is-ready'));
 
+// localStorage throws (not returns null) when storage is blocked — e.g. Safari
+// "Block All Cookies" or enterprise policy. These wrappers keep a throw from
+// aborting the file, which would take the nav, progress bar and toggles with it.
+const store = {
+  get(key) {
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+  },
+  set(key, value) {
+    try { localStorage.setItem(key, value); } catch (_) { /* preference not persisted */ }
+  },
+};
+
 (() => {
   const bgBtn = document.getElementById('bg-toggle');
   const content = document.querySelector('.content');
   if (bgBtn && content) {
-    if (localStorage.getItem('bg-image') === 'on') content.setAttribute('data-bg', 'on');
+    if (store.get('bg-image') === 'on') content.setAttribute('data-bg', 'on');
     bgBtn.addEventListener('click', () => {
       const on = content.getAttribute('data-bg') === 'on';
       content.setAttribute('data-bg', on ? 'off' : 'on');
-      localStorage.setItem('bg-image', on ? 'off' : 'on');
+      store.set('bg-image', on ? 'off' : 'on');
     });
   }
   const darkBtn = document.getElementById('dark-toggle');
@@ -18,7 +30,7 @@ requestAnimationFrame(() => document.body.classList.add('is-ready'));
     darkBtn.addEventListener('click', () => {
       const on = document.documentElement.classList.toggle('dark-mode');
       darkIcon.className = on ? 'fas fa-sun' : 'fas fa-moon';
-      localStorage.setItem('dark-mode', on ? 'on' : 'off');
+      store.set('dark-mode', on ? 'on' : 'off');
     });
   }
 })();

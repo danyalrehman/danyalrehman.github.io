@@ -87,6 +87,29 @@ body::after {
   body::before { animation: none; }
 }
 
+/* Skip link — visually hidden until focused, then pinned top-left above the nav. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  margin: 8px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: var(--accent-primary);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 0.18s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
 html.js .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -506,14 +529,16 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('img/aperiodic_monotiles.png') center / 100% repeat;
   border-radius: 8px;
   pointer-events: none;
   z-index: 0;
   opacity: 0;
   transition: opacity 0.6s ease;
 }
+/* The 1.5 MB tile only downloads once the toggle is on — an opacity:0 element
+   with a background-image is still fetched, so the url() must live here. */
 .content[data-bg="on"]::before {
+  background: url('img/aperiodic_monotiles.png') center / 100% repeat;
   opacity: 0.065;
 }
 
@@ -540,6 +565,8 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   font-size: 36px;
   font-weight: 400;
+  /* Neutralises the UA h1 margin so the heading sits where the old span did. */
+  margin: 0;
   letter-spacing: -0.018em;
   line-height: 1.02;
   background: linear-gradient(135deg,
@@ -878,11 +905,11 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
     rgba(var(--accent-deep-rgb), 0)  100%);
 }
 
+/* Padding, background and border-radius live on .room-research.research below;
+   the only .research element also carries .room-research, so setting them here
+   too would be dead weight. */
 .research {
   margin: calc(2.75rem - 10px) 0 2rem;
-  padding: 1.5rem;
-  background: var(--surface-tint-strong);
-  border-radius: 8px;
 }
 
 .research h2 {
@@ -929,6 +956,10 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
   line-height: 1.38;
   color: #4a4a4a;
 }
+
+/* Accolade highlight (Spotlight / Oral / Best Paper). Was an inline color that
+   never adapted to dark mode; see the dark override in the dark-mode block. */
+.research-item p .paper-accolade { color: #0067cf; }
 
 .research-item p b,
 .research-item p strong {
@@ -1207,7 +1238,6 @@ html.dark-mode .award-ribbon:hover {
 }
 .blog-card:hover,
 .blog-card:focus-visible {
-  background: #ffffff;
   border-color: rgba(var(--accent-primary-rgb), 0.32);
   box-shadow:
     0 8px 22px rgba(var(--accent-primary-rgb), 0.10),
@@ -1423,6 +1453,7 @@ html.dark-mode .site-footer-sep {
 .cmp-top-img {
   display: block;
   width: 100%;
+  height: auto;
   border-radius: 14px;
   pointer-events: none;
 }
@@ -2036,6 +2067,22 @@ html.dark-mode .stats {
     0 10px 26px -12px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
+/* Without this, .stats:hover reverts to its light #ffffff gradient on the dark page. */
+html.dark-mode .stats:hover {
+  background:
+    linear-gradient(180deg,
+      rgba(201, 182, 255, 0.11) 0%,
+      rgba(201, 182, 255, 0.045) 100%),
+    #1a1918;
+  border-color: rgba(201, 182, 255, 0.22);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.3),
+    0 12px 30px -14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+/* Light mode turns the number accent-blue on hover; #0067cf is too dark on the
+   dark card, so use the AA-passing light blue instead. */
+html.dark-mode .stats:hover .stat-number { color: #9ec5ff; }
 html.dark-mode .stat-number { color: #c9b6ff; }
 html.dark-mode .stat-label { color: #8a857c; }
 html.dark-mode .stat-divider {
@@ -2043,10 +2090,6 @@ html.dark-mode .stat-divider {
     rgba(235, 230, 220, 0)    0%,
     rgba(235, 230, 220, 0.18) 50%,
     rgba(235, 230, 220, 0)  100%);
-}
-
-html.dark-mode .research {
-  background: rgba(124, 92, 196, 0.08);
 }
 
 html.dark-mode .room {
@@ -2083,6 +2126,8 @@ html.dark-mode .research-item h3 { color: #c9b6ff; }
 html.dark-mode .research-item p { color: #c4beb3; }
 html.dark-mode .research-item p b,
 html.dark-mode .research-item p strong { color: #ebe6dc; }
+/* #0067cf clears only ~3.2:1 on the dark card (#1a1918); #9ec5ff reaches AA. */
+html.dark-mode .research-item p .paper-accolade { color: #9ec5ff; }
 html.dark-mode .research-item a:not(.paper-btn) { color: #ff9d9d; }
 html.dark-mode .research-item a:not(.paper-btn):hover,
 html.dark-mode .research-item a:not(.paper-btn):focus {
@@ -2203,7 +2248,9 @@ html.dark-mode .cmdk-footer {
     padding: 20px;
   }
 
-  .research {
+  /* Must match .room-research.research (0,2,0) below — a bare .research (0,1,0)
+     loses the cascade and the mobile padding never applies. */
+  .room-research.research {
     padding: 1rem;
   }
 }
