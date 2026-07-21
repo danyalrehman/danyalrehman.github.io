@@ -110,6 +110,19 @@ body::after {
   outline-offset: 2px;
 }
 
+/* Native cross-document page transitions (progressive enhancement). Supporting
+   browsers morph between pages; the rest fall back to the JS opacity fade. The
+   .vt class (set before paint in the head) disables that fade so the two never
+   run at once. The sticky nav carries a view-transition-name so it stays
+   anchored while the page content cross-fades beneath it. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
 html.js .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -180,6 +193,8 @@ h2 {
   display: flex;
   justify-content: center;
   pointer-events: none;
+  /* Stays anchored across cross-document view transitions (unique per page). */
+  view-transition-name: site-nav;
 }
 
 .sticky-nav-inner {
@@ -1350,7 +1365,9 @@ html.dark-mode .blog-empty {
   color: #999;
 }
 
-html.js body { opacity: 0; transition: opacity 0.35s ease; }
+/* :not(.vt) — when native view transitions are active they own the fade, so the
+   JS opacity transition stands down to avoid double-animating. */
+html.js:not(.vt) body { opacity: 0; transition: opacity 0.35s ease; }
 html.js body.is-ready { opacity: 1; }
 body.is-leaving { opacity: 0; transition: opacity 0.32s ease; }
 

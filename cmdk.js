@@ -13,17 +13,22 @@
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
   // ---- Page-transition fade for internal links ----
-  document.querySelectorAll('a[data-fade-link]').forEach((a) => {
-    a.addEventListener('click', (e) => {
-      const href = a.getAttribute('href');
-      if (!href || href.startsWith('http') || href.startsWith('mailto:')) return;
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      e.preventDefault();
-      if (prefersReducedMotion()) { window.location.href = href; return; }
-      document.body.classList.add('is-leaving');
-      setTimeout(() => { window.location.href = href; }, 320);
+  // When the browser supports view transitions (html.vt), let the native
+  // cross-document morph handle it — don't intercept, don't run the JS fade.
+  const nativeTransitions = document.documentElement.classList.contains('vt');
+  if (!nativeTransitions) {
+    document.querySelectorAll('a[data-fade-link]').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if (!href || href.startsWith('http') || href.startsWith('mailto:')) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        if (prefersReducedMotion()) { window.location.href = href; return; }
+        document.body.classList.add('is-leaving');
+        setTimeout(() => { window.location.href = href; }, 320);
+      });
     });
-  });
+  }
 
   // ---- Command palette ----
   const modal   = document.getElementById('cmdk');

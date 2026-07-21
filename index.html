@@ -30,6 +30,13 @@
   <script>
     document.documentElement.classList.add('js');
 
+    // Mark browsers that understand view transitions so the CSS can hand page
+    // fades over to the native cross-document morph (and stand down its own).
+    // Set before paint so html.js:not(.vt) body resolves correctly first frame.
+    if (window.CSS && CSS.supports && CSS.supports('view-transition-name: none')) {
+      document.documentElement.classList.add('vt');
+    }
+
     // localStorage throws (not returns null) when storage is blocked — e.g.
     // Safari "Block All Cookies" or enterprise policy — so every access is
     // guarded. Shared by the theme bootstrap below and the toggles further down.

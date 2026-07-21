@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 &middot; Danyal Rehman</title>
+  <meta name="author" content="Danyal Rehman">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+
+  <!-- GitHub Pages serves this at any missing path, so every reference is
+       root-relative (/...) rather than relative to the broken URL. -->
+  <link rel="stylesheet" href="/stylesheet.css">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet">
+
+  <script>
+    // Respect the saved / OS theme before paint (storage can throw when blocked).
+    try {
+      var t = localStorage.getItem('dark-mode');
+      var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'on' || (t === null && d)) document.documentElement.classList.add('dark-mode');
+    } catch (e) { /* storage unavailable — fall back to the light theme */ }
+  </script>
+
+  <style>
+    .nf {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.1rem;
+      text-align: center;
+      padding: 5rem 1.25rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nf-brand {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+      color: var(--accent-deep);
+      font-weight: 600;
+      font-size: 14px;
+      transition: opacity var(--motion-quick);
+    }
+    .nf-brand:hover { opacity: 0.7; }
+    .nf-brand img { width: 26px; height: 26px; border-radius: 7px; }
+
+    /* Noise panel — echoes the homepage's denoise portrait, but the sample
+       never resolves: this URL was never generated. */
+    .nf-panel {
+      position: relative;
+      width: min(380px, 80vw);
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(var(--accent-deep-rgb), 0.16);
+      box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.06),
+        0 24px 55px -26px rgba(var(--accent-primary-rgb), 0.34);
+    }
+    .nf-noise { display: block; width: 100%; height: 100%; }
+    .nf-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(75% 75% at 50% 50%, rgba(0, 0, 0, 0.55), transparent 78%);
+      pointer-events: none;
+    }
+    .nf-code {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+      font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+      font-weight: 400;
+      font-size: clamp(76px, 17vw, 132px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      text-shadow: 0 2px 34px rgba(0, 0, 0, 0.6);
+    }
+
+    .nf-title {
+      font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+      font-weight: 400;
+      font-size: clamp(27px, 5.2vw, 42px);
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      color: var(--accent-deep);
+      margin: 0.55rem 0 0;
+    }
+    .nf-sub {
+      max-width: 30rem;
+      margin: 0;
+      color: #5b6573;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .nf-path {
+      margin: 0.1rem 0 0;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 12.5px;
+      color: #8a93a3;
+      word-break: break-all;
+    }
+
+    .nf-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+      margin-top: 0.6rem;
+    }
+    .nf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.15rem;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(var(--accent-deep-rgb), 0.14);
+      background: rgba(var(--accent-deep-rgb), 0.05);
+      color: var(--accent-deep);
+      transition: background var(--motion-quick), border-color var(--motion-quick), transform var(--motion-quick);
+    }
+    .nf-btn:hover { background: rgba(var(--accent-deep-rgb), 0.1); transform: translateY(-1px); }
+    .nf-btn-primary {
+      background: var(--accent-primary);
+      border-color: transparent;
+      color: #ffffff;
+      box-shadow: 0 2px 10px -3px rgba(var(--accent-primary-rgb), 0.5);
+    }
+    .nf-btn-primary:hover { background: var(--accent-primary); color: #ffffff; }
+
+    html.dark-mode .nf-brand { color: #cbd9f2; }
+    html.dark-mode .nf-panel { border-color: rgba(255, 255, 255, 0.1); }
+    html.dark-mode .nf-title { color: #cbd9f2; }
+    html.dark-mode .nf-sub { color: #9aa3b3; }
+    html.dark-mode .nf-path { color: #6f7787; }
+    html.dark-mode .nf-btn {
+      background: rgba(255, 255, 255, 0.07);
+      color: #cdd9ee;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    html.dark-mode .nf-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
+    html.dark-mode .nf-btn-primary { background: var(--accent-primary); color: #ffffff; }
+
+    @media (max-width: 480px) {
+      .nf-brand { top: 14px; left: 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="nf-brand" href="/">
+    <img src="/img/favicon.png" alt="" width="26" height="26">
+    <span>Danyal Rehman</span>
+  </a>
+
+  <main class="nf">
+    <div class="nf-panel">
+      <canvas class="nf-noise" id="nf-noise" aria-hidden="true"></canvas>
+      <span class="nf-code">404</span>
+    </div>
+    <h1 class="nf-title">You&rsquo;ve wandered off the data manifold.</h1>
+    <p class="nf-sub">This page was never generated &mdash; the URL you followed doesn&rsquo;t exist. Every other page converged nicely, though.</p>
+    <p class="nf-path" id="nf-path" aria-hidden="true"></p>
+    <div class="nf-actions">
+      <a class="nf-btn nf-btn-primary" href="/"><i class="fas fa-arrow-left" aria-hidden="true"></i> Back to homepage</a>
+      <a class="nf-btn" href="/blogs/arbg/autoregressive_boltzmann_generators.html"><i class="fas fa-pen-nib" aria-hidden="true"></i> Read the blog</a>
+    </div>
+  </main>
+
+  <script>
+    // Surface the path the visitor actually requested.
+    (() => {
+      const el = document.getElementById('nf-path');
+      if (el) el.textContent = location.pathname + location.search;
+    })();
+
+    // Living static in the panel — the "sample" that never converges. Rendered
+    // at a capped backing resolution (noise doesn't need retina) and paused for
+    // prefers-reduced-motion, which gets a single frozen frame instead.
+    (() => {
+      const canvas = document.getElementById('nf-noise');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      let frame;
+      const size = () => {
+        const r = canvas.getBoundingClientRect();
+        const scale = Math.min(1, 320 / Math.max(1, r.width));
+        canvas.width = Math.max(1, Math.round(r.width * scale));
+        canvas.height = Math.max(1, Math.round(r.height * scale));
+        frame = ctx.createImageData(canvas.width, canvas.height);
+      };
+      const paint = () => {
+        const d = frame.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const v = (Math.random() * 255) | 0;
+          d[i] = d[i + 1] = d[i + 2] = v;
+          d[i + 3] = 255;
+        }
+        ctx.putImageData(frame, 0, 0);
+      };
+
+      size();
+      paint();
+
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) {
+        let last = 0;
+        const loop = (t) => {
+          if (t - last > 42) { paint(); last = t; }
+          requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
+      }
+
+      let rt;
+      window.addEventListener('resize', () => {
+        clearTimeout(rt);
+        rt = setTimeout(() => { size(); paint(); }, 150);
+      });
+    })();
+  </script>
+</body>
+</html>
