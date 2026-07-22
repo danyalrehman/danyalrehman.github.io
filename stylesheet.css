@@ -125,24 +125,37 @@ body::after {
 
 html.js .reveal {
   opacity: 0;
-  transform: translateY(14px);
-  will-change: opacity, transform;
+  filter: blur(12px);
+  transform: translateY(10px) scale(0.99);
+  will-change: opacity, filter, transform;
 }
 
 html.js .reveal.is-visible {
   opacity: 1;
+  filter: none;
   transform: none;
   will-change: auto;
-  animation: reveal-in 650ms var(--ease-out);
+  /* "Denoise" resolve — content sharpens out of a blur as it scrolls into view,
+     echoing the profile portrait's noise-to-image reveal. backwards fill holds
+     the blurred first frame during any stagger delay (no flash of final state). */
+  animation: reveal-denoise 900ms var(--ease-out) backwards;
 }
 
-@keyframes reveal-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: none; }
+@keyframes reveal-denoise {
+  0%   { opacity: 0; filter: blur(12px); transform: translateY(10px) scale(0.99); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; filter: blur(0);    transform: none; }
 }
+
+/* Gentle cascade so a timeline that enters together resolves item by item. */
+html.js .news-item.reveal:nth-child(2).is-visible { animation-delay: 45ms; }
+html.js .news-item.reveal:nth-child(3).is-visible { animation-delay: 90ms; }
+html.js .news-item.reveal:nth-child(4).is-visible { animation-delay: 135ms; }
+html.js .news-item.reveal:nth-child(5).is-visible { animation-delay: 180ms; }
+html.js .news-item.reveal:nth-child(n+6).is-visible { animation-delay: 210ms; }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js .reveal { opacity: 1; transform: none; }
+  html.js .reveal { opacity: 1; filter: none; transform: none; }
   html.js .reveal.is-visible { animation: none; }
 }
 
@@ -206,10 +219,8 @@ h2 {
   padding: 0.38rem 0.48rem 0.38rem 0.95rem;
   background:
     linear-gradient(180deg,
-      rgba(255, 255, 255, 0.82) 0%,
-      rgba(255, 255, 255, 0.62) 100%);
-  -webkit-backdrop-filter: saturate(200%) blur(22px);
-          backdrop-filter: saturate(200%) blur(22px);
+      #ffffff 0%,
+      #f6f8fc 100%);
   border: 1px solid rgba(33, 60, 122, 0.1);
   border-radius: 999px;
   box-shadow:
@@ -226,10 +237,7 @@ h2 {
 }
 
 .sticky-nav.is-scrolled .sticky-nav-inner {
-  background:
-    linear-gradient(180deg,
-      rgba(255, 255, 255, 0.88) 0%,
-      rgba(255, 255, 255, 0.68) 100%);
+  /* Opaque background stays as set above; scrolling only deepens the shadow. */
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.06),
     0 12px 28px -10px rgba(33, 60, 122, 0.25),
@@ -528,6 +536,17 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
 .nav-icon-btn:active {
   transform: translateY(0) scale(0.94);
   box-shadow: none;
+}
+
+/* Thermal flip when the temperature (theme) control is toggled. */
+@keyframes thermo-flip {
+  0%   { transform: scale(0.4) rotate(-60deg); opacity: 0.3; }
+  60%  { transform: scale(1.1) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+#dark-toggle i.thermo-flip { animation: thermo-flip 0.42s var(--ease-out); }
+@media (prefers-reduced-motion: reduce) {
+  #dark-toggle i.thermo-flip { animation: none; }
 }
 
 .content {
@@ -1907,8 +1926,8 @@ html.dark-mode .content::after {
 html.dark-mode .sticky-nav-inner {
   background:
     linear-gradient(180deg,
-      rgba(26, 25, 24, 0.82) 0%,
-      rgba(26, 25, 24, 0.58) 100%);
+      #211f1e 0%,
+      #191817 100%);
   border-color: rgba(235, 230, 220, 0.1);
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.45),
@@ -1918,10 +1937,7 @@ html.dark-mode .sticky-nav-inner {
     inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 html.dark-mode .sticky-nav.is-scrolled .sticky-nav-inner {
-  background:
-    linear-gradient(180deg,
-      rgba(26, 25, 24, 0.9) 0%,
-      rgba(26, 25, 24, 0.68) 100%);
+  /* Opaque background stays as set above; scrolling only deepens the shadow. */
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.5),
     0 14px 32px -10px rgba(0, 0, 0, 0.7),

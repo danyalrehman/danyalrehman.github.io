@@ -39,10 +39,18 @@ if (location.protocol === 'file:') {
   const darkBtn = document.getElementById('dark-toggle');
   const darkIcon = darkBtn?.querySelector('i');
   if (darkBtn && darkIcon) {
-    if (document.documentElement.classList.contains('dark-mode')) darkIcon.className = 'fas fa-sun';
+    const reduceMo = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    // Thermodynamic framing: light = "hot", dark = "cold" — cool down / heat up.
+    const setThermo = (dark, animate) => {
+      darkIcon.className = dark ? 'fas fa-sun' : 'fas fa-snowflake';
+      darkBtn.setAttribute('aria-label', dark ? 'Warm up to light mode' : 'Cool down to dark mode');
+      darkBtn.setAttribute('title', dark ? 'Warm up' : 'Cool down');
+      if (animate && !reduceMo) { void darkIcon.offsetWidth; darkIcon.classList.add('thermo-flip'); }
+    };
+    setThermo(document.documentElement.classList.contains('dark-mode'), false);
     darkBtn.addEventListener('click', () => {
       const on = document.documentElement.classList.toggle('dark-mode');
-      darkIcon.className = on ? 'fas fa-sun' : 'fas fa-moon';
+      setThermo(on, true);
       store.set('dark-mode', on ? 'on' : 'off');
     });
   }
