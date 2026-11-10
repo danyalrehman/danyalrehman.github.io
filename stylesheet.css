@@ -1545,7 +1545,7 @@ html.dark-mode .site-footer-sep {
     box-shadow 180ms var(--ease-out);
 }
 
-.cmp-wrapper.denoise-complete .cmp-toggle {
+.cmp-wrapper.generation-complete .cmp-toggle {
   opacity: 1;
   pointer-events: auto;
 }
@@ -1563,7 +1563,25 @@ html.dark-mode .site-footer-sep {
   background: rgba(15, 22, 38, 0.72);
 }
 
-.denoise-canvas {
+/* Load-time generation, autoregressive or diffusion (HERO_GENERATION in the
+   head script). Until it finishes, or is skipped, the canvas stands in for the
+   portrait: the real images stay hidden so they can't flash first, and the
+   wrapper shows the empty-slot colour before the canvas is in place. Without
+   JS (no html.js) they show. */
+html.js .cmp-wrapper:not(.generation-complete) {
+  background: #e8edf5;
+}
+
+html.dark-mode.js .cmp-wrapper:not(.generation-complete) {
+  background: #232126;
+}
+
+html.js .cmp-wrapper:not(.generation-complete) .cmp-base-img,
+html.js .cmp-wrapper:not(.generation-complete) .cmp-top-img {
+  visibility: hidden;
+}
+
+.gen-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1575,7 +1593,26 @@ html.dark-mode .site-footer-sep {
   z-index: 2;
 }
 
-.denoise-canvas.denoise-done {
+.gen-canvas.is-done {
+  opacity: 0;
+}
+
+/* Marks the patch token currently being sampled; moved by the script. */
+.ar-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  border-radius: 2px;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.92),
+    0 0 12px 2px rgba(var(--accent-primary-rgb), 0.55);
+  transition: opacity 320ms var(--ease-out);
+  will-change: transform;
+}
+
+.ar-cursor.is-done {
   opacity: 0;
 }
 
@@ -2351,7 +2388,8 @@ html.dark-mode .cmdk-footer {
   .paper-abstract,
   .cmp-toggle,
   .cmp-noise,
-  .denoise-canvas,
+  .gen-canvas,
+  .ar-cursor,
   .interests {
     display: none !important;
   }
@@ -2439,6 +2477,7 @@ html.dark-mode .cmdk-footer {
     transform: none !important;
     filter: none !important;
     opacity: 1 !important;
+    visibility: visible !important;   /* even if printed mid-generation */
     border-radius: 0 !important;
   }
 

@@ -125,46 +125,117 @@
     });
   </script>
   <script>
-
-    // Uses globalAlpha (no getImageData on the photo) to avoid taint on file://.
+    // Load-time portrait generation. HERO_GENERATION picks the effect:
+    //   'autoregressive' - the image is cut into a 16×16 grid of patch "tokens"
+    //                      emitted one at a time in raster order (~3.5 s), with
+    //                      a cursor on the token being sampled.
+    //   'diffusion'      - the image resolves out of per-frame noise (~4 s).
+    // Add ?hero=diffusion or ?hero=autoregressive to the URL to preview the
+    // other one without editing this file.
+    //
+    // The image is only ever copied onto the canvas with drawImage (never read
+    // back via getImageData), so the canvas can't taint on file://. The canvas
+    // goes up as soon as the DOM is ready (the real images stay hidden in CSS
+    // until .generation-complete), and the pass toggle appears when it ends.
     (() => {
-      const startDenoise = () => {
-        const wrapper = document.querySelector('.profile-image .cmp-wrapper');
-        if (!wrapper || wrapper.dataset.denoiseStarted === '1') return;
-        wrapper.dataset.denoiseStarted = '1';
+      const HERO_GENERATION = 'autoregressive';   // or 'diffusion'
 
-        const revealToggle = () => wrapper.classList.add('denoise-complete');
+      const AR_COLS = 16;
+      const AR_ROWS = 16;              // 256 patch tokens
+      const AR_DURATION = 3500;        // ms from the first token to the last one settling
+      const AR_SETTLE = 180;           // ms for one token to fade and grow into place
+      const DIFFUSION_DURATION = 4000;
+      const MAX_DT = 50;               // per-frame cap: a backgrounded tab resumes, not skips
 
-        if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-          revealToggle();
-          return;
-        }
+      const mode = (() => {
+        const requested = new URLSearchParams(window.location.search).get('hero');
+        return requested === 'diffusion' || requested === 'autoregressive' ? requested : HERO_GENERATION;
+      })();
 
-        const rect = wrapper.getBoundingClientRect();
-        if (rect.width < 4 || rect.height < 4) { revealToggle(); return; }
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
 
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const w = Math.max(1, Math.round(rect.width  * dpr));
-        const h = Math.max(1, Math.round(rect.height * dpr));
+      // Each generator paints its starting frame straight away and returns
+      // { overlays, step(elapsedMs) }, where step draws one frame and returns
+      // true once the image is complete. Overlays are extra DOM layers that are
+      // faded out and removed along with the canvas.
 
-        const canvas = document.createElement('canvas');
-        canvas.className = 'denoise-canvas';
-        canvas.setAttribute('aria-hidden', 'true');
-        canvas.width  = w;
-        canvas.height = h;
+      const autoregressive = ({ ctx, w, h, wrapper, target }) => {
+        // Whole-pixel cell edges, so finished neighbours meet without seams.
+        const xs = Array.from({ length: AR_COLS + 1 }, (_, i) => Math.round((i * w) / AR_COLS));
+        const ys = Array.from({ length: AR_ROWS + 1 }, (_, i) => Math.round((i * h) / AR_ROWS));
+        const cell = (i) => {
+          const c = i % AR_COLS;
+          const r = Math.floor(i / AR_COLS);
+          return { c, r, x: xs[c], y: ys[r], cw: xs[c + 1] - xs[c], ch: ys[r + 1] - ys[r] };
+        };
 
-        const ctx = canvas.getContext('2d');
-        if (!ctx) { revealToggle(); return; }
+        // Tokens not yet generated: pale slots on a hairline grid.
+        const dark = document.documentElement.classList.contains('dark-mode');
+        const slotFill = dark ? '#232126' : '#e8edf5';
+        const slotLine = dark ? 'rgba(235, 230, 220, 0.08)' : 'rgba(33, 60, 122, 0.1)';
+        const paintSlot = ({ x, y, cw, ch }) => {
+          ctx.fillStyle = slotFill;
+          ctx.fillRect(x, y, cw, ch);
+          ctx.fillStyle = slotLine;
+          ctx.fillRect(x, y, cw, 1);
+          ctx.fillRect(x, y, 1, ch);
+        };
 
+        const total = AR_COLS * AR_ROWS;
+        for (let i = 0; i < total; i++) paintSlot(cell(i));
+
+        const cursor = document.createElement('div');
+        cursor.className = 'ar-cursor';
+        cursor.setAttribute('aria-hidden', 'true');
+        cursor.style.width  = `${100 / AR_COLS}%`;
+        cursor.style.height = `${100 / AR_ROWS}%`;
+        wrapper.append(cursor);
+
+        const gap = (AR_DURATION - AR_SETTLE) / (total - 1);   // ms between tokens
+        let settled = 0;   // tokens fully in place; they never need redrawing
+
+        // p runs 0 → 1 while a token settles: it fades in, growing from 82%.
+        const drawToken = (i, p) => {
+          const k = cell(i);
+          const sw = target.naturalWidth / AR_COLS;
+          const sh = target.naturalHeight / AR_ROWS;
+          if (p < 1) paintSlot(k);
+          const e = ease(p);
+          const s = 0.82 + 0.18 * e;
+          const dw = k.cw * s;
+          const dh = k.ch * s;
+          ctx.globalAlpha = e;
+          ctx.drawImage(target, k.c * sw, k.r * sh, sw, sh,
+                        k.x + (k.cw - dw) / 2, k.y + (k.ch - dh) / 2, dw, dh);
+          ctx.globalAlpha = 1;
+        };
+
+        return {
+          overlays: [cursor],
+          step(elapsed) {
+            const emitted = Math.min(total, Math.floor(elapsed / gap) + 1);
+            for (let i = settled; i < emitted; i++) {
+              const p = Math.min(1, (elapsed - i * gap) / AR_SETTLE);
+              drawToken(i, p);
+              if (p === 1 && i === settled) settled++;
+            }
+            const head = cell(emitted - 1);
+            cursor.style.transform = `translate(${head.c * 100}%, ${head.r * 100}%)`;
+            return settled >= total;
+          },
+        };
+      };
+
+      const diffusion = ({ ctx, w, h, target }) => {
         const noiseCanvas = document.createElement('canvas');
         noiseCanvas.width = w;
         noiseCanvas.height = h;
         const nctx = noiseCanvas.getContext('2d');
-        if (!nctx) { revealToggle(); return; }
+        if (!nctx) return null;
+
         const noiseFrame = nctx.createImageData(w, h);
         const noise = noiseFrame.data;
         for (let i = 3; i < noise.length; i += 4) noise[i] = 255;
-
         const paintNoise = () => {
           for (let i = 0; i < noise.length; i += 4) {
             noise[i]     = Math.random() * 255;
@@ -176,56 +247,107 @@
 
         paintNoise();
         ctx.drawImage(noiseCanvas, 0, 0);
-        wrapper.appendChild(canvas);
 
-        const target = new Image();
-        let started = false;
-
-        const begin = () => {
-          if (started) return;
-          started = true;
-
-          const duration = 4000;
-          let startTime = null;
-          const ease = (t) => 1 - Math.pow(1 - t, 3);
-
-          const step = (now) => {
-            if (startTime === null) startTime = now;
-            const t = Math.min((now - startTime) / duration, 1);
+        return {
+          overlays: [],
+          step(elapsed) {
+            const t = Math.min(elapsed / DIFFUSION_DURATION, 1);
             const e = ease(t);
-
             paintNoise();
-
             ctx.clearRect(0, 0, w, h);
             ctx.globalAlpha = e;
             ctx.drawImage(target, 0, 0, w, h);
             ctx.globalAlpha = 1 - e;
             ctx.drawImage(noiseCanvas, 0, 0);
             ctx.globalAlpha = 1;
-
-            if (t < 1) {
-              requestAnimationFrame(step);
-            } else {
-              canvas.classList.add('denoise-done');
-              revealToggle();
-              setTimeout(() => canvas.remove(), 600);
-            }
-          };
-
-          requestAnimationFrame(step);
+            return t >= 1;
+          },
         };
-
-        target.addEventListener('load', begin, { once: true });
-        target.addEventListener('error', () => { canvas.remove(); revealToggle(); }, { once: true });
-        target.src = 'img/forward_pass.png';
-
-        if (target.complete && target.naturalWidth > 0) begin();
       };
 
-      if (document.readyState === 'complete') {
-        startDenoise();
+      const startGeneration = () => {
+        const wrapper = document.querySelector('.profile-image .cmp-wrapper');
+        if (!wrapper || wrapper.dataset.generationStarted === '1') return;
+        wrapper.dataset.generationStarted = '1';
+        wrapper.dataset.generation = mode;
+
+        let layers = [];
+        const complete = () => {
+          layers.forEach((el) => el.remove());
+          wrapper.classList.add('generation-complete');
+        };
+
+        try {
+          if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) { complete(); return; }
+
+          const rect = wrapper.getBoundingClientRect();
+          if (rect.width < 4 || rect.height < 4) { complete(); return; }
+
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const w = Math.max(1, Math.round(rect.width  * dpr));
+          const h = Math.max(1, Math.round(rect.height * dpr));
+
+          const canvas = document.createElement('canvas');
+          canvas.className = 'gen-canvas';
+          canvas.setAttribute('aria-hidden', 'true');
+          canvas.width  = w;
+          canvas.height = h;
+
+          const ctx = canvas.getContext('2d');
+          if (!ctx) { complete(); return; }
+          ctx.imageSmoothingQuality = 'high';
+
+          layers = [canvas];
+          wrapper.append(canvas);
+
+          const target = new Image();
+          const generator = (mode === 'diffusion' ? diffusion : autoregressive)({ ctx, w, h, wrapper, target });
+          if (!generator) { complete(); return; }
+          layers.push(...generator.overlays);
+
+          let started = false;
+          const begin = () => {
+            if (started) return;
+            started = true;
+
+            let elapsed = 0;
+            let last = null;
+            const frame = (now) => {
+              try {
+                if (last !== null) elapsed += Math.min(now - last, MAX_DT);
+                last = now;
+
+                if (!generator.step(elapsed)) {
+                  requestAnimationFrame(frame);
+                  return;
+                }
+
+                ctx.globalAlpha = 1;
+                ctx.drawImage(target, 0, 0, w, h);   // one clean full frame to hand off
+                layers.forEach((el) => el.classList.add('is-done'));
+                wrapper.classList.add('generation-complete');
+                setTimeout(() => layers.forEach((el) => el.remove()), 600);
+              } catch (_) {
+                complete();
+              }
+            };
+
+            requestAnimationFrame(frame);
+          };
+
+          target.addEventListener('load', begin, { once: true });
+          target.addEventListener('error', complete, { once: true });
+          target.src = 'img/forward_pass.png';
+          if (target.complete && target.naturalWidth > 0) begin();
+        } catch (_) {
+          complete();   // never leave the portrait hidden
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startGeneration, { once: true });
       } else {
-        window.addEventListener('load', startDenoise, { once: true });
+        startGeneration();
       }
     })();
   </script>

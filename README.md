@@ -11,7 +11,7 @@ A static site showcasing research publications, recent highlights, and contact i
 - Sticky nav with scroll progress, dark mode, and background-image toggles
 - Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
 - Long-form research blog pages with shared navigation, citation tools, and table-of-contents behavior
-- Tap-to-dissolve profile image with denoise-style animation
+- Profile image generated on load, either autoregressively (patch by patch) or by diffusion from noise (`HERO_GENERATION` in `index.html`; preview with `?hero=diffusion`), with a tap-to-dissolve toggle
 - Expandable paper abstracts with one-click BibTeX copy
 - Animated count-up stats (citations, h-index, publications)
 - Timeline-style recent highlights feed
