@@ -10,6 +10,10 @@
   --accent-warm-rgb:    184, 125, 150;
   --accent-red:         oklch(44% 0.188 28);
   --accent-red-rgb:     180, 1, 1;
+  /* Publication distinctions (orals, spotlights, awards) share one amber. */
+  --accent-highlight:   #9a5b00;
+
+  --text-muted:         #596273;
 
   --surface-card:       #ffffff;
   --surface-tint-soft:  rgba(var(--accent-deep-rgb), 0.035);
@@ -23,6 +27,11 @@
                           rgba(var(--accent-deep-rgb), 0.12) 25%,
                           rgba(var(--accent-deep-rgb), 0.12) 75%,
                           transparent);
+
+  /* Inset of list entries past their markers (highlight bullets, accent bars on
+     distinguished papers), which sit on the section heading's left edge.
+     Entries without a marker stay flush with the heading. */
+  --list-indent:        18px;
 
   --ease-out:           cubic-bezier(0.22, 1, 0.36, 1);
   --motion-quick:       180ms var(--ease-out);
@@ -792,11 +801,13 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
   color: var(--accent-deep);
 }
 
+/* The bullets line up with the section heading: each dot's left edge sits on
+   the heading's first stroke (its "R" starts ~1.75px into the box at 21px),
+   the rail runs through the dot centres, and the entries start after them. */
 .news-timeline {
   position: relative;
-  padding-left: 20px;
-  padding-right: 18px;
   margin-top: 10px;
+  padding-left: var(--list-indent);
 }
 
 .news-timeline::before {
@@ -804,7 +815,7 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
   position: absolute;
   top: 1px;
   bottom: 2px;
-  left: 5px;
+  left: 3px;
   width: 2px;
   background: linear-gradient(to bottom,
     rgba(200, 214, 229, 0) 0%,
@@ -824,7 +835,8 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
 .news-item::before {
   content: '';
   position: absolute;
-  left: -16.5px;
+  /* 1.5px from the timeline's edge, centred on the rail (3px + 2px / 2 = 4px). */
+  left: calc(1.5px - var(--list-indent));
   top: 7.5px;
   width: 5px;
   height: 5px;
@@ -851,7 +863,6 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
 .news-date .news-month {
   display: inline-block;
   width: 28px;
-  margin-left: 3px;
   text-align: left;
 }
 
@@ -939,84 +950,261 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
     rgba(var(--accent-deep-rgb), 0)  100%);
 }
 
-/* Padding, background and border-radius live on .room-research.research below;
-   the only .research element also carries .room-research, so setting them here
-   too would be dead weight. */
+/* ---------- Featured publications ----------
+   A card-less list sitting directly on the page, flush with its heading.
+   Distinguished papers (orals, spotlights, awards) get an amber flag line
+   above the title and are inset by --list-indent so their amber accent bar
+   lands on the heading's first stroke, as the Highlights bullets do. */
 .research {
   margin: calc(2.75rem - 10px) 0 2rem;
 }
 
-.research h2 {
-  margin-top: -4px;
-  margin-bottom: calc(0.75rem - 5px);
+.pub-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin: 0 0 1.15rem;
 }
 
-.research-item {
+.pub-head h2 {
+  margin: 0;
+}
+
+.pub-head-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pub-head-link i {
+  font-size: 0.85em;
+  transition: transform var(--motion-quick);
+}
+
+.pub-head-link:hover,
+.pub-head-link:focus {
+  background: none;
+}
+
+.pub-head-link:hover i,
+.pub-head-link:focus-visible i {
+  transform: translateX(2px);
+}
+
+.pub-list,
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.research-item,
+.post {
   position: relative;
-  margin-bottom: 0.4rem;
-  padding: 1.05rem 1.25rem 1.1rem;
-  background: var(--surface-tint-strong);
-  border-radius: 10px;
   line-height: 1.4;
-  transition:
-    background var(--motion-medium),
-    box-shadow var(--motion-medium),
-    transform var(--motion-medium);
 }
 
-.research-item:last-child {
-  margin-bottom: 0;
+/* Only distinguished papers are inset, making room for the accent bar on the
+   heading's edge; every other paper (and every blog post) stays flush with its
+   section heading. */
+.research-item.has-honor,
+.research-item.has-award {
+  padding-left: var(--list-indent);
 }
 
-.research-item:hover {
-  background: var(--surface-hover-alt);
-  box-shadow:
-    0 6px 18px rgba(var(--accent-warm-rgb), 0.10),
-    0 1px 3px rgba(var(--accent-warm-rgb), 0.06);
+/* 2px in: the heading's "F" stroke starts ~1.75px into its box at 21px, and
+   whole pixels keep the 2px bar crisp. */
+.research-item.has-honor::before,
+.research-item.has-award::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent-highlight);
 }
 
-.research-item h3 {
-  margin: 0 0 0.25rem;
+.pub-flag {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.75rem;
+  margin: 0 0 0.2rem;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.pub-flag-honor {
+  color: var(--accent-highlight);
+}
+
+.pub-flag-award {
+  color: var(--accent-highlight);
+}
+
+/* Trailing trophy; inline so it follows the last word if the label wraps. */
+.pub-flag-award i {
+  margin-left: 0.4em;
+  font-size: 0.92em;
+}
+
+.pub-flag-note {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.research-item h3,
+.post h3 {
+  margin: 0;
   font-size: 15.5px;
-  font-weight: 700;
+  font-weight: 650;
+  line-height: 1.3;
   letter-spacing: -0.005em;
-  line-height: 1.25;
   color: var(--accent-deep);
+  text-wrap: pretty;
 }
 
-.research-item p {
+.research-item h3 a,
+.post h3 a {
+  color: inherit;
+}
+
+.research-item h3 a:focus,
+.post h3 a:focus {
+  background: none;
+}
+
+.research-item h3 a:hover,
+.research-item h3 a:focus-visible,
+.post h3 a:hover,
+.post h3 a:focus-visible {
+  color: var(--accent-primary);
+  background: none;
+}
+
+/* Authors (or a post's summary) stay a step below the title (13.5px vs
+   15.5px); the venue (or a post's tags) a half step below that. */
+.pub-authors,
+.pub-venue,
+.post-summary,
+.post-tags {
   margin: 0.2rem 0 0;
   font-size: 13.5px;
-  line-height: 1.38;
-  color: #4a4a4a;
+  line-height: 1.45;
+  color: var(--text-muted);
 }
 
-/* Accolade highlight (Spotlight / Oral / Best Paper). Was an inline color that
-   never adapted to dark mode; see the dark override in the dark-mode block. */
-.research-item p .paper-accolade { color: #0067cf; }
-
-.research-item p b,
-.research-item p strong {
+.pub-authors b {
   font-weight: 700;
   color: var(--accent-deep);
 }
 
-.research-item a:not(.paper-btn) {
-  color: var(--accent-red);
-  text-decoration: none;
-  transition:
-    background-color 220ms var(--ease-out),
-    color 0.2s ease;
+.pub-venue,
+.post-tags {
+  margin-top: 0.1rem;
+  font-size: 13px;
 }
 
-.research-item a:not(.paper-btn):hover,
-.research-item a:not(.paper-btn):focus {
-  color: #7a0000;
-  background-color: rgba(var(--accent-red-rgb), 0.12);
+.pub-venue a {
+  color: inherit;
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(var(--accent-deep-rgb), 0.28);
+  text-underline-offset: 3px;
 }
 
+.pub-venue a.pub-venue-name {
+  font-weight: 600;
+  color: #3a3f4b;
+}
+
+.pub-venue a:focus {
+  background: none;
+}
+
+.pub-venue a:hover,
+.pub-venue a:focus-visible {
+  color: var(--accent-primary);
+  background: none;
+  text-decoration-style: solid;
+  text-decoration-color: currentColor;
+}
+
+/* Plain text links in place of buttons; <button>s (Abstract, BibTeX) are reset
+   to read exactly like the <a>s beside them. */
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  margin-top: 0.45rem;
+}
+
+/* inline-block, not inline-flex: flex items inherit the hover underline, which
+   would then draw across the chevron icon (and flip with it when rotated). */
+.pub-link {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--accent-primary);
+  cursor: pointer;
+  transition: color var(--motion-quick);
+}
+
+.pub-link:focus {
+  background: none;
+}
+
+.pub-link:hover,
+.pub-link:focus-visible {
+  color: var(--accent-deep);
+  background: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.pub-link-abstract i {
+  margin-left: 0.35em;
+  font-size: 0.7em;
+  vertical-align: 0.12em;
+  opacity: 0.8;
+  transition: transform var(--motion-medium);
+}
+
+.research-item.is-open .pub-link-abstract i {
+  transform: rotate(180deg);
+}
+
+.pub-head-link:focus-visible,
+.research-item h3 a:focus-visible,
+.post h3 a:focus-visible,
+.pub-venue a:focus-visible,
+.pub-link:focus-visible {
+  outline: 2px solid rgba(var(--accent-primary-rgb), 0.45);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Paper buttons below are no longer used on the home page; the blog pages'
+   resource links (blogs/*) still rely on them. */
 .paper-links {
   display: flex;
   flex-wrap: wrap;
@@ -1053,56 +1241,19 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
   margin-right: 0.3rem;
 }
 
-.paper-btn-abstract {
-  background: #ffffff;
-  color: var(--accent-deep);
-  border: 1px solid rgba(var(--accent-deep-rgb), 0.22);
-  text-shadow: none;
-  letter-spacing: 0.01em;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    color 0.25s ease;
-}
-.paper-btn-abstract:hover,
-.paper-btn-abstract:focus {
-  background: rgba(var(--accent-deep-rgb), 0.06);
-  color: var(--accent-deep);
-  border-color: rgba(var(--accent-deep-rgb), 0.36);
-  box-shadow: 0 2px 6px rgba(var(--accent-deep-rgb), 0.18);
-  text-decoration: none;
-  outline: none;
-}
-.paper-btn-abstract i {
-  font-size: 0.68rem;
-  opacity: 0.7;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-.paper-btn-abstract:hover i {
-  opacity: 1;
-}
-.research-item.is-open .paper-btn-abstract {
-  background: rgba(var(--accent-deep-rgb), 0.12);
-  color: var(--accent-deep);
-  border-color: rgba(var(--accent-deep-rgb), 0.40);
-  box-shadow: inset 0 1px 2px rgba(var(--accent-deep-rgb), 0.10);
-}
-.research-item.is-open .paper-btn-abstract i {
-  transform: rotate(180deg);
-  opacity: 1;
-}
-
+/* Collapsed abstracts are also visibility:hidden (applied after the collapse
+   finishes) so keyboard focus can't land on links inside invisible text. */
 .paper-abstract {
   display: grid;
   grid-template-rows: 0fr;
   margin-top: 0;
   opacity: 0;
+  visibility: hidden;
   transition:
     grid-template-rows var(--motion-medium),
     margin-top var(--motion-medium),
-    opacity var(--motion-quick);
+    opacity var(--motion-quick),
+    visibility 0s linear 280ms;
 }
 .paper-abstract > .paper-abstract-inner {
   overflow: hidden;
@@ -1110,71 +1261,28 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
 }
 .research-item.is-open .paper-abstract {
   grid-template-rows: 1fr;
-  margin-top: 0.65rem;
+  margin-top: 0.6rem;
   opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
 }
-.paper-abstract-body {
-  padding: 0.7rem 0.95rem 0.75rem 1rem;
-  background-color: var(--surface-hover);
-  border-left: 4px solid rgba(var(--accent-deep-rgb), 0.22);
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 300;
-  line-height: 1.6;
-  letter-spacing: 0.005em;
-  color: #2f2f2f;
-}
-.research-item .paper-abstract-body p {
+.paper-abstract-body p {
   margin: 0;
-  font-size: 10px;
-  font-weight: 300;
+  font-size: 11px;
   line-height: 1.6;
-
+  color: #4a5160;
   text-wrap: pretty;
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphenate-limit-chars: 6 3 3;
+  text-align: left;
+  hyphens: manual;
+  -webkit-hyphens: manual;
   overflow-wrap: break-word;
 }
-.research-item .paper-abstract-body em,
-.research-item .paper-abstract-body i,
-.research-item .paper-abstract-body b,
-.research-item .paper-abstract-body strong {
-  font-weight: 400;
-}
 
-.award-ribbon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.45em;
-  color: #c2570a;
-  font-size: 0.9em;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-  transition: color var(--motion-medium);
-}
-.award-ribbon:hover {
-  color: #e36a10;
-}
-html.dark-mode .award-ribbon {
-  color: #e07b28;
-}
-html.dark-mode .award-ribbon:hover {
-  color: #b87d96;
-}
-
+/* A page section with a soft divider above it. Highlights, Publications and
+   Blog all sit directly on the page (no panel), headings on the bio's edge. */
 .room {
   position: relative;
   margin: calc(2.75rem - 10px) 0 2rem;
-  padding: 1.25rem 1.5rem 1.35rem;
-  background: var(--surface-tint-soft);
-  border: 1px solid var(--border-accent-soft);
-  border-radius: 12px;
-  transition: background var(--motion-medium), border-color var(--motion-medium);
 }
 
 .room > h2 {
@@ -1210,178 +1318,45 @@ html.dark-mode .award-ribbon:hover {
   pointer-events: none;
 }
 
-.room-news {
-  padding: 1.25rem 0.9rem 1rem 1rem;
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-deep-rgb), 0.028) 0%,
-      rgba(var(--accent-deep-rgb), 0.055) 100%),
-    #ffffff;
-  border-color: rgba(var(--accent-deep-rgb), 0.09);
-}
-
 .room-news .news-item:last-child {
   margin-bottom: 0;
 }
 
-.room-research.research {
-  padding: 1.5rem;
-  border: 1px solid rgba(var(--accent-primary-rgb), 0.14);
-  border-radius: 12px;
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-primary-rgb), 0.055) 0%,
-      rgba(var(--accent-primary-rgb), 0.02) 100%),
-    var(--surface-tint-strong);
-}
-
-.room-blog {
-  padding: 1.25rem 1.5rem 1.35rem;
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-deep-rgb), 0.028) 0%,
-      rgba(var(--accent-deep-rgb), 0.055) 100%),
-    #ffffff;
-  border-color: rgba(var(--accent-deep-rgb), 0.09);
-}
+/* ---------- Blog ----------
+   Posts mirror a plain (unhighlighted) publication entry, flush with the
+   heading: the list, title and link styles are shared with the publication
+   rules above (.post-list / .post / .post h3 are grouped there, and the link
+   row reuses .pub-links / .pub-link). */
 .room-blog > h2 {
-  margin-top: 0;
-  margin-bottom: 0.85rem;
+  margin-bottom: 1.15rem;
 }
 
-.blog-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.blog-card {
-  position: relative;
-  display: block;
-  padding: 1.05rem 2.5rem 1.1rem 1.2rem;
-  background: #ffffff;
-  border: 1px solid rgba(var(--accent-primary-rgb), 0.14);
-  border-radius: 12px;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  transition:
-    background var(--motion-medium),
-    border-color var(--motion-medium),
-    box-shadow var(--motion-medium);
-}
-.blog-card:hover,
-.blog-card:focus-visible {
-  border-color: rgba(var(--accent-primary-rgb), 0.32);
-  box-shadow:
-    0 8px 22px rgba(var(--accent-primary-rgb), 0.10),
-    0 1px 3px rgba(var(--accent-primary-rgb), 0.06);
-  outline: none;
-}
-
-.blog-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem 0.85rem;
+/* Where a paper's flag line sits; muted, since it isn't a distinction. */
+.post-meta {
+  margin: 0 0 0.2rem;
   font-size: 12px;
-  color: #6e6e6e;
-  margin-bottom: 0.4rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--text-muted);
 }
-.blog-card-meta .dot { color: #c0c0c0; }
-.blog-card-meta i { font-size: 11px; opacity: 0.85; margin-right: 0.25rem; }
 
-.blog-card-title {
-  display: block;
-  font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  font-size: 26px;
-  line-height: 1.18;
-  letter-spacing: -0.012em;
-  color: var(--accent-deep);
-  margin: 0.1rem 0 0.35rem;
+.pub-link-more i {
+  margin-left: 0.35em;
+  font-size: 0.8em;
+  transition: transform var(--motion-quick);
 }
-.blog-card-sub {
-  margin: 0 0 0.6rem;
-  font-size: 14px;
-  line-height: 1.45;
-  color: #444;
+
+.pub-link-more:hover i,
+.pub-link-more:focus-visible i {
+  transform: translateX(2px);
 }
-.blog-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-top: 0.35rem;
-}
-.blog-card-tag {
+
+.post-empty {
+  margin: 1.45rem 0 0;
   font-size: 11.5px;
-  padding: 0.2rem 0.55rem;
-  background: rgba(var(--accent-deep-rgb), 0.06);
-  color: var(--accent-deep);
-  border-radius: 4px;
-  border: 1px solid rgba(var(--accent-deep-rgb), 0.10);
-}
-
-.blog-card-arrow {
-  position: absolute;
-  top: 50%;
-  right: 1.1rem;
-  transform: translateY(-50%);
-  color: rgba(var(--accent-deep-rgb), 0.35);
-  font-size: 14px;
-  transition: color var(--motion-quick), transform var(--motion-quick);
-}
-.blog-card:hover .blog-card-arrow,
-.blog-card:focus-visible .blog-card-arrow {
-  color: var(--accent-primary);
-  transform: translateY(-50%) translateX(2px);
-}
-
-.blog-empty {
-  margin-top: 1rem;
-  padding: 0.8rem 1rem;
-  text-align: center;
-  font-size: 12.5px;
-  color: #888;
-  font-style: italic;
-  border: 1px dashed rgba(var(--accent-deep-rgb), 0.16);
-  border-radius: 10px;
-}
-
-html.dark-mode .room-blog {
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-deep-rgb), 0.05) 0%,
-      rgba(var(--accent-deep-rgb), 0.09) 100%),
-    #1a1918;
-  border-color: rgba(var(--accent-deep-rgb), 0.14);
-}
-html.dark-mode .blog-card {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.10);
-}
-html.dark-mode .blog-card:hover,
-html.dark-mode .blog-card:focus-visible {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(var(--accent-primary-rgb), 0.45);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-}
-html.dark-mode .blog-card-title { color: #c9b6ff; }
-html.dark-mode .blog-card-meta  { color: #a0a0a0; }
-html.dark-mode .blog-card-meta .dot { color: #555; }
-html.dark-mode .blog-card-sub   { color: #c8c8c8; }
-html.dark-mode .blog-card-tag {
-  background: rgba(var(--accent-deep-rgb), 0.10);
-  color: #c9b6ff;
-  border-color: rgba(var(--accent-deep-rgb), 0.22);
-}
-html.dark-mode .blog-card-arrow { color: rgba(var(--accent-deep-rgb), 0.45); }
-html.dark-mode .blog-card:hover .blog-card-arrow,
-html.dark-mode .blog-card:focus-visible .blog-card-arrow {
-  color: var(--accent-primary);
-}
-html.dark-mode .blog-empty {
-  border-color: rgba(255, 255, 255, 0.10);
-  color: #999;
+  line-height: 1.45;
+  color: var(--text-muted);
 }
 
 /* :not(.vt) — when native view transitions are active they own the fade, so the
@@ -1859,6 +1834,9 @@ html.dark-mode {
   --accent-warm-rgb:    184, 125, 150;
   --accent-red:         oklch(77% 0.105 18);
   --accent-red-rgb:     255, 157, 157;
+  --accent-highlight:   #e8b35a;
+
+  --text-muted:         #a8a39a;
 
   --surface-card:       #1a1918;
   --surface-tint-soft:  rgba(var(--accent-deep-rgb), 0.06);
@@ -2125,48 +2103,45 @@ html.dark-mode .stat-divider {
     rgba(235, 230, 220, 0)  100%);
 }
 
-html.dark-mode .room {
-  border-color: var(--border-accent-soft);
+html.dark-mode .research-item h3,
+html.dark-mode .post h3 { color: #c9b6ff; }
+/* html.dark-mode a / a:hover outrank the light-mode publication link rules,
+   so the colour and no-background overrides are restated here. */
+html.dark-mode .research-item h3 a,
+html.dark-mode .post h3 a { color: inherit; }
+html.dark-mode .research-item h3 a:hover,
+html.dark-mode .research-item h3 a:focus-visible,
+html.dark-mode .post h3 a:hover,
+html.dark-mode .post h3 a:focus-visible {
+  color: var(--accent-primary);
+  background: none;
 }
-
-html.dark-mode .room-news {
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-deep-rgb), 0.05) 0%,
-      rgba(var(--accent-deep-rgb), 0.09) 100%),
-    #1a1918;
-  border-color: rgba(var(--accent-deep-rgb), 0.14);
+html.dark-mode .pub-authors b { color: #ebe6dc; }
+html.dark-mode .pub-venue a {
+  color: inherit;
+  text-decoration-color: rgba(235, 230, 220, 0.3);
 }
-
-html.dark-mode .room-research.research {
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-deep-rgb), 0.08) 0%,
-      rgba(var(--accent-deep-rgb), 0.04) 100%),
-    rgba(124, 92, 196, 0.06);
-  border-color: rgba(var(--accent-deep-rgb), 0.16);
+html.dark-mode .pub-venue a.pub-venue-name { color: #d6d0c4; }
+html.dark-mode .pub-venue a:hover,
+html.dark-mode .pub-venue a:focus-visible {
+  color: var(--accent-primary);
+  background: none;
+  text-decoration-color: currentColor;
 }
-html.dark-mode .research-item {
-  background: transparent;
+html.dark-mode .pub-head-link:hover,
+html.dark-mode .pub-head-link:focus,
+html.dark-mode .research-item h3 a:focus,
+html.dark-mode .post h3 a:focus,
+html.dark-mode .pub-venue a:focus,
+html.dark-mode .pub-link:focus {
+  background: none;
 }
-html.dark-mode .research-item:hover {
-  background: rgba(223, 176, 194, 0.07);
-  box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.35),
-    0 1px 3px rgba(0, 0, 0, 0.25);
+html.dark-mode .pub-link:hover,
+html.dark-mode .pub-link:focus-visible {
+  color: #ffd9e5;
+  background: none;
 }
-html.dark-mode .research-item h3 { color: #c9b6ff; }
-html.dark-mode .research-item p { color: #c4beb3; }
-html.dark-mode .research-item p b,
-html.dark-mode .research-item p strong { color: #ebe6dc; }
-/* #0067cf clears only ~3.2:1 on the dark card (#1a1918); #9ec5ff reaches AA. */
-html.dark-mode .research-item p .paper-accolade { color: #9ec5ff; }
-html.dark-mode .research-item a:not(.paper-btn) { color: #ff9d9d; }
-html.dark-mode .research-item a:not(.paper-btn):hover,
-html.dark-mode .research-item a:not(.paper-btn):focus {
-  color: #ffc4c4;
-  background-color: rgba(var(--accent-red-rgb), 0.16);
-}
+html.dark-mode .paper-abstract-body p { color: #c4beb3; }
 
 html.dark-mode .paper-btn {
   background-color: #3a4f7a;
@@ -2177,32 +2152,6 @@ html.dark-mode .paper-btn:focus {
   background-color: #5078ad;
   color: #ffffff;
   box-shadow: 0 2px 6px rgba(80, 120, 173, 0.40);
-}
-
-html.dark-mode .paper-btn-abstract {
-  background: rgba(255, 255, 255, 0.025);
-  color: #c9b6ff;
-  border-color: rgba(201, 182, 255, 0.22);
-  text-shadow: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.30);
-}
-html.dark-mode .paper-btn-abstract:hover,
-html.dark-mode .paper-btn-abstract:focus {
-  background: rgba(201, 182, 255, 0.10);
-  color: #e0d6ff;
-  border-color: rgba(201, 182, 255, 0.38);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.42);
-}
-html.dark-mode .research-item.is-open .paper-btn-abstract {
-  background: rgba(201, 182, 255, 0.16);
-  color: #e0d6ff;
-  border-color: rgba(201, 182, 255, 0.42);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.28);
-}
-html.dark-mode .paper-abstract-body {
-  background: rgba(124, 92, 196, 0.12);
-  border-left-color: rgba(201, 182, 255, 0.28);
-  color: #ebe6dc;
 }
 
 html.dark-mode .footer,
@@ -2280,12 +2229,6 @@ html.dark-mode .cmdk-footer {
     margin: 10px;
     padding: 20px;
   }
-
-  /* Must match .room-research.research (0,2,0) below — a bare .research (0,1,0)
-     loses the cascade and the mobile padding never applies. */
-  .room-research.research {
-    padding: 1rem;
-  }
 }
 
 @media screen and (max-width: 640px) {
@@ -2337,23 +2280,32 @@ html.dark-mode .cmdk-footer {
     height: 16px;
   }
 
+  .sticky-nav-links { gap: 0; }
+  .sticky-nav-sep { display: none; }
+
   .sticky-nav-links a {
-    padding: 0.3rem 0.45rem;
+    padding: 0.3rem 0.25rem;
     font-size: 11.5px;
   }
 }
 
 @media screen and (max-width: 520px) {
+  /* Equal columns keep all three metrics inside the content panel. */
   .stats {
-    gap: 1.4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) 1px minmax(0, 1fr);
+    width: min(100%, 390px);
+    gap: clamp(0.25rem, 1.5vw, 0.6rem);
+    padding: 0.55rem clamp(0.6rem, 3vw, 1rem);
   }
 
-  .stat {
-    min-width: 4.5rem;
-  }
+  .stat { min-width: 0; }
 
-  .stat-number {
-    font-size: 2rem;
+  .stat-number { font-size: clamp(1.6rem, 6vw, 2rem); }
+
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.05em;
   }
 }
 
@@ -2394,6 +2346,8 @@ html.dark-mode .cmdk-footer {
   .stats,
   .room-news,
   .paper-links,
+  .pub-links,
+  .pub-head-link,
   .paper-abstract,
   .cmp-toggle,
   .cmp-noise,
@@ -2566,7 +2520,19 @@ html.dark-mode .cmdk-footer {
     color: #555 !important;
   }
 
-  .research-item {
+  /* Block (not flex) so the heading's rule spans the full width. */
+  .pub-head {
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  .pub-list,
+  .post-list {
+    display: block !important;
+  }
+
+  .research-item,
+  .post {
     page-break-inside: avoid;
     margin: 0 0 0.7rem !important;
     padding: 0 !important;
@@ -2574,9 +2540,13 @@ html.dark-mode .cmdk-footer {
     box-shadow: none !important;
     border: 0 !important;
   }
-  .research-item:last-child { margin-bottom: 0 !important; }
+  .research-item:last-child,
+  .post:last-child { margin-bottom: 0 !important; }
+  .research-item::before { display: none !important; }
+  .post-empty { display: none !important; }
 
-  .research-item h3 {
+  .research-item h3,
+  .post h3 {
     margin: 0 0 1pt !important;
     font-size: 10.5pt;
     font-weight: 600;
@@ -2584,41 +2554,46 @@ html.dark-mode .cmdk-footer {
     letter-spacing: -0.002em;
     color: #111 !important;
   }
-  .research-item p {
+  .research-item p,
+  .post p {
     margin: 0 !important;
     font-size: 9.5pt;
     line-height: 1.4;
     color: #2a2a2a !important;
   }
-  .research-item p:first-of-type {
+  .research-item .pub-flag {
+    margin: 0 0 1pt !important;
+    font-size: 8.5pt;
+    color: #555 !important;
+  }
+  .research-item .pub-flag span { color: inherit !important; }
+  .research-item .pub-authors {
     color: #1d1d1f !important;
   }
-
-  .research-item p + p {
-    font-style: italic;
+  .research-item .pub-venue {
     color: #6a6a6a !important;
     margin-top: 1pt !important;
   }
+  .research-item .pub-venue a.pub-venue-name { color: #3a3a3a !important; }
   .research-item p b,
   .research-item p strong {
-    font-style: normal;
     font-weight: 600;
     color: #111 !important;
   }
   .research-item a,
-  .research-item a:hover {
+  .research-item a:hover,
+  .post a,
+  .post a:hover {
     color: inherit !important;
     text-decoration: none !important;
     background: none !important;
   }
-
-  .award-ribbon {
-    display: inline-block;
-    margin-right: 0.3em !important;
+  .post .post-meta {
+    margin: 0 0 1pt !important;
+    font-size: 8.5pt;
     color: #555 !important;
-    top: 0 !important;
   }
-  .award-ribbon i { font-size: 0.85em; }
+  .post .post-tags { color: #6a6a6a !important; }
 
   .footer {
     margin: 1.4rem 0 0 !important;

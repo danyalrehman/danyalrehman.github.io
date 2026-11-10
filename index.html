@@ -98,7 +98,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.paper-btn[data-bib-key]').forEach((btn) => {
+      document.querySelectorAll('.pub-link[data-bib-key]').forEach((btn) => {
         btn.addEventListener('click', () => copyBib(btn.dataset.bibKey, btn));
       });
     });
@@ -443,245 +443,174 @@
     </div>
 
     <section class="research room room-research">
-      <h2>Featured Publications</h2>
-
-      <div class="research-item reveal">
-        <h3><span class="award-ribbon" title="ICML 2026 Spotlight — Top 2.2%" aria-label="ICML 2026 Spotlight — Top 2.2%"><i class="fas fa-award" aria-hidden="true"></i></span>Autoregressive Boltzmann Generators.</h3>
-        <p><b>Danyal Rehman</b>, Charlie B. Tan, Yoshua Bengio, Joey Bose, Alexander Tong.</p>
-        <p><a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML (2026)</a> <span class="paper-accolade">(<u>Spotlight - Top 2.2%</u>)</span>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Generative AI for Biomolecular Design Workshop (2026).</p>
-        <div class="paper-links">
-          <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
-          </button>
-          <a href="https://arxiv.org/abs/2606.27361" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
-          </a>
-          <button class="paper-btn" type="button" data-bib-key="rehman2026arbg">
-            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
-          </button>
-          <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="paper-btn">
-            <i class="fas fa-pen-nib" aria-hidden="true"></i> Blog
-          </a>
-          <a href="https://github.com/danyalrehman/AutoBG" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github" aria-hidden="true"></i> GitHub
-          </a>
-          <a href="https://arxiv.org/pdf/2606.27361" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
-          </a>
-        </div>
-        <div class="paper-abstract">
-          <div class="paper-abstract-inner">
-            <div class="paper-abstract-body">
-              <p>Efficient sampling of molecular systems at thermodynamic equilibrium is a hallmark challenge in statistical physics. This challenge has driven the development of Boltzmann Generators (BGs), which allow rapid generation of uncorrelated equilibrium samples by combining a generative model with exact likelihoods and an importance sampling correction. However, modern BGs predominantly rely on normalizing flows (NFs), which either suffer from limited expressivity due to strict invertibility constraints (discrete time) or computationally expensive likelihoods (continuous time). In this paper, we propose Autoregressive Boltzmann Generators (ArBG) &mdash; a novel autoregressive modelling framework &mdash; that overcomes these limitations by departing from the flow-based BG paradigm. ArBG circumvents the topological constraints of flows and enables sequential inference-time interventions, while offering enhanced scalability by leveraging architectures effective in Large Language Models. We empirically demonstrate that ArBG leads to significant improvements over flow-based models across all benchmarks, but particularly in larger peptide systems such as the 10-residue Chignolin. Furthermore, we introduce Robin, a 132 million parameter transferable model trained with the ArBG framework which improves over the previous state-of-the-art, reducing the zero-shot energy error, E-<em>&#x1D4B2;</em><sub>2</sub>, on 8-residue systems by over 60%.</p>
-            </div>
-          </div>
-        </div>
+      <div class="pub-head">
+        <h2>Featured Publications</h2>
+        <a class="pub-head-link" href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" title="Full list on Google Scholar">All publications<i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       </div>
 
-      <div class="research-item reveal">
-        <h3><span class="award-ribbon" title="ICLR 2026 Oral — Top 1.2%" aria-label="ICLR 2026 Oral — Top 1.2%"><i class="fas fa-award" aria-hidden="true"></i></span>FALCON: Few-step Accurate Likelihoods for Continuous Flows.</h3>
-        <p><b>Danyal Rehman</b>, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong.</p>
-        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a> <span class="paper-accolade">(<u>Oral - Top 1.2%</u>)</span>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
-        <div class="paper-links">
-          <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
-          </button>
-          <a href="https://arxiv.org/abs/2512.09914" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
-          </a>
-          <button class="paper-btn" type="button" data-bib-key="rehman2025falcon">
-            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
-          </button>
+      <ol class="pub-list">
+        <li class="research-item has-honor reveal">
+          <p class="pub-flag">
+            <span class="pub-flag-honor">Spotlight at ICML 2026</span>
+            <span class="pub-flag-note">Top 2.2% of submissions</span>
+          </p>
+          <h3><a href="https://arxiv.org/abs/2606.27361" target="_blank" rel="noopener noreferrer">Autoregressive Boltzmann Generators</a></h3>
+          <p class="pub-authors"><b>Danyal Rehman</b>, Charlie B. Tan, Yoshua Bengio, Joey Bose, Alexander Tong</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML (2026)</a>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Generative AI for Biomolecular Design Workshop (2026).</p>
+          <div class="pub-links">
+            <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-arbg">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+            <a class="pub-link" href="https://arxiv.org/abs/2606.27361" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <button class="pub-link" type="button" data-bib-key="rehman2026arbg" title="Copy BibTeX to clipboard">BibTeX</button>
+            <a class="pub-link" href="blogs/arbg/autoregressive_boltzmann_generators.html">Blog</a>
+            <a class="pub-link" href="https://github.com/danyalrehman/AutoBG" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="pub-link" href="https://arxiv.org/pdf/2606.27361" target="_blank" rel="noopener noreferrer">PDF</a>
+          </div>
+          <div class="paper-abstract" id="abstract-arbg">
+            <div class="paper-abstract-inner">
+              <div class="paper-abstract-body">
+                <p>Efficient sampling of molecular systems at thermodynamic equilibrium is a hallmark challenge in statistical physics. This challenge has driven the development of Boltzmann Generators (BGs), which allow rapid generation of uncorrelated equilibrium samples by combining a generative model with exact likelihoods and an importance sampling correction. However, modern BGs predominantly rely on normalizing flows (NFs), which either suffer from limited expressivity due to strict invertibility constraints (discrete time) or computationally expensive likelihoods (continuous time). In this paper, we propose Autoregressive Boltzmann Generators (ArBG) &mdash; a novel autoregressive modelling framework &mdash; that overcomes these limitations by departing from the flow-based BG paradigm. ArBG circumvents the topological constraints of flows and enables sequential inference-time interventions, while offering enhanced scalability by leveraging architectures effective in Large Language Models. We empirically demonstrate that ArBG leads to significant improvements over flow-based models across all benchmarks, but particularly in larger peptide systems such as the 10-residue Chignolin. Furthermore, we introduce Robin, a 132 million parameter transferable model trained with the ArBG framework which improves over the previous state-of-the-art, reducing the zero-shot energy error, E-<em>&#x1D4B2;</em><sub>2</sub>, on 8-residue systems by over 60%.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="research-item has-honor reveal">
+          <p class="pub-flag">
+            <span class="pub-flag-honor">Oral at ICLR 2026</span>
+            <span class="pub-flag-note">Top 1.2% of submissions</span>
+          </p>
+          <h3><a href="https://arxiv.org/abs/2512.09914" target="_blank" rel="noopener noreferrer">FALCON: Few-step Accurate Likelihoods for Continuous Flows</a></h3>
+          <p class="pub-authors"><b>Danyal Rehman</b>, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; Machine Learning for Structural Biology Workshop (2025).</p>
+          <div class="pub-links">
+            <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-falcon">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+            <a class="pub-link" href="https://arxiv.org/abs/2512.09914" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <button class="pub-link" type="button" data-bib-key="rehman2025falcon" title="Copy BibTeX to clipboard">BibTeX</button>
 <!-- FALCON blog link (hidden)
-          <a href="blogs/falcon/falcon.html" class="paper-btn">
-            <i class="fas fa-pen-nib"></i> Blog
-          </a>
+            <a class="pub-link" href="blogs/falcon/falcon.html">Blog</a>
 -->
-          <a href="https://arxiv.org/pdf/2512.09914" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
-          </a>
-        </div>
-        <div class="paper-abstract">
-          <div class="paper-abstract-inner">
-            <div class="paper-abstract-body">
-              <p>Scalable sampling of molecular states in thermodynamic equilibrium is a long-standing challenge in statistical physics. Boltzmann Generators tackle this problem by pairing a generative model, capable of exact likelihood computation, with importance sampling to obtain consistent samples under the target distribution. Current Boltzmann Generators primarily use continuous normalizing flows (CNFs) trained with flow matching for efficient training of powerful models. However, likelihood calculation for these models is extremely costly, requiring thousands of function evaluations per sample, severely limiting their adoption. In this work, we propose Few-step Accurate Likelihoods for Continuous Flows (FALCON), a method which allows for few-step sampling with a likelihood accurate enough for importance sampling applications by introducing a hybrid training objective that encourages invertibility. We show FALCON outperforms state-of-the-art normalizing flow models for molecular Boltzmann sampling and is two orders of magnitude faster than the equivalently performing CNF model.</p>
+            <a class="pub-link" href="https://arxiv.org/pdf/2512.09914" target="_blank" rel="noopener noreferrer">PDF</a>
+          </div>
+          <div class="paper-abstract" id="abstract-falcon">
+            <div class="paper-abstract-inner">
+              <div class="paper-abstract-body">
+                <p>Scalable sampling of molecular states in thermodynamic equilibrium is a long-standing challenge in statistical physics. Boltzmann Generators tackle this problem by pairing a generative model, capable of exact likelihood computation, with importance sampling to obtain consistent samples under the target distribution. Current Boltzmann Generators primarily use continuous normalizing flows (CNFs) trained with flow matching for efficient training of powerful models. However, likelihood calculation for these models is extremely costly, requiring thousands of function evaluations per sample, severely limiting their adoption. In this work, we propose Few-step Accurate Likelihoods for Continuous Flows (FALCON), a method which allows for few-step sampling with a likelihood accurate enough for importance sampling applications by introducing a hybrid training objective that encourages invertibility. We show FALCON outperforms state-of-the-art normalizing flow models for molecular Boltzmann sampling and is two orders of magnitude faster than the equivalently performing CNF model.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="research-item reveal">
-        <h3>Efficient Regression-based Training of Normalizing Flows for Boltzmann Generators.</h3>
-        <p><b>Danyal Rehman</b>, Oscar Davis, Jiarui Lu, Jian Tang, Michael Bronstein, Yoshua Bengio, Alexander Tong, Joey Bose.</p>
-        <p><a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Received the <span class="paper-accolade"><u>Best Paper Award</u></span> at <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
-        <div class="paper-links">
-          <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
-          </button>
-          <a href="https://arxiv.org/abs/2506.01158" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
-          </a>
-          <button class="paper-btn" type="button" data-bib-key="rehman2026regflow">
-            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
-          </button>
-          <a href="https://github.com/danyalrehman/regflow" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github" aria-hidden="true"></i> GitHub
-          </a>
-          <a href="https://arxiv.org/pdf/2506.01158" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
-          </a>
-        </div>
-        <div class="paper-abstract">
-          <div class="paper-abstract-inner">
-            <div class="paper-abstract-body">
-              <p>Simulation-free training frameworks have been at the forefront of the generative modelling revolution in continuous spaces, leading to large-scale diffusion and flow matching models. However, such modern generative models suffer from expensive inference, inhibiting their use in numerous scientific applications like Boltzmann Generators (BGs) for molecular conformations that require fast likelihood evaluation. In this paper, we revisit classical normalizing flows in the context of BGs that offer efficient sampling and likelihoods, but whose training via maximum likelihood is often unstable and computationally challenging. We propose Regression Training of Normalizing Flows (RegFlow), a novel and scalable regression-based training objective that bypasses the numerical instability and computational challenge of conventional maximum likelihood training in favour of a simple <em>&#x2113;</em><sub>2</sub>-regression objective. Specifically, RegFlow maps prior samples under our flow to targets computed using optimal transport couplings or a pre-trained continuous normalizing flow (CNF). To enhance numerical stability, RegFlow employs effective regularization strategies such as a new forward-backward self-consistency loss that enjoys painless implementation. Empirically, we demonstrate that RegFlow unlocks a broader class of architectures that were previously intractable to train for BGs with maximum likelihood. We also show RegFlow exceeds the performance, computational cost, and stability of maximum likelihood training in equilibrium sampling in Cartesian coordinates of alanine dipeptide, tripeptide, and tetrapeptide, showcasing its potential in molecular systems.</p>
+        <li class="research-item has-award reveal">
+          <p class="pub-flag">
+            <span class="pub-flag-award">Best Paper Award at ICML 2025 GenBio Workshop<i class="fas fa-trophy" aria-hidden="true"></i></span>
+            <span class="pub-flag-note">Top 3 of 145 papers</span>
+          </p>
+          <h3><a href="https://arxiv.org/abs/2506.01158" target="_blank" rel="noopener noreferrer">Efficient Regression-based Training of Normalizing Flows for Boltzmann Generators</a></h3>
+          <p class="pub-authors"><b>Danyal Rehman</b>, Oscar Davis, Jiarui Lu, Jian Tang, Michael Bronstein, Yoshua Bengio, Alexander Tong, Joey Bose</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR (2026)</a>. Also presented at <a href="https://icml.cc/" target="_blank" rel="noopener noreferrer">ICML</a> &ndash; Generative AI for Biology Workshop (2025).</p>
+          <div class="pub-links">
+            <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-regflow">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+            <a class="pub-link" href="https://arxiv.org/abs/2506.01158" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <button class="pub-link" type="button" data-bib-key="rehman2026regflow" title="Copy BibTeX to clipboard">BibTeX</button>
+            <a class="pub-link" href="https://github.com/danyalrehman/regflow" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="pub-link" href="https://arxiv.org/pdf/2506.01158" target="_blank" rel="noopener noreferrer">PDF</a>
+          </div>
+          <div class="paper-abstract" id="abstract-regflow">
+            <div class="paper-abstract-inner">
+              <div class="paper-abstract-body">
+                <p>Simulation-free training frameworks have been at the forefront of the generative modelling revolution in continuous spaces, leading to large-scale diffusion and flow matching models. However, such modern generative models suffer from expensive inference, inhibiting their use in numerous scientific applications like Boltzmann Generators (BGs) for molecular conformations that require fast likelihood evaluation. In this paper, we revisit classical normalizing flows in the context of BGs that offer efficient sampling and likelihoods, but whose training via maximum likelihood is often unstable and computationally challenging. We propose Regression Training of Normalizing Flows (RegFlow), a novel and scalable regression-based training objective that bypasses the numerical instability and computational challenge of conventional maximum likelihood training in favour of a simple <em>&#x2113;</em><sub>2</sub>-regression objective. Specifically, RegFlow maps prior samples under our flow to targets computed using optimal transport couplings or a pre-trained continuous normalizing flow (CNF). To enhance numerical stability, RegFlow employs effective regularization strategies such as a new forward-backward self-consistency loss that enjoys painless implementation. Empirically, we demonstrate that RegFlow unlocks a broader class of architectures that were previously intractable to train for BGs with maximum likelihood. We also show RegFlow exceeds the performance, computational cost, and stability of maximum likelihood training in equilibrium sampling in Cartesian coordinates of alanine dipeptide, tripeptide, and tetrapeptide, showcasing its potential in molecular systems.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="research-item reveal">
-        <h3>A Generative Deep Learning Approach to <i>De Novo</i> Antibiotic Design.</h3>
-        <p>Aarti Krishnan, Melis N. Anahtar, Jacqueline A. Valeri, ..., <b>Danyal Rehman</b>, ..., Felix Wong, James J. Collins.</p>
-        <p><a href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>.</p>
-        <div class="paper-links">
-          <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
-          </button>
-          <a href="https://doi.org/10.1016/j.cell.2025.07.033" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-alt" aria-hidden="true"></i> DOI
-          </a>
-          <button class="paper-btn" type="button" data-bib-key="krishnan2025antibiotics">
-            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
-          </button>
-          <a href="https://github.com/aartikrish/de-novo-antibiotics" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github" aria-hidden="true"></i> GitHub
-          </a>
-          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12790861/pdf/nihms-2127187.pdf" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
-          </a>
-        </div>
-        <div class="paper-abstract">
-          <div class="paper-abstract-inner">
-            <div class="paper-abstract-body">
-              <p>The antimicrobial resistance crisis necessitates structurally distinct antibiotics. While deep learning approaches can identify antibacterial compounds from existing libraries, structural novelty remains limited. Here, we developed a generative artificial intelligence framework for designing <i>de novo</i> antibiotics through two approaches: a fragment-based method to comprehensively screen &gt;10<sup>7</sup> chemical fragments <i>in silico</i> against <i>Neisseria gonorrhoeae</i> or <i>Staphylococcus aureus</i>, subsequently expanding promising fragments, and an unconstrained <i>de novo</i> compound generation, each using genetic algorithms and variational autoencoders. Of 24 synthesized compounds, seven demonstrated selective antibacterial activity. Two lead compounds exhibited bactericidal efficacy against multidrug-resistant isolates with distinct mechanisms of action and reduced bacterial burden <i>in vivo</i> in mouse models of <i>N. gonorrhoeae</i> vaginal infection and methicillin-resistant <i>S. aureus</i> skin infection. We further validated structural analogs for both compound classes as antibacterial. Our approach enables the generative deep-learning-guided design of <i>de novo</i> antibiotics, providing a platform for mapping uncharted regions of chemical space.</p>
+        <li class="research-item reveal">
+          <h3><a href="https://doi.org/10.1016/j.cell.2025.07.033" target="_blank" rel="noopener noreferrer">A Generative Deep Learning Approach to De Novo Antibiotic Design</a></h3>
+          <p class="pub-authors">Aarti Krishnan, Melis N. Anahtar, Jacqueline A. Valeri, &hellip;, <b>Danyal Rehman</b>, &hellip;, Felix Wong, James J. Collins</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>.</p>
+          <div class="pub-links">
+            <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-antibiotics">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+            <a class="pub-link" href="https://doi.org/10.1016/j.cell.2025.07.033" target="_blank" rel="noopener noreferrer">DOI</a>
+            <button class="pub-link" type="button" data-bib-key="krishnan2025antibiotics" title="Copy BibTeX to clipboard">BibTeX</button>
+            <a class="pub-link" href="https://github.com/aartikrish/de-novo-antibiotics" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="pub-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12790861/pdf/nihms-2127187.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+          </div>
+          <div class="paper-abstract" id="abstract-antibiotics">
+            <div class="paper-abstract-inner">
+              <div class="paper-abstract-body">
+                <p>The antimicrobial resistance crisis necessitates structurally distinct antibiotics. While deep learning approaches can identify antibacterial compounds from existing libraries, structural novelty remains limited. Here, we developed a generative artificial intelligence framework for designing <i>de novo</i> antibiotics through two approaches: a fragment-based method to comprehensively screen &gt;10<sup>7</sup> chemical fragments <i>in silico</i> against <i>Neisseria gonorrhoeae</i> or <i>Staphylococcus aureus</i>, subsequently expanding promising fragments, and an unconstrained <i>de novo</i> compound generation, each using genetic algorithms and variational autoencoders. Of 24 synthesized compounds, seven demonstrated selective antibacterial activity. Two lead compounds exhibited bactericidal efficacy against multidrug-resistant isolates with distinct mechanisms of action and reduced bacterial burden <i>in vivo</i> in mouse models of <i>N. gonorrhoeae</i> vaginal infection and methicillin-resistant <i>S. aureus</i> skin infection. We further validated structural analogs for both compound classes as antibacterial. Our approach enables the generative deep-learning-guided design of <i>de novo</i> antibiotics, providing a platform for mapping uncharted regions of chemical space.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="research-item reveal">
-        <h3>Physics-informed Deep Learning for Multi-species Membrane Transport.</h3>
-        <p><b>Danyal Rehman</b> and John H. Lienhard.</p>
-        <p><a href="https://www.sciencedirect.com/journal/chemical-engineering-journal" target="_blank" rel="noopener noreferrer">Chemical Engineering Journal (2024)</a>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Physics for Machine Learning Workshop (2023).</p>
-        <div class="paper-links">
-          <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
-          </button>
-          <a href="https://doi.org/10.1016/j.cej.2024.149806" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-alt" aria-hidden="true"></i> DOI
-          </a>
-          <button class="paper-btn" type="button" data-bib-key="rehman2024membrane">
-            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
-          </button>
-          <a href="https://dspace.mit.edu/handle/1721.1/155274" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
-          </a>
-        </div>
-        <div class="paper-abstract">
-          <div class="paper-abstract-inner">
-            <div class="paper-abstract-body">
-              <p>Conventional continuum models for ion transport across polyamide membranes require solving partial differential equations (PDEs). These models typically introduce a host of assumptions and simplifications to improve the computational tractability of existing solvers. As a consequence of these constraints, conventional models struggle to generalize predictive performance to new unseen conditions. Deep learning has recently shown promise in alleviating many of these concerns, making it a promising avenue for surrogate models that can replace conventional PDE-based approaches. In this work, we develop a physics-informed deep learning model to predict ion transport across diverse membrane types. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural methods are pre-trained on simulated data from continuum models and fine-tuned on independent experiments to learn multi-ionic rejection behaviour. We also harness the attention mechanism, commonly observed in language modelling, to learn and infer key paired transport relationships. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve robustness and generalization. We study the neural framework&rsquo;s performance relative to conventional PDE-based methods, and also compare the use of hard/soft inductive bias constraints on prediction accuracy. Lastly, we compare our approach to other competitive deep learning architectures and illustrate strong agreement with experimental measurements across all studied datasets.</p>
+        <li class="research-item reveal">
+          <h3><a href="https://doi.org/10.1016/j.cej.2024.149806" target="_blank" rel="noopener noreferrer">Physics-informed Deep Learning for Multi-species Membrane Transport</a></h3>
+          <p class="pub-authors"><b>Danyal Rehman</b> and John H. Lienhard</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://www.sciencedirect.com/journal/chemical-engineering-journal" target="_blank" rel="noopener noreferrer">Chemical Engineering Journal (2024)</a>. Also presented at <a href="https://iclr.cc/" target="_blank" rel="noopener noreferrer">ICLR</a> &ndash; Physics for Machine Learning Workshop (2023).</p>
+          <div class="pub-links">
+            <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-membrane">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+            <a class="pub-link" href="https://doi.org/10.1016/j.cej.2024.149806" target="_blank" rel="noopener noreferrer">DOI</a>
+            <button class="pub-link" type="button" data-bib-key="rehman2024membrane" title="Copy BibTeX to clipboard">BibTeX</button>
+            <a class="pub-link" href="https://dspace.mit.edu/handle/1721.1/155274" target="_blank" rel="noopener noreferrer">PDF</a>
+          </div>
+          <div class="paper-abstract" id="abstract-membrane">
+            <div class="paper-abstract-inner">
+              <div class="paper-abstract-body">
+                <p>Conventional continuum models for ion transport across polyamide membranes require solving partial differential equations (PDEs). These models typically introduce a host of assumptions and simplifications to improve the computational tractability of existing solvers. As a consequence of these constraints, conventional models struggle to generalize predictive performance to new unseen conditions. Deep learning has recently shown promise in alleviating many of these concerns, making it a promising avenue for surrogate models that can replace conventional PDE-based approaches. In this work, we develop a physics-informed deep learning model to predict ion transport across diverse membrane types. The proposed architecture leverages neural differential equations in conjunction with classical closure models as inductive biases directly encoded into the neural framework. The neural methods are pre-trained on simulated data from continuum models and fine-tuned on independent experiments to learn multi-ionic rejection behaviour. We also harness the attention mechanism, commonly observed in language modelling, to learn and infer key paired transport relationships. Gaussian noise augmentations from experimental uncertainty estimates are also introduced into the measured data to improve robustness and generalization. We study the neural framework&rsquo;s performance relative to conventional PDE-based methods, and also compare the use of hard/soft inductive bias constraints on prediction accuracy. Lastly, we compare our approach to other competitive deep learning architectures and illustrate strong agreement with experimental measurements across all studied datasets.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
 
-      <div class="research-item reveal">
-        <h3>Self-supervised Learning with Lie Symmetries for Partial Differential Equations.</h3>
-        <p>Gr&eacute;goire Mialon, Quentin Garrido, Hannah Lawrence, <b>Danyal Rehman</b>, Yann LeCun, Bobak T. Kiani.</p>
-        <p><a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023).</p>
-        <div class="paper-links">
-          <button class="paper-btn paper-btn-abstract" type="button" aria-expanded="false">
-            <i class="fas fa-chevron-down" aria-hidden="true"></i> Abstract
-          </button>
-          <a href="https://arxiv.org/abs/2307.05432" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt" aria-hidden="true"></i> arXiv
-          </a>
-          <button class="paper-btn" type="button" data-bib-key="mialon2023ssl">
-            <i class="fas fa-quote-right" aria-hidden="true"></i> Bib
-          </button>
-          <a href="https://github.com/facebookresearch/SSLForPDEs" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github" aria-hidden="true"></i> GitHub
-          </a>
-          <a href="https://arxiv.org/pdf/2307.05432" class="paper-btn" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
-          </a>
-        </div>
-        <div class="paper-abstract">
-          <div class="paper-abstract-inner">
-            <div class="paper-abstract-body">
-              <p>Machine learning for differential equations paves the way for computationally efficient alternatives to numerical solvers, with potentially broad impacts in science and engineering. Though current algorithms typically require simulated training data tailored to a given setting, one may instead wish to learn useful information from heterogeneous sources, or from real dynamical systems observations that are messy or incomplete. In this work, we learn general-purpose representations of PDEs from heterogeneous data by implementing joint embedding methods for self-supervised learning (SSL), a framework for unsupervised representation learning that has had notable success in computer vision. Our representation outperforms baseline approaches to invariant tasks, such as regressing the coefficients of a PDE, while also improving the time-stepping performance of neural solvers. We hope that our proposed methodology will prove useful in the eventual development of general-purpose foundation models for PDEs. Code: <a href="https://github.com/facebookresearch/SSLForPDEs" target="_blank" rel="noopener noreferrer">this https URL</a>.</p>
+        <li class="research-item reveal">
+          <h3><a href="https://arxiv.org/abs/2307.05432" target="_blank" rel="noopener noreferrer">Self-supervised Learning with Lie Symmetries for Partial Differential Equations</a></h3>
+          <p class="pub-authors">Gr&eacute;goire Mialon, Quentin Garrido, Hannah Lawrence, <b>Danyal Rehman</b>, Yann LeCun, Bobak T. Kiani</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023).</p>
+          <div class="pub-links">
+            <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-ssl-pde">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+            <a class="pub-link" href="https://arxiv.org/abs/2307.05432" target="_blank" rel="noopener noreferrer">arXiv</a>
+            <button class="pub-link" type="button" data-bib-key="mialon2023ssl" title="Copy BibTeX to clipboard">BibTeX</button>
+            <a class="pub-link" href="https://github.com/facebookresearch/SSLForPDEs" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="pub-link" href="https://arxiv.org/pdf/2307.05432" target="_blank" rel="noopener noreferrer">PDF</a>
+          </div>
+          <div class="paper-abstract" id="abstract-ssl-pde">
+            <div class="paper-abstract-inner">
+              <div class="paper-abstract-body">
+                <p>Machine learning for differential equations paves the way for computationally efficient alternatives to numerical solvers, with potentially broad impacts in science and engineering. Though current algorithms typically require simulated training data tailored to a given setting, one may instead wish to learn useful information from heterogeneous sources, or from real dynamical systems observations that are messy or incomplete. In this work, we learn general-purpose representations of PDEs from heterogeneous data by implementing joint embedding methods for self-supervised learning (SSL), a framework for unsupervised representation learning that has had notable success in computer vision. Our representation outperforms baseline approaches to invariant tasks, such as regressing the coefficients of a PDE, while also improving the time-stepping performance of neural solvers. We hope that our proposed methodology will prove useful in the eventual development of general-purpose foundation models for PDEs. Code: <a href="https://github.com/facebookresearch/SSLForPDEs" target="_blank" rel="noopener noreferrer">this https URL</a>.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ol>
     </section>
 
     <section id="blog" class="room room-blog reveal">
       <h2>Blog</h2>
-      <div class="blog-list">
-        <a href="blogs/arbg/autoregressive_boltzmann_generators.html" class="blog-card" data-fade-link>
-          <div class="blog-card-meta">
-            <span><i class="fas fa-calendar" aria-hidden="true"></i>June 25, 2026</span>
-            <span class="dot">&middot;</span>
-            <span><i class="fas fa-clock" aria-hidden="true"></i>~8 min read</span>
-            <span class="dot">&middot;</span>
-            <span><i class="fas fa-flask" aria-hidden="true"></i>ICML 2026</span>
+      <ol class="post-list">
+        <li class="post">
+          <p class="post-meta">June 25, 2026 <span aria-hidden="true">&middot;</span> ~8 min read <span aria-hidden="true">&middot;</span> ICML 2026</p>
+          <h3><a href="blogs/arbg/autoregressive_boltzmann_generators.html" data-fade-link>Autoregressive Boltzmann Generators</a></h3>
+          <p class="post-summary">Train a Boltzmann Generator the way you&rsquo;d train an LLM &mdash; coordinate by coordinate &mdash; and you inherit LLM-style scaling laws, exact likelihoods in a single forward pass, and a transferable model that beats molecular dynamics on inference efficiency.</p>
+          <p class="post-tags">Boltzmann Generators <span aria-hidden="true">&middot;</span> Autoregressive Models <span aria-hidden="true">&middot;</span> AI for Science</p>
+          <div class="pub-links">
+            <a class="pub-link pub-link-more" href="blogs/arbg/autoregressive_boltzmann_generators.html" data-fade-link>Read post<i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
-          <span class="blog-card-title">Autoregressive Boltzmann Generators</span>
-          <p class="blog-card-sub">
-            Train a Boltzmann Generator the way you&rsquo;d train an LLM &mdash;
-            coordinate by coordinate &mdash; and you inherit LLM-style scaling laws,
-            exact likelihoods in a single forward pass, and a transferable model that
-            beats molecular dynamics on inference efficiency.
-          </p>
-          <div class="blog-card-tags">
-            <span class="blog-card-tag">Boltzmann Generators</span>
-            <span class="blog-card-tag">Autoregressive Models</span>
-            <span class="blog-card-tag">AI for Science</span>
-          </div>
-          <i class="fas fa-arrow-right blog-card-arrow" aria-hidden="true"></i>
-        </a>
+        </li>
 
-<!-- FALCON blog card (hidden)
-        <a href="blogs/falcon/falcon.html" class="blog-card" data-fade-link>
-          <div class="blog-card-meta">
-            <span><i class="fas fa-calendar"></i>June 25, 2026</span>
-            <span class="dot">&middot;</span>
-            <span><i class="fas fa-clock"></i>~7 min read</span>
-            <span class="dot">&middot;</span>
-            <span><i class="fas fa-flask"></i>ICLR 2026</span>
+<!-- FALCON blog post (hidden)
+        <li class="post">
+          <p class="post-meta">June 25, 2026 <span aria-hidden="true">&middot;</span> ~7 min read <span aria-hidden="true">&middot;</span> ICLR 2026</p>
+          <h3><a href="blogs/falcon/falcon.html" data-fade-link>FALCON: Few-Step Accurate Likelihoods for Continuous Flows</a></h3>
+          <p class="post-summary">Continuous flows are easy to train but slow at inference. Few-step flow maps are fast at inference but lose exact likelihoods. FALCON achieves both objectives &mdash; making Boltzmann sampling two orders of magnitude faster than state-of-the-art CNFs.</p>
+          <p class="post-tags">Generative Models <span aria-hidden="true">&middot;</span> Flow Maps <span aria-hidden="true">&middot;</span> Exact Likelihoods <span aria-hidden="true">&middot;</span> AI for Science</p>
+          <div class="pub-links">
+            <a class="pub-link pub-link-more" href="blogs/falcon/falcon.html" data-fade-link>Read post<i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
-          <span class="blog-card-title">FALCON: Few-Step Accurate Likelihoods for Continuous Flows</span>
-          <p class="blog-card-sub">
-            Continuous flows are easy to train but slow at inference. Few-step
-            flow maps are fast at inference but lose exact likelihoods. FALCON achieves
-            both objectives &mdash; making Boltzmann sampling two orders of magnitude faster
-            than state-of-the-art CNFs.
-          </p>
-          <div class="blog-card-tags">
-            <span class="blog-card-tag">Generative Models</span>
-            <span class="blog-card-tag">Flow Maps</span>
-            <span class="blog-card-tag">Exact Likelihoods</span>
-            <span class="blog-card-tag">AI for Science</span>
-          </div>
-          <i class="fas fa-arrow-right blog-card-arrow" aria-hidden="true"></i>
-        </a>
+        </li>
 -->
-
-        <div class="blog-empty">More posts coming soon.</div>
-      </div>
+      </ol>
+      <p class="post-empty">More posts coming soon.</p>
     </section>
 
     <footer class="footer reveal">
@@ -736,7 +665,7 @@
 
   <script>
     (() => {
-      document.querySelectorAll('.paper-btn-abstract').forEach((btn) => {
+      document.querySelectorAll('.pub-link-abstract').forEach((btn) => {
         btn.addEventListener('click', () => {
           const item = btn.closest('.research-item');
           if (!item) return;
