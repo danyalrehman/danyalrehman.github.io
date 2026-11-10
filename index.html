@@ -126,7 +126,7 @@
   </script>
   <script>
     // Load-time portrait generation. HERO_GENERATION picks the effect:
-    //   'autoregressive' - the image is cut into a 16×16 grid of patch "tokens"
+    //   'autoregressive' - the image is cut into a 32×32 grid of patch "tokens"
     //                      emitted one at a time in raster order (~3.5 s), with
     //                      a cursor on the token being sampled.
     //   'diffusion'      - the image resolves out of per-frame noise (~4 s).
@@ -140,9 +140,10 @@
     (() => {
       const HERO_GENERATION = 'autoregressive';   // or 'diffusion'
 
-      const AR_COLS = 16;
-      const AR_ROWS = 16;              // 256 patch tokens
-      const AR_DURATION = 3500;        // ms from the first token to the last one settling
+      const AR_COLS = 32;
+      const AR_ROWS = 32;              // 1,024 patch tokens
+      const AR_DURATION = 3500;        // ms from the first token to the last one settling,
+                                       // whatever the grid size (the gap between tokens scales)
       const AR_SETTLE = 180;           // ms for one token to fade and grow into place
       const DIFFUSION_DURATION = 4000;
       const MAX_DT = 50;               // per-frame cap: a backgrounded tab resumes, not skips
@@ -573,7 +574,7 @@
       <ol class="pub-list">
         <li class="research-item has-honor reveal">
           <p class="pub-flag">
-            <span class="pub-flag-honor">Spotlight at ICML 2026</span>
+            <span class="pub-flag-honor"><i class="fas fa-award" aria-hidden="true"></i>Spotlight at ICML 2026</span>
             <span class="pub-flag-note">Top 2.2% of submissions</span>
           </p>
           <h3><a href="https://arxiv.org/abs/2606.27361" target="_blank" rel="noopener noreferrer">Autoregressive Boltzmann Generators</a></h3>
@@ -598,7 +599,7 @@
 
         <li class="research-item has-honor reveal">
           <p class="pub-flag">
-            <span class="pub-flag-honor">Oral at ICLR 2026</span>
+            <span class="pub-flag-honor"><i class="fas fa-award" aria-hidden="true"></i>Oral at ICLR 2026</span>
             <span class="pub-flag-note">Top 1.2% of submissions</span>
           </p>
           <h3><a href="https://arxiv.org/abs/2512.09914" target="_blank" rel="noopener noreferrer">FALCON: Few-step Accurate Likelihoods for Continuous Flows</a></h3>
@@ -624,7 +625,7 @@
 
         <li class="research-item has-award reveal">
           <p class="pub-flag">
-            <span class="pub-flag-award">Best Paper Award at ICML 2025 GenBio Workshop<i class="fas fa-trophy" aria-hidden="true"></i></span>
+            <span class="pub-flag-award"><i class="fas fa-trophy" aria-hidden="true"></i>Best Paper Award at ICML 2025 GenBio Workshop</span>
             <span class="pub-flag-note">Top 3 of 145 papers</span>
           </p>
           <h3><a href="https://arxiv.org/abs/2506.01158" target="_blank" rel="noopener noreferrer">Efficient Regression-based Training of Normalizing Flows for Boltzmann Generators</a></h3>
