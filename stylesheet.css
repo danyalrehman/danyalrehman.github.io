@@ -1386,6 +1386,10 @@ body.is-leaving { opacity: 0; transition: opacity 0.32s ease; }
     transparent);
 }
 
+/* On the homepage the divider follows the blog's "More posts coming soon"
+   note, which needs a little less room above it than the blog posts' footers. */
+.room-blog + .footer .footer-divider { margin-top: 1.25rem; }
+
 html.dark-mode .footer-divider {
   background: linear-gradient(to right,
     transparent,
