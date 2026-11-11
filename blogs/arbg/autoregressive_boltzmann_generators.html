@@ -52,7 +52,6 @@
     }
     .hero-video .video-frame {
       position: relative;
-      width: 100%;
       aspect-ratio: 16 / 9;
       background: #ffffff;
       display: flex;
@@ -63,8 +62,6 @@
     .hero-video .video-frame video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      display: block;
     }
     html.dark-mode .hero-video {
       background: #14171f;
@@ -102,7 +99,6 @@
       border-top: 1px solid rgba(var(--accent-deep-rgb), 0.08);
       line-height: 1.55;
     }
-    .hero-video figcaption b { color: var(--accent-deep); }
     html.dark-mode .hero-video figcaption {
       color: #b8b8b8;
       background: rgba(255, 255, 255, 0.04);
@@ -110,7 +106,6 @@
     }
 
     .hero-figure-arbg {
-      max-width: none;
       margin: 1.4rem 0;
       background: #ffffff;
       border: 1px solid rgba(var(--accent-primary-rgb), 0.18);
@@ -120,13 +115,11 @@
     }
     .hero-figure-arbg .svg-frame {
       position: relative;
-      width: 100%;
       background: #ffffff;
     }
     .hero-figure-arbg .svg-frame svg {
       display: block;
       width: 100%;
-      height: auto;
     }
     .hero-figure-arbg figcaption {
       font-size: 12.5px;
@@ -136,7 +129,6 @@
       border-top: 1px solid rgba(var(--accent-deep-rgb), 0.08);
       line-height: 1.55;
     }
-    .hero-figure-arbg figcaption b { color: var(--accent-deep); }
 
     .hero-figure-arbg .hero-play-btn {
       position: absolute;
@@ -204,16 +196,15 @@
     #arch-diagram .fig-frame { padding: 1.1rem 1.1rem 0.8rem; position: relative; }
 
     .arch-svg {
-      display: block; width: 100%; height: auto;
+      display: block; width: 100%;
       font-family: 'Source Sans 3', 'Inter', system-ui, sans-serif;
       color: #20242e;
     }
     .arch-svg text { fill: currentColor; }
     .arch-label    { font-size: 13px; font-weight: 600; letter-spacing: -0.005em; }
-    .arch-label-sm { font-size: 11px; font-weight: 600; letter-spacing: -0.003em; }
-    .arch-add-sm   { font-size: 13px; }
-    .arch-section  { font-size: 13px; font-weight: 600; letter-spacing: -0.003em; fill: #20242e; }
-    .arch-caption { font-size: 11px; fill: #5b6276; }
+    .arch-label-sm { font-size: 11px; letter-spacing: -0.003em; }
+    .arch-section  { font-size: 13px; font-weight: 600; letter-spacing: -0.003em; }
+    .arch-caption { font-size: 11px; }
     .arch-block { cursor: pointer; }
     .arch-block .arch-shape {
       stroke: #1f222b; stroke-width: 1.6;
@@ -243,8 +234,8 @@
     .arch-fill-block-outer{ fill: #d7d9dc; }
     .arch-fill-add        { fill: #c46868; }
     .arch-cond-circle     { fill: #ad55b6; }
-    .arch-cond-text       { fill: #ffffff; font-size: 11px; font-weight: 700; }
-    .arch-add-glyph       { fill: #ffffff; font-size: 14px; font-weight: 700; }
+    .arch-cond-text       { font-size: 11px; font-weight: 700; }
+    .arch-add-glyph       { font-size: 14px; font-weight: 700; }
 
     .arch-connector    { stroke: #1f222b; stroke-width: 1.6; fill: none; }
     .arch-residual     { stroke: #1f222b; stroke-width: 1.6; fill: none; }
@@ -265,7 +256,6 @@
     .arch-tip b { color: #ffffff; font-weight: 600; }
 
     html.dark-mode .arch-svg { color: #e7ecf5; }
-    html.dark-mode .arch-section { fill: #e7ecf5; }
     html.dark-mode .arch-caption { fill: #98a3b5; }
     html.dark-mode .arch-block .arch-shape,
     html.dark-mode .arch-connector,
@@ -292,7 +282,7 @@
       gap: 12px; padding: 0 0 12px; flex-wrap: wrap;
     }
     .table-head .table-toggle { padding: 0; }
-    .table-toggle { display: flex; gap: 20px; padding: 0 0 12px; }
+    .table-toggle { display: flex; gap: 20px; }
     .table-toggle button {
       font: inherit;
       font-size: 11.5px;
@@ -331,9 +321,6 @@
       border-bottom: 2px solid rgba(var(--accent-deep-rgb), 0.82);
     }
     .data-table th, .data-table td { padding: 6px 8px; text-align: center; white-space: nowrap; }
-
-    .data-table thead { background: none; }
-    .data-table thead th { background: none; font-weight: 600; }
 
     .data-table thead tr:first-child th:not(:first-child) {
       font-size: 12px;
@@ -392,12 +379,10 @@
       padding: 0.6rem 0 0;
       line-height: 1.55;
     }
-    .table-card figcaption b { color: var(--accent-deep); }
     html.dark-mode .data-table {
       border-top-color: rgba(255, 255, 255, 0.72);
       border-bottom-color: rgba(255, 255, 255, 0.72);
     }
-    html.dark-mode .data-table thead { background: none; }
     html.dark-mode .data-table thead tr:first-child th:not(:first-child) { color: #d6dde9; border-bottom-color: rgba(255, 255, 255, 0.30); }
     html.dark-mode .data-table thead tr:last-child th,
     html.dark-mode .data-table thead th:first-child { border-bottom-color: rgba(255, 255, 255, 0.30); }
@@ -440,16 +425,10 @@
       box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
     }
     html.dark-mode .fig .fig-frame { background: transparent; }
-    html.dark-mode .fig figcaption {
-      background: rgba(255, 255, 255, 0.04);
-      color: #b8b8b8;
-      border-color: rgba(255, 255, 255, 0.06);
-    }
 
-    .blog-title { font-size: 42px; line-height: 1.06; letter-spacing: -0.018em; margin: 0.2rem 0 0.55rem; }
+    .blog-title { font-size: 42px; line-height: 1.06; letter-spacing: -0.018em; }
 
     .blog-divider {
-      height: 1px;
       background: linear-gradient(to right,
         transparent,
         rgba(var(--accent-deep-rgb), 0.22) 14%,
@@ -467,34 +446,18 @@
 
     .blog-body h2 {
       font-size: 24px;
-      font-weight: 600;
       letter-spacing: -0.014em;
-      color: var(--accent-deep);
       margin: 2.9rem 0 0.35rem;
     }
     .blog-body h3 {
       font-size: 16.5px;
-      font-weight: 600;
       letter-spacing: -0.006em;
-      color: var(--accent-deep);
       margin: 1.85rem 0 0.28rem;
     }
 
     .blog-body h2 + h3 { margin-top: 0.65rem; }
     html.dark-mode .blog-body h2,
     html.dark-mode .blog-body h3 { color: #cbd9f2; }
-
-    .blog-body p { margin: 0 0 0.85rem; }
-
-    .blog-body a {
-      color: var(--accent-primary);
-      text-decoration: underline;
-      text-decoration-color: rgba(var(--accent-primary-rgb), 0.35);
-      text-underline-offset: 2.5px;
-      transition: text-decoration-color 0.15s ease, color 0.15s ease;
-    }
-    .blog-body a:hover { text-decoration-color: var(--accent-primary); }
-    html.dark-mode .blog-body a { color: #9db8ff; }
 
     .blog-body ul { line-height: 1.5; padding-left: 1.2rem; margin: 0 0 0.85rem; }
     .blog-body ul li { margin: 0.42rem 0; padding-left: 0.2rem; }
@@ -503,7 +466,7 @@
     .blog-eq { margin: 1.2rem auto; }
 
     .paper-hero { margin: 0.2rem 0 0; }
-    .paper-hero .blog-title { text-align: left; margin: 0.55rem 0 0.95rem; }
+    .paper-hero .blog-title { margin: 0.55rem 0 0.95rem; }
 
     .paper-hero .gh-badge { margin: 0.1rem 0 0.3rem; }
 
@@ -568,7 +531,6 @@
       text-align: center;
       color: var(--accent-deep);
       margin: 0.4rem auto 1.2rem;
-      max-width: none;
     }
     html.dark-mode .blog-body p.blog-lede { color: #cbd9f2; }
     html.dark-mode .paper-authors  { color: #c9cfda; }
@@ -586,8 +548,6 @@
     .table-card figcaption b { letter-spacing: 0.01em; }
 
     ::selection { background: rgba(var(--accent-primary-rgb), 0.20); }
-
-    #fig-scaling { background: #ffffff; }
     #fig-scaling .chart-frame { background: transparent; padding: 0.95rem 1.05rem 0.75rem; }
     .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
     @media (max-width: 680px) { .chart-grid { grid-template-columns: 1fr; gap: 1.6rem; } }
@@ -606,11 +566,11 @@
     }
     .chart-toggle button:hover { color: var(--accent-primary); }
     .chart-toggle button.is-active { background: rgba(var(--accent-primary-rgb), 0.12); color: var(--accent-primary); }
-    .chart-svg { display: block; width: 100%; height: auto; color: #5b6573; --mk: #ffffff; overflow: visible; font-family: 'Source Sans 3', sans-serif; }
+    .chart-svg { display: block; width: 100%; color: #5b6573; --mk: #ffffff; overflow: visible; font-family: 'Source Sans 3', sans-serif; }
     .chart-svg text { fill: currentColor; }
     .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem 0.9rem; font-size: 11px; color: #6b7280; margin: 0.4rem 0 0; }
     .chart-legend span { display: inline-flex; align-items: center; gap: 0.32rem; }
-    .chart-legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+    .chart-legend i { width: 14px; height: 3px; border-radius: 2px; }
     .chart-tip {
       position: absolute; pointer-events: none; opacity: 0;
       transition: opacity 0.1s ease; z-index: 5;
@@ -644,7 +604,7 @@
 
     #fig-rama .rama-frame { position: relative; padding: 0.95rem 1.05rem 0.85rem; }
     .rama-scroll { overflow-x: auto; }
-    .rama-body { display: flex; gap: 12px; align-items: center; min-width: 0; }
+    .rama-body { display: flex; gap: 12px; align-items: center; }
     .rama-grid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
 
     .rama-row { display: grid; grid-template-columns: 15px 1fr; grid-template-rows: 1fr 14px; column-gap: 6px; align-items: stretch; }
@@ -653,7 +613,7 @@
     .rama-head { grid-template-rows: auto; }
     .rama-head > .rama-cells { grid-row: 1; }
     .rama-rlab {
-      width: 15px; display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       writing-mode: vertical-rl; transform: rotate(180deg);
       font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
       color: #6b7280; white-space: nowrap;
@@ -675,7 +635,6 @@
       width: 100%; aspect-ratio: 1 / 1; display: block;
       image-rendering: pixelated;
       border: 1px solid rgba(var(--accent-deep-rgb), 0.22); border-radius: 3px;
-      background: transparent;
     }
     .rama-xax {
       grid-column: 2; display: flex; justify-content: space-between;
@@ -686,7 +645,7 @@
 
     .rama-res { font-size: 11px; font-weight: 600; text-align: center; color: var(--accent-deep); padding-left: 16px; }
     .rama-cbar { flex: 0 0 auto; align-self: center; display: flex; color: #6b7280; }
-    .rama-cbar svg { width: 12px; height: auto; display: block; }
+    .rama-cbar svg { width: 12px; }
     html.dark-mode #fig-rama .rama-res { color: #cbd9f2; }
     html.dark-mode #fig-rama .rama-rlab,
     html.dark-mode #fig-rama .rama-yax,
@@ -735,7 +694,6 @@
     .eg-legend i {
       width: 9px; height: 9px;
       border-radius: 50%;
-      display: inline-block;
       box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.12);
       transition: box-shadow 0.18s ease, opacity 0.18s ease;
     }
@@ -762,7 +720,7 @@
       gap: 8px; min-width: 760px;
     }
     .eg-cell { min-width: 0; }
-    .eg-cell svg { display: block; width: 100%; height: auto; overflow: visible; font-family: 'Source Sans 3', system-ui, sans-serif; }
+    .eg-cell svg { display: block; width: 100%; overflow: visible; font-family: 'Source Sans 3', system-ui, sans-serif; }
     .eg-cell svg text { fill: currentColor; }
     /* Importance sampling primer demo */
     #fig-is .is-frame { position: relative; padding: 0.95rem 1.05rem 0.85rem; color: #5b6573; }
@@ -773,22 +731,22 @@
     .is-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
     .is-btn i { font-size: 9.5px; }
     .is-controls #is-resample { margin-left: auto; }
-    .is-svg { display: block; width: 100%; height: auto; color: #5b6573; overflow: visible; }
+    .is-svg { display: block; width: 100%; color: #5b6573; overflow: visible; }
     .is-svg text { fill: currentColor; font-family: 'Source Sans 3', sans-serif; }
     .is-plot { position: relative; }
     .is-eq {
       position: absolute; top: 4px; left: 8px;
-      font-size: 11.5px; color: #5b6573; pointer-events: none; line-height: 1;
+      font-size: 11.5px; pointer-events: none; line-height: 1;
       background: rgba(255, 255, 255, 0.72);
       padding: 2px 6px; border-radius: 5px;
     }
     html.dark-mode .is-eq { color: #9aa3b5; background: rgba(20, 23, 31, 0.72); }
     .is-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 1.15rem; font-size: 11px; color: #6b7280; margin: 0.35rem 0 0; }
     .is-legend > span { display: inline-flex; align-items: center; gap: 0.32rem; }
-    .is-legend .sw-line { display: inline-block; width: 16px; height: 2px; border-radius: 1px; }
-    .is-legend .sw-bar { display: inline-block; width: 14px; height: 8px; border-radius: 1px; }
+    .is-legend .sw-line { width: 16px; height: 2px; border-radius: 1px; }
+    .is-legend .sw-bar { width: 14px; height: 8px; border-radius: 1px; }
     .is-legend .is-ess { margin-left: auto; font-variant-numeric: tabular-nums; }
-    .is-legend .is-ess b { color: var(--accent-deep); font-weight: 700; }
+    .is-legend .is-ess b { font-weight: 700; }
     html.dark-mode #fig-is .is-frame { color: #9aa3b5; }
     html.dark-mode .is-controls, html.dark-mode .is-legend { color: #9aa3b3; }
     html.dark-mode .is-controls label { color: #98a3b5; }
@@ -798,7 +756,7 @@
 
     #fig-tica .tica-frame { position: relative; padding: 0.95rem 1.05rem 0.85rem; }
     .tica-scroll { overflow-x: auto; }
-    .tica-body { display: flex; gap: 12px; align-items: center; min-width: 0; }
+    .tica-body { display: flex; gap: 12px; align-items: center; }
     .tica-grid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
     .tica-row { display: grid; grid-template-columns: 15px 1fr; grid-template-rows: 1fr 14px; column-gap: 6px; align-items: stretch; }
     .tica-row > .tica-rlab { grid-column: 1; grid-row: 1; }
@@ -806,7 +764,7 @@
     .tica-head { grid-template-rows: auto; }
     .tica-head > .tica-cells { grid-row: 1; }
     .tica-rlab {
-      width: 15px; display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       writing-mode: vertical-rl; transform: rotate(180deg);
       font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
       color: #6b7280; white-space: nowrap;
@@ -827,7 +785,6 @@
       width: 100%; aspect-ratio: 1 / 1; display: block;
       image-rendering: pixelated;
       border: 1px solid rgba(var(--accent-deep-rgb), 0.22); border-radius: 3px;
-      background: transparent;
     }
     .tica-xax {
       grid-column: 2; display: flex; justify-content: space-between;
@@ -837,7 +794,7 @@
     .tica-head .tica-cells { align-items: end; }
     .tica-seq { font-size: 11px; font-weight: 600; text-align: center; color: var(--accent-deep); padding-left: 24px; }
     .tica-cbar { flex: 0 0 auto; align-self: center; display: flex; color: #6b7280; }
-    .tica-cbar svg { width: 12px; height: auto; display: block; }
+    .tica-cbar svg { width: 12px; }
     html.dark-mode #fig-tica .tica-seq { color: #cbd9f2; }
     html.dark-mode #fig-tica .tica-rlab,
     html.dark-mode #fig-tica .tica-yax,
@@ -864,7 +821,7 @@
         <img class="sticky-nav-favicon" src="../../img/favicon.png" alt="">
         <span class="sticky-nav-name-text">Danyal Rehman</span>
       </a>
-      <nav class="sticky-nav-links">
+      <nav class="sticky-nav-links" aria-label="Site sections">
         <a href="../../" data-fade-link>About</a>
         <a href="../../#news" data-fade-link>News</a>
         <a href="../../#publications" data-fade-link>Publications</a>
@@ -875,27 +832,29 @@
               <span class="nav-blog-item-title">Autoregressive Boltzmann Generators</span>
               <span class="nav-blog-item-meta">ICML 2026 Spotlight &middot; Seoul, Korea</span>
             </a>
-<!-- FALCON blog (hidden)
-            <a href="../falcon/falcon.html" class="nav-blog-item" role="menuitem" data-fade-link>
+            <!-- FALCON blog (hidden until the post is published)
+            <a href="../falcon/falcon.html" class="nav-blog-item" data-fade-link>
               <span class="nav-blog-item-title">FALCON: Few-step Accurate Likelihood Flows</span>
               <span class="nav-blog-item-meta">ICLR 2026 Oral &middot; Rio de Janeiro, Brazil</span>
             </a>
--->
+            -->
           </div>
         </div>
         <span class="sticky-nav-sep" aria-hidden="true"></span>
-        <button class="nav-icon-btn" id="cmdk-open" aria-label="Open command palette" title="Search (⌘K)">
+        <button type="button" class="nav-icon-btn" id="cmdk-open" aria-label="Open command palette" title="Search (⌘K)">
           <i class="fas fa-search" aria-hidden="true"></i>
         </button>
-        <button class="nav-icon-btn" id="bg-toggle" aria-label="Toggle background image" title="Toggle background image">
+        <button type="button" class="nav-icon-btn" id="bg-toggle" aria-label="Toggle background image" title="Toggle background image">
           <i class="fas fa-image" aria-hidden="true"></i>
         </button>
-        <button class="nav-icon-btn" id="dark-toggle" aria-label="Cool down to dark mode" title="Cool down">
+        <button type="button" class="nav-icon-btn" id="dark-toggle" aria-label="Cool down to dark mode" title="Cool down">
           <i class="fas fa-snowflake" aria-hidden="true"></i>
         </button>
       </nav>
     </div>
   </header>
+
+  <script src="../../site.js"></script>
 
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
@@ -956,7 +915,7 @@
         </figcaption>
       </figure>
 
-      <aside class="callout" id="tldr">
+      <aside class="callout" id="tldr" aria-label="TL;DR">
         <p>
           <span class="callout-title">TL;DR.</span>&ensp;We introduce <em>Autoregressive Boltzmann Generators</em> (ArBG), a training framework that factors the joint
           distribution over Cartesian coordinates and gives exact likelihoods in a single forward pass. The loss scales
@@ -1158,7 +1117,7 @@
           a.remove(); URL.revokeObjectURL(a.href);
         });
       })();
-</script>
+      </script>
 
       <h2 id="primer">Primer</h2>
       <p>
@@ -1751,7 +1710,7 @@
         have already absorbed into $\mathcal{E}$):
       </p>
       <ul>
-        <li><em>Temperature scaling.</em> Logits are divided by $\tau > 0$ before the softmax, which controls sample diversity. For transferable generation, we tune $\tau$ to optimize performance, and use $\tau = 0.95$ for all studies conducted.</li>
+        <li><em>Temperature scaling.</em> Logits are divided by $\tau &gt; 0$ before the softmax, which controls sample diversity. For transferable generation, we tune $\tau$ to optimize performance, and use $\tau = 0.95$ for all studies conducted.</li>
         <li><em>KV-caching.</em> The attention keys and values computed for the prefix are stored and reused, so generating each new coordinate is a single-token append rather than a full re-encode. </li>
         <li><em>Twisted SMC.</em> SMC maintains a population of partial generations and resamples at residue boundaries using <em>twist functions</em>: scalar approximations of the future likelihood under the target, computed from the partial energy of the residues generated so far. Implausible substructures (e.g., steric clashes) are filtered out before they propagate. Autoregressive sampling is well-suited to this, since intermediate prefixes can be scored before the rest of the conformation is generated.</li>
       </ul>
@@ -1827,21 +1786,21 @@ ArBG (ours)
           <table class="data-table">
             <thead>
               <tr>
-                <th rowspan="2" class="col-sortable" data-col="0" data-type="text" aria-sort="none">Algorithm <span class="caret">&#8597;</span></th>
-                <th colspan="2">Tri-alanine</th>
-                <th colspan="2">Tetrapeptide</th>
-                <th colspan="2">Hexa-alanine</th>
-                <th colspan="2">Chignolin</th>
+                <th scope="col" rowspan="2" class="col-sortable" data-col="0" data-type="text" aria-sort="none">Algorithm <span class="caret">&#8597;</span></th>
+                <th scope="colgroup" colspan="2">Tri-alanine</th>
+                <th scope="colgroup" colspan="2">Tetrapeptide</th>
+                <th scope="colgroup" colspan="2">Hexa-alanine</th>
+                <th scope="colgroup" colspan="2">Chignolin</th>
               </tr>
               <tr>
-                <th class="col-sortable" data-col="1" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="2" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="3" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="4" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="5" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="6" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="7" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="8" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="1" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="2" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="3" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="4" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="5" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="6" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="7" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="8" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
               </tr>
             </thead>
             <tbody>
@@ -2005,7 +1964,7 @@ ArBG (ours)
           return v.toExponential(0);
         }
 
-        function panel(s, isFirst, isLast) {
+        function panel(s, isFirst) {
           const wrap = document.createElement('div');
           wrap.className = 'eg-cell';
           const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -2059,7 +2018,7 @@ ArBG (ours)
 
             let op = 'M' + X(xmin).toFixed(1) + ' ' + Y(Math.min(d[0], ymax)).toFixed(1);
             for (let i = 0; i < NB; i++) {
-              const xL = X(xmin + i * bw), xR = X(xmin + (i + 1) * bw),
+              const xR = X(xmin + (i + 1) * bw),
                     yT = Y(Math.min(d[i], ymax)),
                     yN = i + 1 < NB ? Y(Math.min(d[i + 1], ymax)) : yT;
               op += ' L' + xR.toFixed(1) + ' ' + yT.toFixed(1);
@@ -2109,7 +2068,7 @@ ArBG (ours)
         }
 
         const grid = root.querySelector('.eg-grid');
-        D.systems.forEach((s, i) => grid.appendChild(panel(s, i === 0, i === D.systems.length - 1)));
+        D.systems.forEach((s, i) => grid.appendChild(panel(s, i === 0)));
 
         const legend = root.querySelector('.eg-legend');
         legend.innerHTML = SER.map(k =>
@@ -2127,7 +2086,7 @@ ArBG (ours)
           });
         });
       })();
-</script>
+      </script>
 
       <p>
         Agreement on the energy is a local consistency check; a more demanding question is whether the sampler actually
@@ -2272,7 +2231,7 @@ ArBG (ours)
           ' Z" fill="url(#rcg)" stroke="none"/>' +
           '</svg>';
       })();
-</script>
+      </script>
 
       <h3 id="robin-transferable">Transferable generation</h3>
       <p>
@@ -2328,17 +2287,17 @@ ArBG (ours)
           <table class="data-table">
             <thead>
               <tr>
-                <th rowspan="2" class="col-sortable" data-col="0" data-type="text" aria-sort="none">Model <span class="caret">&#8597;</span></th>
-                <th colspan="3">4-residue (30 systems)</th>
-                <th colspan="3">8-residue (30 systems)</th>
+                <th scope="col" rowspan="2" class="col-sortable" data-col="0" data-type="text" aria-sort="none">Model <span class="caret">&#8597;</span></th>
+                <th scope="colgroup" colspan="3">4-residue (30 systems)</th>
+                <th scope="colgroup" colspan="3">8-residue (30 systems)</th>
               </tr>
               <tr>
-                <th class="col-sortable" data-col="1" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="2" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="3" data-type="num" aria-sort="none">$\mathrm{TICA}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="4" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="5" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
-                <th class="col-sortable" data-col="6" data-type="num" aria-sort="none">$\mathrm{TICA}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="1" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="2" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="3" data-type="num" aria-sort="none">$\mathrm{TICA}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="4" data-type="num" aria-sort="none">$\mathcal{E}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="5" data-type="num" aria-sort="none">$\mathbb{T}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
+                <th scope="col" class="col-sortable" data-col="6" data-type="num" aria-sort="none">$\mathrm{TICA}\text{-}\mathcal{W}_2$ <span class="caret">&#8597;</span></th>
               </tr>
             </thead>
             <tbody data-budget="b1">
@@ -2551,7 +2510,7 @@ ArBG (ours)
           '<path d="M0 ' + (CCAP + CBAR) + ' L' + CW + ' ' + (CCAP + CBAR) + ' L' + (CW / 2) + ' ' + CH + ' Z" fill="url(#tcg)" stroke="none"/>' +
           '</svg>';
       })();
-</script>
+      </script>
 
       <h2 id="references">References</h2>
       <ol class="ref-list ref-card">
@@ -2661,7 +2620,7 @@ ArBG (ours)
         tryPlay();
       });
     })();
-</script>
+  </script>
 
   <script>
     (() => {
@@ -2683,7 +2642,7 @@ ArBG (ours)
         });
       });
     })();
-</script>
+  </script>
 
   <script>
     (() => {
@@ -2774,7 +2733,7 @@ ArBG (ours)
         });
       });
     })();
-</script>
+  </script>
 
   <script type="application/json" id="cmdk-data">
   [
@@ -2808,7 +2767,6 @@ ArBG (ours)
   ]
   </script>
   <script src="../../cmdk.js"></script>
-
 
 </body>
 </html>

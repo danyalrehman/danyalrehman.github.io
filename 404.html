@@ -18,12 +18,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900&amp;display=swap" rel="stylesheet">
 
   <script>
-    // Respect the saved / OS theme before paint (storage can throw when blocked).
-    try {
-      var t = localStorage.getItem('dark-mode');
-      var d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (t === 'on' || (t === null && d)) document.documentElement.classList.add('dark-mode');
-    } catch (e) { /* storage unavailable — fall back to the light theme */ }
+    // Respect the saved theme, or the OS setting, before paint — as the rest of
+    // the site does. Storage throws (rather than returning null) when blocked.
+    (() => {
+      let storedTheme = null;
+      try {
+        storedTheme = localStorage.getItem('dark-mode');
+      } catch (_) { /* storage blocked: follow the OS setting */ }
+      const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+      if (storedTheme === 'on' || (storedTheme === null && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
   </script>
 
   <style>
@@ -37,8 +43,6 @@
     }
 
     * { box-sizing: border-box; }
-
-    html, body { height: 100%; }
 
     body {
       margin: 0;
@@ -114,7 +118,7 @@
       transform: translateY(-1px);
       box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06), 0 12px 26px -14px rgba(var(--accent-deep-rgb), 0.5);
     }
-    .nf-brand img { width: 24px; height: 24px; border-radius: 7px; display: block; }
+    .nf-brand img { border-radius: 7px; }
 
     /* Noise panel — echoes the homepage denoise portrait, but the sample never
        converges: this URL was never generated. */
@@ -144,7 +148,6 @@
       place-items: center;
       z-index: 1;
       font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-      font-weight: 400;
       font-size: clamp(78px, 17vw, 136px);
       line-height: 1;
       letter-spacing: 0.02em;
@@ -232,7 +235,8 @@
       border-color: rgba(255, 255, 255, 0.12);
     }
     html.dark-mode .nf-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
-    html.dark-mode .nf-btn-primary { background: var(--accent-primary); color: #ffffff; }
+    html.dark-mode .nf-btn-primary,
+    html.dark-mode .nf-btn-primary:hover { background: var(--accent-primary); color: #ffffff; }
 
     @media (max-width: 480px) {
       .nf-brand { top: 12px; left: 12px; }
@@ -299,41 +303,41 @@
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      let frame;
+      let image;
       const size = () => {
         const r = canvas.getBoundingClientRect();
         const scale = Math.min(1, 320 / Math.max(1, r.width));
         canvas.width = Math.max(1, Math.round(r.width * scale));
         canvas.height = Math.max(1, Math.round(r.height * scale));
-        frame = ctx.createImageData(canvas.width, canvas.height);
+        image = ctx.createImageData(canvas.width, canvas.height);
       };
       const paint = () => {
-        const d = frame.data;
-        for (let i = 0; i < d.length; i += 4) {
+        const px = image.data;
+        for (let i = 0; i < px.length; i += 4) {
           const v = (Math.random() * 255) | 0;
-          d[i] = d[i + 1] = d[i + 2] = v;
-          d[i + 3] = 255;
+          px[i] = px[i + 1] = px[i + 2] = v;
+          px[i + 3] = 255;
         }
-        ctx.putImageData(frame, 0, 0);
+        ctx.putImageData(image, 0, 0);
       };
 
       size();
       paint();
 
-      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
       if (!reduce) {
         let last = 0;
-        const loop = (t) => {
-          if (t - last > 42) { paint(); last = t; }
+        const loop = (now) => {
+          if (now - last > 42) { paint(); last = now; }   // ~24 fps is plenty for static
           requestAnimationFrame(loop);
         };
         requestAnimationFrame(loop);
       }
 
-      let rt;
+      let resizeTimer = 0;
       window.addEventListener('resize', () => {
-        clearTimeout(rt);
-        rt = setTimeout(() => { size(); paint(); }, 150);
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { size(); paint(); }, 150);
       });
     })();
   </script>

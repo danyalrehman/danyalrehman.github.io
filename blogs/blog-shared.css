@@ -18,17 +18,12 @@ body.is-leaving { opacity: 0; }
 .blog-back i { font-size: 11px; }
 
 .blog-title {
-  display: block;
   text-align: left;
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   /* Instrument Serif ships weight 400 only; pinned so the UA h1 bold does not
      fall back to a synthesised faux-bold. */
   font-weight: 400;
-  font-size: 38px;
-  line-height: 1.1;
-  letter-spacing: -0.012em;
   color: var(--accent-deep);
-  margin: 0.2rem 0 0.5rem;
 }
 
 .gh-badge {
@@ -39,7 +34,6 @@ body.is-leaving { opacity: 0; }
   line-height: 1;
   border-radius: 4px;
   overflow: hidden;
-  text-decoration: none;
   color: #ffffff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   transition: box-shadow 0.18s ease, filter 0.18s ease;
@@ -65,14 +59,11 @@ body.is-leaving { opacity: 0; }
 
 .gh-badge .gh-badge-label {
   background: #555;
-  color: #ffffff;
 }
 
 .gh-badge i { font-size: 10px; }
 
 .gh-badge.gh-badge-award { cursor: default; }
-
-.gh-badge.gh-badge-award .gh-badge-value { background: #d4a017; }
 
 html.dark-mode .gh-badge { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
 
@@ -81,47 +72,30 @@ html.dark-mode .gh-badge .gh-badge-label { background: #3a3a3a; }
 .blog-divider {
   border: 0;
   height: 1px;
-  background: var(--divider-line);
-  margin: 1.6rem 0 1.2rem;
 }
 
 .blog-body h2 {
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-  font-size: 22px;
   font-weight: 600;
 }
 
 .blog-body h3 {
-  margin-top: 1.4rem;
-  margin-bottom: 0.35rem;
-  font-size: 16px;
   font-weight: 600;
   color: var(--accent-deep);
 }
 
 .blog-body p { margin: 0 0 0.85rem; }
 
-.blog-body p:last-child { margin-bottom: 0; }
-
-.blog-body ul { line-height: 1.55; }
-
-.blog-body ul li { margin: 0.35rem 0; }
-
 .blog-body b { color: var(--accent-deep); }
 
 html.dark-mode .blog-body b { color: #b8d2ff; }
 
 .fig-frame {
-  display: block;
-  width: 100%;
   padding: 0.9rem 1rem 0.6rem;
   background: #ffffff;
 }
 
 .fig-frame img {
   display: block;
-  width: 100%;
   height: auto;
   max-width: 100%;
   object-fit: contain;
@@ -136,13 +110,10 @@ html.dark-mode .blog-body b { color: #b8d2ff; }
   line-height: 1.55;
 }
 
-.fig figcaption b { color: var(--accent-deep); }
-
 /* Equation block */
-.blog-eq { display: block; margin: 0.8rem auto; text-align: center; overflow-x: auto; }
+.blog-eq { display: block; text-align: center; overflow-x: auto; }
 
 .ref-card.ref-list {
-  list-style-position: outside;
   font-size: 13px;
   line-height: 1.55;
   color: #555;
@@ -175,13 +146,7 @@ html.dark-mode .ref-list li strong { color: #b8d2ff; }
   color: var(--accent-deep);
 }
 
-.callout p { margin: 0.55rem 0; }
-
-.callout p:first-of-type { margin-top: 0; }
-
 .callout p:last-child { margin-bottom: 0; }
-
-.callout .blog-eq { margin: 0.6rem auto; }
 
 html.dark-mode .callout {
   background: rgba(124, 92, 196, 0.12);
@@ -239,7 +204,6 @@ html.dark-mode .callout .callout-title { color: #c9b6ff; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 600;
-  color: #57606a;
 }
 
 .bib-block .bib-header .bib-label i { color: #0969da; }
@@ -275,8 +239,6 @@ html.dark-mode .callout .callout-title { color: #c9b6ff; }
   font-size: 12.5px;
   line-height: 1.6;
   overflow-x: auto;
-  white-space: pre;
-  color: #24292f;
   tab-size: 2;
 }
 
@@ -286,7 +248,6 @@ html.dark-mode .callout .callout-title { color: #c9b6ff; }
 .bib-block .tok-field { color: #0550ae; }
 .bib-block .tok-eq    { color: #cf222e; }
 .bib-block .tok-str   { color: #0a3069; }
-.bib-block .tok-brace { color: #24292f; }
 .bib-block .tok-punct { color: #57606a; }
 .bib-block .tok-num   { color: #0550ae; }
 
@@ -335,6 +296,6 @@ html.dark-mode .bib-block .tok-num   { color: #79c0ff; }
 
 html.dark-mode .fig figcaption {
   color: #b8b8b8;
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
 }

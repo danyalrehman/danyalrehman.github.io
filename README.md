@@ -15,22 +15,25 @@ A static site showcasing research publications, recent highlights, and contact i
 - Expandable paper abstracts with one-click BibTeX copy
 - Animated count-up stats (citations, h-index, publications)
 - Timeline-style recent highlights feed
+- Faint pixel-art Karachi skyline and clouds framing the page
 - Persisted preferences (dark mode, background) via `localStorage`
 - Auto-updating footer timestamp
 
 ## 📂 Structure
 
 ```
-index.html          — Main page
-stylesheet.css      — Homepage styles, theming, and dark mode
-cmdk.js             — Shared command palette (⌘K) and link-fade transition
-last-updated.js     — Auto-updates the footer timestamp
-blogs/              — Research blog pages and shared blog scripts/styles
-blogs/blog-head.js  — Shared blog head injection
-blogs/blog-body.js  — Shared blog interactions
+index.html            — Main page
+404.html              — Self-contained "page not found" page
+stylesheet.css        — Site styles, theming, and dark mode
+site.js               — Shared site chrome: theme/background toggles, sticky nav, back-to-top
+cmdk.js               — Shared command palette (⌘K) and link-fade transition
+last-updated.js       — Auto-updates the footer timestamp
+blogs/                — Research blog posts and shared blog scripts/styles
+blogs/blog-head.js    — Blog head setup: theme before paint, MathJax config
+blogs/blog-body.js    — Blog-only interactions: citation copy, local-preview links
 blogs/blog-shared.css — Shared blog styles
-img/                — Images and favicon
-CNAME               — Custom domain (danyalrehman.com)
+img/                  — Images and favicon
+CNAME                 — Custom domain (danyalrehman.com)
 ```
 
 ## 🚀 Deployment
