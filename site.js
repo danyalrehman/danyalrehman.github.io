@@ -6,9 +6,11 @@
 //  3. Sticky nav: scroll progress, scrolled state, active section, the sliding
 //     highlight pill, and smooth scrolling for in-page links.
 //  4. Back-to-top button.
-//  5. The homepage skyline's lights, switched on as it scrolls into view.
-//  6. The occasional shooting star in the homepage's night sky, and preloading
-//     the corner sky's other pictures for the theme switch.
+//  5. The skyline's lights (homepage and blog posts), switched on as it
+//     scrolls into view.
+//  6. The occasional shooting star in the right corner's night sky (homepage
+//     and blog posts), and preloading the homepage corners' other pictures
+//     for the theme switch.
 
 (() => {
   // localStorage throws (not returns null) when storage is blocked — e.g.
@@ -303,8 +305,8 @@
   };
 
   // ---- Skyline lights ----
-  // The homepage skyline's windows switch on a few at a time, like the city at
-  // dusk, the first time it scrolls into view. CSS steps through the frames
+  // The skyline's windows switch on a few at a time, like the city at dusk,
+  // the first time it scrolls into view. CSS steps through the frames
   // (and, without JS or with reduced motion, shows them all lit).
   const initSkyline = () => {
     const skyline = document.querySelector('.content > .skyline');

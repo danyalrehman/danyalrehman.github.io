@@ -1458,7 +1458,6 @@ html.dark-mode .content > .sky-right.is-shooting::after {
 
 .pub-head-link:focus-visible,
 .research-item h3 a:focus-visible,
-.post h3 a:focus-visible,
 .pub-venue a:focus-visible,
 .pub-link:focus-visible {
   outline: 2px solid rgba(var(--accent-primary-rgb), 0.45);
@@ -1558,12 +1557,36 @@ html.dark-mode .content > .sky-right.is-shooting::after {
 }
 
 /* ---------- Blog ----------
-   Posts mirror a plain (unhighlighted) publication entry, flush with the
-   heading: the list, title and link styles are shared with the publication
-   rules above (.post-list / .post / .post h3 are grouped there, and the link
-   row reuses .pub-links / .pub-link). */
+   Each post is a framed box with a hard offset shadow (after pi.website's
+   blog), flush with the section heading; the whole box is the post's link.
+   The list, title and summary styles are shared with the publication rules
+   above (.post-list / .post / .post h3 / .post-summary are grouped there). */
 .room-blog > h2 {
   margin-bottom: 1.15rem;
+}
+
+.post {
+  padding: 10px 14px 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--accent-deep);
+  box-shadow: 3px 3px 0 var(--accent-deep);
+}
+
+/* The title's link stretches over the whole box; keyboard focus outlines
+   the box rather than the title. */
+.post h3 a::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+}
+
+.post h3 a:focus-visible {
+  outline: none;
+}
+
+.post:has(h3 a:focus-visible) {
+  outline: 2px solid rgba(var(--accent-primary-rgb), 0.45);
+  outline-offset: 3px;
 }
 
 /* Where a paper's flag line sits; muted, since it isn't a distinction. */
@@ -1575,23 +1598,23 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   color: var(--text-muted);
 }
 
-/* A post's topics, as small tinted chips: a quieter cousin of the timeline's
-   "new" tag. They float at the end of the summary's last line, flush right,
-   or just below it (still flush right) when that line is too full; the
-   summary is a flow root so it grows to hold them. (A float switches off
-   text-wrap: pretty, so the summary's last two words are joined with a
-   no-break space in the markup instead.) */
-.post-summary {
-  display: flow-root;
+/* A post's title shares its line with the post's topics, pushed to the far
+   right (like \hfill); when the line is too full they drop just below the
+   title, still flush right. The topics are small tinted chips: a quieter
+   cousin of the timeline's "new" tag. */
+.post-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 1rem;
 }
 
 .post-tags {
-  float: right;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 5px;
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 auto;
   padding: 0;
   list-style: none;
 }
@@ -1605,17 +1628,6 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0.01em;
-}
-
-.pub-link-more i {
-  margin-left: 0.35em;
-  font-size: 0.8em;
-  transition: transform var(--motion-quick);
-}
-
-.pub-link-more:hover i,
-.pub-link-more:focus-visible i {
-  transform: translateX(2px);
 }
 
 .post-empty {
@@ -2389,6 +2401,11 @@ html.dark-mode .post h3 a:focus-visible {
 }
 html.dark-mode .pub-authors b { color: #ebe6dc; }
 html.dark-mode .post-tags li { background: rgba(var(--accent-deep-rgb), 0.1); }
+html.dark-mode .post {
+  background: #201f1d;
+  border-color: rgba(var(--accent-deep-rgb), 0.85);
+  box-shadow: 3px 3px 0 rgba(var(--accent-deep-rgb), 0.85);
+}
 html.dark-mode .pub-venue a {
   color: inherit;
   text-decoration-color: rgba(235, 230, 220, 0.3);
@@ -2807,6 +2824,11 @@ html.dark-mode .cmdk-footer {
   }
   .research-item:last-child,
   .post:last-child { margin-bottom: 0 !important; }
+  .post {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
+  }
   .research-item::before { display: none !important; }
   .post-empty { display: none !important; }
 
@@ -2819,8 +2841,7 @@ html.dark-mode .cmdk-footer {
     color: #111 !important;
   }
   .research-item p,
-  .post p,
-  .post .post-summary {
+  .post p {
     margin: 0 !important;
     font-size: 9.5pt;
     line-height: 1.4;
