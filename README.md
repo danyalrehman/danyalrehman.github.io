@@ -8,14 +8,14 @@ A static site showcasing research publications, recent highlights, and contact i
 
 ## ✨ Features
 
-- Sticky nav with scroll progress, dark mode, and background-image toggles
+- Sticky nav with scroll progress, dark mode (the new theme spreads out from the toggle), and background-image toggles
 - Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
 - Long-form research blog pages with shared navigation, citation tools, and table-of-contents behavior
 - Profile image generated on load, either autoregressively (patch by patch) or by diffusion from noise (`HERO_GENERATION` in `index.html`; preview with `?hero=diffusion`), with a tap-to-dissolve toggle
 - Expandable paper abstracts with one-click BibTeX copy
 - Animated count-up stats (citations, h-index, publications)
 - Timeline-style recent highlights feed
-- Faint pixel art framing the page: a Karachi skyline and corner clouds, with a sun by day and a moon and stars by night
+- Faint pixel art framing the page: a Karachi skyline whose windows light up as you reach it, and corner clouds with a sun by day and a moon and stars by night
 - Persisted preferences (dark mode, background) via `localStorage`
 - Auto-updating footer timestamp
 

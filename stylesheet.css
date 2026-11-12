@@ -120,6 +120,18 @@ body::after {
   ::view-transition-new(*) { animation: none !important; }
 }
 
+/* Theme switch: the new theme spreads out from the toggle as a growing circle
+   (site.js animates the new snapshot's clip-path), so the usual cross-fade is
+   off, and the nav drops its own transition name to be revealed with the
+   rest of the page. */
+html.theme-switching .sticky-nav { view-transition-name: none; }
+
+html.theme-switching::view-transition-old(root),
+html.theme-switching::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 html.js .reveal {
   opacity: 0;
   filter: blur(12px);
@@ -582,8 +594,9 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
 
 /* A faint pixel Karachi skyline along the bottom of the card, behind the
    footer: the port cranes, Mazar-e-Quaid, the old city's clock towers,
-   downtown, Teen Talwar, Bahria Icon Tower and Masjid-e-Tooba. Static pixel
-   art (300×28 art pixels) drawn at 3×, with a night version in dark mode. */
+   downtown, Teen Talwar, Bahria Icon Tower and Masjid-e-Tooba. Pixel art
+   (300×28 art pixels) drawn at 3×, with a night version in dark mode; its
+   lights are a layer of their own (below). */
 .content > .skyline {
   position: absolute;
   left: 0;
@@ -600,6 +613,46 @@ html.dark-mode .sticky-nav-links .nav-blog-item[aria-current="page"] {
 
 html.dark-mode .content > .skyline {
   background-image: url('img/skyline-night.png');
+}
+
+/* The skyline's lights: a strip of 15 frames, from every window dark to all
+   lit (a faint warm glow by day, the night lights in dark mode). The first
+   time the skyline scrolls into view, site.js adds .is-lit and the frames
+   step through once, a few windows at a time, like the city at dusk. Without
+   JS, or with reduced motion, the lights are simply on. */
+.content > .skyline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url('img/skyline-lights-day.png') center bottom / 900px auto no-repeat;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+html.dark-mode .content > .skyline::after {
+  background-image: url('img/skyline-lights-night.png');
+}
+
+html.js .content > .skyline:not(.is-lit)::after {
+  background-position-y: 0%;   /* the first frame: every window dark */
+}
+
+html.js .content > .skyline.is-lit::after {
+  animation: skyline-lights 2.8s steps(14, jump-end) 0.2s both;
+}
+
+@keyframes skyline-lights {
+  from { background-position-y: 0%; }
+  to   { background-position-y: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .content > .skyline:not(.is-lit)::after,
+  html.js .content > .skyline.is-lit::after {
+    background-position-y: 100%;
+    animation: none;
+  }
 }
 
 /* The sky in the card's top corners, over the skyline below: a few small,
@@ -2235,6 +2288,11 @@ html.dark-mode .cmdk-footer {
     height: 56px;
     background-size: 600px 56px;
     background-position: -86px bottom;
+  }
+
+  .content > .skyline::after {
+    background-size: 600px auto;
+    background-position-x: -86px;
   }
 
   /* On phones the top corners sit on the name, so the sky is for wider

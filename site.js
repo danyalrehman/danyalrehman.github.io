@@ -6,6 +6,7 @@
 //  3. Sticky nav: scroll progress, scrolled state, active section, the sliding
 //     highlight pill, and smooth scrolling for in-page links.
 //  4. Back-to-top button.
+//  5. The homepage skyline's lights, switched on as it scrolls into view.
 
 (() => {
   // localStorage throws (not returns null) when storage is blocked — e.g.
@@ -39,11 +40,38 @@
         icon.classList.add('thermo-flip');
       }
     };
-    show(document.documentElement.classList.contains('dark-mode'), false);
-    btn.addEventListener('click', () => {
-      const dark = document.documentElement.classList.toggle('dark-mode');
+    const root = document.documentElement;
+    show(root.classList.contains('dark-mode'), false);
+    const toggle = () => {
+      const dark = root.classList.toggle('dark-mode');
       show(dark, true);
       store.set('dark-mode', dark ? 'on' : 'off');
+    };
+    let current = null;   // the theme switch now animating, if any
+    btn.addEventListener('click', () => {
+      if (!document.startViewTransition || reducedMotion()) {
+        toggle();
+        return;
+      }
+      // The new theme spreads out from the button as a growing circle over a
+      // snapshot of the old one (html.theme-switching sets the stage in CSS).
+      const r = btn.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+      root.classList.add('theme-switching');
+      const transition = document.startViewTransition(toggle);
+      current = transition;
+      transition.ready.then(() => {
+        root.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 600, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', pseudoElement: '::view-transition-new(root)' },
+        );
+      }).catch(() => { /* skipped by a quick second click, whose switch takes over */ });
+      const done = () => {
+        if (current === transition) root.classList.remove('theme-switching');
+      };
+      transition.finished.then(done, done);
     });
   };
 
@@ -260,11 +288,31 @@
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: scrollBehavior() }));
   };
 
+  // ---- Skyline lights ----
+  // The homepage skyline's windows switch on a few at a time, like the city at
+  // dusk, the first time it scrolls into view. CSS steps through the frames
+  // (and, without JS or with reduced motion, shows them all lit).
+  const initSkyline = () => {
+    const skyline = document.querySelector('.content > .skyline');
+    if (!skyline) return;
+    if (!('IntersectionObserver' in window)) {
+      skyline.classList.add('is-lit');
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      skyline.classList.add('is-lit');
+      observer.disconnect();
+    }, { threshold: 0.6 });
+    observer.observe(skyline);
+  };
+
   initTheme();
   const initRest = () => {
     initBackground();
     initNav();
     initBackToTop();
+    initSkyline();
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRest, { once: true });
   else initRest();
