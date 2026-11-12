@@ -15,7 +15,7 @@ A static site showcasing research publications, recent highlights, and contact i
 - Expandable paper abstracts with one-click BibTeX copy
 - Animated count-up stats (citations, h-index, publications)
 - Timeline-style recent highlights feed
-- Faint pixel-art Karachi skyline and clouds framing the page
+- Faint pixel art framing the page: a Karachi skyline and corner clouds, with a sun by day and a moon and stars by night
 - Persisted preferences (dark mode, background) via `localStorage`
 - Auto-updating footer timestamp
 

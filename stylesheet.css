@@ -602,16 +602,14 @@ html.dark-mode .content > .skyline {
   background-image: url('img/skyline-night.png');
 }
 
-/* A few small, faint pixel clouds in the card's top corners, over the skyline
-   below: a medium, a small and a tiny cloud on each side, arranged
-   differently left and right. Static pixel art drawn at 3× in the skyline's
-   colours; by day the undersides carry a little more ink, by night the tops
-   catch a little light. */
-.content > .clouds {
+/* The sky in the card's top corners, over the skyline below: a few small,
+   faint pixel clouds (a medium, a small and a tiny one on each side), with a
+   sun peeking from behind the left cloud by day, and a crescent moon and
+   stars by night. Static pixel art drawn at 3× in the skyline's colours; the
+   moon and stars take its warm night light. */
+.content > .sky {
   position: absolute;
-  top: 16px;
   z-index: 0;
-  height: 27px;
   background-position: center;
   background-repeat: no-repeat;
   image-rendering: crisp-edges;
@@ -619,27 +617,30 @@ html.dark-mode .content > .skyline {
   pointer-events: none;
 }
 
-.content > .clouds-left {
+.content > .sky-left {
+  top: 4px;
   left: 24px;
-  width: 78px;
-  background-image: url('img/clouds-left-day.png');
-  background-size: 78px 27px;
+  width: 90px;
+  height: 39px;
+  background-image: url('img/sky-left-day.png');
+  background-size: 90px 39px;
 }
 
-.content > .clouds-right {
+.content > .sky-right {
   top: 14px;
   right: 24px;
-  width: 81px;
-  background-image: url('img/clouds-right-day.png');
-  background-size: 81px 27px;
+  width: 123px;
+  height: 27px;
+  background-image: url('img/sky-right-day.png');
+  background-size: 123px 27px;
 }
 
-html.dark-mode .content > .clouds-left {
-  background-image: url('img/clouds-left-night.png');
+html.dark-mode .content > .sky-left {
+  background-image: url('img/sky-left-night.png');
 }
 
-html.dark-mode .content > .clouds-right {
-  background-image: url('img/clouds-right-night.png');
+html.dark-mode .content > .sky-right {
+  background-image: url('img/sky-right-night.png');
 }
 
 .name {
@@ -2236,9 +2237,9 @@ html.dark-mode .cmdk-footer {
     background-position: -86px bottom;
   }
 
-  /* On phones the top corners sit on the name, so the clouds are for wider
+  /* On phones the top corners sit on the name, so the sky is for wider
      screens only. */
-  .content > .clouds {
+  .content > .sky {
     display: none;
   }
 }
@@ -2364,7 +2365,7 @@ html.dark-mode .cmdk-footer {
   .gen-canvas,
   .ar-cursor,
   .skyline,
-  .clouds,
+  .sky,
   .interests {
     display: none !important;
   }
