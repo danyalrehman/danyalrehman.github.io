@@ -7,7 +7,8 @@
 //     highlight pill, and smooth scrolling for in-page links.
 //  4. Back-to-top button.
 //  5. The homepage skyline's lights, switched on as it scrolls into view.
-//  6. The occasional shooting star in the homepage's night sky.
+//  6. The occasional shooting star in the homepage's night sky, and preloading
+//     the corner sky's other pictures for the theme switch.
 
 (() => {
   // localStorage throws (not returns null) when storage is blocked — e.g.
@@ -45,13 +46,14 @@
     show(root.classList.contains('dark-mode'), false);
     // The left corner plays a sunset (cooling down) or sunrise (warming up)
     // in the new theme; CSS steps through the frames, then the class comes off.
+    // (Not where the corner is hidden, as on phones: nothing would play.)
     const turnSky = (dark) => {
       const sky = document.querySelector('.content > .sky-left');
-      if (!sky || reducedMotion()) return;
+      if (!sky?.offsetParent || reducedMotion()) return;
       sky.classList.remove('is-setting', 'is-rising');
       void sky.offsetWidth;   // restart the animation
       sky.classList.add(dark ? 'is-setting' : 'is-rising');
-      sky.addEventListener('animationend', () => sky.classList.remove('is-setting', 'is-rising'), { once: true });
+      sky.onanimationend = sky.onanimationcancel = () => sky.classList.remove('is-setting', 'is-rising');
     };
     const toggle = () => {
       const dark = root.classList.toggle('dark-mode');
@@ -330,6 +332,9 @@
     let onScreen = false;
     let timer = 0;
     new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; }).observe(sky);
+    // Take the class off once the star has crossed, or switching back to dark
+    // mode would play it again straight away.
+    sky.addEventListener('animationend', () => sky.classList.remove('is-shooting'));
     const schedule = (ms) => {
       clearTimeout(timer);
       timer = setTimeout(shoot, ms);
@@ -351,6 +356,18 @@
     }).observe(root, { attributes: true, attributeFilter: ['class'] });
   };
 
+  // ---- Preloading the corner's other pictures ----
+  // The other theme's corner pictures, and the sunset and sunrise strips, only
+  // load when first needed, so the first switch could play over a blank
+  // corner. They are tiny: fetch them once the page has loaded.
+  const preloadSky = () => {
+    if (!document.querySelector('.content > .sky-left')) return;
+    const fetchAll = () => ['left-day', 'left-night', 'right-day', 'right-night', 'left-sunset', 'left-sunrise']
+      .forEach((name) => { new Image().src = `img/sky-${name}.png`; });
+    if (document.readyState === 'complete') fetchAll();
+    else window.addEventListener('load', fetchAll, { once: true });
+  };
+
   initTheme();
   const initRest = () => {
     initBackground();
@@ -358,6 +375,7 @@
     initBackToTop();
     initSkyline();
     initShootingStars();
+    preloadSky();
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRest, { once: true });
   else initRest();

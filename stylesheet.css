@@ -120,11 +120,13 @@ body::after {
   ::view-transition-new(*) { animation: none !important; }
 }
 
-/* Between pages, the new one dissolves in over the old, pixel by pixel, in the
-   same ordered dither as the section reveals: one mask layer per level of the
-   4×4 Bayer matrix (a 3px pixel repeating every 12px, placed where the matrix
-   puts that level), each switched on as --dither passes its level. Theme
-   switches keep their circle (below); reduced motion switches at once. */
+/* An ordered-dither mask, shared by the page transitions and the section
+   reveals: one layer per level of the 4×4 Bayer matrix (a 3px pixel repeating
+   every 12px, placed where the matrix puts that level), each switched on as
+   --dither passes its level, so animating --dither from 0 to 16 dissolves
+   the page or section in, pixel by pixel. Between pages, the new one
+   dissolves in over the old; theme switches keep their circle (below), and
+   reduced motion switches at once. */
 @property --dither {
   syntax: '<number>';
   inherits: false;
@@ -135,8 +137,8 @@ html:not(.theme-switching)::view-transition-old(root) {
   animation: none;
 }
 
-html:not(.theme-switching)::view-transition-new(root) {
-  mix-blend-mode: normal;
+html:not(.theme-switching)::view-transition-new(root),
+html.js .reveal.is-dissolving {
   mask-image:
     conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 0) * 8, 1)) 0),
     conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 1) * 8, 1)) 0),
@@ -160,10 +162,14 @@ html:not(.theme-switching)::view-transition-new(root) {
     3px 0px, 9px 6px, 9px 0px, 3px 6px,
     0px 3px, 6px 9px, 6px 3px, 0px 9px;
   mask-size: 12px 12px;
-  animation: page-dither 0.5s linear both;
 }
 
-@keyframes page-dither {
+html:not(.theme-switching)::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation: dither-in 0.5s linear both;
+}
+
+@keyframes dither-in {
   from { --dither: 0; }
   to   { --dither: 16; }
 }
@@ -180,14 +186,34 @@ html.theme-switching::view-transition-new(root) {
   mix-blend-mode: normal;
 }
 
+/* Nothing fades its colours meanwhile, so the circle shows the new theme
+   finished. (Without a view transition, the usual fades still play.) */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
 /* Sections are hidden until they first scroll into view, then dissolve in
-   pixel by pixel: a script in index.html masks each one with an ordered-dither
-   pattern of 3px pixels (the site's pixel-art scale) that fills in over about
-   half a second, like an image being denoised. With reduced motion they are
-   simply shown. */
+   through the dither mask above over about half a second, quickly at first,
+   like an image being denoised: a script in index.html adds .is-visible and
+   .is-dissolving, and takes the latter off at the end. Overflow such as the
+   timeline's icons dissolves with them, and a timeline that enters together
+   resolves item by item. With reduced motion they are simply shown. */
 html.js .reveal:not(.is-visible) {
   opacity: 0;
 }
+
+html.js .reveal.is-dissolving {
+  mask-clip: no-clip;
+  animation: dither-in 0.56s cubic-bezier(0.5, 1, 0.89, 1) both;
+}
+
+html.js .news-item.reveal:nth-child(2).is-dissolving { animation-delay: 45ms; }
+html.js .news-item.reveal:nth-child(3).is-dissolving { animation-delay: 90ms; }
+html.js .news-item.reveal:nth-child(4).is-dissolving { animation-delay: 135ms; }
+html.js .news-item.reveal:nth-child(5).is-dissolving { animation-delay: 180ms; }
+html.js .news-item.reveal:nth-child(n+6).is-dissolving { animation-delay: 210ms; }
 
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal:not(.is-visible) { opacity: 1; }
@@ -664,10 +690,12 @@ html.js .content > .skyline:not(.is-lit)::after {
 }
 
 html.js .content > .skyline.is-lit::after {
-  animation: skyline-lights 2.8s steps(14, jump-end) 0.2s both;
+  animation: step-frames 2.8s steps(14, jump-end) 0.2s both;
 }
 
-@keyframes skyline-lights {
+/* Steps through a vertical strip of frames, first to last (the skyline's
+   lights, and the corner's sunset and sunrise). */
+@keyframes step-frames {
   from { background-position-y: 0%; }
   to   { background-position-y: 100%; }
 }
@@ -730,7 +758,7 @@ html.dark-mode .content > .sky-right {
 html.dark-mode .content > .sky-left.is-setting,
 html:not(.dark-mode) .content > .sky-left.is-rising {
   background-size: 90px auto;
-  animation: sky-turn 0.9s steps(12, jump-end) both;
+  animation: step-frames 0.9s steps(12, jump-end) both;
 }
 
 html.dark-mode .content > .sky-left.is-setting {
@@ -739,11 +767,6 @@ html.dark-mode .content > .sky-left.is-setting {
 
 html:not(.dark-mode) .content > .sky-left.is-rising {
   background-image: url('img/sky-left-sunrise.png');
-}
-
-@keyframes sky-turn {
-  from { background-position-y: 0%; }
-  to   { background-position-y: 100%; }
 }
 
 /* Now and then at night, a shooting star crosses the open sky at the left of
@@ -830,14 +853,19 @@ html.dark-mode .content > .sky-right.is-shooting::after {
           user-select: none;
 }
 
-.name-en:hover,
 .name.is-urdu .name-en {
   opacity: 0;
 }
 
-.name-en:hover + .name-ur,
 .name.is-urdu .name-ur {
   opacity: 1;
+}
+
+/* With a mouse, hovering does the same. (Touch screens rely on the tap: a tap
+   leaves a lingering :hover that would keep the Urdu showing.) */
+@media (hover: hover) {
+  .name-en:hover { opacity: 0; }
+  .name-en:hover + .name-ur { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2453,7 +2481,7 @@ html.dark-mode .cmdk-footer {
   }
 
   .content {
-    margin: 10px;
+    margin: 60px 10px 10px;    /* the top clears the floating nav, as on wider screens */
     padding: 20px 20px 42px;   /* the extra bottom room keeps the footer clear of the skyline */
   }
 

@@ -26,8 +26,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900;1,200..900&amp;display=swap" rel="stylesheet">
-  <!-- Nastaliq for the name's Urdu, shown on hover: just the letters it needs. -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&amp;text=%D8%AF%D8%A7%D9%86%DB%8C%D8%A7%D9%84%20%D8%B1%D8%AD%D9%85%D8%A7%D9%86&amp;display=swap" rel="stylesheet">
+  <!-- Nastaliq for the name's Urdu, shown on hover: just the letters it needs,
+       loaded without holding up the first paint. -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&amp;text=%D8%AF%D8%A7%D9%86%DB%8C%D8%A7%D9%84%20%D8%B1%D8%AD%D9%85%D8%A7%D9%86&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <script src="last-updated.js" defer></script>
   <script>
     document.documentElement.classList.add('js');
@@ -41,8 +42,8 @@
 
     // Apply the persisted theme before paint to prevent a flash of the wrong one.
     // Without a saved choice the site loads in light mode, whatever the
-    // operating-system setting. (This must match blogs/blog-head.js and
-    // 404.html, or the theme would change between pages.)
+    // operating-system setting. (This must match blogs/blog-head.js, or the
+    // theme would change between pages.)
     try {
       if (localStorage.getItem('dark-mode') === 'on') {
         document.documentElement.classList.add('dark-mode');
@@ -868,81 +869,29 @@
   </script>
 
   <script>
-    // Sections dissolve in the first time they scroll into view, like an image
-    // being denoised. Each is masked by an ordered-dither (Bayer) pattern of
-    // 3px pixels: one mask layer per level of the 4×4 matrix, a pixel repeating
-    // every 12px where that level sits, added one by one until the section is
-    // whole. Timeline items cascade. With reduced motion, or without CSS
-    // masks, sections simply appear.
+    // Sections dissolve in, pixel by pixel, the first time they scroll into
+    // view. The dither mask, its timing and the timeline's cascade are in
+    // stylesheet.css (.reveal.is-dissolving, shared with the page transitions);
+    // this only starts each one and tidies up after. With reduced motion, or
+    // without IntersectionObserver, sections simply appear.
     (() => {
       const targets = document.querySelectorAll('.reveal');
       if (!targets.length) return;
-      const show = (el) => el.classList.add('is-visible');
-      const canMask = ['mask-image', '-webkit-mask-image'].some((p) => CSS.supports?.(p, 'linear-gradient(#000, #000)'));
       const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-      if (!('IntersectionObserver' in window) || !canMask || still) {
-        targets.forEach(show);
+      if (still || !('IntersectionObserver' in window)) {
+        targets.forEach((el) => el.classList.add('is-visible'));
         return;
       }
-
-      const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
-      const PIXEL = 3;
-      const TILE = 4 * PIXEL;
-      const DURATION = 560;
-      // One pixel at the top left of each 12px tile, shifted into place per level.
-      const pixel = `conic-gradient(at ${PIXEL}px ${PIXEL}px, transparent 75%, #000 0)`;
-      const place = BAYER.map((_, level) => {
-        const i = BAYER.indexOf(level);
-        return `${(i % 4) * PIXEL}px ${Math.floor(i / 4) * PIXEL}px`;
+      document.addEventListener('animationend', (e) => {
+        if (e.animationName === 'dither-in') e.target.classList.remove('is-dissolving');
       });
-      const PROPS = ['mask-image', 'mask-position', 'mask-size', 'mask-clip'];
-      const mask = (el, levels) => {   // the first `levels` levels shown (0: none)
-        const values = [
-          levels ? Array(levels).fill(pixel).join(', ') : 'linear-gradient(transparent, transparent)',
-          levels ? place.slice(0, levels).join(', ') : '0 0',
-          `${TILE}px ${TILE}px`,
-          'no-clip',   // let overflow (shadows, timeline icons) dissolve too, where supported
-        ];
-        PROPS.forEach((p, i) => {
-          el.style.setProperty(p, values[i]);
-          el.style.setProperty(`-webkit-${p}`, values[i]);
-        });
-      };
-      const unmask = (el) => PROPS.forEach((p) => {
-        el.style.removeProperty(p);
-        el.style.removeProperty(`-webkit-${p}`);
-      });
-
-      const dissolve = (el, delay) => {
-        mask(el, 0);
-        show(el);
-        const start = performance.now() + delay;
-        let shown = 0;
-        const step = (now) => {
-          const t = Math.min(Math.max((now - start) / DURATION, 0), 1);
-          if (t === 1) {
-            unmask(el);
-            return;
-          }
-          const levels = Math.floor(16 * (1 - (1 - t) ** 2));   // quick at first, then settling
-          if (levels !== shown) mask(el, (shown = levels));
-          requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      };
-      // A timeline that enters together resolves item by item.
-      const delayOf = (el) => (el.classList.contains('news-item')
-        ? Math.min(45 * Array.prototype.indexOf.call(el.parentElement.children, el), 210)
-        : 0);
-
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           observer.unobserve(entry.target);
-          dissolve(entry.target, delayOf(entry.target));
+          entry.target.classList.add('is-visible', 'is-dissolving');
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
       targets.forEach((el) => observer.observe(el));
     })();
   </script>
