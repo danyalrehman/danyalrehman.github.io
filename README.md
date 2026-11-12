@@ -12,11 +12,12 @@ A static site showcasing research publications, recent highlights, and contact i
 - Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
 - Long-form research blog pages with shared navigation, citation tools, and table-of-contents behavior
 - Profile image generated on load, either autoregressively (patch by patch) or by diffusion from noise (`HERO_GENERATION` in `index.html`; preview with `?hero=diffusion`), with a tap-to-dissolve toggle
-- Expandable paper abstracts with one-click BibTeX copy
+- Expandable paper abstracts with one-click BibTeX copy, and a pixel glint across the honour icons on hover
 - Animated count-up stats (citations, h-index, publications)
 - Timeline-style recent highlights feed, with a tiny pixel icon per highlight (`data-kind`: paper, award, move, degree) and a "new" tag that expires on its own
 - Faint pixel art framing the page: a Karachi skyline whose windows light up as you reach it, and corner clouds with a sun by day and a moon, stars and the occasional shooting star by night
 - The name in Urdu (Nastaliq) on hover or tap
+- At night (on screens with a mouse), the portrait as a two-tone lavender dither that dissolves to full colour on hover
 - Sections dissolve in pixel by pixel (an ordered dither) the first time they scroll into view
 - Persisted preferences (dark mode, background) via `localStorage`
 - Auto-updating footer timestamp
@@ -25,7 +26,7 @@ A static site showcasing research publications, recent highlights, and contact i
 
 ```
 index.html            — Main page
-404.html              — Self-contained "page not found" page
+404.html              — Self-contained "page not found" page: a pixel-art night scene, with "404" as a constellation over the skyline
 stylesheet.css        — Site styles, theming, and dark mode
 site.js               — Shared site chrome: theme/background toggles, sticky nav, back-to-top
 cmdk.js               — Shared command palette (⌘K) and link-fade transition

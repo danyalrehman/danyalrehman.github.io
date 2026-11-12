@@ -123,6 +123,127 @@
     });
   </script>
   <script>
+    // At night, on screens with a mouse, the portrait shows as a two-tone
+    // ordered dither in the night ink (lavender on the card's charcoal), like
+    // an old Mac screen. Hovering it, or focusing its toggle, dissolves the
+    // dither away to full colour, pixel by pixel. It is drawn from whichever
+    // pass is showing, once the load-time generation is done. (Reading the
+    // image back needs it served over http, so local file:// previews skip it.)
+    document.addEventListener('DOMContentLoaded', () => {
+      const wrapper = document.querySelector('.profile-image .cmp-wrapper');
+      if (!wrapper || !window.matchMedia?.('(hover: hover)').matches) return;
+      const root = document.documentElement;
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const PIXEL = 2;                                   // css px per dither pixel
+      const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+      const INK = [201, 182, 255];
+      const PAPER = [26, 25, 24];
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'cmp-dither';
+      canvas.setAttribute('aria-hidden', 'true');
+      wrapper.querySelector('.cmp-noise').before(canvas);
+      const ctx = canvas.getContext('2d');
+
+      let ink = null;            // 1 where the dither is lavender
+      let cols = 0;
+      let rows = 0;
+      let shown = 16;            // dither levels showing: 16 = all of it, 0 = full colour
+      let target = 16;
+      let frame = 0;
+
+      const active = () => root.classList.contains('dark-mode') && wrapper.classList.contains('generation-complete');
+      const source = () => wrapper.querySelector(wrapper.classList.contains('is-revealed') ? '.cmp-base-img' : '.cmp-top-img');
+
+      // Threshold the image's brightness, stretched to its own range, against
+      // the 4×4 Bayer matrix.
+      const compute = (img) => {
+        cols = Math.max(1, Math.round(wrapper.clientWidth / PIXEL));
+        rows = Math.max(1, Math.round(wrapper.clientHeight / PIXEL));
+        const small = document.createElement('canvas');
+        small.width = cols;
+        small.height = rows;
+        const sctx = small.getContext('2d', { willReadFrequently: true });
+        sctx.imageSmoothingQuality = 'high';
+        sctx.drawImage(img, 0, 0, cols, rows);
+        const { data } = sctx.getImageData(0, 0, cols, rows);
+        const lum = new Float32Array(cols * rows);
+        for (let i = 0; i < lum.length; i++) {
+          lum[i] = (0.2126 * data[4 * i] + 0.7152 * data[4 * i + 1] + 0.0722 * data[4 * i + 2]) / 255;
+        }
+        const sorted = Float32Array.from(lum).sort();
+        const lo = sorted[Math.floor(sorted.length * 0.03)];
+        const hi = sorted[Math.floor(sorted.length * 0.97)];
+        ink = new Uint8Array(cols * rows);
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            const v = (lum[y * cols + x] - lo) / (hi - lo || 1);
+            ink[y * cols + x] = v > (BAYER[(y % 4) * 4 + (x % 4)] + 0.5) / 16 ? 1 : 0;
+          }
+        }
+        canvas.width = cols;
+        canvas.height = rows;
+      };
+
+      // Draw the dither with only its first `shown` levels, in an order offset
+      // from the dither's own so the dissolve doesn't follow the image.
+      const paint = () => {
+        const out = ctx.createImageData(cols, rows);
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            const i = y * cols + x;
+            const colour = ink[i] ? INK : PAPER;
+            out.data.set(colour, 4 * i);
+            out.data[4 * i + 3] = BAYER[((y + 2) % 4) * 4 + ((x + 2) % 4)] < shown ? 255 : 0;
+          }
+        }
+        ctx.putImageData(out, 0, 0);
+      };
+
+      const update = () => {
+        if (!active()) return;
+        const img = source();
+        if (!img.complete || !img.naturalWidth) {
+          img.addEventListener('load', update, { once: true });
+          return;
+        }
+        try {
+          compute(img);
+        } catch (_) {          // a canvas tainted by a file:// image can't be read
+          canvas.remove();
+          return;
+        }
+        paint();
+      };
+
+      // Step the dither in or out one level per frame (about a quarter second).
+      const dissolve = (colour) => {
+        target = colour ? 0 : 16;
+        cancelAnimationFrame(frame);
+        if (!ink || still) {
+          shown = target;
+          if (ink) paint();
+          return;
+        }
+        const step = () => {
+          shown += Math.sign(target - shown);
+          paint();
+          if (shown !== target) frame = requestAnimationFrame(step);
+        };
+        frame = requestAnimationFrame(step);
+      };
+
+      wrapper.addEventListener('pointerenter', () => dissolve(true));
+      wrapper.addEventListener('pointerleave', () => dissolve(false));
+      wrapper.addEventListener('focusin', () => dissolve(true));
+      wrapper.addEventListener('focusout', () => dissolve(false));
+      // Redraw when the theme, the pass or the size changes, and once generated.
+      new MutationObserver(update).observe(wrapper, { attributes: true, attributeFilter: ['class'] });
+      new MutationObserver(update).observe(root, { attributes: true, attributeFilter: ['class'] });
+      new ResizeObserver(update).observe(wrapper);
+    });
+  </script>
+  <script>
     // Load-time portrait generation. HERO_GENERATION picks the effect:
     //   'autoregressive' - the image is cut into a 32×32 grid of patch "tokens"
     //                      emitted one at a time in raster order (~3.5 s), with

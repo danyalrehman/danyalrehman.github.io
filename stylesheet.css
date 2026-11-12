@@ -1227,6 +1227,29 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   color: var(--text-muted);
 }
 
+/* A glint on honours: hovering a Spotlight, Oral or Best Paper flag sends a
+   bright band across its icon in a few pixel steps, like light catching
+   metal. The icon is only repainted (in its own colour, plus the band) while
+   hovered, so at rest and in print it is untouched. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pub-flag:hover .pub-flag-honor i,
+  .pub-flag:hover .pub-flag-award i {
+    background:
+      linear-gradient(110deg, transparent 42%, rgba(255, 251, 235, 0.95) 42% 56%, transparent 56%) 100% 0 / 300% 100% no-repeat,
+      linear-gradient(var(--accent-highlight), var(--accent-highlight));
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: honour-glint 0.55s steps(5, jump-none) both;
+  }
+}
+
+@keyframes honour-glint {
+  from { background-position: 100% 0, 0 0; }
+  to   { background-position: 0 0, 0 0; }
+}
+
 .research-item h3,
 .post h3 {
   margin: 0;
@@ -1638,6 +1661,25 @@ html.dark-mode .site-footer-sep {
 
 @media (prefers-reduced-motion: reduce) {
   .cmp-wrapper.denoising .cmp-noise { animation: none; }
+}
+
+/* At night the portrait can show as a two-tone dither: a small canvas, drawn
+   by a script in index.html, scaled up in hard pixels over the images. It
+   dissolves to full colour on hover. */
+.cmp-dither {
+  position: absolute;
+  inset: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+html.dark-mode .cmp-wrapper.generation-complete .cmp-dither {
+  display: block;
 }
 
 .cmp-toggle {
@@ -2499,6 +2541,7 @@ html.dark-mode .cmdk-footer {
   .paper-abstract,
   .cmp-toggle,
   .cmp-noise,
+  .cmp-dither,
   .gen-canvas,
   .ar-cursor,
   .skyline,

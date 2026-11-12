@@ -7,84 +7,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
 
-  <!-- Self-contained: no external CSS/image dependencies, so this renders
-       identically whether GitHub Pages serves it at a deep missing URL or it
-       is opened directly. The links below are root-relative because Pages
-       serves this file at arbitrary paths; they resolve on the live site. -->
+  <!-- Self-contained: no external CSS/image dependencies (the pixel art is
+       inlined), so this renders identically whether GitHub Pages serves it at
+       a deep missing URL or it is opened directly. The links below are
+       root-relative because Pages serves this file at arbitrary paths; they
+       resolve on the live site. -->
   <link rel="icon" type="image/png" href="data:image/png;base64,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">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900&amp;display=swap" rel="stylesheet">
 
-  <script>
-    // Respect the saved theme before paint, as the rest of the site does: light
-    // unless dark mode was chosen. Storage throws (rather than returning null)
-    // when blocked.
-    try {
-      if (localStorage.getItem('dark-mode') === 'on') {
-        document.documentElement.classList.add('dark-mode');
-      }
-    } catch (_) { /* storage blocked: stay light */ }
-  </script>
+  <script>document.documentElement.classList.add('js');</script>
 
   <style>
+    /* Always a night scene, in the homepage's pixel art: a sky of stars with
+       "404" picked out as a constellation, a crescent moon, the odd shooting
+       star, and the Karachi skyline along the bottom with its windows
+       switching on. The sky is a canvas drawn in art pixels; --k, set by the
+       script, is one art pixel on screen (a whole number of CSS pixels, so the
+       art stays crisp, and large enough for the skyline to span the screen). */
     :root {
-      --accent-primary: #0067cf;
-      --accent-primary-rgb: 0, 103, 207;
-      --accent-deep: #213c7a;
-      --accent-deep-rgb: 33, 60, 122;
+      --k: 3px;
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      color-scheme: dark;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      position: relative;
       overflow: hidden;
-      color: #333;
-      background-color: #f8f9fa;
+      color: #ebe6dc;
+      background:
+        radial-gradient(70% 36% at 50% 100%, rgba(255, 206, 128, 0.08), transparent 72%),
+        linear-gradient(#0b0a10, #121118 55%, #1b1820);
+      background-attachment: fixed;
       font-family: 'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
       font-size: 15px;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Ambient gradient wash + drift, echoing the main site. */
-    body::before {
-      content: "";
+    .nf-sky {
       position: fixed;
-      inset: -10%;
-      z-index: -2;
-      background:
-        radial-gradient(42% 44% at 16% 18%, rgba(33, 60, 122, 0.20), transparent 70%),
-        radial-gradient(38% 40% at 84% 14%, rgba(184, 125, 150, 0.16), transparent 70%),
-        radial-gradient(44% 46% at 50% 94%, rgba(0, 103, 207, 0.18), transparent 70%),
-        radial-gradient(34% 36% at 88% 68%, rgba(180, 1, 1, 0.10), transparent 70%),
-        radial-gradient(36% 38% at 12% 72%, rgba(124, 92, 196, 0.14), transparent 70%);
-      animation: nf-drift 32s ease-in-out infinite alternate;
+      top: 0;
+      left: 0;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
       pointer-events: none;
     }
 
-    @keyframes nf-drift {
-      0%   { transform: translate3d(0, 0, 0) scale(1); }
-      50%  { transform: translate3d(-2%, 1.5%, 0) scale(1.06); }
-      100% { transform: translate3d(2%, -1%, 0) scale(1.02); }
+    .nf-skyline {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: calc(28 * var(--k));
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAAcCAYAAADbcIJsAAADfUlEQVR42u2cW04cMRBFh/AKhGAmGSDTy5ntsL/sIRtBfPOVP2JLbskxtrv8ft2SrlC3mH643Me37J7Z7RAIRNX4eHl5RSsgEIgu4s/vjwWtgEAgACwEAoEAsBAIxJSwWoXWQCAQXcAK0EIgEF3BajRo8Xs5INMR8ff97bAKrYEAsPIDi+snsh0HrBOAhQCwACwAa4CHB60BYAFYjZSBKrBQHtofHPSaMu1uGiz09u85NwBWOKxODk0LrRlG+Z7bvufc8Ot8XIHF9aOFC7ofAFZTQ2t2YNW8z9GB1ZTD4hfxXf5lA8BqWmiZyhHXQzEa1HoClroNYPldxJ22/dBaZwmA1WnGyXgfhzWKE9OBUAtecFhpTnDOdcF1yXXFdc31leuG65brmwCWcFiiJBQOSwCLay/qVOrF2SYYEziqQ6C7Opkm40cHWCiwXKN96w8ZgDWRwxLAWkvCFVhyex/qrGITEAmoJGVir+VRDofVumMrAayYcg/AKggsuSJwkCsET1zPXL+4jq4kxiQjI6zIZWJoJ6rd+WztT81Vj06sRWC5/sc1d9iBm20DWIb9e5/OsvXuSU/AiukoKTpXzDF8wBSrrWmBHoFlqxZs97YFG9M11SwZY481JbDkPNknhQJLfob8/7bzK+4yqKOk6GA+x6AApSTAHPqU41rAokxf+Lon5f6CHdbWMXIOYFMCy4fkqYBlcWdJgOU7Ghk623/3tHXOHMBqWTUdlg2m2j4f4DPbZ6gOiwA9RnC4LHduXMCSi3nXcnHvSi70CV1MBywTjCjAMu1L4bAMn0kGLCosqW5KL89aBVaoE6MCywQRF7w8Bgcvh2XJRRSwCuYIwDI93DYw+QDLtt8FD71j1ABWCw4r9vjUVbNcwFLyoQ5Ceo63thfi4BAErFiHRTlvpI4A1jjAiprLCe1s1FU512pUTZBttIU3sDyumTnKP1teqHmqCaycTvgo3wi4l28R3E0FLI/Gzg2srYcnF7BSOR9WoLPmBpoT3CEOy/ZQO/oeIwJrCXVYqruLBNbSErDkC+e38gX0m26BlaqxCgOL/IA1MOFNGs1zzVcVvHdGdB0sUXkU5Xwpx88ArKUQsJ6rASvkqzmu33EuMfkHQVB1YD3pPy8jGfGgwNgELHXfpfya4LkOEaEzri8pvksY+6Y7BEFjA0srG1X3ZQSWZJNg1O4fqQVa+TTEA6oAAAAASUVORK5CYII=) center bottom / calc(300 * var(--k)) auto no-repeat;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      pointer-events: none;
     }
 
-    .nf {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.15rem;
-      text-align: center;
-      padding: 5.5rem 1.25rem 3rem;
+    /* The lights: a strip of frames from every window dark to all lit, stepped
+       through once (all lit without the script, or with reduced motion). */
+    .nf-skyline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAGkCAYAAACLnhjAAAAElElEQVR42u3dUY6sIBAF0F7jrMgV9pZ6fjsdYwmKFHBO8r7m+YFSl6IT5fUCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgg89729wFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIw+721zFwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGmONQMAAADbZgCwmgIAAAAAAAAAAAAAAAAAAAAAAAAAANCIL9UCAAAAAODHYgAAAIi3zbbPAHB1NQUAAAAAAAAAAAAAAAAAAAAAAAAAAGBVvlQLAAAAAIAfiwEAACDeNts+Q8MCAxQ7AAAA2NYCAAAAAAAAAAAAAAAAAAAAAMDUfNIHAAAAAAA/FgMAAGBrGY/N9hmEB6DYAQAAsK0FAECHBQAAAAAAAAAAAAAAAAAAQB0vnAMAAGD7CABY7QEAALC1jMdm+8zVifTnLqwVHjBkUP3+U+zAcoEFILAAgSWwbGtBYIGFAIGlsAAAAAAAAAAAAAAAAAAAAGjEC+cAAADYPgIAVnsAAHSzgGKMxyZwuDqRnJZjJYf8QdXqmC/FDtzaRZ0JLN0X0K2TKgksB6zajoLAEhqAwMJCgMDSYQEAAAAAAAAAAAAAAAAAALASL5wDAABg+wgAWO0BANDNAooxHlvJGIUTe5PCMV6KBfIHVXRUvWIHUnRRZwJL9yV8oVsnVRJYTn7OE5JCE4ElsHRWILDAQoDAUlgAAAAAAAAAAAAAAAAAAAC054VzAAAAbB8BAKs9AAC6WUAxxmMrGaNwYm9SOMZLsUD+oIqOqlfsQIou6kxgjdh91YTl0TXCFzp1UiWB5eTnPKErNBFYAsu2FgQW3LMQWDQElsDqWCwKEAAAAAAAAAAAAAAAAAAAYABeDgcAAMD2EQCw2gMA6J48D0AxxmNzag5XJ5JjvBQL5A+q6Kh6xQ6k6KLOBNaI3VdNWB5dI3yhUydVElhOfu7XYf5eLzQRWALrMCyEBAgszMetxf9FYOmwkm0VAQAAAAAAAAAAAAAAAAAAeIDvgAEAAEm3J3g+AIDVHgBghe5JJ+YewnTFOGNR1oxNOLE3KRzjpVggf1BFR9UrdiBFF3UmsEbsvmrC8uga4QudOqmSwHLyc78O0zt1CCyBVRQWQgIEFg07s9nGaNEQWAKrY4elAAEAAAAAAAAAAAAAAAAAAAbgO2AAAEDS7QmeDwBgtQcAWKF70om5hzBdMc5YlDVjE07sTQrHeCkWyB9U0VH1ih2LBim6qDOBNWL3VTPJj675/psCggc7qZLAcvJzv85g5nfqhD4Cq0FB7RXW3UEECCzdxyRjFPACS2Bd6LAEEgAAAAAAAAAAAAAAAAAAwAJm/g4YAAAw9PYEzwcAsNoDYAGAFYpHIbqHMF0xzliUNWMTTuxNCsd4KRbPhfxBFR1Vb1LRM4zMI11UUWCN2H3VTPKja77/poB0WjzYSZUElpOf+xXTzJ2GoEFgNSiovcK6O4gAgaX7mGSMAl5gCawLHZZAAgCA2f0DAzq2ZL3xlT4AAAAASUVORK5CYII=) center bottom / calc(300 * var(--k)) auto no-repeat;
+    }
+
+    html.js .nf-skyline::after {
+      animation: nf-lights 2.8s steps(14, jump-end) 0.6s both;
+    }
+
+    @keyframes nf-lights {
+      from { background-position-y: 0%; }
+      to   { background-position-y: 100%; }
     }
 
     /* Brand pill — mirrors the site's rounded nav. */
@@ -99,56 +100,48 @@
       padding: 0.4rem 0.85rem 0.4rem 0.5rem;
       border-radius: 999px;
       text-decoration: none;
-      color: var(--accent-deep);
+      color: #e3dcff;
       font-weight: 600;
       font-size: 14px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(var(--accent-deep-rgb), 0.1);
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 22px -14px rgba(var(--accent-deep-rgb), 0.4);
+      background: rgba(30, 28, 38, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 22px -14px rgba(0, 0, 0, 0.8);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
-      transition: transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
+      transition: transform 0.18s var(--ease-out);
     }
-    .nf-brand:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06), 0 12px 26px -14px rgba(var(--accent-deep-rgb), 0.5);
-    }
+    .nf-brand:hover { transform: translateY(-1px); }
     .nf-brand img { border-radius: 7px; }
 
-    /* Noise panel — echoes the homepage denoise portrait, but the sample never
-       converges: this URL was never generated. */
-    .nf-panel {
+    .nf {
       position: relative;
-      width: min(360px, 78vw);
-      aspect-ratio: 16 / 10;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(var(--accent-deep-rgb), 0.16);
-      box-shadow:
-        0 1px 2px rgba(15, 23, 42, 0.06),
-        0 30px 60px -30px rgba(var(--accent-primary-rgb), 0.4);
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      padding: 4.5rem 1.25rem calc(28 * var(--k) + 1.5rem);
     }
-    .nf-noise { display: block; width: 100%; height: 100%; }
-    .nf-panel::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(78% 78% at 50% 50%, rgba(0, 0, 0, 0.58), transparent 80%);
-      pointer-events: none;
+
+    /* Where the constellation goes; the script draws it there. Without the
+       script, it is plain text. */
+    .nf-404 {
+      width: min(320px, 72vw);
+      aspect-ratio: 19 / 8;
     }
-    .nf-code {
-      position: absolute;
-      inset: 0;
+    html:not(.js) .nf-404 {
       display: grid;
       place-items: center;
-      z-index: 1;
       font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-      font-size: clamp(78px, 17vw, 136px);
+      font-size: 96px;
       line-height: 1;
-      letter-spacing: 0.02em;
-      color: #ffffff;
-      text-shadow: 0 2px 36px rgba(0, 0, 0, 0.65);
+      color: #e3dcff;
     }
+    html:not(.js) .nf-404::before { content: "404"; }
 
     .nf-title {
       font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
@@ -156,13 +149,13 @@
       font-size: clamp(28px, 5.4vw, 44px);
       line-height: 1.08;
       letter-spacing: -0.014em;
-      color: var(--accent-deep);
-      margin: 0.7rem 0 0;
+      color: #e7e1ff;
+      margin: 0.4rem 0 0;
     }
     .nf-sub {
       max-width: 31rem;
       margin: 0;
-      color: #5b6573;
+      color: #a8a39a;
       font-size: 15.5px;
       line-height: 1.55;
     }
@@ -172,10 +165,10 @@
       font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
       font-size: 12.5px;
       letter-spacing: -0.01em;
-      color: #8a93a3;
+      color: #77718a;
       word-break: break-all;
     }
-    .nf-path b { color: var(--accent-deep); font-weight: 600; }
+    .nf-path b { color: #c9b6ff; font-weight: 600; }
 
     .nf-actions {
       display: flex;
@@ -193,68 +186,41 @@
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
-      border: 1px solid rgba(var(--accent-deep-rgb), 0.14);
-      background: rgba(var(--accent-deep-rgb), 0.05);
-      color: var(--accent-deep);
-      transition: background 0.16s var(--ease-out), border-color 0.16s var(--ease-out), transform 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.07);
+      color: #e3dcff;
+      transition: background 0.16s var(--ease-out), transform 0.16s var(--ease-out);
     }
-    .nf-btn:hover { background: rgba(var(--accent-deep-rgb), 0.1); transform: translateY(-1px); }
+    .nf-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; transform: translateY(-1px); }
     .nf-btn svg { width: 15px; height: 15px; flex: none; }
     .nf-btn-primary {
-      background: var(--accent-primary);
+      background: #c9b6ff;
       border-color: transparent;
-      color: #ffffff;
-      box-shadow: 0 2px 10px -3px rgba(var(--accent-primary-rgb), 0.5);
+      color: #17151d;
+      box-shadow: 0 2px 14px -4px rgba(201, 182, 255, 0.5);
     }
-    .nf-btn-primary:hover {
-      background: var(--accent-primary);
-      color: #ffffff;
-      box-shadow: 0 4px 14px -4px rgba(var(--accent-primary-rgb), 0.6);
-    }
-
-    /* ---- Dark mode ---- */
-    html.dark-mode { color-scheme: dark; }
-    html.dark-mode body { color: #d8d8d8; background-color: #141317; }
-    html.dark-mode .nf-brand {
-      color: #cbd9f2;
-      background: rgba(30, 30, 38, 0.7);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    html.dark-mode .nf-panel { border-color: rgba(255, 255, 255, 0.1); }
-    html.dark-mode .nf-title { color: #cbd9f2; }
-    html.dark-mode .nf-sub { color: #9aa3b3; }
-    html.dark-mode .nf-path { color: #6f7787; }
-    html.dark-mode .nf-path b { color: #9ec5ff; }
-    html.dark-mode .nf-btn {
-      background: rgba(255, 255, 255, 0.07);
-      color: #cdd9ee;
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-    html.dark-mode .nf-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
-    html.dark-mode .nf-btn-primary,
-    html.dark-mode .nf-btn-primary:hover { background: var(--accent-primary); color: #ffffff; }
+    .nf-btn-primary:hover { background: #d9ccff; color: #17151d; }
 
     @media (max-width: 480px) {
       .nf-brand { top: 12px; left: 12px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      body::before { animation: none; }
+      html.js .nf-skyline::after { animation: none; }
     }
   </style>
 </head>
-
 <body>
   <a class="nf-brand" href="/">
     <img src="data:image/png;base64,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" alt="" width="24" height="24">
     <span>Danyal Rehman</span>
   </a>
 
+  <canvas class="nf-sky" aria-hidden="true"></canvas>
+  <div class="nf-skyline" aria-hidden="true"></div>
+
   <main class="nf">
-    <div class="nf-panel">
-      <canvas class="nf-noise" id="nf-noise" aria-hidden="true"></canvas>
-      <span class="nf-code">404</span>
-    </div>
+    <div class="nf-404" role="img" aria-label="404"></div>
     <h1 class="nf-title">You&rsquo;ve wandered off the data manifold.</h1>
     <p class="nf-sub">This page was never generated &mdash; the URL you followed doesn&rsquo;t exist. Every other page converged nicely, though.</p>
     <p class="nf-path" id="nf-path" aria-hidden="true"></p>
@@ -291,49 +257,159 @@
       el.querySelector('b').textContent = path;
     })();
 
-    // Living static in the panel — the "sample" that never converges. Rendered
-    // at a capped backing resolution and frozen for prefers-reduced-motion.
+    // The night sky, drawn in art pixels and scaled up by --k: faint stars
+    // that twinkle, "404" as a constellation where .nf-404 sits, a crescent
+    // moon, and every few seconds a shooting star. Still with reduced motion.
     (() => {
-      const canvas = document.getElementById('nf-noise');
-      if (!canvas) return;
+      const canvas = document.querySelector('.nf-sky');
+      const mark = document.querySelector('.nf-404');
       const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      const MOON = '248, 242, 232';
+      const INK = '201, 182, 255';
+      const SKYLINE = 28;      // art pixels of skyline along the bottom
 
-      let image;
-      const size = () => {
-        const r = canvas.getBoundingClientRect();
-        const scale = Math.min(1, 320 / Math.max(1, r.width));
-        canvas.width = Math.max(1, Math.round(r.width * scale));
-        canvas.height = Math.max(1, Math.round(r.height * scale));
-        image = ctx.createImageData(canvas.width, canvas.height);
+      // "404" on a grid of 5 × 8 points per digit: stars joined by faint lines.
+      const FOUR = { stars: [[0, 0], [0, 4], [3, 4], [4, 4], [3, 0], [3, 7]], lines: [[0, 1], [1, 2], [2, 3], [4, 2], [2, 5]] };
+      const ZERO = { stars: [[1, 0], [3, 0], [4, 1], [4, 6], [3, 7], [1, 7], [0, 6], [0, 1]], lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0]] };
+      const DIGITS = [FOUR, ZERO, FOUR];
+
+      let k = 3;
+      let W = 0;
+      let H = 0;
+      let field = [];          // background stars
+      let marks = [];          // the constellation's stars
+      let links = [];          // and its lines
+      let shot = null;         // the shooting star in flight, if any
+      let nextShot = 0;
+      let lastDraw = 0;
+
+      const dot = (x, y, rgb, a) => {
+        ctx.fillStyle = `rgba(${rgb}, ${a})`;
+        ctx.fillRect(x, y, 1, 1);
       };
-      const paint = () => {
-        const px = image.data;
-        for (let i = 0; i < px.length; i += 4) {
-          const v = (Math.random() * 255) | 0;
-          px[i] = px[i + 1] = px[i + 2] = v;
-          px[i + 3] = 255;
+      const line = (x0, y0, x1, y1, rgb, a) => {      // Bresenham
+        const dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0);
+        const sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+        let err = dx + dy;
+        for (;;) {
+          dot(x0, y0, rgb, a);
+          if (x0 === x1 && y0 === y1) return;
+          const e2 = 2 * err;
+          if (e2 >= dy) { err += dy; x0 += sx; }
+          if (e2 <= dx) { err += dx; y0 += sy; }
         }
-        ctx.putImageData(image, 0, 0);
+      };
+      const sparkle = (x, y, a) => {                   // a bright star: a small cross
+        dot(x, y, MOON, a);
+        [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([ox, oy]) => dot(x + ox, y + oy, MOON, a * 0.45));
       };
 
-      size();
-      paint();
+      // A seeded random, so the sky keeps its stars across resizes.
+      let seed = 1;
+      const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 
-      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-      if (!reduce) {
-        let last = 0;
-        const loop = (now) => {
-          if (now - last > 42) { paint(); last = now; }   // ~24 fps is plenty for static
-          requestAnimationFrame(loop);
-        };
+      const layout = () => {
+        k = Math.max(2, Math.ceil(window.innerWidth / 300));
+        document.documentElement.style.setProperty('--k', `${k}px`);
+        W = Math.ceil(window.innerWidth / k);
+        H = Math.ceil(window.innerHeight / k);
+        canvas.width = W;
+        canvas.height = H;
+        canvas.style.width = `${W * k}px`;
+        canvas.style.height = `${H * k}px`;
+
+        // The constellation, fitted into .nf-404 (in art pixels).
+        const r = mark.getBoundingClientRect();
+        const unit = Math.max(2, Math.floor(Math.min(r.width / 19, r.height / 8) / k));
+        const ox = Math.round((r.left + r.width / 2) / k - 9 * unit);
+        const oy = Math.round((r.top + r.height / 2) / k - 3.5 * unit);
+        marks = [];
+        links = [];
+        DIGITS.forEach((d, n) => {
+          const base = marks.length;
+          d.stars.forEach(([gx, gy]) => marks.push({ x: ox + (7 * n + gx) * unit, y: oy + gy * unit, phase: random() * 6.3 }));
+          d.lines.forEach(([a, b]) => links.push([marks[base + a], marks[base + b]]));
+        });
+
+        // Background stars, kept clear of the text and the constellation.
+        const keepOut = [...document.querySelectorAll('.nf > *')].map((el) => {
+          const b = el.getBoundingClientRect();
+          return { l: b.left / k - 3, t: b.top / k - 3, r: b.right / k + 3, b: b.bottom / k + 3 };
+        });
+        seed = 1;
+        field = [];
+        const count = Math.round((W * (H - SKYLINE)) / 420);
+        for (let i = 0; i < count; i++) {
+          const x = Math.floor(random() * W);
+          const y = Math.floor(random() * (H - SKYLINE - 4));
+          const bright = random() < 0.08;
+          const s = { x, y, a: bright ? 0.8 : 0.18 + random() * 0.3, bright, phase: random() * 6.3, speed: 0.6 + random() * 1.6 };
+          if (!keepOut.some((z) => x > z.l && x < z.r && y > z.t && y < z.b)) field.push(s);
+        }
+      };
+
+      const moon = () => {                             // a crescent lit on the left
+        const cx = W - Math.round(Math.min(40, W * 0.12));
+        const cy = 16;
+        for (let y = -7; y <= 7; y++) {
+          for (let x = -7; x <= 7; x++) {
+            const inDisc = x * x + y * y <= 49;
+            const inShadow = (x - 3) ** 2 + (y + 2) ** 2 <= 36;
+            if (inDisc && !inShadow) dot(cx + x, cy + y, MOON, 0.85);
+          }
+        }
+      };
+
+      const draw = (t) => {
+        ctx.clearRect(0, 0, W, H);
+        const twinkle = (s, depth) => (still ? 1 : 1 - depth * (0.5 + 0.5 * Math.sin(t / 1000 * (s.speed || 1.2) + s.phase)));
+        field.forEach((s) => {
+          const a = Math.round(s.a * twinkle(s, 0.45) * 8) / 8;   // in steps, like the art
+          if (s.bright) sparkle(s.x, s.y, a);
+          else dot(s.x, s.y, MOON, a);
+        });
+        links.forEach(([a, b]) => line(a.x, a.y, b.x, b.y, INK, 0.2));
+        marks.forEach((s) => sparkle(s.x, s.y, Math.round(0.95 * twinkle(s, 0.25) * 8) / 8));
+        moon();
+        if (shot) {
+          const p = (t - shot.start) / shot.duration;
+          if (p >= 1) {
+            shot = null;
+          } else {
+            const step = Math.floor(p * shot.length);
+            const fade = p < 0.15 ? p / 0.15 : p > 0.7 ? (1 - p) / 0.3 : 1;
+            for (let i = 0; i < 10; i++) {                    // head first, the tail trailing back
+              const x = shot.x + shot.dir * (step - i) * 2;
+              const y = shot.y + (step - i);
+              if (i <= step) dot(x, y, MOON, fade * (1 - i / 10) * 0.95);
+            }
+          }
+        }
+      };
+
+      const loop = (t) => {
+        if (!shot && t > nextShot) {
+          shot = { x: Math.round(W * (0.15 + random() * 0.7)), y: Math.round(4 + random() * (H - SKYLINE) * 0.3), dir: random() < 0.5 ? -1 : 1, length: 24, start: t, duration: 650 };
+          nextShot = t + 4000 + random() * 5000;
+        }
+        if (shot || t - lastDraw > 80) {                   // twinkles need only a few frames a second
+          draw(t);
+          lastDraw = t;
+        }
+        requestAnimationFrame(loop);
+      };
+
+      layout();
+      draw(0);
+      if (!still) {
+        nextShot = performance.now() + 2500;
         requestAnimationFrame(loop);
       }
-
       let resizeTimer = 0;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => { size(); paint(); }, 150);
+        resizeTimer = setTimeout(() => { layout(); draw(performance.now()); }, 150);
       });
     })();
   </script>
