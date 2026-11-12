@@ -7,6 +7,7 @@
 //     highlight pill, and smooth scrolling for in-page links.
 //  4. Back-to-top button.
 //  5. The homepage skyline's lights, switched on as it scrolls into view.
+//  6. The occasional shooting star in the homepage's night sky.
 
 (() => {
   // localStorage throws (not returns null) when storage is blocked — e.g.
@@ -307,12 +308,45 @@
     observer.observe(skyline);
   };
 
+  // ---- Shooting stars ----
+  // At night, every half a minute or so, a tiny shooting star crosses the top
+  // right corner's sky (CSS draws it), only while that corner is on screen.
+  // Cooling down to dark mode brings the first one sooner.
+  const initShootingStars = () => {
+    const sky = document.querySelector('.content > .sky-right');
+    if (!sky || !('IntersectionObserver' in window)) return;
+    const root = document.documentElement;
+    let onScreen = false;
+    let timer = 0;
+    new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; }).observe(sky);
+    const schedule = (ms) => {
+      clearTimeout(timer);
+      timer = setTimeout(shoot, ms);
+    };
+    const shoot = () => {
+      if (onScreen && !document.hidden && root.classList.contains('dark-mode') && !reducedMotion()) {
+        sky.classList.remove('is-shooting');
+        void sky.offsetWidth;   // restart the animation
+        sky.classList.add('is-shooting');
+      }
+      schedule(20000 + Math.random() * 25000);
+    };
+    schedule(5000 + Math.random() * 5000);
+    let wasDark = root.classList.contains('dark-mode');
+    new MutationObserver(() => {
+      const dark = root.classList.contains('dark-mode');
+      if (dark && !wasDark) schedule(2500 + Math.random() * 1500);
+      wasDark = dark;
+    }).observe(root, { attributes: true, attributeFilter: ['class'] });
+  };
+
   initTheme();
   const initRest = () => {
     initBackground();
     initNav();
     initBackToTop();
     initSkyline();
+    initShootingStars();
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRest, { once: true });
   else initRest();

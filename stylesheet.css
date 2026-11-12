@@ -132,40 +132,17 @@ html.theme-switching::view-transition-new(root) {
   mix-blend-mode: normal;
 }
 
-html.js .reveal {
+/* Sections are hidden until they first scroll into view, then dissolve in
+   pixel by pixel: a script in index.html masks each one with an ordered-dither
+   pattern of 3px pixels (the site's pixel-art scale) that fills in over about
+   half a second, like an image being denoised. With reduced motion they are
+   simply shown. */
+html.js .reveal:not(.is-visible) {
   opacity: 0;
-  filter: blur(12px);
-  transform: translateY(10px) scale(0.99);
-  will-change: opacity, filter, transform;
 }
-
-html.js .reveal.is-visible {
-  opacity: 1;
-  filter: none;
-  transform: none;
-  will-change: auto;
-  /* "Denoise" resolve — content sharpens out of a blur as it scrolls into view,
-     echoing the profile portrait's noise-to-image reveal. backwards fill holds
-     the blurred first frame during any stagger delay (no flash of final state). */
-  animation: reveal-denoise 900ms var(--ease-out) backwards;
-}
-
-@keyframes reveal-denoise {
-  0%   { opacity: 0; filter: blur(12px); transform: translateY(10px) scale(0.99); }
-  55%  { opacity: 1; }
-  100% { opacity: 1; filter: blur(0);    transform: none; }
-}
-
-/* Gentle cascade so a timeline that enters together resolves item by item. */
-html.js .news-item.reveal:nth-child(2).is-visible { animation-delay: 45ms; }
-html.js .news-item.reveal:nth-child(3).is-visible { animation-delay: 90ms; }
-html.js .news-item.reveal:nth-child(4).is-visible { animation-delay: 135ms; }
-html.js .news-item.reveal:nth-child(5).is-visible { animation-delay: 180ms; }
-html.js .news-item.reveal:nth-child(n+6).is-visible { animation-delay: 210ms; }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js .reveal { opacity: 1; filter: none; transform: none; }
-  html.js .reveal.is-visible { animation: none; }
+  html.js .reveal:not(.is-visible) { opacity: 1; }
 }
 
 a {
@@ -696,7 +673,43 @@ html.dark-mode .content > .sky-right {
   background-image: url('img/sky-right-night.png');
 }
 
+/* Now and then at night, a shooting star crosses the open sky at the left of
+   the right corner: site.js adds .is-shooting every half a minute or so while
+   the corner is on screen. It steps in whole art pixels (2 across, 1 down)
+   and fades out before reaching the clouds. */
+.content > .sky-right::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -13px;
+  width: 27px;
+  height: 15px;
+  background: url('img/shooting-star.png') center / 27px 15px no-repeat;
+  opacity: 0;
+}
+
+html.dark-mode .content > .sky-right.is-shooting::after {
+  animation:
+    shooting-star-path 0.7s steps(7, jump-end) both,
+    shooting-star-fade 0.7s linear both;
+}
+
+@keyframes shooting-star-path {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(42px, 21px); }
+}
+
+@keyframes shooting-star-fade {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  60%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .name {
+  /* A size container, so each name's gradient can span the whole heading. */
+  container-type: inline-size;
+  position: relative;
   text-align: center;
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   font-size: 36px;
@@ -705,14 +718,58 @@ html.dark-mode .content > .sky-right {
   margin: 0;
   letter-spacing: -0.018em;
   line-height: 1.02;
-  background: linear-gradient(135deg,
+}
+
+/* The name, and its Urdu in Nastaliq, which takes its place on hover (or a
+   tap, via index.html). Each carries the heading's gradient, sized to the
+   whole heading so the colours fall where they always have (browsers without
+   container units size it to the name instead). */
+.name-en,
+.name-ur {
+  display: inline-block;
+  background-image: linear-gradient(135deg,
     #091a3d              0%,
     var(--accent-deep)  55%,
     #0a3d80            110%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100cqw 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  transition: opacity 0.45s var(--ease-out);
+}
+
+.name-ur {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-size: 26px;
+  letter-spacing: 0;     /* any spacing would break the script's joins */
+  line-height: 2.2;      /* Nastaliq's tall letters stay inside the box */
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-user-select: none;
+          user-select: none;
+}
+
+.name-en:hover,
+.name.is-urdu .name-en {
+  opacity: 0;
+}
+
+.name-en:hover + .name-ur,
+.name.is-urdu .name-ur {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-en,
+  .name-ur { transition: none; }
 }
 
 .subtitle {
@@ -916,24 +973,53 @@ html.dark-mode .content > .sky-right {
   margin-bottom: 12px;
 }
 
+/* Each highlight's marker on the rail: a tiny 7×7 pixel icon, about the
+   height of a lowercase letter, picked by its data-kind from one strip per
+   theme (a plain dot, then paper, award, move and degree). A card-coloured
+   stripe behind it keeps the rail from showing through the icon's gaps.
+   Hovering the highlight hops it up a pixel. */
 .news-item::before {
   content: '';
   position: absolute;
-  /* 1.5px from the timeline's edge, centred on the rail (3px + 2px / 2 = 4px). */
-  left: calc(1.5px - var(--list-indent));
-  top: 7.5px;
-  width: 5px;
-  height: 5px;
-  background: var(--accent-deep);
-  border-radius: 50%;
+  /* Centred on the rail (3px + 2px / 2 = 4px from the timeline's edge) and
+     on the first line of text, where the old dots sat. */
+  left: calc(0.5px - var(--list-indent));
+  top: 6.5px;
+  width: 7px;
+  height: 7px;
+  background:
+    url('img/news-icons-day.png') 0 0 / 35px 7px no-repeat,
+    linear-gradient(var(--surface-card), var(--surface-card)) center / 2px 100% no-repeat;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
   z-index: 1;
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s var(--ease-out);
 }
 
+.news-item[data-kind="paper"]::before  { background-position: -7px 0, center; }
+.news-item[data-kind="award"]::before  { background-position: -14px 0, center; }
+.news-item[data-kind="move"]::before   { background-position: -21px 0, center; }
+.news-item[data-kind="degree"]::before { background-position: -28px 0, center; }
+
 .news-item:hover::before {
-  background: var(--accent-primary);
-  transform: scale(1.4);
-  box-shadow: 0 0 0 1.5px rgba(var(--accent-primary-rgb), 0.15);
+  transform: translateY(-1px);
+}
+
+/* "New" on highlights from about the last two months (a script in index.html
+   tags them from their datetime, so it drops off by itself). */
+.news-item.is-new > span:last-child::after {
+  content: "new";
+  margin-left: 6px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(var(--accent-primary-rgb), 0.1);
+  color: var(--accent-primary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+  white-space: nowrap;
 }
 
 .news-date {
@@ -2035,15 +2121,12 @@ html.dark-mode .nav-icon-btn:hover {
   box-shadow: 0 3px 10px -3px rgba(223, 176, 194, 0.4);
 }
 
-html.dark-mode .name {
-  background: linear-gradient(135deg,
+html.dark-mode .name-en,
+html.dark-mode .name-ur {
+  background-image: linear-gradient(135deg,
     var(--accent-deep)    0%,
     var(--accent-primary) 55%,
     var(--accent-warm)   110%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
 }
 html.dark-mode .subtitle { color: #b3ada3; }
 html.dark-mode .subtitle b { color: #ebe6dc; }
@@ -2117,11 +2200,7 @@ html.dark-mode .news-timeline::before {
     rgba(235, 230, 220, 0) 100%);
 }
 html.dark-mode .news-item::before {
-  background: #c9b6ff;
-}
-html.dark-mode .news-item:hover::before {
-  background: #dfb0c2;
-  box-shadow: 0 0 0 1.5px rgba(223, 176, 194, 0.2);
+  background-image: url('img/news-icons-night.png'), linear-gradient(var(--surface-card), var(--surface-card));
 }
 html.dark-mode .news-date { color: #a8a39a; }
 
@@ -2430,8 +2509,6 @@ html.dark-mode .cmdk-footer {
 
   .reveal {
     opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
   }
 
   .content {
@@ -2449,12 +2526,17 @@ html.dark-mode .cmdk-footer {
     font-size: 26pt;
     line-height: 1.05;
     letter-spacing: -0.01em;
+  }
+
+  .name-en {
     color: #111 !important;
     background: none !important;
     -webkit-background-clip: border-box !important;
             background-clip: border-box !important;
     -webkit-text-fill-color: #111 !important;
   }
+
+  .name-ur { display: none !important; }
 
   .subtitle {
     margin: 0 0 1.1rem !important;
