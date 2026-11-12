@@ -12,7 +12,7 @@ A static site showcasing research publications, recent highlights, and contact i
 - Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
 - Long-form research blog pages with shared navigation, citation tools, and table-of-contents behavior
 - Profile image generated on load, either autoregressively (patch by patch) or by diffusion from noise (`HERO_GENERATION` in `index.html`; preview with `?hero=diffusion`), with a tap-to-dissolve toggle
-- Expandable paper abstracts with one-click BibTeX copy, and a pixel glint across the honour icons on hover
+- Expandable paper abstracts with one-click BibTeX copy
 - Animated count-up stats (citations, h-index, publications)
 - Timeline-style recent highlights feed, with a tiny pixel icon per highlight (`data-kind`: paper, award, move, degree) and a "new" tag that expires on its own
 - Faint pixel art framing the page: a Karachi skyline whose windows light up as you reach it, and corner clouds with a sun by day and a moon, stars and the occasional shooting star by night

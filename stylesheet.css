@@ -1328,29 +1328,6 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   color: var(--text-muted);
 }
 
-/* A glint on honours: hovering a Spotlight, Oral or Best Paper flag sends a
-   bright band across its icon in a few pixel steps, like light catching
-   metal. The icon is only repainted (in its own colour, plus the band) while
-   hovered, so at rest and in print it is untouched. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .pub-flag:hover .pub-flag-honor i,
-  .pub-flag:hover .pub-flag-award i {
-    background:
-      linear-gradient(110deg, transparent 42%, rgba(255, 251, 235, 0.95) 42% 56%, transparent 56%) 100% 0 / 300% 100% no-repeat,
-      linear-gradient(var(--accent-highlight), var(--accent-highlight));
-    -webkit-background-clip: text;
-            background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    animation: honour-glint 0.55s steps(5, jump-none) both;
-  }
-}
-
-@keyframes honour-glint {
-  from { background-position: 100% 0, 0 0; }
-  to   { background-position: 0 0, 0 0; }
-}
-
 .research-item h3,
 .post h3 {
   margin: 0;
@@ -1380,16 +1357,17 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   background: none;
 }
 
-/* Authors (or a post's summary) stay a step below the title (13.5px vs
-   15.5px); the venue (or a post's tags) a half step below that. */
+/* Authors (or a post's summary) stay a step below the title (12.5px vs
+   15.5px); the venue a half step below that. Like the titles, they wrap
+   "pretty", so a last line is never one lone word. */
 .pub-authors,
 .pub-venue,
-.post-summary,
-.post-tags {
+.post-summary {
   margin: 0.2rem 0 0;
-  font-size: 13.5px;
+  font-size: 12.5px;
   line-height: 1.45;
   color: var(--text-muted);
+  text-wrap: pretty;
 }
 
 .pub-authors b {
@@ -1397,10 +1375,9 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   color: var(--accent-deep);
 }
 
-.pub-venue,
-.post-tags {
+.pub-venue {
   margin-top: 0.1rem;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .pub-venue a {
@@ -1596,6 +1573,38 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--text-muted);
+}
+
+/* A post's topics, as small tinted chips: a quieter cousin of the timeline's
+   "new" tag. They float at the end of the summary's last line, flush right,
+   or just below it (still flush right) when that line is too full; the
+   summary is a flow root so it grows to hold them. (A float switches off
+   text-wrap: pretty, so the summary's last two words are joined with a
+   no-break space in the markup instead.) */
+.post-summary {
+  display: flow-root;
+}
+
+.post-tags {
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px;
+  margin: 0 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.post-tags li {
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(var(--accent-deep-rgb), 0.06);
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
 }
 
 .pub-link-more i {
@@ -2379,6 +2388,7 @@ html.dark-mode .post h3 a:focus-visible {
   background: none;
 }
 html.dark-mode .pub-authors b { color: #ebe6dc; }
+html.dark-mode .post-tags li { background: rgba(var(--accent-deep-rgb), 0.1); }
 html.dark-mode .pub-venue a {
   color: inherit;
   text-decoration-color: rgba(235, 230, 220, 0.3);
@@ -2809,7 +2819,8 @@ html.dark-mode .cmdk-footer {
     color: #111 !important;
   }
   .research-item p,
-  .post p {
+  .post p,
+  .post .post-summary {
     margin: 0 !important;
     font-size: 9.5pt;
     line-height: 1.4;
@@ -2846,7 +2857,14 @@ html.dark-mode .cmdk-footer {
     font-size: 8.5pt;
     color: #555 !important;
   }
-  .post .post-tags { color: #6a6a6a !important; }
+  /* backgrounds don't print, so the chips keep their shape with a hairline */
+  .post .post-tags li {
+    padding: 0 4pt;
+    border: 0.5pt solid #c8c8c8;
+    background: none !important;
+    font-size: 7.5pt;
+    color: #555 !important;
+  }
 
   .footer {
     margin: 1.4rem 0 0 !important;
