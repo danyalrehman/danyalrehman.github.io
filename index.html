@@ -38,18 +38,14 @@
     }
 
     // Apply the persisted theme before paint to prevent a flash of the wrong one.
-    // With no stored preference, follow the operating-system setting. (This
-    // must match blogs/blog-head.js, or the theme would change between pages.)
-    (() => {
-      let storedTheme = null;
-      try {
-        storedTheme = localStorage.getItem('dark-mode');
-      } catch (_) { /* storage blocked (it throws rather than returning null) */ }
-      const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-      if (storedTheme === 'on' || (storedTheme === null && prefersDark)) {
+    // Without a saved choice the site loads in light mode, whatever the
+    // operating-system setting. (This must match blogs/blog-head.js and
+    // 404.html, or the theme would change between pages.)
+    try {
+      if (localStorage.getItem('dark-mode') === 'on') {
         document.documentElement.classList.add('dark-mode');
       }
-    })();
+    } catch (_) { /* storage blocked (it throws rather than returning null): stay light */ }
   </script>
   <script>
     // One-click BibTeX: each publication's "BibTeX" button copies its entry.

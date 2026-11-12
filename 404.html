@@ -18,18 +18,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Source+Sans+3:ital,wght@0,200..900&amp;display=swap" rel="stylesheet">
 
   <script>
-    // Respect the saved theme, or the OS setting, before paint — as the rest of
-    // the site does. Storage throws (rather than returning null) when blocked.
-    (() => {
-      let storedTheme = null;
-      try {
-        storedTheme = localStorage.getItem('dark-mode');
-      } catch (_) { /* storage blocked: follow the OS setting */ }
-      const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-      if (storedTheme === 'on' || (storedTheme === null && prefersDark)) {
+    // Respect the saved theme before paint, as the rest of the site does: light
+    // unless dark mode was chosen. Storage throws (rather than returning null)
+    // when blocked.
+    try {
+      if (localStorage.getItem('dark-mode') === 'on') {
         document.documentElement.classList.add('dark-mode');
       }
-    })();
+    } catch (_) { /* storage blocked: stay light */ }
   </script>
 
   <style>
@@ -39,7 +35,6 @@
       --accent-deep: #213c7a;
       --accent-deep-rgb: 33, 60, 122;
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-      color-scheme: light dark;
     }
 
     * { box-sizing: border-box; }
@@ -218,6 +213,7 @@
     }
 
     /* ---- Dark mode ---- */
+    html.dark-mode { color-scheme: dark; }
     html.dark-mode body { color: #d8d8d8; background-color: #141317; }
     html.dark-mode .nf-brand {
       color: #cbd9f2;

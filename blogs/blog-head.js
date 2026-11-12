@@ -8,21 +8,17 @@ if (window.CSS && CSS.supports && CSS.supports('view-transition-name: none')) {
   document.documentElement.classList.add('vt');
 }
 
-// Apply the saved theme, or the OS setting, before paint. This must match
-// index.html's bootstrap or the theme would change between pages.
+// Apply the saved theme before paint. Without a saved choice the site loads in
+// light mode, whatever the OS setting; this must match index.html's bootstrap
+// or the theme would change between pages.
 // localStorage throws (not returns null) when storage is blocked — e.g. Safari
 // "Block All Cookies" or enterprise policy. Unguarded, that would abort this
 // script and leave window.MathJax unset, so no math renders anywhere.
-(() => {
-  let storedTheme = null;
-  try {
-    storedTheme = localStorage.getItem('dark-mode');
-  } catch (_) { /* storage blocked: follow the OS setting */ }
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  if (storedTheme === 'on' || (storedTheme === null && prefersDark)) {
+try {
+  if (localStorage.getItem('dark-mode') === 'on') {
     document.documentElement.classList.add('dark-mode');
   }
-})();
+} catch (_) { /* storage blocked: stay light */ }
 
 window.MathJax = {
   tex: {
