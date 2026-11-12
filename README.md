@@ -8,7 +8,7 @@ A static site showcasing research publications, recent highlights, and contact i
 
 ## ✨ Features
 
-- Sticky nav with scroll progress, dark mode (the new theme spreads out from the toggle), and background-image toggles
+- Sticky nav with scroll progress, dark mode (the new theme spreads out from the toggle while the corner sun sets and the moon rises), and background-image toggles
 - Command palette (⌘K / Ctrl-K / `/`) for quick section and paper navigation
 - Long-form research blog pages with shared navigation, citation tools, and table-of-contents behavior
 - Profile image generated on load, either autoregressively (patch by patch) or by diffusion from noise (`HERO_GENERATION` in `index.html`; preview with `?hero=diffusion`), with a tap-to-dissolve toggle
@@ -17,8 +17,7 @@ A static site showcasing research publications, recent highlights, and contact i
 - Timeline-style recent highlights feed, with a tiny pixel icon per highlight (`data-kind`: paper, award, move, degree) and a "new" tag that expires on its own
 - Faint pixel art framing the page: a Karachi skyline whose windows light up as you reach it, and corner clouds with a sun by day and a moon, stars and the occasional shooting star by night
 - The name in Urdu (Nastaliq) on hover or tap
-- At night (on screens with a mouse), the portrait as a two-tone lavender dither that dissolves to full colour on hover
-- Sections dissolve in pixel by pixel (an ordered dither) the first time they scroll into view
+- Sections dissolve in pixel by pixel (an ordered dither) the first time they scroll into view, and pages dissolve into each other the same way
 - Persisted preferences (dark mode, background) via `localStorage`
 - Auto-updating footer timestamp
 

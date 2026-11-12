@@ -111,13 +111,61 @@ body::after {
    browsers morph between pages; the rest fall back to the JS opacity fade. The
    .vt class (set before paint in the head) disables that fade so the two never
    run at once. The sticky nav carries a view-transition-name so it stays
-   anchored while the page content cross-fades beneath it. */
+   anchored while the page content dissolves in beneath it. */
 @view-transition { navigation: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) { animation: none !important; }
+}
+
+/* Between pages, the new one dissolves in over the old, pixel by pixel, in the
+   same ordered dither as the section reveals: one mask layer per level of the
+   4×4 Bayer matrix (a 3px pixel repeating every 12px, placed where the matrix
+   puts that level), each switched on as --dither passes its level. Theme
+   switches keep their circle (below); reduced motion switches at once. */
+@property --dither {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 16;
+}
+
+html:not(.theme-switching)::view-transition-old(root) {
+  animation: none;
+}
+
+html:not(.theme-switching)::view-transition-new(root) {
+  mix-blend-mode: normal;
+  mask-image:
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 0) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 1) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 2) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 3) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 4) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 5) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 6) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 7) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 8) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 9) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 10) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 11) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 12) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 13) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 14) * 8, 1)) 0),
+    conic-gradient(at 3px 3px, transparent 75%, rgb(0 0 0 / clamp(0, (var(--dither) - 15) * 8, 1)) 0);
+  mask-position:
+    0px 0px, 6px 6px, 6px 0px, 0px 6px,
+    3px 3px, 9px 9px, 9px 3px, 3px 9px,
+    3px 0px, 9px 6px, 9px 0px, 3px 6px,
+    0px 3px, 6px 9px, 6px 3px, 0px 9px;
+  mask-size: 12px 12px;
+  animation: page-dither 0.5s linear both;
+}
+
+@keyframes page-dither {
+  from { --dither: 0; }
+  to   { --dither: 16; }
 }
 
 /* Theme switch: the new theme spreads out from the toggle as a growing circle
@@ -671,6 +719,31 @@ html.dark-mode .content > .sky-left {
 
 html.dark-mode .content > .sky-right {
   background-image: url('img/sky-right-night.png');
+}
+
+/* On a theme switch the left corner plays a short sunset or sunrise from a
+   strip of 13 frames: cooling down, a warm sun sinks behind the clouds, then
+   the moon rises as the stars come out; warming up, a pale daytime moon sets
+   and the sun comes back up. site.js adds the class with the switch (not with
+   reduced motion) and takes it off at the end; each strip ends on the
+   corner's usual picture. */
+html.dark-mode .content > .sky-left.is-setting,
+html:not(.dark-mode) .content > .sky-left.is-rising {
+  background-size: 90px auto;
+  animation: sky-turn 0.9s steps(12, jump-end) both;
+}
+
+html.dark-mode .content > .sky-left.is-setting {
+  background-image: url('img/sky-left-sunset.png');
+}
+
+html:not(.dark-mode) .content > .sky-left.is-rising {
+  background-image: url('img/sky-left-sunrise.png');
+}
+
+@keyframes sky-turn {
+  from { background-position-y: 0%; }
+  to   { background-position-y: 100%; }
 }
 
 /* Now and then at night, a shooting star crosses the open sky at the left of
@@ -1663,25 +1736,6 @@ html.dark-mode .site-footer-sep {
   .cmp-wrapper.denoising .cmp-noise { animation: none; }
 }
 
-/* At night the portrait can show as a two-tone dither: a small canvas, drawn
-   by a script in index.html, scaled up in hard pixels over the images. It
-   dissolves to full colour on hover. */
-.cmp-dither {
-  position: absolute;
-  inset: 0;
-  display: none;
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
-  pointer-events: none;
-}
-
-html.dark-mode .cmp-wrapper.generation-complete .cmp-dither {
-  display: block;
-}
-
 .cmp-toggle {
   position: absolute;
   bottom: 8px;
@@ -2541,7 +2595,6 @@ html.dark-mode .cmdk-footer {
   .paper-abstract,
   .cmp-toggle,
   .cmp-noise,
-  .cmp-dither,
   .gen-canvas,
   .ar-cursor,
   .skyline,

@@ -43,10 +43,21 @@
     };
     const root = document.documentElement;
     show(root.classList.contains('dark-mode'), false);
+    // The left corner plays a sunset (cooling down) or sunrise (warming up)
+    // in the new theme; CSS steps through the frames, then the class comes off.
+    const turnSky = (dark) => {
+      const sky = document.querySelector('.content > .sky-left');
+      if (!sky || reducedMotion()) return;
+      sky.classList.remove('is-setting', 'is-rising');
+      void sky.offsetWidth;   // restart the animation
+      sky.classList.add(dark ? 'is-setting' : 'is-rising');
+      sky.addEventListener('animationend', () => sky.classList.remove('is-setting', 'is-rising'), { once: true });
+    };
     const toggle = () => {
       const dark = root.classList.toggle('dark-mode');
       show(dark, true);
       store.set('dark-mode', dark ? 'on' : 'off');
+      turnSky(dark);
     };
     let current = null;   // the theme switch now animating, if any
     btn.addEventListener('click', () => {
