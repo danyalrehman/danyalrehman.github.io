@@ -1297,6 +1297,35 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   background: var(--accent-highlight);
 }
 
+/* Hovering a paper (or tabbing into one) shades it: a faint square fill
+   reaching a little past the entry (just above and below, a bit more at the
+   sides), so nothing moves. The entry isolates its stacking so the fill sits
+   just behind its own text. */
+.research-item {
+  isolation: isolate;
+}
+
+.research-item::after {
+  content: "";
+  position: absolute;
+  inset: -6px -14px;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.047);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-quick);
+}
+
+@media (hover: hover) {
+  .research-item:hover::after {
+    opacity: 1;
+  }
+}
+
+.research-item:has(:focus-visible)::after {
+  opacity: 1;
+}
+
 .pub-flag {
   display: flex;
   flex-wrap: wrap;
@@ -1557,8 +1586,8 @@ html.dark-mode .content > .sky-right.is-shooting::after {
 }
 
 /* ---------- Blog ----------
-   Each post is a framed box with a hard offset shadow (after pi.website's
-   blog), flush with the section heading; the whole box is the post's link.
+   Each post is a framed box with a hard offset shadow, flush with the
+   section heading; the whole box is the post's link.
    The list, title and summary styles are shared with the publication rules
    above (.post-list / .post / .post h3 / .post-summary are grouped there). */
 .room-blog > h2 {
@@ -2405,6 +2434,9 @@ html.dark-mode .post {
   background: #201f1d;
   border-color: rgba(var(--accent-deep-rgb), 0.85);
   box-shadow: 3px 3px 0 rgba(var(--accent-deep-rgb), 0.85);
+}
+html.dark-mode .research-item::after {
+  background: rgba(255, 255, 255, 0.06);
 }
 html.dark-mode .pub-venue a {
   color: inherit;
