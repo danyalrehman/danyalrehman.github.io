@@ -1139,83 +1139,35 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   margin-left: 3px;
 }
 
+/* A centered, understated summary using the site's serif/sans-serif pairing. */
 .stats {
-  display: flex;
-  align-items: center;
-  gap: 1.955rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: 1.6rem auto 0.5rem;
-  padding: 0.45rem 1.725rem;
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-deep-rgb), 0.04) 0%,
-      rgba(var(--accent-deep-rgb), 0.015) 100%),
-    #ffffff;
-  border: 1px solid rgba(var(--accent-deep-rgb), 0.1);
-  border-radius: 999px;
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.035),
-    0 6px 18px -12px rgba(var(--accent-deep-rgb), 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  transition:
-    background var(--motion-medium),
-    border-color var(--motion-medium),
-    box-shadow var(--motion-medium),
-    transform var(--motion-medium);
-}
-
-.stats:hover {
-  background:
-    linear-gradient(180deg,
-      rgba(var(--accent-primary-rgb), 0.07) 0%,
-      rgba(var(--accent-primary-rgb), 0.025) 100%),
-    #ffffff;
-  border-color: rgba(var(--accent-primary-rgb), 0.18);
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 10px 26px -14px rgba(var(--accent-primary-rgb), 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
-}
-
-.stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.1rem;
-  min-width: 4.83rem;
+  gap: 4px;
+  width: min(100%, 288px);
+  margin: 1.25rem auto;
+  padding: 0;
 }
-
+.stats-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; margin: 0; padding: 0; }
+.stat { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; padding: 0 10px; }
+.stat + .stat::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 5px; width: 1px; background: rgba(var(--accent-deep-rgb), 0.12); }
+.stat-value { order: -1; margin: 0; }
 .stat-number {
+  display: inline-block;
   font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  font-size: 1.85rem;
-  line-height: 1;
-  letter-spacing: -0.01em;
   color: var(--accent-deep);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.015em;
   font-variant-numeric: tabular-nums;
-  transition: color var(--motion-medium);
 }
-
-.stats:hover .stat-number {
-  color: var(--accent-primary);
-}
-
-.stat-label {
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #888;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 28px;
-  background: linear-gradient(180deg,
-    rgba(var(--accent-deep-rgb), 0)    0%,
-    rgba(var(--accent-deep-rgb), 0.2) 50%,
-    rgba(var(--accent-deep-rgb), 0)  100%);
-}
+.stat-label { font-size: 10.5px; line-height: 1.2; color: var(--text-muted); }
+.stats .stats-source { display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 18px; color: var(--text-muted); background: none; font-size: 10px; text-decoration: none; }
+.stats .stats-source:hover, .stats .stats-source:focus-visible { color: var(--accent-primary); background: none; text-decoration: underline; text-underline-offset: 3px; }
+.stats-source:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 3px; }
+.stats-source svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- Featured publications ----------
    A card-less list sitting directly on the page, flush with its heading.
@@ -1404,6 +1356,11 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   color: var(--accent-deep);
 }
 
+/* The asterisks marking co-first authors, in a dark magenta. */
+.pub-equal {
+  color: #8e1c6b;
+}
+
 .pub-venue {
   margin-top: 0.1rem;
   font-size: 12px;
@@ -1553,20 +1510,16 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
-.room + .room {
-  margin-top: 1.75rem;
-}
-
+/* Sections sit 38px apart, with the divider line between them about 18px
+   from each (a room's 2rem bottom margin collapses into this); after the
+   hiring note too. */
+.room + .room,
 .news-box + .room {
-  margin-top: 3rem;
-}
-
-.news-box + .room::before {
-  top: -1.5rem;
+  margin-top: calc(2rem + 6px);
 }
 
 .room-news + .stats {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
 
 .room::before {
@@ -1574,7 +1527,7 @@ html.dark-mode .content > .sky-right.is-shooting::after {
   position: absolute;
   left: 12%;
   right: 12%;
-  top: -1.05rem;
+  top: calc(-1.05rem - 3px);
   height: 1px;
   background: var(--divider-line);
   opacity: 0.9;
@@ -2378,43 +2331,6 @@ html.dark-mode .news-item::before {
 }
 html.dark-mode .news-date { color: #a8a39a; }
 
-html.dark-mode .stats {
-  background:
-    linear-gradient(180deg,
-      rgba(201, 182, 255, 0.06) 0%,
-      rgba(201, 182, 255, 0.02) 100%),
-    #1a1918;
-  border-color: rgba(235, 230, 220, 0.1);
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.3),
-    0 10px 26px -12px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-/* Without this, .stats:hover reverts to its light #ffffff gradient on the dark page. */
-html.dark-mode .stats:hover {
-  background:
-    linear-gradient(180deg,
-      rgba(201, 182, 255, 0.11) 0%,
-      rgba(201, 182, 255, 0.045) 100%),
-    #1a1918;
-  border-color: rgba(201, 182, 255, 0.22);
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.3),
-    0 12px 30px -14px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-/* Light mode turns the number accent-blue on hover; #0067cf is too dark on the
-   dark card, so use the AA-passing light blue instead. */
-html.dark-mode .stats:hover .stat-number { color: #9ec5ff; }
-html.dark-mode .stat-number { color: #c9b6ff; }
-html.dark-mode .stat-label { color: #8a857c; }
-html.dark-mode .stat-divider {
-  background: linear-gradient(180deg,
-    rgba(235, 230, 220, 0)    0%,
-    rgba(235, 230, 220, 0.18) 50%,
-    rgba(235, 230, 220, 0)  100%);
-}
-
 html.dark-mode .research-item h3,
 html.dark-mode .post h3 { color: #c9b6ff; }
 /* html.dark-mode a / a:hover outrank the light-mode publication link rules,
@@ -2429,6 +2345,7 @@ html.dark-mode .post h3 a:focus-visible {
   background: none;
 }
 html.dark-mode .pub-authors b { color: #ebe6dc; }
+html.dark-mode .pub-equal { color: #e48ac9; }
 html.dark-mode .post-tags li { background: rgba(var(--accent-deep-rgb), 0.1); }
 html.dark-mode .post {
   background: #201f1d;
@@ -2619,26 +2536,6 @@ html.dark-mode .cmdk-footer {
   .sticky-nav-links a {
     padding: 0.3rem 0.25rem;
     font-size: 11.5px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  /* Equal columns keep all three metrics inside the content panel. */
-  .stats {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr) 1px minmax(0, 1fr);
-    width: min(100%, 390px);
-    gap: clamp(0.25rem, 1.5vw, 0.6rem);
-    padding: 0.55rem clamp(0.6rem, 3vw, 1rem);
-  }
-
-  .stat { min-width: 0; }
-
-  .stat-number { font-size: clamp(1.6rem, 6vw, 2rem); }
-
-  .stat-label {
-    font-size: 9px;
-    letter-spacing: 0.05em;
   }
 }
 
@@ -2884,7 +2781,8 @@ html.dark-mode .cmdk-footer {
     font-size: 8.5pt;
     color: #555 !important;
   }
-  .research-item .pub-flag span { color: inherit !important; }
+  .research-item .pub-flag span,
+  .research-item .pub-equal { color: inherit !important; }
   .research-item .pub-authors {
     color: #1d1d1f !important;
   }

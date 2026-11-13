@@ -509,24 +509,30 @@
       </div>
     </section>
 
-    <div id="publications" class="stats reveal">
-      <div class="stat">
-        <span class="stat-number" data-target="1000" data-suffix="+">0</span>
-        <span class="stat-label">citations</span>
-      </div>
-      <div class="stat-divider" aria-hidden="true"></div>
-      <div class="stat">
-        <span class="stat-number" data-target="17">0</span>
-        <span class="stat-label">h-index</span>
-      </div>
-      <div class="stat-divider" aria-hidden="true"></div>
-      <div class="stat">
-        <span class="stat-number" data-target="30" data-suffix="+">0</span>
-        <span class="stat-label">publications</span>
-      </div>
-    </div>
+    <!-- Citation metrics (hidden for now; uncomment to bring them back, their
+         styles are still in stylesheet.css under .stats)
+    <aside class="stats reveal" aria-label="Research metrics">
+      <dl class="stats-metrics">
+        <div class="stat">
+          <dt class="stat-label">citations</dt>
+          <dd class="stat-value"><span class="stat-number" data-target="1000" data-suffix="+">1,000+</span></dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-label">h-index</dt>
+          <dd class="stat-value"><span class="stat-number" data-target="17">17</span></dd>
+        </div>
+        <div class="stat">
+          <dt class="stat-label">publications</dt>
+          <dd class="stat-value"><span class="stat-number" data-target="30" data-suffix="+">30+</span></dd>
+        </div>
+      </dl>
+      <a class="stats-source" href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" aria-label="View research profile on Google Scholar (opens in a new tab)" title="View on Google Scholar">
+        <span class="stats-source-name">Google Scholar</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg>
+      </a>
+    </aside>
+    -->
 
-    <section class="research room room-research">
+    <section id="publications" class="research room room-research">
       <div class="pub-head">
         <h2>Featured Publications</h2>
         <a class="pub-head-link" href="https://scholar.google.com/citations?user=XdyK1qoAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" title="Full list on Google Scholar">All publications<i class="fas fa-arrow-right" aria-hidden="true"></i></a>
@@ -631,8 +637,8 @@
 
         <li class="research-item reveal">
           <h3><a href="https://doi.org/10.1016/j.cell.2025.07.033" target="_blank" rel="noopener noreferrer">A Generative Deep Learning Approach to De Novo Antibiotic Design</a></h3>
-          <p class="pub-authors">Aarti Krishnan*, Melis N. Anahtar*, Jacqueline A. Valeri*, &hellip;, <b>Danyal Rehman</b>, &hellip;, Felix Wong, James J. Collins.</p>
-          <p class="pub-venue"><a class="pub-venue-name" href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>. *Equal contribution.</p>
+          <p class="pub-authors">Aarti Krishnan<span class="pub-equal">*</span>, Melis N. Anahtar<span class="pub-equal">*</span>, Jacqueline A. Valeri<span class="pub-equal">*</span>, &hellip;, <b>Danyal Rehman</b>, &hellip;, Felix Wong, James J. Collins.</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://www.cell.com/cell/home" target="_blank" rel="noopener noreferrer">Cell (2025)</a>.</p>
           <div class="pub-links">
             <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-antibiotics">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
             <a class="pub-link" href="https://doi.org/10.1016/j.cell.2025.07.033" target="_blank" rel="noopener noreferrer">DOI</a>
@@ -670,8 +676,8 @@
 
         <li class="research-item reveal">
           <h3><a href="https://arxiv.org/abs/2307.05432" target="_blank" rel="noopener noreferrer">Self-supervised Learning with Lie Symmetries for Partial Differential Equations</a></h3>
-          <p class="pub-authors">Gr&eacute;goire Mialon*, Quentin Garrido*, Hannah Lawrence, <b>Danyal Rehman</b>, Yann LeCun, Bobak T. Kiani.</p>
-          <p class="pub-venue"><a class="pub-venue-name" href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023). *Equal contribution.</p>
+          <p class="pub-authors">Gr&eacute;goire Mialon<span class="pub-equal">*</span>, Quentin Garrido<span class="pub-equal">*</span>, Hannah Lawrence, <b>Danyal Rehman</b>, Yann LeCun, Bobak T. Kiani.</p>
+          <p class="pub-venue"><a class="pub-venue-name" href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS (2023)</a>. Also presented at <a href="https://neurips.cc/" target="_blank" rel="noopener noreferrer">NeurIPS</a> &ndash; AI for Science Workshop (2023).</p>
           <div class="pub-links">
             <button class="pub-link pub-link-abstract" type="button" aria-expanded="false" aria-controls="abstract-ssl-pde">Abstract<i class="fas fa-chevron-down" aria-hidden="true"></i></button>
             <a class="pub-link" href="https://arxiv.org/abs/2307.05432" target="_blank" rel="noopener noreferrer">arXiv</a>

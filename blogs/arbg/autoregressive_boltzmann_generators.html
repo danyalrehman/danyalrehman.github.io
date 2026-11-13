@@ -193,86 +193,161 @@
       box-shadow: 0 2px 10px rgba(var(--accent-primary-rgb), 0.07);
     }
 
-    #arch-diagram .fig-frame { padding: 1.1rem 1.1rem 0.8rem; position: relative; }
-
-    .arch-svg {
-      display: block; width: 100%;
-      font-family: 'Source Sans 3', 'Inter', system-ui, sans-serif;
-      color: #20242e;
+    /* Both diagrams use one palette derived from the site's light/dark theme tokens. */
+    #arch-diagram, #bin-diagram {
+      --arch-ink: #2d2f37;
+      --arch-muted: var(--text-muted);
+      --arch-line: color-mix(in oklab, var(--accent-deep) 52%, var(--surface-card));
+      --arch-paper: color-mix(in oklab, var(--accent-deep) 2%, var(--surface-card));
+      --arch-card: var(--surface-card);
+      --arch-border: color-mix(in oklab, var(--accent-deep) 18%, var(--surface-card));
+      --arch-blue: var(--accent-primary);
+      --arch-blue-bg: color-mix(in oklab, var(--accent-primary) 6%, var(--surface-card));
+      --arch-blue-line: color-mix(in oklab, var(--accent-primary) 26%, var(--surface-card));
+      --arch-teal: var(--accent-deep);
+      --arch-teal-bg: color-mix(in oklab, var(--accent-deep) 6%, var(--surface-card));
+      --arch-teal-line: color-mix(in oklab, var(--accent-deep) 24%, var(--surface-card));
+      --arch-purple: var(--accent-primary);
+      --arch-purple-bg: color-mix(in oklab, var(--accent-primary) 9%, var(--surface-card));
+      --arch-purple-line: color-mix(in oklab, var(--accent-primary) 30%, var(--surface-card));
+      --arch-warm: color-mix(in oklab, var(--accent-warm) 70%, var(--accent-deep));
+      --arch-warm-bg: color-mix(in oklab, var(--accent-warm) 9%, var(--surface-card));
+      --arch-warm-line: color-mix(in oklab, var(--arch-warm) 30%, var(--surface-card));
+      background: var(--arch-card);
+      border-color: var(--arch-border);
     }
+    html.dark-mode #arch-diagram, html.dark-mode #bin-diagram {
+      --arch-ink: #ebe6dc;
+      --arch-warm: var(--accent-primary);
+      --arch-warm-bg: color-mix(in oklab, var(--accent-primary) 9%, var(--surface-card));
+    }
+    #arch-diagram .arch-block:hover .arch-hit,
+    #arch-diagram .arch-block:focus-visible .arch-hit,
+    #arch-diagram .arch-block.is-focus .arch-hit {
+      filter: drop-shadow(0 3px 4px rgba(var(--accent-deep-rgb), .12));
+    }
+    #arch-diagram .fig-frame { padding: 0; background: var(--arch-paper); }
+    .arch-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 22px 26px 0; }
+    .arch-heading strong { font-family: 'Instrument Serif', Georgia, serif; font-size: 27px; font-weight: 400; color: var(--arch-ink); }
+    .arch-heading span { font-size: 11px; color: var(--arch-muted); letter-spacing: .06em; text-transform: uppercase; }
+    .arch-svg { display: block; width: 100%; height: auto; font-family: 'Source Sans 3', system-ui, sans-serif; color: var(--arch-ink); }
     .arch-svg text { fill: currentColor; }
-    .arch-label    { font-size: 13px; font-weight: 600; letter-spacing: -0.005em; }
-    .arch-label-sm { font-size: 11px; letter-spacing: -0.003em; }
-    .arch-section  { font-size: 13px; font-weight: 600; letter-spacing: -0.003em; }
-    .arch-caption { font-size: 11px; }
-    .arch-block { cursor: pointer; }
-    .arch-block .arch-shape {
-      stroke: #1f222b; stroke-width: 1.6;
-      filter: url(#arch-shadow);
-      transition: stroke 0.18s ease, stroke-width 0.18s ease, opacity 0.2s ease;
+    .arch-svg .arch-title { font-size: 18px; font-weight: 600; letter-spacing: -.02em; }
+    .arch-svg .arch-label { font-size: 15px; font-weight: 600; }
+    .arch-svg .arch-small { font-size: 13px; fill: var(--arch-muted); }
+    .arch-svg .arch-kicker { font-size: 11px; font-weight: 600; letter-spacing: .12em; fill: var(--arch-muted); }
+    .arch-svg .arch-math { font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; font-style: italic; }
+    .arch-panel { fill: var(--arch-card); stroke: var(--arch-border); stroke-width: 1.2; }
+    .arch-neutral { fill: var(--arch-paper); stroke: var(--arch-border); }
+    .arch-conditioning { color: var(--arch-teal); }
+    .arch-conditioning .arch-panel, .arch-teal { fill: var(--arch-teal-bg); stroke: var(--arch-teal-line); }
+    .arch-attention { fill: var(--arch-purple-bg); stroke: var(--arch-purple-line); }
+    .arch-ffn { fill: var(--arch-blue-bg); stroke: var(--arch-blue-line); }
+    .arch-coordinate { fill: var(--arch-warm-bg); stroke: var(--arch-warm-line); }
+    .arch-svg .arch-warm-text { fill: var(--arch-warm); }
+    .arch-svg .arch-teal-text { fill: var(--arch-teal); }
+    .arch-svg .arch-purple-text { fill: var(--arch-purple); }
+    .arch-svg .arch-blue-text { fill: var(--arch-blue); }
+    .arch-wire { fill: none; stroke: var(--arch-line); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; marker-end: url(#arch-arrow); }
+    .arch-context-wire { stroke: var(--arch-teal); marker-end: url(#arch-context-arrow); }
+    .arch-residual { stroke-width: 1.5; }
+    .arch-junction { fill: var(--arch-line); }
+    .arch-feedback { stroke-dasharray: 4 5; stroke: var(--arch-warm); marker-end: url(#arch-feedback-arrow); }
+    .arch-add { fill: var(--arch-card); stroke: var(--arch-line); stroke-width: 1.2; }
+    .arch-bar { fill: var(--arch-blue); opacity: .25; }
+    .arch-bar.is-selected { opacity: 1; }
+    .arch-block { cursor: pointer; outline: none; }
+    .arch-block .arch-hit { transition: stroke .18s ease, filter .18s ease; }
+    .arch-block:hover .arch-hit, .arch-block:focus-visible .arch-hit, .arch-block.is-focus .arch-hit { stroke: var(--arch-blue); stroke-width: 2; filter: drop-shadow(0 3px 4px rgba(42, 73, 108, .12)); }
+    .arch-block:focus-visible .arch-hit { stroke-dasharray: 4 3; }
+    .arch-detail { display: flex; align-items: baseline; gap: 12px; margin: 0 24px 20px; padding: 12px 15px; border: 1px solid var(--arch-border); border-radius: 8px; background: var(--arch-card); color: var(--arch-muted); font-size: 12px; line-height: 1.55; min-height: 38px; }
+    .arch-detail-label { flex-shrink: 0; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--arch-blue); }
+    #arch-diagram .arch-detail b { color: var(--arch-ink); font-weight: 600; }
+    .arch-mobile-wires { display: none; }
+    html.dark-mode #arch-diagram .fig-frame { background: var(--arch-paper); }
+    @media (max-width: 700px) {
+      .arch-svg { max-width: 440px; margin-inline: auto; }
+      .arch-heading { padding: 20px 20px 0; align-items: flex-start; flex-direction: column; gap: 3px; }
+      .arch-heading strong { font-size: 25px; }
+      .arch-heading span { font-size: 10px; }
+      .arch-desktop-wires, .arch-stage-labels, .arch-likelihood { display: none; }
+      .arch-mobile-wires { display: block; }
+      .arch-inputs { transform: translate(8px, -26px); }
+      .arch-conditioning { transform: translate(8px, -56px); }
+      .arch-model { transform: translate(-338px, 370px); }
+      .arch-output { transform: translate(-674px, 736px); }
+      .arch-detail { margin: 0 16px 16px; flex-direction: column; gap: 4px; min-height: 78px; }
     }
-    .arch-block:hover .arch-shape,
-    .arch-block.is-focus .arch-shape {
-      stroke: #0067cf; stroke-width: 2.2;
+    @media (prefers-reduced-motion: reduce) {
+      .arch-block .arch-hit { transition: none; }
     }
-    .arch-svg.is-hovering .arch-block .arch-shape { opacity: 0.38; }
-    .arch-svg.is-hovering .arch-block:hover .arch-shape,
-    .arch-svg.is-hovering .arch-block.is-focus .arch-shape { opacity: 1; }
-    .arch-svg.is-hovering .arch-connector,
-    .arch-svg.is-hovering .arch-residual,
-    .arch-svg.is-hovering text:not(.arch-section):not(.arch-cond-text):not(.arch-add-glyph) { opacity: 0.55; transition: opacity 0.2s ease; }
-    .arch-fill-input      { fill: #f4b189; }
-    .arch-fill-norm       { fill: #b9bbbf; }
-    .arch-fill-attn       { fill: #d9b1da; }
-    .arch-fill-ffn        { fill: #91bedd; }
-    .arch-fill-act        { fill: #b9bbbf; }
-    .arch-fill-bin-back   { fill: #b8d0e3; }
-    .arch-fill-bin-front  { fill: #d8e6ef; }
-    .arch-fill-cond-outer { fill: #a8caE1; }
-    .arch-fill-cond-inner { fill: #f4b189; }
-    .arch-fill-cond-pill  { fill: #a8caE1; }
-    .arch-fill-block-outer{ fill: #d7d9dc; }
-    .arch-fill-add        { fill: #c46868; }
-    .arch-cond-circle     { fill: #ad55b6; }
-    .arch-cond-text       { font-size: 11px; font-weight: 700; }
-    .arch-add-glyph       { font-size: 14px; font-weight: 700; }
 
-    .arch-connector    { stroke: #1f222b; stroke-width: 1.6; fill: none; }
-    .arch-residual     { stroke: #1f222b; stroke-width: 1.6; fill: none; }
-    .arch-arrow-fill   { fill: #1f222b; }
-    html.dark-mode .arch-arrow-fill { fill: #cdd0d7; }
-    .arch-tip {
-      position: absolute; pointer-events: none; opacity: 0;
-      top: 14px; right: 14px;
-      transition: opacity 0.16s ease;
-      background: #1c2030; color: #f4f6fb;
-      font-size: 11px; line-height: 1.55;
-      padding: 8px 11px; border-radius: 7px;
-      max-width: min(240px, calc(100% - 28px));
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      z-index: 10;
+    /* Figure 3 cards reflow independently while retaining the shared diagram palette. */
+    #bin-diagram .fig-frame { padding: 0; background: var(--arch-paper); color: var(--arch-ink); }
+    #bin-diagram .bin-heading { align-items: center; flex-wrap: wrap; }
+    .bin-controls { display: flex; gap: 6px; }
+    #bin-diagram button { font: inherit; cursor: pointer; }
+    #bin-diagram .bin-controls button { border: 1px solid var(--arch-border); border-radius: 6px; background: var(--arch-card); color: var(--arch-ink); padding: 7px 10px; font-size: 12px; min-height: 34px; }
+    #bin-diagram button:hover { border-color: var(--arch-blue); }
+    #bin-diagram button:focus-visible { outline: 2px solid var(--arch-blue); outline-offset: 3px; }
+    .bin-intro { padding: 7px 26px 0; font-size: 12px; color: var(--arch-muted); }
+    .bin-stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px; padding: 24px 26px 0; }
+    .bin-stage { position: relative; min-width: 0; display: flex; flex-direction: column; }
+    .bin-stage-arrow { position: absolute; top: calc(50% + 12px); left: -46px; width: 40px; height: 16px; transform: translateY(-50%); overflow: visible; color: var(--arch-line); }
+    .bin-stage-arrow path, .bin-prefix-arrow path, .bin-selection-arrow { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .bin-kicker { font-size: 10px; font-weight: 600; letter-spacing: .11em; color: var(--arch-muted); text-transform: uppercase; }
+    .bin-card { margin-top: 10px; padding: 15px 15px 12px; border: 1px solid var(--arch-border); border-radius: 10px; background: var(--arch-card); min-height: 264px; flex: 1; box-sizing: border-box; }
+    #bin-diagram .bin-card h4 { margin: 0 0 3px; font-size: 15px; font-weight: 600; color: var(--arch-ink); letter-spacing: -.015em; }
+    .bin-card-note { font-size: 11px; color: var(--arch-muted); }
+    .bin-prefix { display: flex; align-items: center; justify-content: center; height: 36px; margin: 15px 0 0; border: 1px solid var(--arch-teal-line); border-radius: 6px; background: var(--arch-teal-bg); color: var(--arch-teal); font-size: 13px; }
+    .bin-model { position: relative; padding: 12px 5px; text-align: center; border: 1px solid var(--arch-purple-line); border-radius: 7px; background: var(--arch-purple-bg); color: var(--arch-purple); font-size: 13px; font-weight: 600; }
+    .bin-prefix-arrow { display: block; width: 16px; height: 36px; margin: 3px auto; color: var(--arch-line); }
+    .bin-selection-arrow { color: var(--arch-warm); }
+    .bin-conditional { margin-top: 13px; text-align: center; font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 24px; color: var(--arch-purple); }
+    #bin-diagram sub { font-size: .65em; line-height: 0; }
+    .bin-plot { display: block; width: 100%; height: 174px; overflow: visible; }
+    .bin-plot text { fill: var(--arch-muted); font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 12px; }
+    .bin-plot .bin-bar { fill: var(--arch-blue); opacity: .28; }
+    .bin-plot .bin-bar.is-selected { fill: var(--arch-warm); opacity: 1; }
+    .bin-plot .bin-axis { stroke: var(--arch-border); stroke-width: 1; }
+    .bin-plot .bin-selected-label { fill: var(--arch-warm); font-weight: 600; }
+    .bin-card-foot { font-size: 11px; color: var(--arch-muted); text-align: center; }
+    .bin-value { color: var(--arch-warm); font-family: 'JetBrains Mono', monospace; font-size: 15px; text-align: center; margin-top: -2px; }
+    .bin-sequence { margin: 26px 26px 0; padding: 16px 18px; border: 1px solid var(--arch-border); border-radius: 10px; background: var(--arch-card); }
+    .bin-sequence-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+    .bin-step-label { color: var(--arch-warm); font-size: 12px; }
+    .bin-atoms { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .bin-atom-label { display: block; margin-top: 8px; text-align: center; color: var(--arch-muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .bin-tokens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+    #bin-diagram .bin-token { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 11px 3px; border: 1px dashed var(--arch-border); border-radius: 6px; color: var(--arch-muted); background: var(--arch-paper); }
+    .bin-token-name { font-family: 'Instrument Serif', Georgia, serif; font-size: 21px; font-style: italic; }
+    .bin-token-value { font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+    #bin-diagram .bin-token.is-past { border-style: solid; border-color: var(--arch-teal-line); background: var(--arch-teal-bg); color: var(--arch-teal); }
+    #bin-diagram .bin-token.is-current { border-style: solid; border-color: var(--arch-warm); background: var(--arch-warm-bg); color: var(--arch-warm); box-shadow: 0 0 0 2px var(--arch-warm-bg); }
+    .bin-loop { margin-top: 12px; font-size: 11px; color: var(--arch-muted); text-align: center; }
+    .bin-loop span { color: var(--arch-warm); }
+    .bin-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 18px 26px 22px; color: var(--arch-muted); font-size: 12px; line-height: 1.5; }
+    .bin-summary .bin-kicker { display: block; margin-bottom: 4px; color: var(--arch-blue); }
+    .bin-announcement { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    @media (max-width: 700px) {
+      #bin-diagram .bin-heading { align-items: flex-start; gap: 12px; }
+      .bin-intro { padding: 10px 20px 0; }
+      .bin-stages { grid-template-columns: 1fr; gap: 52px; padding: 22px 20px 0; }
+      .bin-stage-arrow { top: -26px; left: 50%; transform: translate(-50%, -50%) rotate(90deg); }
+      .bin-card { height: auto; min-height: 216px; }
+      .bin-plot { max-width: 300px; margin-inline: auto; }
+      .bin-prefix, .bin-model { max-width: 280px; margin-inline: auto; }
+      .bin-conditional { margin-bottom: 5px; }
+      .bin-sequence { margin: 22px 20px 0; padding: 14px 12px; }
+      .bin-sequence-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .bin-atoms { gap: 10px; }
+      .bin-tokens { gap: 4px; }
+      #bin-diagram .bin-token { flex-direction: column; gap: 5px; padding: 8px 2px; }
+      .bin-summary { gap: 14px; padding: 18px 20px 20px; font-size: 11px; }
     }
-    .arch-tip b { color: #ffffff; font-weight: 600; }
-
-    html.dark-mode .arch-svg { color: #e7ecf5; }
-    html.dark-mode .arch-caption { fill: #98a3b5; }
-    html.dark-mode .arch-block .arch-shape,
-    html.dark-mode .arch-connector,
-    html.dark-mode .arch-residual { stroke: #cdd0d7; }
-    html.dark-mode .arch-fill-input      { fill: #c08660; }
-    html.dark-mode .arch-fill-norm       { fill: #6a6d75; }
-    html.dark-mode .arch-fill-attn       { fill: #9a779f; }
-    html.dark-mode .arch-fill-ffn        { fill: #5d83a5; }
-    html.dark-mode .arch-fill-act        { fill: #6a6d75; }
-    html.dark-mode .arch-fill-bin-back   { fill: #5c7c95; }
-    html.dark-mode .arch-fill-bin-front  { fill: #83a3bf; }
-    html.dark-mode .arch-fill-cond-outer { fill: #6890b6; }
-    html.dark-mode .arch-fill-cond-inner { fill: #c08660; }
-    html.dark-mode .arch-fill-cond-pill  { fill: #6890b6; }
-    html.dark-mode .arch-fill-block-outer{ fill: #4d5057; }
-    html.dark-mode .arch-fill-add        { fill: #a65454; }
-    html.dark-mode .arch-cond-circle     { fill: #8a4595; }
+    @media (prefers-reduced-motion: reduce) {
+      .bin-plot .bin-bar { transition: none; }
+    }
 
     .table-card { margin: 1.7rem 0; }
     .table-scroll { overflow-x: auto; }
@@ -1391,108 +1466,182 @@
         limit.
       </p>
 
-      <figure class="hero-figure-arbg" id="bin-diagram" aria-label="Autoregressive coordinate-by-coordinate generation">
-        <div class="svg-frame">
-          <button type="button" class="hero-play-btn" aria-label="Pause animation" title="Pause / play">
-            <i class="fas fa-pause" aria-hidden="true"></i>
-          </button>
-          <svg viewBox="0 0 920 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hero-arbg-title">
-            <title id="hero-arbg-title">Autoregressive coordinate-by-coordinate generation: a causal transformer predicts a categorical over bins for each next atom and samples one at a time</title>
-            <defs>
-              <marker id="ar-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
-                <path d="M0 0 L10 5 L0 10 z" fill="#8ba6ca"/>
-              </marker>
-            </defs>
-
-            <text x="460" y="23" text-anchor="middle" font-family="'Source Sans 3', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="0.02em" fill="#6b7280">Autoregressive &#8201;&#183;&#8201; coordinate by coordinate &#8201;&#183;&#8201; atom by atom</text>
-
-            <g>
-              <rect x="46" y="92" width="200" height="96" rx="12" fill="rgba(91,125,166,0.10)" stroke="#5b7da6" stroke-width="1.4"/>
-              <text x="146" y="127" text-anchor="middle" font-family="'Source Sans 3', system-ui, -apple-system, sans-serif" font-size="12.5" font-weight="600" fill="#5b7da6">causal-attention</text>
-              <text x="146" y="146" text-anchor="middle" font-family="'Source Sans 3', system-ui, -apple-system, sans-serif" font-size="12.5" font-weight="600" fill="#5b7da6">transformer</text>
-              <text x="146" y="172" text-anchor="middle" font-family="'Instrument Serif', 'STIX Two Math', 'Cambria Math', Georgia, serif" font-size="15" font-style="italic" fill="#5b7da6">p(x<tspan dy="3" font-size="10">j</tspan><tspan dy="-3">&#8201;|&#8201;x</tspan><tspan dy="3" font-size="10">&lt;j</tspan><tspan dy="-3">)</tspan></text>
-            </g>
-
-            <line x1="252" y1="140" x2="300" y2="140" stroke="#8ba6ca" stroke-width="1.6" marker-end="url(#ar-arrow)"/>
-
-            <g>
-              <line x1="306" y1="201" x2="493" y2="201" stroke="#8ba6ca" stroke-width="0.8" opacity="0.55"/>
-              <rect x="312" width="15" y="194" height="6" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="6;24;46;4;3;30;6" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="194;176;154;196;197;170;194" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="332" width="15" y="184" height="16" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="16;52;70;9;10;40;16" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="184;148;130;191;190;160;184" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="352" width="15" y="168" height="32" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="32;84;34;18;30;50;32" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="168;116;166;182;170;150;168" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="372" width="15" y="144" height="56" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="56;60;16;34;90;60;56" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="144;140;184;166;110;140;144" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="392" width="15" y="116" height="84" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="84;36;34;54;30;66;84" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="116;164;166;146;170;134;116" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="412" width="15" y="144" height="56" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="56;20;70;76;10;60;56" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="144;180;130;124;190;140;144" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="432" width="15" y="168" height="32" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="32;11;46;92;5;50;32" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="168;189;154;108;195;150;168" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="452" width="15" y="184" height="16" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="16;6;18;60;2;40;16" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="184;194;182;140;198;160;184" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-              <rect x="472" width="15" y="194" height="6" rx="2" fill="#8ba6ca">
-                <animate attributeName="height" calcMode="discrete" values="6;3;7;30;1;30;6" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-                <animate attributeName="y" calcMode="discrete" values="194;197;193;170;199;170;194" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </rect>
-            </g>
-            <text x="399" y="222" text-anchor="middle" font-family="'Source Sans 3', system-ui, -apple-system, sans-serif" font-size="10.5" font-style="italic" fill="#8a93a3">categorical over bins</text>
-
-            <text x="528" y="156" text-anchor="middle" font-family="'Source Sans 3', system-ui, -apple-system, sans-serif" font-size="10" font-style="italic" fill="#8a93a3">sample</text>
-            <line x1="500" y1="165" x2="558" y2="165" stroke="#8ba6ca" stroke-width="1.6" marker-end="url(#ar-arrow)"/>
-
-            <line x1="560" y1="165" x2="862" y2="165" stroke="#3a6cc4" stroke-width="1" stroke-dasharray="2 5" opacity="0.35"/>
-            <g>
-              <circle cx="572" cy="165" r="12" fill="#5b7da6" opacity="1">
-                <animate attributeName="opacity" calcMode="discrete" values="1;1;1;1;1;1;1" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="626" cy="165" r="12" fill="#5b7da6" opacity="0">
-                <animate attributeName="opacity" calcMode="discrete" values="0;1;1;1;1;1;0" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="680" cy="165" r="12" fill="#5b7da6" opacity="0">
-                <animate attributeName="opacity" calcMode="discrete" values="0;0;1;1;1;1;0" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="734" cy="165" r="12" fill="#5b7da6" opacity="0">
-                <animate attributeName="opacity" calcMode="discrete" values="0;0;0;1;1;1;0" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="788" cy="165" r="12" fill="#5b7da6" opacity="0">
-                <animate attributeName="opacity" calcMode="discrete" values="0;0;0;0;1;1;0" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="842" cy="165" r="12" fill="#5b7da6" opacity="0">
-                <animate attributeName="opacity" calcMode="discrete" values="0;0;0;0;0;1;0" keyTimes="0;0.166667;0.333333;0.5;0.666667;0.833333;1" dur="7s" repeatCount="indefinite"/>
-              </circle>
-            </g>
-            <g font-family="'Instrument Serif', 'STIX Two Math', 'Cambria Math', Georgia, serif" font-size="14" font-style="italic" fill="#5b7da6" text-anchor="middle">
-              <text x="572" y="193" text-anchor="middle">x<tspan dy="3" font-size="10">1</tspan></text><text x="626" y="193" text-anchor="middle">y<tspan dy="3" font-size="10">1</tspan></text><text x="680" y="193" text-anchor="middle">z<tspan dy="3" font-size="10">1</tspan></text><text x="734" y="193" text-anchor="middle">x<tspan dy="3" font-size="10">2</tspan></text><text x="788" y="193" text-anchor="middle">y<tspan dy="3" font-size="10">2</tspan></text><text x="842" y="193" text-anchor="middle">z<tspan dy="3" font-size="10">2</tspan></text>
-            </g>
-
-            <text x="460" y="262" text-anchor="middle" font-family="'Source Sans 3', system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="0.02em" fill="#6b7280">Exact likelihood &#8201;&#183;&#8201; one forward pass</text>
-          </svg>
+      <figure class="fig" id="bin-diagram" aria-label="Interactive walkthrough of autoregressive coordinate sampling">
+        <div class="fig-frame">
+          <div class="arch-heading bin-heading">
+            <strong>A conformation, one coordinate at a time</strong>
+            <div class="bin-controls" role="group" aria-label="Sampling walkthrough controls">
+              <button type="button" data-bin-action="play" aria-label="Play sampling animation">Play</button>
+              <button type="button" data-bin-action="next" aria-label="Show next coordinate">Next →</button>
+              <button type="button" data-bin-action="reset" aria-label="Reset sampling walkthrough">Reset</button>
+            </div>
+          </div>
+          <div class="bin-intro">Predict a distribution. Draw a coordinate. Extend the prefix.</div>
+          <div class="bin-stages">
+            <section class="bin-stage" aria-label="Condition on previous coordinates">
+              <div class="bin-kicker">01 / Condition</div>
+              <div class="bin-card">
+                <h4>Read the prefix</h4>
+                <div class="bin-card-note">Condition on coordinates already sampled</div>
+                <div class="bin-prefix" data-bin-prefix>Start of sequence</div>
+                <svg class="bin-prefix-arrow" viewBox="0 0 16 36" aria-hidden="true"><path d="M8 3 V33 M3 27 L8 33 L13 27"/></svg>
+                <div class="bin-model">Causal transformer</div>
+                <div class="bin-conditional" data-bin-conditional>p(x<sub>1</sub>)</div>
+              </div>
+            </section>
+            <section class="bin-stage" aria-label="Predict and sample a coordinate bin">
+              <svg class="bin-stage-arrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M3 8 H36 M30 3 L36 8 L30 13"/></svg>
+              <div class="bin-kicker">02 / Predict</div>
+              <div class="bin-card">
+                <h4>Choose a coordinate bin</h4>
+                <div class="bin-card-note">Sample from the predicted categorical</div>
+                <svg class="bin-plot" viewBox="0 0 252 174" role="img" aria-label="Illustrative bin probabilities; the sampled bin is marked by the Selected bin label">
+                  <line class="bin-axis" x1="7" y1="141" x2="245" y2="141"/>
+                  <rect class="bin-bar" x="9" y="135" width="12" height="5" rx="2"/>
+                  <rect class="bin-bar" x="26" y="135" width="12" height="5" rx="2"/>
+                  <rect class="bin-bar" x="43" y="135" width="12" height="5" rx="2"/>
+                  <rect class="bin-bar" x="60" y="134" width="12" height="6" rx="2"/>
+                  <rect class="bin-bar" x="77" y="127" width="12" height="13" rx="2"/>
+                  <rect class="bin-bar" x="94" y="103" width="12" height="37" rx="2"/>
+                  <rect class="bin-bar" x="111" y="69" width="12" height="71" rx="2"/>
+                  <rect class="bin-bar is-selected" x="128" y="58" width="12" height="82" rx="2"/>
+                  <rect class="bin-bar" x="145" y="81" width="12" height="59" rx="2"/>
+                  <rect class="bin-bar" x="162" y="112" width="12" height="28" rx="2"/>
+                  <rect class="bin-bar" x="179" y="129" width="12" height="11" rx="2"/>
+                  <rect class="bin-bar" x="196" y="134" width="12" height="6" rx="2"/>
+                  <rect class="bin-bar" x="213" y="135" width="12" height="5" rx="2"/>
+                  <rect class="bin-bar" x="230" y="135" width="12" height="5" rx="2"/>
+                  <text x="7" y="161">C<tspan baseline-shift="-3" font-size="9">min</tspan></text><text x="245" y="161" text-anchor="end">C<tspan baseline-shift="-3" font-size="9">max</tspan></text>
+                  <text class="bin-selected-label" x="134" y="18" text-anchor="middle">Selected bin</text>
+                  <path class="bin-selection-arrow" data-bin-selection-arrow d="M134 28 V49 M129 43 L134 49 L139 43"/>
+                </svg>
+                <div class="bin-card-foot">A new distribution at every step</div>
+              </div>
+            </section>
+            <section class="bin-stage" aria-label="Sample uniformly inside the chosen bin">
+              <svg class="bin-stage-arrow" viewBox="0 0 40 16" aria-hidden="true"><path d="M3 8 H36 M30 3 L36 8 L30 13"/></svg>
+              <div class="bin-kicker">03 / Sample</div>
+              <div class="bin-card">
+                <h4>Recover a continuous value</h4>
+                <div class="bin-card-note">Draw uniformly inside the chosen bin</div>
+                <svg class="bin-plot" viewBox="0 0 252 154" role="img" aria-label="An enlarged selected bin with a uniformly sampled position">
+                  <text x="126" y="30" text-anchor="middle">Inside the selected bin</text>
+                  <rect x="28" y="54" width="196" height="48" rx="5" fill="var(--arch-warm-bg)" stroke="var(--arch-warm)"/>
+                  <line x1="28" y1="112" x2="224" y2="112" stroke="var(--arch-line)"/>
+                  <line x1="28" y1="108" x2="28" y2="116" stroke="var(--arch-line)"/><line x1="224" y1="108" x2="224" y2="116" stroke="var(--arch-line)"/>
+                  <line data-bin-sample-line x1="100" y1="48" x2="100" y2="113" stroke="var(--arch-warm)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <circle data-bin-sample-dot cx="100" cy="78" r="6" fill="var(--arch-warm)" stroke="var(--arch-card)" stroke-width="2"/>
+                  <text data-bin-min x="28" y="136" text-anchor="middle">0.00</text><text data-bin-max x="224" y="136" text-anchor="middle">0.30</text>
+                </svg>
+                <div class="bin-value" data-bin-value>x₁ = 0.11</div>
+              </div>
+            </section>
+          </div>
+          <div class="bin-sequence">
+            <div class="bin-sequence-head"><span class="bin-kicker">04 / Append to the sequence</span><span class="bin-step-label" data-bin-step>Step 1 of 6 · sample x₁</span></div>
+            <div class="bin-atoms">
+              <div><div class="bin-tokens">
+                <button type="button" class="bin-token is-current" aria-label="Inspect x1" aria-pressed="true"><span class="bin-token-name">x<sub>1</sub></span><span class="bin-token-value">0.11</span></button>
+                <button type="button" class="bin-token" aria-label="Inspect y1" aria-pressed="false"><span class="bin-token-name">y<sub>1</sub></span><span class="bin-token-value">—</span></button>
+                <button type="button" class="bin-token" aria-label="Inspect z1" aria-pressed="false"><span class="bin-token-name">z<sub>1</sub></span><span class="bin-token-value">—</span></button>
+              </div><span class="bin-atom-label">Atom 1</span></div>
+              <div><div class="bin-tokens">
+                <button type="button" class="bin-token" aria-label="Inspect x2" aria-pressed="false"><span class="bin-token-name">x<sub>2</sub></span><span class="bin-token-value">—</span></button>
+                <button type="button" class="bin-token" aria-label="Inspect y2" aria-pressed="false"><span class="bin-token-name">y<sub>2</sub></span><span class="bin-token-value">—</span></button>
+                <button type="button" class="bin-token" aria-label="Inspect z2" aria-pressed="false"><span class="bin-token-name">z<sub>2</sub></span><span class="bin-token-value">—</span></button>
+              </div><span class="bin-atom-label">Atom 2</span></div>
+            </div>
+            <div class="bin-loop"><span>Feed the extended prefix back into the transformer.</span> Select a coordinate to inspect its step.</div>
+          </div>
+          <div class="bin-summary">
+            <div><span class="bin-kicker">Generation</span>Sample coordinates sequentially, three per atom.</div>
+            <div><span class="bin-kicker">Likelihood evaluation</span>Score all conditionals in one forward pass.</div>
+          </div>
+          <div class="bin-announcement" role="status" aria-live="polite" data-bin-announcement></div>
         </div>
         <figcaption>
-          <b>Figure&nbsp;3.</b> ArBG factors a peptide&rsquo;s joint density coordinate by coordinate: a
-          causal-attention transformer predicts a categorical over bins for each next atom and samples one
-          at a time. The distribution snaps to a new shape at every step &mdash; one forward pass, exact likelihood.
+          <b>Figure&nbsp;3.</b> Autoregressive coordinate generation. At each step, ArBG predicts a categorical
+          distribution conditioned on the coordinate prefix, samples a bin, and draws uniformly within it to recover
+          a continuous coordinate. The result is appended to the prefix before predicting the next coordinate.
+          Distributions and values are illustrative; two atoms are shown.
         </figcaption>
       </figure>
+      <script>
+        (() => {
+          const root = document.getElementById('bin-diagram');
+          const get = name => root.querySelector('[data-bin-' + name + ']');
+          const bars = Array.from(root.querySelectorAll('.bin-bar'));
+          const tokens = Array.from(root.querySelectorAll('.bin-token'));
+          const play = root.querySelector('[data-bin-action="play"]');
+          const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+          const coordinates = ['x₁', 'y₁', 'z₁', 'x₂', 'y₂', 'z₂'];
+          // Deterministic illustrative draws: each value lies uniformly within its selected bin.
+          const bins = [7, 4, 10, 6, 9, 3];
+          const fractions = [.37, .68, .24, .81, .43, .57];
+          const values = bins.map((bin, i) => (-2.1 + bin * .3 + fractions[i] * .3).toFixed(2));
+          let step = 0, playing = !reducedMotion.matches, visible = false, timer = null;
+          const render = (announce = false) => {
+            const axis = ['x', 'y', 'z'][step % 3];
+            const atom = Math.floor(step / 3) + 1;
+            get('prefix').textContent = step ? coordinates.slice(0, step).join('  ·  ') : 'Start of sequence';
+            get('conditional').innerHTML = 'p(' + axis + '<sub>' + atom + '</sub>' + (step ? ' | prefix)' : ')');
+            const center = bins[step];
+            bars.forEach((bar, i) => {
+              const height = Math.round(5 + 68 * Math.exp(-.5 * ((i - center) / (1.35 + step * .15)) ** 2) + 14 * Math.exp(-.5 * ((i - (13 - center)) / 1.1) ** 2));
+              bar.setAttribute('height', height);
+              bar.setAttribute('y', 140 - height);
+              bar.classList.toggle('is-selected', i === center);
+              bar.setAttribute('stroke', i === center ? 'var(--arch-warm)' : 'none');
+            });
+            const selectedLabel = root.querySelector('.bin-selected-label');
+            const selectedX = 15 + center * 17;
+            selectedLabel.setAttribute('x', Math.max(60, Math.min(192, selectedX)));
+            const pointerEnd = Number(bars[center].getAttribute('y')) - 6;
+            get('selection-arrow').setAttribute('d', 'M' + selectedX + ' 28 V' + pointerEnd +
+              ' M' + (selectedX - 5) + ' ' + (pointerEnd - 6) + ' L' + selectedX + ' ' + pointerEnd +
+              ' L' + (selectedX + 5) + ' ' + (pointerEnd - 6));
+            const lower = -2.1 + center * .3;
+            get('min').textContent = (Math.abs(lower) < .001 ? 0 : lower).toFixed(2);
+            get('max').textContent = (lower + .3).toFixed(2);
+            const sampleX = 28 + fractions[step] * 196;
+            get('sample-dot').setAttribute('cx', sampleX);
+            get('sample-line').setAttribute('x1', sampleX);
+            get('sample-line').setAttribute('x2', sampleX);
+            get('value').textContent = coordinates[step] + ' = ' + values[step];
+            get('step').textContent = 'Step ' + (step + 1) + ' of 6 · sample ' + coordinates[step];
+            tokens.forEach((token, i) => {
+              token.classList.toggle('is-past', i < step);
+              token.classList.toggle('is-current', i === step);
+              token.setAttribute('aria-pressed', String(i === step));
+              token.querySelector('.bin-token-value').textContent = i <= step ? values[i] : '—';
+              token.setAttribute('aria-label', 'Inspect step ' + (i + 1) + ': ' + coordinates[i]);
+            });
+            if (announce) get('announcement').textContent = get('step').textContent + '. Sampled value ' + values[step] + '.';
+          };
+          const syncPlayback = () => {
+            clearInterval(timer);
+            timer = null;
+            play.textContent = playing ? 'Pause' : 'Play';
+            play.setAttribute('aria-label', (playing ? 'Pause' : 'Play') + ' sampling animation');
+            if (playing && visible && !document.hidden) timer = setInterval(() => { step = (step + 1) % 6; render(); }, 2400);
+          };
+          play.addEventListener('click', () => { playing = !playing; syncPlayback(); });
+          root.querySelector('[data-bin-action="next"]').addEventListener('click', () => {
+            playing = false; step = (step + 1) % 6; render(true); syncPlayback();
+          });
+          root.querySelector('[data-bin-action="reset"]').addEventListener('click', () => {
+            playing = false; step = 0; render(true); syncPlayback();
+          });
+          tokens.forEach((token, i) => token.addEventListener('click', () => {
+            playing = false; step = i; render(true); syncPlayback();
+          }));
+          new IntersectionObserver(entries => { visible = entries[0].isIntersecting; syncPlayback(); }, { threshold: .1 }).observe(root);
+          document.addEventListener('visibilitychange', syncPlayback);
+          reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) { playing = false; syncPlayback(); } });
+          render();
+          syncPlayback();
+        })();
+      </script>
 
       <h3 id="arbg-arch">Architecture</h3>
       <p>
@@ -1505,202 +1654,186 @@
 
       <figure class="fig" id="arch-diagram" aria-label="ArBG architecture diagram">
         <div class="fig-frame">
-          <svg class="arch-svg" viewBox="0 0 1100 500" role="img" aria-label="ArBG architecture: cross-attention on conditioning, causal self-attention transformer block, and a discrete distribution over coordinate bins.">
+          <div class="arch-heading"><strong>Inside an ArBG</strong><span>Decoder-only transformer</span></div>
+          <svg class="arch-svg" viewBox="0 0 1000 890" role="group" aria-labelledby="arch-title arch-desc">
+            <title id="arch-title">From coordinates to the next-coordinate distribution</title>
+            <desc id="arch-desc">Coordinate inputs pass through RMSNorm and cross-attention to a global conditioning encoder, then N pre-norm causal transformer blocks with residual connections. A categorical distribution over value bins yields the next coordinate, which is appended to the input. Select a component for details.</desc>
             <defs>
-              <filter id="arch-shadow" x="-15%" y="-15%" width="130%" height="130%">
-                <feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#0d1018" flood-opacity="0.22"/>
-              </filter>
-              <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                <path class="arch-arrow-fill" d="M0 0 L10 5 L0 10 z"/>
-              </marker>
-              <marker id="arch-arrow-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                <path class="arch-arrow-fill" d="M10 0 L0 5 L10 10 z"/>
-              </marker>
+              <marker id="arch-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 8 4 0 8" fill="var(--arch-line)"/></marker>
+              <marker id="arch-context-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 8 4 0 8" fill="var(--arch-teal)"/></marker>
+              <marker id="arch-feedback-arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0 8 4 0 8" fill="var(--arch-warm)"/></marker>
             </defs>
-
-            <text class="arch-section" x="241" y="22" text-anchor="middle">Conditioning</text>
-            <g class="arch-block" data-info="<b>Conditioning tokens</b> — A: atom type, R: residue type, P: position-in-residue, L: sequence length (Robin only).">
-              <rect class="arch-shape arch-fill-cond-pill" x="141" y="40" width="200" height="38" rx="19"/>
-              <circle cx="169" cy="59" r="12" class="arch-cond-circle"/><text class="arch-cond-text" x="169" y="63" text-anchor="middle">A</text>
-              <circle cx="217" cy="59" r="12" class="arch-cond-circle"/><text class="arch-cond-text" x="217" y="63" text-anchor="middle">R</text>
-              <circle cx="265" cy="59" r="12" class="arch-cond-circle"/><text class="arch-cond-text" x="265" y="63" text-anchor="middle">P</text>
-              <circle cx="313" cy="59" r="12" class="arch-cond-circle"/><text class="arch-cond-text" x="313" y="63" text-anchor="middle">L</text>
+            <g class="arch-stage-labels arch-kicker">
+              <text x="28" y="43">01 / REPRESENT</text><text x="365" y="43">02 / TRANSFORM</text><text x="710" y="43">03 / SAMPLE</text>
             </g>
-            <line class="arch-connector" x1="241" y1="82" x2="241" y2="114" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Conditioning encoder</b> — a non-causal self-attention block that mixes the conditioning tokens once; its K, V are reused by every cross-attention layer.">
-              <rect class="arch-shape arch-fill-cond-outer" x="141" y="118" width="200" height="138" rx="8"/>
-              <rect class="arch-shape arch-fill-cond-inner" x="173" y="140" width="136" height="94" rx="6"/>
-              <text class="arch-label" x="241" y="167" text-anchor="middle">Non-causal</text>
-              <text class="arch-label" x="241" y="187" text-anchor="middle">Global</text>
-              <text class="arch-label" x="241" y="207" text-anchor="middle">Self-attention</text>
-              <text class="arch-caption" x="241" y="226" text-anchor="middle">K, V from conditioning</text>
+            <g class="arch-desktop-wires">
+              <path class="arch-wire" d="M290 112 H342 Q350 112 350 104 V72 Q350 64 358 64 H492 Q500 64 500 72 V101"/>
+              <text class="arch-small" x="327" y="100">Q</text>
+              <path class="arch-wire arch-context-wire" d="M290 344 H325 Q333 344 333 336 V208 Q333 200 341 200 H387"/>
+              <text class="arch-small arch-teal-text" x="342" y="188">K, V</text>
+              <path class="arch-wire" d="M500 788 V802 Q500 810 508 810 H676 Q684 810 684 802 V553 Q684 545 692 545 H707"/>
+              <path class="arch-wire arch-feedback" d="M840 725 V842 Q840 850 832 850 H22 Q14 850 14 842 V243 Q14 235 22 235 H150 Q158 235 158 227 V209"/>
+              <rect x="357" y="839" width="286" height="23" fill="var(--arch-paper)"/>
+              <text class="arch-small arch-warm-text" x="500" y="855" text-anchor="middle">Append the sampled coordinate · repeat</text>
             </g>
-            <line class="arch-connector" x1="241" y1="260" x2="241" y2="352" marker-end="url(#arch-arrow)" marker-start="url(#arch-arrow-start)"/>
-
-            <g class="arch-block" data-info="<b>Continuous coordinate inputs</b> — flattened atomic positions $(x, y, z)$ for atoms 1…$j{-}1$, fed in autoregressive order.">
-              <rect class="arch-shape arch-fill-input" x="30" y="315" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="30" y="341" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="30" y="367" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="30" y="393" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="30" y="419" width="40" height="22" rx="3"/>
+            <g class="arch-mobile-wires">
+              <path class="arch-wire" d="M298 86 H328 Q336 86 336 94 V426 Q336 434 328 434 H170 Q162 434 162 442 V471"/>
+              <path class="arch-wire arch-context-wire" d="M166 378 V404 Q166 412 158 412 H32 Q24 412 24 420 V562 Q24 570 32 570 H49"/>
+              <text class="arch-small arch-teal-text" x="30" y="552">K, V</text>
+              <path class="arch-wire" d="M162 1158 V1213"/>
+              <path class="arch-wire arch-feedback" d="M166 1461 V1482 Q166 1490 158 1490 H16 Q8 1490 8 1482 V122 Q8 114 16 114 H33"/>
+              <text class="arch-small arch-warm-text" x="180" y="1518" text-anchor="middle">Append coordinate · repeat</text>
             </g>
-            <text class="arch-section" x="50" y="466" text-anchor="middle">Inputs</text>
-            <line class="arch-connector" x1="70" y1="378" x2="88" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>RMSNorm</b> — root-mean-square layer normalisation applied before cross-attention.">
-              <rect class="arch-shape arch-fill-norm" x="90" y="358" width="80" height="40" rx="5"/>
-              <text class="arch-label" x="130" y="383" text-anchor="middle">RMSNorm</text>
+            <g class="arch-inputs arch-block" data-title="Coordinate inputs" data-info="Continuous atomic coordinates are flattened into an autoregressive sequence. The prefix supplies the queries for cross-attention.">
+              <rect class="arch-panel arch-hit" x="28" y="76" width="260" height="130" rx="12"/>
+              <text class="arch-title" x="48" y="105">Coordinate prefix</text>
+              <text class="arch-small" x="48" y="127">Continuous positions, in sequence</text>
+              <rect class="arch-coordinate" x="48" y="148" width="45" height="36" rx="6"/><rect class="arch-coordinate" x="101" y="148" width="45" height="36" rx="6"/><rect class="arch-coordinate" x="154" y="148" width="45" height="36" rx="6"/>
+              <g class="arch-math arch-warm-text" text-anchor="middle"><text x="70" y="173">x<tspan baseline-shift="-4" font-size="15">1</tspan></text><text x="123" y="173">y<tspan baseline-shift="-4" font-size="15">1</tspan></text><text x="176" y="173">z<tspan baseline-shift="-4" font-size="15">1</tspan></text><text x="231" y="173">…</text></g>
             </g>
-            <line class="arch-connector" x1="170" y1="378" x2="182" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Cross-attention</b> — coordinate tokens (queries) attend over the conditioning keys/values produced by the global encoder.">
-              <rect class="arch-shape arch-fill-attn" x="186" y="354" width="110" height="48" rx="5"/>
-              <text class="arch-label" x="241" y="383" text-anchor="middle">Cross Attention</text>
+            <g class="arch-conditioning arch-block" data-title="Global conditioning" data-info="Atom type, residue type and positional information are mixed by non-causal self-attention. Robin additionally uses residue position and sequence length. The encoder supplies keys and values to cross-attention.">
+              <rect class="arch-panel arch-hit" x="28" y="262" width="260" height="170" rx="12"/>
+              <text class="arch-title" x="48" y="292">Molecular context</text>
+              <text class="arch-small" x="48" y="315">Atom · residue · position · length</text>
+              <rect class="arch-panel" x="48" y="331" width="220" height="57" rx="7"/>
+              <text class="arch-label" x="158" y="355" text-anchor="middle">Global self-attention</text>
+              <text class="arch-small" x="158" y="375" text-anchor="middle">Non-causal conditioning encoder</text>
+              <text class="arch-small arch-teal-text" x="48" y="414">Sequence length is used by Robin</text>
             </g>
-            <line class="arch-connector" x1="296" y1="378" x2="308" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Residual addition</b> — adds the pre-attention representation back, completing the cross-attention sub-layer.">
-              <circle class="arch-shape arch-fill-add" cx="326" cy="378" r="14"/>
-              <text class="arch-add-glyph" x="326" y="383" text-anchor="middle">+</text>
+            <g class="arch-model">
+              <path class="arch-wire" d="M500 142 V173"/>
+              <path class="arch-wire" d="M500 226 V251"/>
+              <path class="arch-wire arch-residual" d="M500 86.5 H642 Q650 86.5 650 94.5 V258 Q650 266 642 266 H515"/>
+              <g class="arch-block" data-title="Cross-attention pre-norm" data-info="RMSNorm normalizes the coordinate representation before it queries the conditioning encoder.">
+                <rect class="arch-neutral arch-hit" x="390" y="104" width="220" height="36" rx="7"/><text class="arch-label" x="500" y="127" text-anchor="middle">RMSNorm</text>
+              </g>
+              <g class="arch-block" data-title="Cross-attention" data-info="Coordinate queries attend to the keys and values from molecular context, injecting information about the peptide into the coordinate stream.">
+                <rect class="arch-attention arch-hit" x="390" y="176" width="220" height="48" rx="8"/><text class="arch-label arch-purple-text" x="500" y="206" text-anchor="middle">Cross-attention</text>
+              </g>
+              <circle class="arch-add" cx="500" cy="266" r="12"/><text class="arch-label" x="500" y="271" text-anchor="middle">+</text>
+              <rect class="arch-panel" x="365" y="320" width="300" height="468" rx="12"/>
+              <text class="arch-kicker" x="375" y="304">DECODER BLOCK</text>
+              <rect class="arch-ffn" x="570" y="289" width="45" height="24" rx="12"/><text class="arch-label arch-blue-text" x="592" y="306" text-anchor="middle">× N</text>
+              <path class="arch-wire" d="M500 280 V381"/>
+              <path class="arch-wire" d="M500 414 V445"/>
+              <path class="arch-wire" d="M500 496 V521"/>
+              <path class="arch-wire" d="M500 550 V597"/>
+              <path class="arch-wire" d="M500 630 V661"/>
+              <path class="arch-wire" d="M500 712 V737"/>
+              <path class="arch-wire arch-residual" d="M500 330.5 H634 Q642 330.5 642 338.5 V528 Q642 536 634 536 H515"/>
+              <path class="arch-wire arch-residual" d="M500 573.5 H634 Q642 573.5 642 581.5 V744 Q642 752 634 752 H515"/>
+              <g class="arch-block" data-title="Attention pre-norm" data-info="Each decoder block normalizes its input before causal self-attention. The residual path preserves the incoming representation.">
+                <rect class="arch-neutral arch-hit" x="390" y="384" width="220" height="28" rx="6"/><text class="arch-small" x="500" y="403" text-anchor="middle">RMSNorm</text>
+              </g>
+              <g class="arch-block" data-title="Causal self-attention" data-info="A causal mask restricts attention to the available prefix. KV-caching reuses the prefix keys and values during autoregressive generation.">
+                <rect class="arch-attention arch-hit" x="390" y="448" width="220" height="46" rx="8"/><text class="arch-label arch-purple-text" x="500" y="476" text-anchor="middle">Causal self-attention</text>
+              </g>
+              <circle class="arch-add" cx="500" cy="536" r="12"/><text class="arch-label" x="500" y="541" text-anchor="middle">+</text>
+              <g class="arch-block" data-title="Feed-forward pre-norm" data-info="A second RMSNorm prepares the representation for the feed-forward network, with a separate residual connection.">
+                <rect class="arch-neutral arch-hit" x="390" y="600" width="220" height="28" rx="6"/><text class="arch-small" x="500" y="619" text-anchor="middle">RMSNorm</text>
+              </g>
+              <g class="arch-block" data-title="Feed-forward network · SwiGLU" data-info="A gated feed-forward network uses the SwiGLU activation and projects back into the residual stream. Both decoder sublayers are repeated N times.">
+                <rect class="arch-ffn arch-hit" x="390" y="664" width="220" height="46" rx="8"/><text class="arch-label arch-blue-text" x="500" y="684" text-anchor="middle">Feed-forward</text><text class="arch-small arch-blue-text" x="500" y="701" text-anchor="middle">SwiGLU activation</text>
+              </g>
+              <path class="arch-wire" style="marker-end: none" d="M500 766 V788"/>
+              <circle class="arch-add" cx="500" cy="752" r="12"/><text class="arch-label" x="500" y="757" text-anchor="middle">+</text>
+              <g aria-hidden="true">
+                <circle class="arch-junction" cx="500" cy="86.5" r="2.5"/>
+                <circle class="arch-junction" cx="500" cy="330.5" r="2.5"/>
+                <circle class="arch-junction" cx="500" cy="573.5" r="2.5"/>
+              </g>
             </g>
-            <path class="arch-residual" d="M 78 378 L 78 455 L 326 455 L 326 392" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Transformer block (×N)</b> — pre-norm + causal self-attention + residual, then pre-norm + feed-forward + SwiGLU + residual. Stacked N times.">
-              <rect class="arch-shape arch-fill-block-outer" x="376" y="294" width="568" height="172" rx="12"/>
+            <g class="arch-likelihood">
+              <text class="arch-kicker" x="710" y="105">ONE COORDINATE AT A TIME</text>
+              <text class="arch-math" x="710" y="146">p(x) = ∏<tspan baseline-shift="-4" font-size="15">j</tspan> p(x<tspan baseline-shift="-4" font-size="15">j</tspan> | x<tspan baseline-shift="-4" font-size="15">&lt;j</tspan>)</text>
+              <text class="arch-small" x="710" y="179">Sample sequentially.</text>
+              <text class="arch-small" x="710" y="201">Evaluate likelihood in one pass.</text>
+              <line x1="710" y1="230" x2="970" y2="230" stroke="var(--arch-border)"/>
+              <circle class="arch-add" cx="718" cy="257" r="8"/><text class="arch-small" x="718" y="261" text-anchor="middle">+</text><text class="arch-small" x="736" y="262">Residual addition</text>
             </g>
-            <text class="arch-section" x="660" y="284" text-anchor="middle">Transformer Block (×N)</text>
-
-            <line class="arch-connector" x1="340" y1="378" x2="376" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>RMSNorm</b> — pre-norm before causal self-attention.">
-              <rect class="arch-shape arch-fill-norm" x="392" y="363" width="54" height="30" rx="5"/>
-              <text class="arch-label arch-label-sm" x="419" y="382" text-anchor="middle">RMSNorm</text>
+            <g class="arch-output arch-block" data-title="Next-coordinate distribution" data-info="The decoder output is projected to a softmax over K coordinate bins. Sample a bin, map it to a continuous coordinate, then append that coordinate to the prefix. The histogram is illustrative.">
+              <rect class="arch-panel arch-hit" x="710" y="480" width="260" height="243" rx="12"/>
+              <text class="arch-title" x="730" y="510">Next coordinate</text>
+              <text class="arch-small" x="730" y="532">Projection + softmax over K bins</text>
+              <text class="arch-math arch-blue-text" x="730" y="563">p(x<tspan baseline-shift="-4" font-size="15">j</tspan> | x<tspan baseline-shift="-4" font-size="15">&lt;j</tspan>)</text>
+              <g aria-hidden="true">
+                <rect class="arch-bar" x="731" y="635" width="10" height="5" rx="2"/>
+                <rect class="arch-bar" x="745" y="632" width="10" height="8" rx="2"/>
+                <rect class="arch-bar" x="759" y="627" width="10" height="13" rx="2"/>
+                <rect class="arch-bar" x="773" y="617" width="10" height="23" rx="2"/>
+                <rect class="arch-bar" x="787" y="604" width="10" height="36" rx="2"/>
+                <rect class="arch-bar" x="801" y="589" width="10" height="51" rx="2"/>
+                <rect class="arch-bar is-selected" x="815" y="576" width="10" height="64" rx="2"/>
+                <rect class="arch-bar" x="829" y="586" width="10" height="54" rx="2"/>
+                <rect class="arch-bar" x="843" y="602" width="10" height="38" rx="2"/>
+                <rect class="arch-bar" x="857" y="615" width="10" height="25" rx="2"/>
+                <rect class="arch-bar" x="871" y="623" width="10" height="17" rx="2"/>
+                <rect class="arch-bar" x="885" y="629" width="10" height="11" rx="2"/>
+                <rect class="arch-bar" x="899" y="632" width="10" height="8" rx="2"/>
+                <rect class="arch-bar" x="913" y="634" width="10" height="6" rx="2"/>
+                <rect class="arch-bar" x="927" y="636" width="10" height="4" rx="2"/>
+                <rect class="arch-bar" x="941" y="637" width="10" height="3" rx="2"/>
+              </g>
+              <line x1="730" y1="642" x2="950" y2="642" stroke="var(--arch-border)"/>
+              <text class="arch-small" x="730" y="659">Coordinate bins</text>
+              <rect class="arch-coordinate" x="730" y="677" width="220" height="30" rx="6"/>
+              <text class="arch-label arch-warm-text" x="840" y="697" text-anchor="middle">Sample → x<tspan baseline-shift="-3" font-size="10">j</tspan></text>
             </g>
-            <line class="arch-connector" x1="446" y1="378" x2="468" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Causal self-attention</b> — multi-head attention with a causal mask so each token only attends to past tokens. KV-cache reuses the prefix across decoding steps.">
-              <rect class="arch-shape arch-fill-attn" x="470" y="357" width="92" height="42" rx="5"/>
-              <text class="arch-label arch-label-sm" x="516" y="374" text-anchor="middle">Causal</text>
-              <text class="arch-label arch-label-sm" x="516" y="390" text-anchor="middle">Self-Attention</text>
-            </g>
-            <line class="arch-connector" x1="562" y1="378" x2="584" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Residual addition</b> — adds the pre-attention representation back.">
-              <circle class="arch-shape arch-fill-add" cx="596" cy="378" r="11"/>
-              <text class="arch-add-glyph arch-add-sm" x="596" y="382" text-anchor="middle">+</text>
-            </g>
-            <path class="arch-residual" d="M 358 378 L 358 438 L 596 438 L 596 389" marker-end="url(#arch-arrow)"/>
-
-            <line class="arch-connector" x1="607" y1="378" x2="629" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>RMSNorm</b> — pre-norm before the feed-forward network.">
-              <rect class="arch-shape arch-fill-norm" x="631" y="363" width="54" height="30" rx="5"/>
-              <text class="arch-label arch-label-sm" x="658" y="382" text-anchor="middle">RMSNorm</text>
-            </g>
-            <line class="arch-connector" x1="685" y1="378" x2="707" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Feed-forward network</b> — gated MLP that expands and projects back to the residual stream.">
-              <rect class="arch-shape arch-fill-ffn" x="709" y="357" width="92" height="42" rx="5"/>
-              <text class="arch-label arch-label-sm" x="755" y="374" text-anchor="middle">Feed-forward</text>
-              <text class="arch-label arch-label-sm" x="755" y="390" text-anchor="middle">Network</text>
-            </g>
-            <line class="arch-connector" x1="801" y1="378" x2="823" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>SwiGLU</b> — Swish-gated linear unit activation inside the feed-forward block.">
-              <rect class="arch-shape arch-fill-act" x="825" y="363" width="54" height="30" rx="5"/>
-              <text class="arch-label arch-label-sm" x="852" y="382" text-anchor="middle">SwiGLU</text>
-            </g>
-            <line class="arch-connector" x1="879" y1="378" x2="901" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Residual addition</b> — adds the pre-FFN representation back, completing the block.">
-              <circle class="arch-shape arch-fill-add" cx="913" cy="378" r="11"/>
-              <text class="arch-add-glyph arch-add-sm" x="913" y="382" text-anchor="middle">+</text>
-            </g>
-            <path class="arch-residual" d="M 618 378 L 618 438 L 913 438 L 913 389" marker-end="url(#arch-arrow)"/>
-
-            <line class="arch-connector" x1="944" y1="378" x2="962" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Discrete distribution over bins</b> — softmax over $K$ value bins gives the categorical $p(x_j \mid x_{&lt;j})$ for the next coordinate.">
-              <rect class="arch-shape arch-fill-bin-back"  x="966" y="319" width="36" height="22" rx="3"/><rect class="arch-shape arch-fill-bin-front" x="972" y="315" width="36" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-bin-back"  x="966" y="345" width="36" height="22" rx="3"/><rect class="arch-shape arch-fill-bin-front" x="972" y="341" width="36" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-bin-back"  x="966" y="371" width="36" height="22" rx="3"/><rect class="arch-shape arch-fill-bin-front" x="972" y="367" width="36" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-bin-back"  x="966" y="397" width="36" height="22" rx="3"/><rect class="arch-shape arch-fill-bin-front" x="972" y="393" width="36" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-bin-back"  x="966" y="423" width="36" height="22" rx="3"/><rect class="arch-shape arch-fill-bin-front" x="972" y="419" width="36" height="22" rx="3"/>
-            </g>
-            <text class="arch-section" x="990" y="466" text-anchor="middle">Bins</text>
-
-            <line class="arch-connector" x1="1010" y1="378" x2="1024" y2="378" marker-end="url(#arch-arrow)"/>
-
-            <g class="arch-block" data-info="<b>Continuous coordinate output</b> — argmax/temperature-sampled bin is mapped back to a real-valued coordinate $x_j$ and fed back as the next input.">
-              <rect class="arch-shape arch-fill-input" x="1028" y="315" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="1028" y="341" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="1028" y="367" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="1028" y="393" width="40" height="22" rx="3"/>
-              <rect class="arch-shape arch-fill-input" x="1028" y="419" width="40" height="22" rx="3"/>
-            </g>
-            <text class="arch-section" x="1048" y="466" text-anchor="middle">Outputs</text>
           </svg>
-          <div class="arch-tip" id="arch-tip"></div>
+          <div class="arch-detail"><span class="arch-detail-label">Explore the model</span><span id="arch-detail-text" aria-live="polite" aria-atomic="true">Hover, tap, or focus a component to see how it works.</span></div>
         </div>
         <figcaption>
-          <b>Figure&nbsp;4.</b> ArBG architecture. Continuous coordinates are cross-attended against a global conditioning
-          encoder (atom, residue, position, sequence length), passed through $N$ pre-norm causal-attention blocks, and
-          projected to a categorical over $K$ value bins — sampled to produce the next coordinate. <em>Hover any block for details.</em>
+          <b>Figure&nbsp;4.</b> ArBG architecture. Continuous coordinates attend to a global conditioning encoder,
+          then pass through $N$ pre-norm causal transformer blocks. A categorical distribution over $K$ value bins
+          produces the next coordinate, which is appended to the prefix. Robin augments the conditioning with residue
+          position and sequence length. Histogram shown schematically.
         </figcaption>
       </figure>
 
       <script>
         (() => {
           const root = document.getElementById('arch-diagram');
-          if (!root) return;
           const svg = root.querySelector('.arch-svg');
-          const tip = document.getElementById('arch-tip');
+          const detail = root.querySelector('#arch-detail-text');
           const blocks = Array.from(root.querySelectorAll('.arch-block'));
+          const defaultText = detail.textContent;
+          const mobile = window.matchMedia('(max-width: 700px)');
+          const resize = () => svg.setAttribute('viewBox', mobile.matches ? '0 0 360 1540' : '0 0 1000 890');
+          resize();
+          mobile.addEventListener('change', resize);
           let pinned = null;
-
-          const showTip = (g) => {
-            const info = g.getAttribute('data-info');
-            if (!info) return;
-            tip.innerHTML = info;
-            if (window.MathJax?.typesetPromise) window.MathJax.typesetPromise([tip]);
-            tip.style.opacity = 1;
+          const show = (block) => {
+            blocks.forEach(b => b.classList.toggle('is-focus', b === block));
+            if (!block) { detail.textContent = defaultText; return; }
+            const title = document.createElement('b');
+            title.textContent = block.dataset.title + '. ';
+            detail.replaceChildren(title, document.createTextNode(block.dataset.info));
           };
-          const hideTip = () => { tip.style.opacity = 0; };
-
-          blocks.forEach((g) => {
-            if (!g.getAttribute('data-info')) return;
-            g.addEventListener('mouseenter', () => {
-              svg.classList.add('is-hovering');
-              showTip(g);
-            });
-            g.addEventListener('mouseleave', () => {
-              if (!pinned) hideTip();
-            });
-            g.addEventListener('click', (e) => {
-              e.stopPropagation();
-              const wasPinned = (pinned === g);
-              blocks.forEach((b) => b.classList.remove('is-focus'));
-              if (wasPinned) {
-                pinned = null;
-                hideTip();
-              } else {
-                pinned = g;
-                g.classList.add('is-focus');
-                showTip(g);
-              }
+          const pin = (block) => {
+            pinned = pinned === block ? null : block;
+            blocks.forEach(b => b.setAttribute('aria-pressed', String(b === pinned)));
+            show(pinned);
+          };
+          blocks.forEach(block => {
+            block.setAttribute('tabindex', '0');
+            block.setAttribute('role', 'button');
+            block.setAttribute('aria-label', block.dataset.title);
+            block.setAttribute('aria-pressed', 'false');
+            block.setAttribute('aria-describedby', 'arch-detail-text');
+            block.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') show(block); });
+            block.addEventListener('pointerleave', () => show(pinned));
+            block.addEventListener('focus', () => show(block));
+            block.addEventListener('blur', () => show(pinned));
+            block.addEventListener('click', () => pin(block));
+            block.addEventListener('keydown', e => {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pin(block); }
             });
           });
-          svg.addEventListener('mouseleave', () => {
-            svg.classList.remove('is-hovering');
-            if (!pinned) hideTip();
+          root.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { pinned = null; blocks.forEach(b => b.setAttribute('aria-pressed', 'false')); show(null); }
           });
-          document.addEventListener('click', (e) => {
-            if (pinned && !root.contains(e.target)) {
-              blocks.forEach((b) => b.classList.remove('is-focus'));
-              pinned = null;
-              hideTip();
-            }
+          document.addEventListener('click', e => {
+            if (!root.contains(e.target) && pinned) { pin(pinned); }
           });
         })();
       </script>
